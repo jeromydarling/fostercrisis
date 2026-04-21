@@ -1,38 +1,87 @@
 import { feature } from 'topojson-client';
 import type { FeatureCollection, Geometry } from 'geojson';
-import { STATE_INDEX, type StateRow } from './states';
+import { STATE_INDEX, STATES, type StateRow } from './states';
 import { CHAPTERS, metricValue, type Metric } from './chapters';
 
 // Minimal TopoJSON shape we actually consume.
 type Topology = Parameters<typeof feature>[0];
 
-// us-atlas 10m states TopoJSON. Lightweight (~85 KB) and battle-tested.
-const STATES_TOPO = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
+// us-atlas 10m boundaries are committed to /public/data/ so the app renders
+// offline. The us-atlas 10m files total < 1 MB and haven't changed in years.
+const STATES_URL = '/data/states-10m.json';
+const COUNTIES_URL = '/data/counties-10m.json';
+
+// Optional live-data overlays produced by `npm run data:*` scripts.
+const SAIPE_URL = '/data/saipe-counties.json';
+const CDC_URL = '/data/cdc-overdose-counties.json';
+const CHURCHES_URL = '/data/churches.geojson';
 
 export interface StateFeatureProps extends Partial<StateRow> {
   fips: string;
   name: string;
-  // Pre-computed per-metric values so Mapbox data-driven styles can key off
-  // `metric_${id}` without needing to rewrite the source on chapter change.
   [key: `metric_${string}`]: number | undefined;
 }
 
-export async function loadStatesGeojson(): Promise<
-  FeatureCollection<Geometry, StateFeatureProps>
-> {
-  const res = await fetch(STATES_TOPO);
-  if (!res.ok) throw new Error(`Failed to load ${STATES_TOPO}`);
-  const topo = (await res.json()) as Topology;
-  const fc = feature(topo, topo.objects.states) as unknown as FeatureCollection<
-    Geometry,
-    { name: string }
-  >;
+export interface CountyFeatureProps {
+  fips: string; // 5-digit state+county
+  stateFips: string;
+  name: string;
+  poverty?: number;
+  overdose?: number;
+}
 
+export interface GeoBundle {
+  states: FeatureCollection<Geometry, StateFeatureProps>;
+  counties: FeatureCollection<Geometry, CountyFeatureProps>;
+  churches: FeatureCollection | null;
+  /** Whether real HIFLD/OSM churches were loaded. */
+  realChurches: boolean;
+  /** Whether county-level SAIPE was loaded. */
+  hasCountyPoverty: boolean;
+  /** Whether county-level CDC overdose was loaded. */
+  hasCountyOverdose: boolean;
+}
+
+async function tryFetch<T>(url: string): Promise<T | null> {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    // Vite's dev server SPA-falls back to index.html for missing files, so we
+    // must verify the response is actually JSON before parsing.
+    const ct = res.headers.get('content-type') ?? '';
+    if (!ct.includes('json') && !ct.includes('geo+json')) return null;
+    return (await res.json()) as T;
+  } catch {
+    return null;
+  }
+}
+
+async function fetchStatesTopo(): Promise<FeatureCollection<Geometry, { name: string }>> {
+  const topo = await tryFetch<Topology>(STATES_URL);
+  if (!topo) throw new Error(`Missing ${STATES_URL}`);
+  return feature(topo, topo.objects.states) as unknown as FeatureCollection<Geometry, { name: string }>;
+}
+
+async function fetchCountiesTopo(): Promise<FeatureCollection<Geometry, { name: string }>> {
+  const topo = await tryFetch<Topology>(COUNTIES_URL);
+  if (!topo) throw new Error(`Missing ${COUNTIES_URL}`);
+  return feature(topo, topo.objects.counties) as unknown as FeatureCollection<Geometry, { name: string }>;
+}
+
+export async function loadAll(): Promise<GeoBundle> {
+  const [statesFc, countiesFc, saipe, cdc, churches] = await Promise.all([
+    fetchStatesTopo(),
+    fetchCountiesTopo(),
+    tryFetch<{ values: Record<string, number> }>(SAIPE_URL),
+    tryFetch<{ values: Record<string, number> }>(CDC_URL),
+    tryFetch<FeatureCollection>(CHURCHES_URL),
+  ]);
+
+  // --- States: join per-state statistics + precompute each chapter metric ---
   const metrics: Metric[] = CHAPTERS.map((c) => c.metric);
-  const joined = {
-    ...fc,
-    features: fc.features.map((f) => {
-      // us-atlas features carry `id` as the 2-digit state FIPS code.
+  const states: FeatureCollection<Geometry, StateFeatureProps> = {
+    ...statesFc,
+    features: statesFc.features.map((f) => {
       const fips = String(f.id).padStart(2, '0');
       const row = STATE_INDEX[fips];
       const props: StateFeatureProps = {
@@ -41,23 +90,60 @@ export async function loadStatesGeojson(): Promise<
         name: row?.name ?? f.properties.name,
       };
       if (row) {
-        for (const m of metrics) {
-          props[`metric_${m}`] = metricValue(row, m);
-        }
+        for (const m of metrics) props[`metric_${m}`] = metricValue(row, m);
       }
       return { ...f, id: fips, properties: props };
     }),
   };
-  return joined;
+
+  // --- Counties: join SAIPE + CDC overdose when present ---
+  const saipeVals = saipe?.values ?? {};
+  const cdcVals = cdc?.values ?? {};
+
+  // State-level fallback: if SAIPE/CDC files aren't present yet, fall back to
+  // the per-state poverty and overdose values so chapters III/IV still render.
+  const stateFallback = new Map<string, { pov: number; od: number }>();
+  for (const s of STATES) {
+    // Rough OD rate per 100k residents; chapter IV uses same denominator.
+    const rate = (s.overdoseDeaths / (s.childPop * 4)) * 100000;
+    stateFallback.set(s.fips, { pov: s.childPovertyPct, od: rate });
+  }
+
+  const counties: FeatureCollection<Geometry, CountyFeatureProps> = {
+    ...countiesFc,
+    features: countiesFc.features.map((f) => {
+      const fips = String(f.id).padStart(5, '0');
+      const stateFips = fips.slice(0, 2);
+      const fb = stateFallback.get(stateFips);
+      const pov = saipeVals[fips];
+      const od = cdcVals[fips];
+      return {
+        ...f,
+        id: fips,
+        properties: {
+          fips,
+          stateFips,
+          name: f.properties.name,
+          poverty: Number.isFinite(pov) ? pov : fb?.pov,
+          overdose: Number.isFinite(od) ? od : fb?.od,
+        },
+      };
+    }),
+  };
+
+  return {
+    states,
+    counties,
+    churches: churches ?? null,
+    realChurches: !!churches,
+    hasCountyPoverty: !!saipe,
+    hasCountyOverdose: !!cdc,
+  };
 }
 
-// Placeholder congregation "dots" generated deterministically per state so the
-// church solution overlay renders even without the full HIFLD geocoded set.
-// Each state gets points proportional to its congregation count (capped for
-// rendering performance).
-export function buildCongregationPoints(): FeatureCollection {
-  const features: GeoJSON.Feature[] = [];
-  // Rough state bounding boxes (min lon, min lat, max lon, max lat).
+// Fallback synthetic church dots — only used if the user hasn't run
+// `npm run data:churches` yet. Deterministic per state.
+export function buildSyntheticChurches(): FeatureCollection {
   const bboxes: Record<string, [number, number, number, number]> = {
     AL: [-88.47, 30.14, -84.89, 35.01], AK: [-168.0, 54.5, -140.0, 71.4],
     AZ: [-114.82, 31.33, -109.05, 37.00], AR: [-94.62, 33.00, -89.64, 36.50],
@@ -86,8 +172,6 @@ export function buildCongregationPoints(): FeatureCollection {
     WV: [-82.64, 37.20, -77.72, 40.64], WI: [-92.89, 42.49, -86.80, 47.08],
     WY: [-111.06, 41.00, -104.05, 45.01],
   };
-
-  // Poor man's PRNG — deterministic, so dots don't reshuffle between renders.
   function prng(seed: number) {
     let s = seed >>> 0;
     return () => {
@@ -95,7 +179,7 @@ export function buildCongregationPoints(): FeatureCollection {
       return s / 0xffffffff;
     };
   }
-
+  const features: GeoJSON.Feature[] = [];
   for (const fips in STATE_INDEX) {
     const row = STATE_INDEX[fips];
     const bbox = bboxes[row.code];
@@ -109,7 +193,7 @@ export function buildCongregationPoints(): FeatureCollection {
       features.push({
         type: 'Feature',
         geometry: { type: 'Point', coordinates: [lon, lat] },
-        properties: { state: row.code },
+        properties: { state: row.code, synthetic: true },
       });
     }
   }

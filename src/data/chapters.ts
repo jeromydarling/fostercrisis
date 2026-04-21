@@ -10,47 +10,43 @@ export type Metric =
   | 'capacityGap'
   | 'churchSolution';
 
+export type Geography = 'state' | 'county';
+
 export interface Chapter {
   id: string;
-  number: string; // Roman-ish ordinal e.g. "I"
+  number: string;
   title: string;
   eyebrow: string;
   metric: Metric;
-  /** Ramp of hex colors from light → darkest (bleakest) */
+  /** Which geography drives this chapter's choropleth. */
+  geography: Geography;
+  /** For county chapters: which property on the county feature to read. */
+  countyProp?: 'poverty' | 'overdose';
+  /** Ramp of hex colors from low → bleak. */
   ramp: string[];
-  unit: string; // Unit suffix for legend (e.g. "per 1,000 children")
-  /** Big sidebar statistic text */
+  unit: string;
   headline: string;
-  /** Sub-statistic under the headline */
   subline: string;
-  /** Body paragraph */
   body: string;
-  /** Short mappable-data source citation displayed under the legend */
   source: string;
-  /** Whether to render church dots on top of the choropleth */
   showChurches?: boolean;
 }
 
 export function metricValue(row: StateRow, metric: Metric): number {
   switch (metric) {
     case 'fosterCarePerCapita':
-      // children in care per 1,000 child-population
       return (row.fosterCare / row.childPop) * 1000;
     case 'homesPer100':
-      // licensed homes per 100 kids in care (ACF "A Home for Every Child")
       return (row.licensedHomes / Math.max(1, row.fosterCare)) * 100;
     case 'childPoverty':
       return row.childPovertyPct;
     case 'overdoseRate':
-      // overdose deaths per 100,000 residents (population ~ child*4)
       return (row.overdoseDeaths / (row.childPop * 4)) * 100000;
     case 'missingFromCare':
       return (row.missingFromCare / Math.max(1, row.fosterCare)) * 100;
     case 'capacityGap':
-      // deficit of homes per 100 kids (invert of homesPer100)
       return Math.max(0, 100 - (row.licensedHomes / Math.max(1, row.fosterCare)) * 100);
     case 'churchSolution':
-      // congregations per waiting-adoption child — higher is better
       return row.congregations / Math.max(1, row.waitingAdoption);
   }
 }
@@ -67,7 +63,7 @@ export function metricFormat(metric: Metric, v: number): string {
     case 'overdoseRate':
       return v.toFixed(1) + ' / 100k';
     case 'churchSolution':
-      return v.toFixed(1) + ' churches per waiting child';
+      return v.toFixed(1) + ' churches / waiting child';
   }
 }
 
@@ -78,6 +74,7 @@ export const CHAPTERS: Chapter[] = [
     title: 'The children nobody sees',
     eyebrow: 'Chapter I — The Baseline',
     metric: 'fosterCarePerCapita',
+    geography: 'state',
     ramp: ['#1a1f2b', '#4a3848', '#7a4558', '#b24d5c', '#dc5858', '#ffb347'],
     unit: 'Children in foster care per 1,000 kids',
     headline: '368,530',
@@ -92,6 +89,7 @@ export const CHAPTERS: Chapter[] = [
     title: 'There are not enough beds',
     eyebrow: 'Chapter II — The Capacity Gap',
     metric: 'capacityGap',
+    geography: 'state',
     ramp: ['#1a1f2b', '#3a2a3e', '#6b2f4b', '#a23452', '#cf3a4f', '#ff5252'],
     unit: 'Home shortfall (% gap below 100/100)',
     headline: '57 homes per 100 children',
@@ -106,13 +104,15 @@ export const CHAPTERS: Chapter[] = [
     title: 'Neglect is a symptom of poverty',
     eyebrow: 'Chapter III — Root Cause: Poverty',
     metric: 'childPoverty',
+    geography: 'county',
+    countyProp: 'poverty',
     ramp: ['#1a1f2b', '#2f2a43', '#542c5a', '#873463', '#c43a5b', '#ff4d4d'],
-    unit: 'Child poverty rate (%)',
+    unit: 'Child poverty rate (%) — by county',
     headline: '1 in 6 American children',
     subline: 'live in poverty. In Mississippi, it’s more than 1 in 4.',
     body:
-      'A hungry family is not an unsafe family — but state law often cannot tell the difference. 117 U.S. counties have child-poverty rates above 40%, and 81% of those counties sit in the American South. The kids removed for “neglect” overwhelmingly come from neighborhoods that society neglected first.',
-    source: 'Census SAIPE 2022 · USAFacts',
+      'A hungry family is not an unsafe family — but state law often cannot tell the difference. 117 U.S. counties have child-poverty rates above 40%, and 81% of those counties sit in the American South. The kids removed for "neglect" overwhelmingly come from neighborhoods that society neglected first.',
+    source: 'Census SAIPE 2022 · county-level SAEPOVRT0_17_PT',
   },
   {
     id: 'opioids',
@@ -120,13 +120,15 @@ export const CHAPTERS: Chapter[] = [
     title: 'The drug map is the foster map',
     eyebrow: 'Chapter IV — Root Cause: Overdose',
     metric: 'overdoseRate',
+    geography: 'county',
+    countyProp: 'overdose',
     ramp: ['#1a1f2b', '#2d2748', '#4e2a60', '#892f6a', '#c72f54', '#ff3838'],
-    unit: 'Overdose deaths per 100,000 residents',
+    unit: 'Overdose deaths per 100,000 — by county',
     headline: '39.1%',
     subline: 'of foster removals in 2021 were caused by parental drug abuse.',
     body:
       'A 10% rise in county overdose deaths predicts a 4.4% rise in foster-care entries twelve months later. For infants under age 1, more than half of all removals are drug-related. The opioid map is not a parallel tragedy — it is the pipeline itself.',
-    source: 'CDC Provisional Overdose Data · NCSACW · HHS',
+    source: 'CDC Provisional County-Level Drug Overdose Deaths',
   },
   {
     id: 'missing',
@@ -134,6 +136,7 @@ export const CHAPTERS: Chapter[] = [
     title: 'The children who disappear',
     eyebrow: 'Chapter V — Missing From Care',
     metric: 'missingFromCare',
+    geography: 'state',
     ramp: ['#14151c', '#28182f', '#501a4b', '#901f55', '#d1244d', '#ff2b2b'],
     unit: 'Runaway / missing rate (% of foster census)',
     headline: '23,160',
@@ -148,6 +151,7 @@ export const CHAPTERS: Chapter[] = [
     title: 'What the pews could end overnight',
     eyebrow: 'Chapter VI — The Solution',
     metric: 'churchSolution',
+    geography: 'state',
     ramp: ['#3d0a1a', '#6d1728', '#a1302a', '#cf6426', '#e6a42a', '#f7e26b'],
     unit: 'Christian congregations per waiting child',
     headline: '380,000 × 1',

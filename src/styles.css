@@ -439,6 +439,44 @@ body {
   color: var(--fg);
 }
 
+/* ---- Seed-data banner ---------------------------------------------- */
+
+.banner {
+  position: absolute;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.55rem 1rem;
+  background: rgba(11, 13, 18, 0.9);
+  border: 1px solid rgba(247, 226, 107, 0.35);
+  border-radius: 4px;
+  color: var(--fg);
+  z-index: 12;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(10px);
+}
+
+.banner strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.banner code {
+  background: rgba(247, 226, 107, 0.1);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  color: var(--accent);
+}
+
+.banner + .banner {
+  top: 3.5rem;
+}
+
 /* ---- Footer -------------------------------------------------------- */
 
 .footer {

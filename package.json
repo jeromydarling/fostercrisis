@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "data:all": "node scripts/build-all.mjs",
+    "data:saipe": "node scripts/fetch-saipe.mjs",
+    "data:cdc": "node scripts/fetch-cdc-overdose.mjs",
+    "data:churches": "node scripts/fetch-churches.mjs"
   },
   "dependencies": {
     "mapbox-gl": "^3.8.0",
