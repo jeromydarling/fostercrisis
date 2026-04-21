@@ -1,0 +1,88 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      refresh_churches:
+        description: Pull fresh HIFLD/OSM church data (slow, ~5-15 min)
+        type: boolean
+        default: false
+
+# Single concurrent deploy per ref; in-progress runs are cancelled when a
+# newer one arrives so the live site always reflects the latest commit.
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Project Pages at https://<user>.github.io/<repo>/ — Vite needs this
+      # prefix so asset URLs resolve correctly under the subpath.
+      VITE_BASE: /${{ github.event.repository.name }}/
+      VITE_MAPBOX_TOKEN: ${{ secrets.VITE_MAPBOX_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Fail fast if Mapbox token is missing
+        run: |
+          if [ -z "$VITE_MAPBOX_TOKEN" ]; then
+            echo "::error::Missing repo secret VITE_MAPBOX_TOKEN."
+            echo "Add it at Settings → Secrets and variables → Actions → New repository secret."
+            exit 1
+          fi
+
+      - run: npm ci
+
+      # SAIPE (county child poverty) — small, annual dataset. Safe to run
+      # on every deploy.
+      - name: Refresh SAIPE (county child poverty)
+        run: npm run data:saipe
+        continue-on-error: true
+
+      # CDC provisional county overdose — small, monthly dataset.
+      - name: Refresh CDC overdose (county)
+        run: npm run data:cdc
+        continue-on-error: true
+
+      # HIFLD / OSM churches — only on manual dispatch since the pull is
+      # large (~30-50 MB) and slow. Normal pushes reuse whatever was
+      # committed under public/data/churches.geojson.
+      - name: Refresh churches (HIFLD → OSM)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.refresh_churches }}
+        run: npm run data:churches
+        continue-on-error: true
+
+      - run: npm run build
+
+      - name: Add .nojekyll so Pages serves _vite-generated files
+        run: touch dist/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

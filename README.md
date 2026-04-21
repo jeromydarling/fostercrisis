@@ -29,6 +29,29 @@ npm run dev              # http://localhost:5173
 
 Grab a free token at <https://account.mapbox.com/access-tokens/>.
 
+## Deploy to GitHub Pages
+
+A workflow at `.github/workflows/pages.yml` builds and deploys on every
+push to `main` (and on manual dispatch).
+
+**One-time setup:**
+
+1. **Settings → Pages** → set *Source* to **GitHub Actions**.
+2. **Settings → Secrets and variables → Actions → New repository secret**:
+   - Name: `VITE_MAPBOX_TOKEN`
+   - Value: your Mapbox public token (`pk.…`)
+3. **(Recommended) Restrict the token's URL allowlist in the Mapbox
+   dashboard** to `https://<your-user>.github.io/*` — the token ships
+   inside the client bundle, so anyone can see it.
+
+Pushing to `main` then publishes to
+`https://<your-user>.github.io/<repo-name>/`.
+
+The workflow refreshes SAIPE + CDC data on every deploy (small, fast).
+HIFLD/OSM church data is only refreshed when you manually run the
+workflow with the **refresh_churches** input checked — otherwise the
+deploy reuses whatever `public/data/churches.geojson` is committed.
+
 ## Data pipeline
 
 Boundaries (us-atlas 10m states + counties) are committed to

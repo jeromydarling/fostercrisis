@@ -6,15 +6,20 @@ import { CHAPTERS, metricValue, type Metric } from './chapters';
 // Minimal TopoJSON shape we actually consume.
 type Topology = Parameters<typeof feature>[0];
 
+// Vite rewrites asset URLs relative to `base` at build time. Using
+// BASE_URL here keeps the app working at both `/` (dev / custom domain)
+// and `/<repo>/` (GitHub Pages project site).
+const BASE = import.meta.env.BASE_URL;
+
 // us-atlas 10m boundaries are committed to /public/data/ so the app renders
 // offline. The us-atlas 10m files total < 1 MB and haven't changed in years.
-const STATES_URL = '/data/states-10m.json';
-const COUNTIES_URL = '/data/counties-10m.json';
+const STATES_URL = `${BASE}data/states-10m.json`;
+const COUNTIES_URL = `${BASE}data/counties-10m.json`;
 
 // Optional live-data overlays produced by `npm run data:*` scripts.
-const SAIPE_URL = '/data/saipe-counties.json';
-const CDC_URL = '/data/cdc-overdose-counties.json';
-const CHURCHES_URL = '/data/churches.geojson';
+const SAIPE_URL = `${BASE}data/saipe-counties.json`;
+const CDC_URL = `${BASE}data/cdc-overdose-counties.json`;
+const CHURCHES_URL = `${BASE}data/churches.geojson`;
 
 export interface StateFeatureProps extends Partial<StateRow> {
   fips: string;
