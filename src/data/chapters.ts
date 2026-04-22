@@ -193,7 +193,7 @@ export const CHAPTERS: Chapter[] = [
     headline: 'The most Christian states',
     subline: 'are the states where foster children are hungriest, highest-count, and most forgotten.',
     body:
-      'Overlay the Pew religiosity map on the foster-children map and the borders match. Alabama, Arkansas, Louisiana, Mississippi, Oklahoma, Tennessee, West Virginia — the reddest pews produce the longest waiting lists. This is not a coincidence. It is a mirror the American Church has refused to look into.',
+      'Overlay the Pew religiosity map on the foster-children map and the borders match. Alabama, Arkansas, Louisiana, Mississippi, Oklahoma, Tennessee, West Virginia — the reddest pews produce the longest waiting lists. This is not a coincidence. It is a mirror American Christianity has refused to look into.',
     source: 'Pew Research Religious Landscape Study',
   },
   {
@@ -223,7 +223,7 @@ export const CHAPTERS: Chapter[] = [
     headline: 'The Bible Belt divorces, too.',
     subline: 'And has its babies out of wedlock. And fills its foster homes. The revolution won inside the sanctuary first.',
     body:
-      'Mississippi is the most religious state in America and has the highest unwed-birth rate (52%). Louisiana is third-most religious; half its births are outside of marriage. Arkansas — 70% "highly religious" — has the second-highest divorce rate in the country. The American Church did not hold a line here. It adopted the package and then preached against it. The children born into that contradiction are the ones waiting for a family tonight.',
+      'Mississippi is the most religious state in America and has the highest unwed-birth rate (52%). Louisiana is third-most religious; half its births are outside of marriage. Arkansas — 70% "highly religious" — has the second-highest divorce rate in the country. American Christianity did not hold a line here. It adopted the package and then preached against it. The children born into that contradiction are the ones waiting for a family tonight.',
     source: 'CDC NVSS divorce 2022 · CDC NCHS unwed births 2022',
   },
   {
@@ -238,7 +238,7 @@ export const CHAPTERS: Chapter[] = [
     headline: 'Mississippi watches the longest.',
     subline: 'Every year, in every annual Pornhub Insights report. The most religious state stays the longest.',
     body:
-      'The authoritative source on this is the only one that owns the telemetry: Pornhub. In their 2014–2019 "State of the Union" Insights series, Mississippi ranked #1 every time. Louisiana, Alabama, Arkansas, Oklahoma — the same Bible Belt states that ranked highest in religiosity, obesity, unwed births, and foster-care demand — also watched the longest. The private life of the American Church is documented by the website the American Church preaches against.',
+      'The authoritative source on this is the only one that owns the telemetry: Pornhub. In their 2014–2019 "State of the Union" Insights series, Mississippi ranked #1 every time. Louisiana, Alabama, Arkansas, Oklahoma — the same Bible Belt states that ranked highest in religiosity, obesity, unwed births, and foster-care demand — also watched the longest. The private life of American Christianity is documented by the website American Christianity preaches against.',
     source: 'Pornhub Insights · 2014–2019 U.S. State-of-the-Union series',
   },
   {
@@ -386,7 +386,7 @@ export function frameForState(chapter: Chapter, row: StateRow): Framing {
         ...base,
         headline: `${mm}:${ss} per visit`,
         subline: `What ${name} actually does in private — Pornhub's own data.`,
-        body: `Pornhub Insights has published the numbers: ${name}'s average visitor stays ${mm}:${ss}. The state is also ${row.religiosityPct}% "highly religious." The private life of the American Church is measured by the website the American Church preaches against, and the website is keeping better records than the church is.`,
+        body: `Pornhub Insights has published the numbers: ${name}'s average visitor stays ${mm}:${ss}. The state is also ${row.religiosityPct}% "highly religious." The private life of American Christianity is measured by the website American Christianity preaches against, and the website is keeping better records than the church is.`,
       };
     }
     case 'misery':

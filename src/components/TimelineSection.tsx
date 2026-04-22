@@ -548,7 +548,7 @@ export function TimelineSection() {
         </ul>
         <p className="tl-legend-note">
           Pin colors encode the actor. The <em>church</em> pins are the
-          ones this site argues about most: when the American Church
+          ones this site argues about most: when the American Christianity
           spoke, shrugged, or stayed silent.
         </p>
       </div>

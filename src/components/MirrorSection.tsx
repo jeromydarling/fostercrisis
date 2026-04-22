@@ -41,7 +41,7 @@ const REDIRECTS = [
     bucket: 'Money',
   },
   {
-    from: '0.5% of the $124B American Church annual take',
+    from: '0.5% of American Christianity\'s $124B annual take',
     to: 'Every one of the 125,000 waiting children, full stipend, for a year',
     note: '$620M',
     bucket: 'Money',
@@ -95,13 +95,13 @@ export function MirrorSection() {
   return (
     <section className="mirror-section" id="mirror">
       <div className="mirror-hero">
-        <p className="mirror-eyebrow">Part II · The American Church Mirror</p>
+        <p className="mirror-eyebrow">Part II · The Mirror of American Christianity</p>
         <h2 className="mirror-title">
           You said you didn't have time. <br />
           You said you couldn't afford it.
         </h2>
         <p className="mirror-lede">
-          The American Church collects <strong>$124 billion a year</strong>,
+          American Christianity collects <strong>$124 billion a year</strong>,
           builds <strong>$4.6 billion</strong> in new facilities,
           sustains a <strong>$1.7 billion</strong> Christian music industry,
           watches <strong>7 hours of screens daily</strong>, and
@@ -213,7 +213,7 @@ export function MirrorSection() {
         <div className="budget-compare">
           <div>
             <span className="budget-compare-num">$124B</span>
-            <span className="budget-compare-label">American Church annual income</span>
+            <span className="budget-compare-label">American Christianity's annual income</span>
           </div>
           <span className="budget-compare-v">vs</span>
           <div>
@@ -235,7 +235,7 @@ export function MirrorSection() {
       <div className="worldview">
         <h3 className="worldview-heading">You said you believed.</h3>
         <p className="worldview-lede">
-          The American Church's footprint is staggering. What it produces
+          American Christianity's footprint is staggering. What it produces
           — measured in actual biblical conviction — is not. George Barna's
           2026 worldview survey:
         </p>

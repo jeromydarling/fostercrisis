@@ -1,6 +1,6 @@
 // Part V — The Substitution & The Lost War.
 //
-// The closing argument of the entire site. What the American Church did
+// The closing argument of the entire site. What American Christianity did
 // INSTEAD of fostering, 1980-2026. The pro-life movement that prevented
 // and funded but refused to receive. The pornography battle won in
 // public and lost in private. The six wars the church claimed to fight
@@ -148,7 +148,7 @@ export function SubstitutionSection() {
           What the Christians did <span className="subst-underline">instead</span>.
         </h2>
         <p className="subst-lede">
-          If the American Church lost the war in 1960–1980, the question is
+          If American Christianity lost the war in 1960–1980, the question is
           what it has been doing for the forty-six years since.
           <br /><br />
           The answer: it built a parallel economy and political apparatus
@@ -166,7 +166,7 @@ export function SubstitutionSection() {
       <div className="subst-substitutes">
         <h3 className="subst-heading">The five substitutes</h3>
         <p className="subst-sub">
-          Five things the American Church built instead of fostering
+          Five things American Christianity built instead of fostering
           networks. Each is real, well-funded, and institutionally serious.
           None of them is absorbing the 70,000 children produced by the
           revolution the church lost.
@@ -289,7 +289,7 @@ export function SubstitutionSection() {
           ))}
         </ul>
         <p className="subst-tally-kicker">
-          Every single metric the American Church pointed to as a measure
+          Every single metric American Christianity pointed to as a measure
           of its cultural influence has either collapsed or reversed in
           the forty-six years it has been politically mobilized to
           "save" the country.
@@ -300,7 +300,7 @@ export function SubstitutionSection() {
       <div className="subst-wars">
         <h3 className="subst-heading">Six wars. Six losses.</h3>
         <p className="subst-sub">
-          The American Church claimed to be fighting for America's soul.
+          American Christianity claimed to be fighting for America's soul.
           Here is the ledger on every front it picked.
         </p>
         <div className="subst-wars-grid">
@@ -380,7 +380,7 @@ export function SubstitutionSection() {
       <div className="subst-nation">
         <h3 className="subst-heading">The "Christian nation" paradox</h3>
         <p className="subst-sub">
-          The American Church has spent seventy-five years calling this
+          American Christianity has spent seventy-five years calling this
           a Christian nation. In 2026, the ledger is this.
         </p>
         <ul className="subst-nation-grid" role="list">
@@ -406,19 +406,14 @@ export function SubstitutionSection() {
         </p>
       </div>
 
-      {/* The single sentence — the closer of closers */}
+      {/* The closer — the whole site rests on this sentence. */}
       <div className="subst-final">
-        <p className="subst-final-eyebrow">The one sentence</p>
+        <p className="subst-final-eyebrow">The closer</p>
         <blockquote className="subst-final-quote">
-          The American Church called itself a Christian nation while
-          losing every battle that defines one, and the 70,418 children
-          waiting tonight are the receipts.
+          <span className="subst-final-line">American Christianity is in debt.</span>
+          <span className="subst-final-line">They are in debt to all of the children.</span>
+          <span className="subst-final-line subst-final-kicker">Crystal clear.</span>
         </blockquote>
-        <p className="subst-final-outro">
-          The only honest thing the American Church could do is stop
-          claiming the title and start earning it <em>one waiting child
-          at a time</em>.
-        </p>
       </div>
     </section>
   );

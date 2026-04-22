@@ -4,7 +4,7 @@
 // Christian fertility down, foster care up — are not coincidences. They
 // are the same event, seen from two sides of the same door. They begin
 // in the same decade (1960–1975), for the same reasons, with the same
-// people saying yes to the same lie. The American Church's guilt here
+// people saying yes to the same lie. American Christianity's guilt here
 // is not identical to the playboys' or the lobbyists' — it is heavier,
 // because it was the institution that had moral authority and declined
 // to spend it.
@@ -152,7 +152,7 @@ const LIES = [
   {
     num: 'III',
     lie: 'Children are a lifestyle choice, not a covenant gift.',
-    body: 'The moment Psalm 127 stopped being read as prescriptive — "blessed is the man whose quiver is full, if he wants it to be" — the American Church ceased to be a culture of children. It became a culture of adults who occasionally had children, up to 2.2.',
+    body: 'The moment Psalm 127 stopped being read as prescriptive — "blessed is the man whose quiver is full, if he wants it to be" — American Christianity ceased to be a culture of children. It became a culture of adults who occasionally had children, up to 2.2.',
   },
 ];
 
@@ -181,7 +181,7 @@ export function ConvergenceSection() {
           <strong> 1960–1975</strong>, for the same reason, because the
           same people said yes to the same lie.
           <br /><br />
-          <em>The American Church's guilt is not identical to the
+          <em>American Christianity's guilt is not identical to the
           playboys' or the lobbyists'. It is heavier. It was the
           institution with the greatest moral authority in mid-century
           America — and in the decade that mattered most, it either
@@ -306,7 +306,7 @@ export function ConvergenceSection() {
           curves bend in the same decade because a single package —
           the Pill, no-fault divorce, sexual liberation, individual
           autonomy elevated above covenant — landed on American life
-          simultaneously, and the American Church either endorsed it,
+          simultaneously, and American Christianity either endorsed it,
           stayed silent, or adopted it privately while condemning it
           publicly.
         </p>
@@ -352,7 +352,7 @@ export function ConvergenceSection() {
         <h3 className="conv-count-heading">The generational body count</h3>
         <p className="conv-count-sub">
           These are the children — not abstractions — for whom the
-          American Church's theological surrender in 1960–1980 was paid.
+          American Christianity's theological surrender in 1960–1980 was paid.
         </p>
         <ul className="conv-count-grid" role="list">
           {BODY_COUNT.map((b, i) => (
@@ -385,7 +385,7 @@ export function ConvergenceSection() {
           demand" in a single resolution.
         </p>
         <p className="conv-closing-body">
-          And for the next fifty-five years, the American Church
+          And for the next fifty-five years, American Christianity
           reduced its own fertility by <strong>50%</strong>, divorced
           at rates indistinguishable from the culture, and quietly
           watched out-of-wedlock births climb from <strong>5% to
@@ -395,7 +395,7 @@ export function ConvergenceSection() {
           Every one of those children — the 1.2 million born outside
           marriage in 1990, the 700,000 who now cycle through foster
           care each year, the 70,418 waiting right now — is a line item
-          in the ledger the American Church started running in the
+          in the ledger American Christianity started running in the
           decade it either blessed the sexual revolution, adopted it
           in private, or failed to oppose it in public.
           <strong> Ninety-seven percent</strong> of American Christians

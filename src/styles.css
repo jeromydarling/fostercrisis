@@ -3291,16 +3291,16 @@ body {
 }
 
 .subst-final-quote {
-  margin: 0 0 2.5rem;
+  margin: 0;
   padding: 0;
   font-family: var(--ff-serif);
-  font-size: clamp(1.5rem, 3.3vw, 2.35rem);
   font-weight: 500;
-  line-height: 1.25;
   color: var(--fg);
-  letter-spacing: -0.01em;
-  font-style: italic;
+  letter-spacing: -0.015em;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .subst-final-quote::before,
@@ -3313,18 +3313,31 @@ body {
   background: linear-gradient(90deg, transparent, var(--danger), transparent);
 }
 
-.subst-final-outro {
-  margin: 0;
-  font-family: var(--ff-serif);
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--fg-dim);
+.subst-final-line {
+  display: block;
+  font-size: clamp(1.6rem, 3.3vw, 2.4rem);
+  line-height: 1.2;
+  color: var(--fg);
 }
 
-.subst-final-outro em {
-  color: var(--accent);
+.subst-final-line:first-of-type {
+  color: var(--danger);
   font-style: italic;
-  font-weight: 500;
+  font-weight: 600;
+}
+
+.subst-final-line + .subst-final-line {
+  color: var(--fg);
+  font-style: italic;
+}
+
+.subst-final-kicker {
+  margin-top: 0.6rem !important;
+  font-size: clamp(1.9rem, 4vw, 3rem) !important;
+  color: var(--accent-warm) !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
 }
 
 /* --- Mobile --- */
@@ -3369,26 +3382,388 @@ body {
 
 .page-footer strong { color: var(--accent); font-weight: 500; }
 
+/* ==================================================================
+ * MOBILE PASS
+ *
+ * Tablet breakpoint (<= 900px):
+ *   - Map section: the sidebar becomes a bottom sheet; the map takes
+ *     the top of the viewport instead of being crushed by the sidebar.
+ *   - Chapter rail collapses to a horizontal scroll ribbon.
+ *   - Floating tooltip + map footer hide (sidebar already shows state
+ *     data and the quote reads on scroll sections).
+ *
+ * Phone breakpoint (<= 560px):
+ *   - Global type scale shrinks.
+ *   - All essay sections tighten padding.
+ *   - Every multi-column grid collapses to 1-col (with a handful of
+ *     2-col exceptions for stat tiles where that reads better).
+ * ================================================================== */
+
+/* --- Tablet: map becomes bottom-sheet layout ----------------------- */
 @media (max-width: 900px) {
+  .map-section {
+    height: 100vh;
+    height: 100dvh;
+  }
+
   .sidebar {
-    width: 100vw;
-    bottom: auto;
-    height: 60vh;
-    border-right: 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  .footer {
-    left: 10px;
-    right: 10px;
-  }
-  .tooltip {
+    position: fixed;
+    inset: auto 0 0 0;
     top: auto;
-    bottom: 1rem;
-    right: 1rem;
-    left: 1rem;
-    width: auto;
+    width: 100vw;
+    max-width: 100vw;
+    height: 58vh;
+    height: 58dvh;
+    padding: 1.4rem 1.25rem 0.75rem;
+    background: rgba(14, 17, 24, 0.96);
+    border-right: 0;
+    border-top: 1px solid var(--rule);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.55);
+    z-index: 12;
   }
-  .feed-section { padding: 3rem 1.25rem 2.5rem; }
-  .feed-title { font-size: 2.1rem; }
-  .feed-grid { gap: 1rem; }
+
+  /* Drag-handle dash at top of bottom sheet */
+  .sidebar::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  .sidebar-header { padding-bottom: 0.7rem; }
+  .chapter-title { font-size: 1.55rem; }
+  .headline { padding: 0.9rem 0 1rem; margin-bottom: 1rem; }
+  .headline-number { font-size: 2.4rem; }
+  .headline-sub { font-size: 0.95rem; }
+  .chapter-text { font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.1rem; }
+
+  /* Chapter rail: horizontal scroll of pill tabs */
+  .chapter-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-height: none;
+    gap: 0.35rem;
+    padding: 0.7rem 0.2rem 0.5rem;
+    margin: 0.6rem 0 0.4rem;
+    border-top: 1px solid var(--rule);
+    scrollbar-width: none;
+  }
+  .chapter-nav::-webkit-scrollbar { display: none; }
+
+  .chapter-dot {
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    padding: 0.4rem 0.55rem 0.45rem;
+    border-left: 0;
+    border-bottom: 2px solid transparent;
+    min-width: 3.2rem;
+    background: rgba(255, 255, 255, 0.025);
+    border-radius: 4px;
+  }
+
+  .chapter-dot.is-active {
+    border-left-color: transparent;
+    border-bottom-color: var(--accent);
+    background: rgba(247, 226, 107, 0.07);
+  }
+
+  .chapter-dot-num { min-width: 0; font-size: 0.65rem; }
+  .chapter-dot-title {
+    font-size: 0.7rem;
+    line-height: 1.1;
+    white-space: nowrap;
+    max-width: 8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-style: normal;
+  }
+
+  .chapter-controls { padding-top: 0.6rem; }
+  .ctrl { padding: 0.45rem 0.7rem; font-size: 0.7rem; }
+
+  /* Hide the floating tooltip — the sidebar already shows the state
+     data; on touch, hover is meaningless. */
+  .tooltip { display: none; }
+
+  /* Hide the map footer — it overlaps the sheet and its text reads
+     prominently elsewhere. */
+  .footer { display: none; }
+
+  /* Banner: lift to top center, tighten. Multiple banners stack. */
+  .banner {
+    top: 0.55rem;
+    right: 0.55rem;
+    left: 0.55rem;
+    transform: none;
+    padding: 0.4rem 0.65rem;
+    font-size: 0.62rem;
+    gap: 0.4rem;
+    border-radius: 3px;
+  }
+  .banner + .banner { top: 2.4rem; }
+  .banner code { padding: 0.05rem 0.25rem; }
+
+  /* Nudge map controls above the sheet so they stay reachable */
+  .mapboxgl-ctrl-top-right {
+    top: 0.5rem !important;
+    right: 0.5rem !important;
+  }
+  .mapboxgl-ctrl-bottom-right {
+    bottom: 59vh !important;
+    bottom: 59dvh !important;
+  }
+
+  /* Seed-data banner + synth banner at the top */
+  .map-section .banner { z-index: 14; }
+}
+
+/* --- Phone: condense typography + collapse all grids --------------- */
+@media (max-width: 560px) {
+  /* Sidebar: slightly taller on phones since phones are narrow */
+  .sidebar {
+    height: 62vh;
+    height: 62dvh;
+    padding: 1.25rem 1rem 0.65rem;
+  }
+
+  .brand { font-size: 0.65rem; letter-spacing: 0.2em; }
+  .brand-sub { font-size: 0.95rem; }
+  .chapter-title { font-size: 1.4rem; }
+  .headline-number { font-size: 2rem; }
+  .headline-sub { font-size: 0.88rem; line-height: 1.35; }
+  .chapter-text { font-size: 0.9rem; }
+
+  .mapboxgl-ctrl-bottom-right {
+    bottom: 63vh !important;
+    bottom: 63dvh !important;
+  }
+
+  /* Essay sections — uniform tight padding */
+  .feed-section,
+  .mirror-section,
+  .cradle-section,
+  .convergence-section,
+  .timeline-section,
+  .subst-section {
+    padding: 2.75rem 1rem 2.25rem;
+  }
+
+  /* Scale down hero titles everywhere */
+  .feed-title,
+  .mirror-title,
+  .cradle-title,
+  .conv-title,
+  .tl-title,
+  .subst-title {
+    font-size: clamp(1.6rem, 7vw, 2rem);
+  }
+
+  .feed-lede,
+  .mirror-lede,
+  .cradle-lede,
+  .conv-lede,
+  .tl-lede,
+  .subst-lede {
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  /* Section sub-heading scale */
+  .mirror-title,
+  .budget-heading,
+  .worldview-heading,
+  .cradle-chart-heading,
+  .cradle-bible-heading,
+  .cradle-vacancy-heading,
+  .cradle-paradox-heading,
+  .conv-chart-heading,
+  .conv-timeline-heading,
+  .conv-lies-heading,
+  .conv-count-heading,
+  .subst-heading {
+    font-size: 1.45rem;
+  }
+
+  /* Feeds */
+  .feed-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .feed-tabs { width: 100%; justify-content: center; }
+  .feed-tab { padding: 0.4rem 0.8rem; font-size: 0.68rem; letter-spacing: 0.12em; }
+
+  /* Mirror */
+  .mirror-stacks { grid-template-columns: 1fr; gap: 1rem; }
+  .stack { padding: 1.25rem 1.2rem 1.35rem; }
+  .stack-heading { font-size: 1.3rem; }
+  .stack-list li { gap: 0.65rem; padding: 0.5rem 0; }
+  .stack-num { min-width: 5.8rem; font-size: 0.88rem; }
+  .stack-lbl { font-size: 0.88rem; }
+  .stack-need { padding: 0.8rem 0.9rem; font-size: 0.9rem; }
+
+  .redirect { padding: 1.5rem 1rem; }
+  .redirect-swap { grid-template-columns: 1fr; gap: 0.85rem; }
+  .redirect-arrow { transform: rotate(90deg); font-size: 1.5rem; }
+  .redirect-from .redirect-content { font-size: 1.05rem; }
+  .redirect-to .redirect-content { font-size: 1.15rem; }
+
+  .budget-bar { height: 44px; }
+  .budget-compare { grid-template-columns: 1fr; gap: 1rem; padding: 1.35rem 1rem; }
+  .budget-compare-num { font-size: 2.3rem; }
+  .budget-compare-label { font-size: 0.85rem; }
+  .budget-compare-v { font-size: 0.6rem; }
+
+  .worldview { padding: 1.75rem 1.1rem; }
+  .worldview-big { flex-direction: column; text-align: center; gap: 0.4rem; padding: 1.25rem 0.5rem; }
+  .worldview-num { font-size: 3.5rem; }
+  .worldview-row { grid-template-columns: 1fr; gap: 1.5rem; }
+
+  .indictment { padding: 2rem 1rem; }
+  .indictment-body { font-size: 1rem; line-height: 1.6; }
+  .indictment-kicker { font-size: 1.15rem; }
+
+  /* Empty Cradle */
+  .cradle-hero { margin-bottom: 2.5rem; }
+  .cradle-row {
+    grid-template-columns: 52px 1fr;
+    gap: 0.5rem;
+    row-gap: 0.35rem;
+    padding: 0.55rem 0.7rem;
+  }
+  .cradle-row .cradle-label {
+    grid-column: 2;
+    font-size: 0.9rem;
+  }
+  .cradle-row .cradle-bar-track { grid-column: 1 / -1; height: 18px; }
+  .cradle-year { font-size: 0.82rem; }
+  .cradle-tfr { font-size: 0.78rem; right: 0.5rem; }
+  .cradle-note { font-size: 0.78rem; }
+
+  .cradle-headline { flex-direction: column; text-align: center; gap: 0.4rem; padding: 1.5rem 1rem; }
+  .cradle-headline-num { font-size: 3.3rem; }
+  .cradle-headline-lbl { font-size: 0.95rem; }
+
+  .cradle-verses { grid-template-columns: 1fr; gap: 1rem; }
+  .cradle-verse { padding: 1.25rem 1.25rem 1rem; }
+  .cradle-verse blockquote { font-size: 1rem; }
+
+  .cradle-vacancies { grid-template-columns: 1fr; gap: 0.85rem; }
+  .vacancy { padding: 1.35rem 1.1rem; }
+  .vacancy h4 { font-size: 1.05rem; padding-right: 2rem; }
+
+  .cradle-compare { grid-template-columns: 1fr; gap: 0.8rem; }
+  .era { padding: 1.3rem 1.1rem; }
+  .era-v { transform: rotate(90deg); font-size: 1.2rem; }
+  .cradle-paradox-note { font-size: 0.95rem; }
+
+  .cradle-closing { padding: 2.5rem 1rem 0.5rem; }
+  .cradle-closing-body { font-size: 1rem; }
+  .cradle-closing-kicker { font-size: 1.15rem; }
+
+  /* Convergence */
+  .conv-chart-scroll { margin: 0 -1rem; padding: 0 1rem; }
+  .conv-legend { grid-template-columns: 1fr; gap: 0.35rem; }
+
+  .conv-timeline::before { left: 46px; }
+  .conv-event { grid-template-columns: 50px 1fr; gap: 0.85rem; }
+  .conv-event::before { left: 40px; }
+  .conv-event-body { padding-left: 1rem; }
+  .conv-event-body h4 { font-size: 1rem; }
+  .conv-event-body p { font-size: 0.88rem; }
+
+  .conv-lies-grid { grid-template-columns: 1fr; gap: 0.85rem; }
+  .conv-lie { padding: 1.5rem 1.2rem 1.35rem; }
+  .conv-lie h4 { font-size: 1.05rem; padding-right: 1.5rem; }
+
+  .conv-count { padding: 1.85rem 1.1rem; }
+  .conv-count-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .conv-count-grid li { padding: 1.1rem 0.65rem; }
+  .conv-count-num { font-size: 1.75rem; }
+  .conv-count-lbl { font-size: 0.82rem; }
+  .conv-count-kicker { font-size: 0.95rem; }
+
+  .conv-closing { padding: 2.5rem 1rem 0.5rem; }
+  .conv-closing-body { font-size: 1rem; line-height: 1.55; }
+  .conv-closing-kicker { font-size: 1.15rem; }
+
+  /* Timeline — still scrolls horizontally; compact everything else */
+  .tl-hero { margin-bottom: 2rem; }
+  .tl-svg { min-width: 900px; }
+  .tl-sidebar { padding: 1rem; }
+  .tl-sidebar-year { font-size: 1.6rem; }
+  .tl-val-lbl { font-size: 0.8rem; }
+  .tl-val-num { font-size: 0.8rem; }
+  .tl-legend { padding: 1rem 1.1rem; }
+  .tl-legend ul { grid-template-columns: 1fr; }
+
+  /* Substitution */
+  .subst-hero { margin-bottom: 2.75rem; }
+  .subst-item {
+    grid-template-columns: 1fr !important;
+    gap: 0.55rem !important;
+    padding: 1.1rem 1.15rem;
+  }
+  .subst-item header { grid-column: 1; grid-row: auto; gap: 0.25rem; }
+  .subst-item-label { font-size: 1.1rem; }
+  .subst-item-scale, .subst-item-replaced { grid-column: 1; font-size: 0.88rem; }
+
+  .subst-ledger-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+  .subst-col { padding: 1.6rem 1.25rem 1.4rem; }
+  .subst-col-figure { font-size: 2.3rem; }
+  .subst-col p { font-size: 0.88rem; }
+  .subst-ledger-note { padding: 1.25rem 1.1rem; font-size: 0.95rem; }
+
+  .subst-porn-grid { grid-template-columns: 1fr; gap: 0.85rem; }
+  .subst-porn-col { padding: 1.4rem 1.2rem; }
+  .subst-porn-col h4 { font-size: 1.2rem; }
+  .subst-porn-col li { grid-template-columns: 58px 1fr; gap: 0.65rem; padding: 0.6rem 0; }
+  .subst-porn-num { font-size: 1.35rem; }
+  .subst-porn-lbl { font-size: 0.88rem; }
+  .subst-porn-kicker { font-size: 0.95rem; }
+
+  .subst-tally-list li {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    padding: 0.75rem 0.9rem;
+  }
+  .subst-tally-arrow { display: none; }
+  .subst-tally-claim { font-size: 0.95rem; }
+  .subst-tally-reality { font-size: 0.78rem; }
+
+  .subst-wars-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+  .subst-war { padding: 1.5rem 1.2rem 1.2rem; }
+  .subst-war h4 { font-size: 1.1rem; padding-right: 2rem; }
+  .subst-war-did, .subst-war-result { font-size: 0.88rem; }
+
+  .subst-possibilities-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .subst-possibility { padding: 1.65rem 1.3rem 1.45rem; }
+  .subst-possibility h4 { font-size: 1.3rem; }
+  .subst-possibility p { font-size: 0.95rem; }
+
+  .subst-nation { padding: 1.85rem 1.1rem; }
+  .subst-nation-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+  }
+  .subst-nation-grid li { padding: 1rem 0.5rem; gap: 0.25rem; }
+  .subst-nation-n { font-size: 1.7rem; }
+  .subst-nation-lbl { font-size: 0.78rem; }
+  .subst-nation-sub { font-size: 0.62rem; }
+  .subst-nation-kicker { font-size: 0.95rem; }
+
+  .subst-final { padding: 2.5rem 1rem 0.5rem; }
+  .subst-final-line { font-size: 1.35rem; }
+  .subst-final-kicker { font-size: 1.9rem !important; }
+
+  .page-footer { padding: 2rem 1.25rem 2.5rem; font-size: 0.68rem; }
 }
