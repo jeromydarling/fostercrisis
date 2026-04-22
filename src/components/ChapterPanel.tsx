@@ -36,18 +36,13 @@ export function ChapterPanel({ index, onChange, selectedFips, onClearSelection }
         <p className="legend-source">{chapter.source}</p>
       </div>
 
-      <header className="sidebar-header">
-        {stateRow ? (
+      {stateRow && (
+        <header className="sidebar-header">
           <button className="back-btn" onClick={onClearSelection} type="button">
             <span aria-hidden>←</span> National view
           </button>
-        ) : (
-          <>
-            <p className="brand">THE FOSTER CRISIS</p>
-            <p className="brand-sub">A map of American silence.</p>
-          </>
-        )}
-      </header>
+        </header>
+      )}
 
       <div className="chapter-body">
         <p className="eyebrow">

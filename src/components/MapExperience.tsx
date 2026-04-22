@@ -65,6 +65,11 @@ export function MapExperience({ selectedFips, onSelectedFipsChange }: Props) {
 
   return (
     <>
+      <header className="map-title">
+        <p className="brand">THE FOSTER CRISIS</p>
+        <p className="brand-sub">A map of American silence.</p>
+      </header>
+
       <div className="map-section" id="map">
         <CrisisMap
           chapterIndex={chapterIndex}

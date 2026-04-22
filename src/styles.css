@@ -262,12 +262,43 @@ body {
   color: #0b0d12;
 }
 
-/* The map view renders its own 100vh map-section directly under the
-   header, so we offset the map/feeds region (but not the landing) so
-   the fixed map doesn't slip under the sticky header. */
-.mode-map .map-section { height: calc(100vh - 52px); }
+/* Map view renders a compact title strip, then the 100vh map-section
+   directly under the sticky mode header. Title is ~56px; subtract it
+   so the map fits without pushing anything below the fold. */
+.map-title {
+  text-align: center;
+  padding: 0.65rem 1.25rem 0.7rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--bg);
+}
+
+.map-title .brand {
+  margin: 0;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.map-title .brand-sub {
+  margin: 0.2rem 0 0;
+  font-family: var(--ff-serif);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--fg-dim);
+  line-height: 1.2;
+}
+
+.mode-map .map-section { height: calc(100vh - 52px - 60px); }
 @supports (height: 100dvh) {
-  .mode-map .map-section { height: calc(100dvh - 52px); }
+  .mode-map .map-section { height: calc(100dvh - 52px - 60px); }
+}
+
+@media (max-width: 560px) {
+  .map-title { padding: 0.5rem 1rem 0.55rem; }
+  .map-title .brand { font-size: 0.65rem; letter-spacing: 0.2em; }
+  .map-title .brand-sub { font-size: 0.9rem; }
 }
 
 /* ---- Solution experience hero ------------------------------------- */
