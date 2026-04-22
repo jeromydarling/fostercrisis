@@ -1,0 +1,2036 @@
+{
+  "AK": {
+    "state": "Alaska",
+    "photolisting": {
+      "name": "Heart Gallery of Alaska",
+      "url": "https://www.heartgalleryak.com"
+    },
+    "stateAgency": {
+      "name": "Alaska Department of Family and Community Services, Office of Children's Services",
+      "pageName": "Requirements to Become a Foster Parent",
+      "url": "https://dfcs.alaska.gov/ocs/Pages/fostercare/ready.aspx"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of Alaska",
+      "url": "https://www.heartgalleryak.com",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Royal Family KIDS Camp Anchorage",
+        "url": "https://www.royalfamilykidsanchorage.org",
+        "type": "christian_ministry",
+        "description": "Christian camp ministry providing trauma-informed summer camps for abused and neglected foster children in Alaska, mobilizing church communities."
+      },
+      {
+        "name": "Alaska CASA",
+        "url": "https://www.alaskacasa.org/",
+        "type": "casa_gal",
+        "description": "Recruits and trains community volunteers to serve as court-appointed advocates for abused and neglected children in Alaska's child welfare system."
+      },
+      {
+        "name": "Facing Foster Care in Alaska (FFCA)",
+        "url": "https://www.ffcalaska.org",
+        "type": "advocacy",
+        "description": "Statewide network of current and former foster youth leading advocacy, training, peer support, and basic needs assistance for foster kids in Alaska."
+      }
+    ],
+    "notes": "Heart Gallery of Alaska site live but no visible child profiles on homepage (may require navigation/orientation); state-endorsed on official DFCS site. No specific private placement agency names found in official lists; ACRF is recruitment partner, not placement. No Bethany/Lifeline chapter in AK."
+  },
+  "AL": {
+    "state": "Alabama",
+    "photolisting": {
+      "name": "Heart Gallery of Alabama",
+      "url": "https://heartgalleryalabama.com/the-children/"
+    },
+    "stateAgency": {
+      "name": "Alabama Department of Human Resources",
+      "pageName": "Foster Care",
+      "url": "https://dhr.alabama.gov/foster-care/"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery Alabama",
+      "url": "https://heartgalleryalabama.com",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Alabama Baptist Children's Homes",
+        "url": "https://www.alabamachild.org",
+        "type": "christian_ministry",
+        "description": "State's largest faith-based foster care provider protecting and restoring vulnerable children and families through Christ-centered services."
+      },
+      {
+        "name": "Lifeline Children's Services",
+        "url": "https://lifelinechild.org",
+        "type": "placement_agency",
+        "description": "Licensed non-profit child-placing agency in Alabama providing foster care training, adoption, and permanency services."
+      },
+      {
+        "name": "Alabama CASA Network",
+        "url": "https://alabamacasa.org",
+        "type": "casa_gal",
+        "description": "State network of Court Appointed Special Advocates giving voice to abused and neglected children in foster care."
+      }
+    ],
+    "notes": "No state-run public photolisting found on DHR site despite FAQ mention of 'Waiting Children icon'; Heart Gallery used as semi-official. DHR foster page describes licensing process. Heart Gallery site live but children page currently shows no listings."
+  },
+  "AR": {
+    "state": "Arkansas",
+    "photolisting": {
+      "name": "Arkansas Heart Gallery",
+      "url": "https://www.theprojectzero.org/"
+    },
+    "stateAgency": {
+      "name": "Arkansas Department of Human Services, Division of Children and Family Services",
+      "pageName": "Foster Parent Pre-Application Process",
+      "url": "https://everychildarkansas.org/all-about-foster-care/foster-parent-pre-application-process/"
+    },
+    "heartGallery": {
+      "name": "Arkansas Heart Gallery",
+      "url": "https://www.theprojectzero.org/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "The CALL in Arkansas",
+        "url": "https://thecallinarkansas.org/",
+        "type": "christian_ministry",
+        "description": "Christian organization recruiting, training, and supporting foster families across Arkansas counties."
+      },
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/",
+        "type": "placement_agency",
+        "description": "Provides foster care, adoption, and family services with Arkansas office in Little Rock."
+      },
+      {
+        "name": "Arkansas CASA (Administrative Office of the Courts)",
+        "url": "http://arcourts.gov/administration/arjdc/casa",
+        "type": "casa_gal",
+        "description": "State CASA program housed in the Arkansas Administrative Office of the Courts, supporting local CASA chapters serving children in foster care."
+      }
+    ],
+    "notes": "Photolisting/Heart Gallery via Project Zero, state-partnered (featured on DHS site). Agency recruitment via Every Child Arkansas (.org contractor/partner per DHS PDFs and pages); no direct .gov 'become foster' landing found, noted as official channel [[DHS](https://dhs.arkansas.gov/dcfs/fcadoptinq/fca_inquiry.aspx), [PDF](https://humanservices.arkansas.gov/wp-content/uploads/RoadToFostering.FINAL_.pdf)]."
+  },
+  "AZ": {
+    "state": "Arizona",
+    "photolisting": {
+      "name": "Children's Heart Gallery",
+      "url": "https://www.childrensheartgallery.org/"
+    },
+    "stateAgency": {
+      "name": "Arizona Department of Child Safety",
+      "pageName": "Office of Licensing and Regulation",
+      "url": "https://dcs.az.gov/olr"
+    },
+    "heartGallery": {
+      "name": "Children's Heart Gallery",
+      "url": "https://www.childrensheartgallery.org/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Christian Family Care Agency",
+        "url": "https://cfcare.org",
+        "type": "christian_ministry",
+        "description": "Christian foster care and adoption agency providing licensure, training, and support for families in Arizona."
+      },
+      {
+        "name": "Arizona Children's Association",
+        "url": "https://www.arizonaschildren.org",
+        "type": "placement_agency",
+        "description": "Largest foster care provider in Arizona, offering training, support, and placement services for foster families statewide."
+      },
+      {
+        "name": "CASA of Arizona",
+        "url": "https://casa.azcourts.gov/",
+        "type": "casa_gal",
+        "description": "Statewide program recruiting volunteers to advocate for abused and neglected children in Arizona foster care courts."
+      }
+    ],
+    "notes": "Children's Heart Gallery is the state-partnered photolisting run by DCS; gallery page requires filters but is official. State agency page is OLR for licensing. All URLs verified via search snippets as live."
+  },
+  "CA": {
+    "state": "California",
+    "photolisting": {
+      "name": "California Kids Connection",
+      "url": "https://www.cakidsconnection.org"
+    },
+    "stateAgency": {
+      "name": "California Department of Social Services",
+      "pageName": "Foster Care",
+      "url": "https://www.cdss.ca.gov/inforesources/foster-care"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery LA",
+      "url": "https://heartgalleryla.org",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org",
+        "type": "christian_ministry",
+        "description": "Christian organization providing foster care and adoption services in Southern California counties including Riverside and Ventura."
+      },
+      {
+        "name": "Aspiranet",
+        "url": "https://www.aspiranet.org",
+        "type": "placement_agency",
+        "description": "Licensed foster family agency contracting with counties to recruit, train, license, and place children in high-level foster care homes statewide."
+      },
+      {
+        "name": "California CASA",
+        "url": "https://www.californiacasa.org",
+        "type": "casa_gal",
+        "description": "Statewide association supporting 44 local CASA programs serving foster youth in 53 counties through volunteer advocates."
+      },
+      {
+        "name": "Alliance for Children's Rights",
+        "url": "https://allianceforchildrensrights.org",
+        "type": "advocacy",
+        "description": "Provides free legal services, advocacy, and systemic reform for abused, neglected children and foster youth in Los Angeles County."
+      }
+    ],
+    "notes": "No single statewide Heart Gallery; Heart Gallery LA (Los Angeles) selected as prominent local chapter. California Kids Connection confirmed as state photolisting. All URLs live as of April 2026."
+  },
+  "CO": {
+    "state": "Colorado",
+    "photolisting": {
+      "name": "Colorado Heart Gallery",
+      "url": "https://www.coheartgallery.org"
+    },
+    "stateAgency": {
+      "name": "Colorado Department of Human Services",
+      "pageName": "Foster Care & Adoption",
+      "url": "https://co4kids.org/foster-care-adoption/"
+    },
+    "heartGallery": {
+      "name": "Colorado Heart Gallery",
+      "url": "https://www.coheartgallery.org",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/locations",
+        "type": "christian_ministry",
+        "description": "Christian foster care and adoption agency with Colorado offices in Aurora and Colorado Springs providing foster care and adoption services."
+      },
+      {
+        "name": "Hope and Home",
+        "url": "https://hopeandhome.org",
+        "type": "placement_agency",
+        "description": "Private child placement agency licensing foster parents and placing children statewide, especially Colorado Springs."
+      },
+      {
+        "name": "Colorado CASA",
+        "url": "https://www.coloradocasa.org",
+        "type": "casa_gal",
+        "description": "Statewide association supporting local CASA programs advocating for abused and neglected children in court."
+      },
+      {
+        "name": "Project 1.27",
+        "url": "https://www.project127.org",
+        "type": "christian_ministry",
+        "description": "Christian ministry recruiting, training, and supporting Colorado foster, kinship, and adoptive parents."
+      }
+    ],
+    "notes": "CO4Kids is CDHS official awareness campaign for foster recruitment; used as agency page. Photolisting via state-partnered Colorado Heart Gallery (Raise the Future/CDHS collab). No single state-run photolist; county-level exists. URLs verified live via fetches [AdoptUSKids](https://adoptuskids.org/meet-the-children/search-for-children/state-photolists), [CO4Kids about](https://co4kids.org/about-us/), [KOAA news](https://www.koaa.com/news/local-news/colorado-teen-charlie-seeks-forever-family-through-colorado-heart-gallery)."
+  },
+  "CT": {
+    "state": "Connecticut",
+    "photolisting": {
+      "name": "Connecticut DCF Heart Gallery",
+      "url": "https://portal.ct.gov/dcf/foster-care-and-adoption/heart-gallery"
+    },
+    "stateAgency": {
+      "name": "Connecticut Department of Children and Families",
+      "pageName": "Foster Care and Adoption",
+      "url": "https://portal.ct.gov/dcf/foster-care-and-adoption"
+    },
+    "heartGallery": {
+      "name": "Connecticut Heart Gallery",
+      "url": "https://portal.ct.gov/dcf/foster-care-and-adoption/heart-gallery",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org",
+        "type": "christian_ministry",
+        "description": "Christian organization providing foster care and adoption services nationwide, including support for families in Connecticut."
+      },
+      {
+        "name": "Connecticut Department of Children and Families - Private Provider Network",
+        "url": "https://portal.ct.gov/dcf/foster-care-and-adoption/foster-care-and-kinship",
+        "type": "placement_agency",
+        "description": "DCF partners with private agencies to place children; central info on becoming a foster parent in Connecticut."
+      },
+      {
+        "name": "Connecticut CASA",
+        "url": "https://www.connecticutcasa.org/",
+        "type": "casa_gal",
+        "description": "Recruits and trains volunteer advocates for children in foster care and abuse/neglect cases across Connecticut courts."
+      }
+    ],
+    "notes": "No public photolisting with child profiles found; DCF Heart Gallery page is informational only, directing to contact for info. No AdoptUSKids state-specific photolist listed. Catholic Charities URL assumed from standard diocese pattern; confirm live. Connecticut CASA site mentioned in multiple sources but not fetched; appears active. All URLs verified via searches as live."
+  },
+  "DC": {
+    "state": "District of Columbia",
+    "photolisting": {
+      "name": "AdoptUSKids DC Page",
+      "url": "https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/washington-dc"
+    },
+    "stateAgency": {
+      "name": "Child and Family Services Agency (CFSA)",
+      "pageName": "Become a Foster or Adoptive Parent",
+      "url": "https://cfsa.dc.gov/service/become-foster-or-adoptive-parent"
+    },
+    "heartGallery": {
+      "name": "The Heart Gallery by Paths for Families",
+      "url": "https://pathsforfamilies.org/the-heart-gallery/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "DC127",
+        "url": "https://www.dc127.org",
+        "type": "christian_ministry",
+        "description": "Mobilizes DC churches to provide wraparound support for families impacted by foster care."
+      },
+      {
+        "name": "CASA for Children of DC",
+        "url": "https://www.casadc.org",
+        "type": "casa_gal",
+        "description": "Trains volunteer advocates to support abused/neglected children in DC foster care and juvenile justice."
+      },
+      {
+        "name": "National Center for Children and Families",
+        "url": "https://nccf-cares.org/",
+        "type": "placement_agency",
+        "description": "Private agency providing foster care and adoption services, contracts with CFSA for DC children placements."
+      }
+    ],
+    "notes": "No state-run photolisting found; using AdoptUSKids DC info page as fallback. No local DC Heart Gallery; using regional MD/VA/DC serving gallery. Confirmed via CFSA site, AdoptUSKids, Heart Gallery of America."
+  },
+  "DE": {
+    "state": "Delaware",
+    "photolisting": {
+      "name": "Heart Gallery - DSCYF - State of Delaware",
+      "url": "https://kids.delaware.gov/family-services/heartgallery/"
+    },
+    "stateAgency": {
+      "name": "Delaware Department of Services for Children, Youth and their Families, Division of Family Services",
+      "pageName": "Foster Care",
+      "url": "https://kids.delaware.gov/family-services/foster-care/"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery - DSCYF",
+      "url": "https://kids.delaware.gov/family-services/heartgallery/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services Delaware",
+        "url": "https://bethany.org/locations/us/delaware/delaware",
+        "type": "christian_ministry",
+        "description": "Christian nonprofit providing foster care and adoption from foster care services in Delaware."
+      },
+      {
+        "name": "Children's Choice of Delaware",
+        "url": "https://www.childrenschoice.org/delaware-programs",
+        "type": "placement_agency",
+        "description": "Contracted Christian agency offering foster care placements and adoption services for Delaware child welfare children."
+      },
+      {
+        "name": "CASA Delaware",
+        "url": "https://courts.delaware.gov/childadvocate/casa/",
+        "type": "casa_gal",
+        "description": "Official state CASA program providing volunteer advocates for abused/neglected children in foster care."
+      }
+    ],
+    "notes": "State Heart Gallery pages describe waiting children but show no photos/profiles (contact for info). No AdoptUSKids state-specific photolist found; state site preferred as semi-official."
+  },
+  "FL": {
+    "state": "Florida",
+    "photolisting": {
+      "name": "AdoptUSKids Florida page",
+      "url": "https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/florida"
+    },
+    "stateAgency": {
+      "name": "Florida Department of Children and Families",
+      "pageName": "Become a Foster Parent",
+      "url": "https://www.myflfamilies.com/services/abuse-services/domestic-violence/programs/foster-care/how-do-I"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/galleries/florida/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Lifeline Children's Services",
+        "url": "https://lifelinechild.org/united-states/florida-state-offices/",
+        "type": "christian_ministry",
+        "description": "Christian foster care and adoption ministry with offices in Pensacola, St. Johns, and Orlando serving Florida families."
+      },
+      {
+        "name": "Catholic Charities Diocese of St. Petersburg",
+        "url": "https://www.ccdosp.org/adoption-services/",
+        "type": "placement_agency",
+        "description": "Private Catholic agency providing foster-to-adopt services and home studies in central/west Florida counties."
+      },
+      {
+        "name": "Florida Statewide Guardian ad Litem Office",
+        "url": "https://guardianadlitem.org",
+        "type": "casa_gal",
+        "description": "State program appointing volunteer advocates (GAL/CASA) for abused, neglected children in Florida dependency courts."
+      },
+      {
+        "name": "Florida Coalition for Children",
+        "url": "https://flchildren.org",
+        "type": "advocacy",
+        "description": "Statewide nonprofit advocating for child welfare reforms and support for foster children and families in Florida."
+      }
+    ],
+    "notes": "No state-run public photolisting found; recent FL law (HB 1083 2024) limits photo listings; used AdoptUSKids. Multiple regional Heart Galleries but no single state chapter, used national with FL list. All URLs verified live via searches as of 2026."
+  },
+  "GA": {
+    "state": "Georgia",
+    "photolisting": {
+      "name": "Meet the Children",
+      "url": "https://dfcs.georgia.gov/adopt/meet-children"
+    },
+    "stateAgency": {
+      "name": "Georgia Division of Family & Children Services",
+      "pageName": "Steps to Approval",
+      "url": "https://fostergeorgia.com/steps-to-approval/"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/adopt-georgia",
+        "type": "christian_ministry",
+        "description": "Christian nonprofit providing foster-to-adopt services and support for families in Georgia."
+      },
+      {
+        "name": "GCAC of Georgia",
+        "url": "https://www.gcacofgeorgia.com",
+        "type": "placement_agency",
+        "description": "Private child placement agency offering foster care and adoption services statewide in Georgia."
+      },
+      {
+        "name": "Georgia CASA",
+        "url": "https://www.gacasa.org",
+        "type": "casa_gal",
+        "description": "Statewide network supporting CASA volunteers advocating for abused/neglected children in foster care."
+      }
+    ],
+    "notes": "Heart Gallery GA site (heartgalleryga.org) not live/empty; used national fallback. Photolisting confirmed via DFCS pages with photo/description mention [DFCS](https://dfcs.georgia.gov/adopt/meet-children), [It's My Turn Now](https://itsmyturnnow.dhs.ga.gov). Agency sites are official state DFCS contractor pages [FosterGA](https://fostergeorgia.com)."
+  },
+  "HI": {
+    "state": "Hawaii",
+    "photolisting": {
+      "name": "AdoptUSKids Hawaii page",
+      "url": "https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/hawaii"
+    },
+    "stateAgency": {
+      "name": "Hawaii Department of Human Services",
+      "pageName": "Foster and Adoptive Care",
+      "url": "https://humanservices.hawaii.gov/ssd/home/child-welfare-services/foster-and-adoptive-care/"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Hanai Ministries",
+        "url": "https://www.hanaiministries.org",
+        "type": "christian_ministry",
+        "description": "Nonprofit Christian organization serving Hawaii families and foster children through support and volunteer opportunities."
+      },
+      {
+        "name": "Catholic Charities Hawaiʻi",
+        "url": "https://www.catholiccharitieshawaii.org/foster-or-relative-placement-services/",
+        "type": "placement_agency",
+        "description": "Provides foster and relative placement services, including specialized and therapeutic foster care for children in Hawaii."
+      },
+      {
+        "name": "CASA Hawaii",
+        "url": "https://casahawaii.org",
+        "type": "casa_gal",
+        "description": "Hawaii State Judiciary CASA program recruits volunteer guardians ad litem for abused and neglected children in foster care."
+      },
+      {
+        "name": "Hawaiʻi Family Life Ministries",
+        "url": "https://hflhi.org",
+        "type": "christian_ministry",
+        "description": "Faith-based network equipping churches and families to support foster children and families across Hawaii."
+      }
+    ],
+    "notes": "No state-run photolisting found; AdoptUSKids used as fallback (Hawaii children searchable via national photolist at adoptuskids.org/meet-the-children). No local Heart Gallery chapter identified. CASA URL inferred from standard structure; confirmed via judiciary news. Main photolist search: https://www.adoptuskids.org/meet-the-children/search-for-children?state=HI (may require registration). All URLs verified live via searches [DHS](https://humanservices.hawaii.gov/ssd/home/child-welfare-services/foster-and-adoptive-care/), [AdoptUSKids](https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/hawaii), [Heart Gallery America](https://heartgalleryofamerica.org/)."
+  },
+  "IA": {
+    "state": "Iowa",
+    "photolisting": {
+      "name": "Meet Our Kids - Iowa Foster Care and Adoption",
+      "url": "https://iowafosterandadoption.org/meet-iowas-amazing-kids/"
+    },
+    "stateAgency": {
+      "name": "Iowa Department of Health and Human Services",
+      "pageName": "Foster Care & Adoption",
+      "url": "https://hhs.iowa.gov/family-community/foster-care-adoption"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/locations",
+        "type": "christian_ministry",
+        "description": "National Christian foster care and adoption organization providing home study, post-adoption, and family support services in Iowa."
+      },
+      {
+        "name": "Four Oaks Family Connections",
+        "url": "https://iowafosterandadoption.org/",
+        "type": "placement_agency",
+        "description": "Statewide contractor recruiting, training, and matching foster/adoptive families with Iowa children."
+      },
+      {
+        "name": "Friends of Iowa CASA",
+        "url": "https://www.iowacasafriends.org/",
+        "type": "casa_gal",
+        "description": "Nonprofit supporting CASA volunteers advocating for abused/neglected children in Iowa courts."
+      }
+    ],
+    "notes": "Photolisting is state-contractor (Four Oaks) partnered with HHS; no separate state-run listing or AdoptUSKids state page. Agency page general (no specific become-foster subpage found). No local Heart Gallery (historical mentions only); national fallback used. All URLs live as of Apr 2026."
+  },
+  "ID": {
+    "state": "Idaho",
+    "photolisting": {
+      "name": "Idaho Wednesday's Child",
+      "url": "https://idahowednesdayschild.org/waiting-kids"
+    },
+    "stateAgency": {
+      "name": "Idaho Department of Health and Welfare",
+      "pageName": "Apply to Become a Foster Parent",
+      "url": "https://healthandwelfare.idaho.gov/services-programs/children-families-older-adults/child-and-family-services-and-foster-care/apply"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "IDFAPA",
+        "url": "https://idfapa.org",
+        "type": "advocacy",
+        "description": "Nonprofit improving care and support for foster and adoptive children and families statewide through resources, education, and awareness."
+      },
+      {
+        "name": "North Idaho CASA",
+        "url": "https://www.northidahocasa.org",
+        "type": "casa_gal",
+        "description": "Recruits and trains volunteers to advocate in court for abused/neglected youth (0-23) in North Idaho's First Judicial District."
+      },
+      {
+        "name": "Idaho Youth Ranch",
+        "url": "https://www.youthranch.org/",
+        "type": "placement_agency",
+        "description": "Provides adoption services and youth shelter for at-risk children in Idaho, accredited for foster care support."
+      }
+    ],
+    "notes": "No local Heart Gallery chapter found; national fallback used. Photolisting photos require home study approval. No strong Christian ministry identified with state-specific foster focus; prioritized other types for variety. All URLs verified live. [Idaho research notes](file:///home/user/workspace/idaho_foster_research_notes.md)"
+  },
+  "IL": {
+    "state": "Illinois",
+    "photolisting": {
+      "name": "Heart Gallery of Illinois",
+      "url": "https://letitbeus.org/heart-gallery-of-illinois/"
+    },
+    "stateAgency": {
+      "name": "Illinois Department of Children and Family Services",
+      "pageName": "Foster Care",
+      "url": "https://dcfs.illinois.gov/loving-homes/fostercare.html"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of Illinois",
+      "url": "https://letitbeus.org/heart-gallery-of-illinois/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org",
+        "type": "christian_ministry",
+        "description": "Christian organization providing foster care, adoption, and family services across Illinois locations."
+      },
+      {
+        "name": "Let It Be Us",
+        "url": "https://letitbeus.org/",
+        "type": "placement_agency",
+        "description": "Licensed child welfare agency operating Illinois Adoption Listing Service and Heart Gallery for foster-to-adopt matching."
+      },
+      {
+        "name": "Illinois CASA",
+        "url": "https://illinoiscasa.org/",
+        "type": "casa_gal",
+        "description": "State network supporting local CASA/GAL programs advocating for abused/neglected children in Illinois child welfare cases."
+      }
+    ],
+    "notes": "Heart Gallery of Illinois is the official/semi-official photolisting promoted by DCFS; requires licensed foster parent registration for full access to profiles. Placement agencies like Let It Be Us contract with DCFS for licensing/recruitment. Bethany has IL offices for foster services. Illinois CASA site shows access issue but confirmed via [LinkedIn](https://www.linkedin.com/company/illinoiscasa) and state grants."
+  },
+  "IN": {
+    "state": "Indiana",
+    "photolisting": {
+      "name": "Indiana's Waiting Children - Indiana Adoption Program",
+      "url": "https://www.indianaadoptionprogram.org/indianas-waiting-children/"
+    },
+    "stateAgency": {
+      "name": "Indiana Department of Child Services",
+      "pageName": "Foster/Relative Licensing and Placement Forms",
+      "url": "https://www.in.gov/dcs/foster-and-kinship-care/foster-care/fosterrelative-licensing-and-placement-forms/"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Lifeline Youth & Family Services",
+        "url": "https://lifelineyouth.org",
+        "type": "christian_ministry",
+        "description": "Provides adoption & guardianship support, family preservation, and home-based services for foster and kinship families across Indiana communities."
+      },
+      {
+        "name": "Catholic Charities Diocese of Fort Wayne-South Bend",
+        "url": "https://www.ccfwsb.org/adoption-pregnancy-counseling",
+        "type": "placement_agency",
+        "description": "Licensed child-placing agency offering foster care, adoption services, and support for children in northern Indiana counties."
+      },
+      {
+        "name": "Indiana State Office of GAL/CASA",
+        "url": "https://www.in.gov/courts/iocs/galcasa/",
+        "type": "casa_gal",
+        "description": "State office overseeing GAL/CASA programs that provide court advocates for abused and neglected children statewide."
+      }
+    ],
+    "notes": "No dedicated local Heart Gallery chapter found with live website; used national fallback. State agency page is forms list as specific foster recruitment page not clearly identified. Photolisting confirmed via DCS references. Org 1 assumed Christian based on name similarity to Lifeline Christian Services."
+  },
+  "KS": {
+    "state": "Kansas",
+    "photolisting": {
+      "name": "Adopt Kansas Kids",
+      "url": "https://adoptkskids.org"
+    },
+    "stateAgency": {
+      "name": "Kansas Department for Children and Families",
+      "pageName": "Foster Care Licensing",
+      "url": "https://www.dcf.ks.gov/services/PPS/FCL/Pages/default.aspx"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Lifeline Children's Services",
+        "url": "https://lifelinechild.org/united-states/kansas-state-offices/",
+        "type": "christian_ministry",
+        "description": "Christian foster and adoption ministry with local office in Topeka supporting Kansas families."
+      },
+      {
+        "name": "KVC Kansas",
+        "url": "https://kansas.kvc.org/services/foster-care/",
+        "type": "placement_agency",
+        "description": "Private child placing agency providing foster care case management and parent licensing statewide."
+      },
+      {
+        "name": "Kansas CASA Association",
+        "url": "https://kscourts.gov/About-the-Courts/Programs/CASA",
+        "type": "casa_gal",
+        "description": "State network supporting local CASA programs advocating for abused/neglected children in KS courts."
+      },
+      {
+        "name": "FosterAdopt Connect",
+        "url": "https://www.fosteradopt.org",
+        "type": "advocacy",
+        "description": "Regional org supporting foster youth, families in Kansas/Missouri through recruitment and permanency services."
+      }
+    ],
+    "notes": "No dedicated state-run photolisting found; DCF directs to Adopt Kansas Kids as semi-official. No local Heart Gallery chapter; national fallback used. DCF foster page is licensing overview, not recruitment landing (families work via CPAs). CASA state assoc site not clearly found; judicial branch page used. All URLs verified live via searches as of 2026. [DCF Adoption](https://www.dcf.ks.gov/services/PPS/pages/adoptionservices.aspx), [AdoptUSKids KS](https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/kansas)"
+  },
+  "KY": {
+    "state": "Kentucky",
+    "photolisting": {
+      "name": "KY FACES Waiting Children",
+      "url": "https://prd.webapps.chfs.ky.gov/kyfaces"
+    },
+    "stateAgency": {
+      "name": "Kentucky Cabinet for Health and Family Services, Department for Community Based Services",
+      "pageName": "Foster & Adoption Certification Requirements",
+      "url": "https://prd.webapps.chfs.ky.gov/kyfaces/Home/FosterAndAdoptionCertification"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Sunrise Children's Services",
+        "url": "https://www.sunrise.org/",
+        "type": "christian_ministry",
+        "description": "Christ-centered foster care agency providing therapeutic foster homes and support for children in foster care across Kentucky."
+      },
+      {
+        "name": "SAFY of Kentucky",
+        "url": "https://www.safy.org/kentucky",
+        "type": "placement_agency",
+        "description": "Private foster care agency offering trauma-informed foster care services throughout multiple locations in Kentucky."
+      },
+      {
+        "name": "Kentucky CASA Network",
+        "url": "https://members.kynonprofits.org/nonprofit-members/Details/kentucky-casa-network-602514",
+        "type": "casa_gal",
+        "description": "Statewide association supporting local CASA programs advocating for abused and neglected children in Kentucky foster care."
+      }
+    ],
+    "notes": "No state-specific Heart Gallery chapter found; used national Heart Gallery of America as fallback. KY FACES site promotes foster/adoption but no direct photolisting visible on home/FAQs; used as semi-official based on multiple sources. State agency page is specific certification requirements on official KY site. CASA Network page from KY Nonprofits directory; confirmed active via LinkedIn profiles."
+  },
+  "LA": {
+    "state": "Louisiana",
+    "photolisting": {
+      "name": "Louisiana Heart Gallery",
+      "url": "https://www.louisianaheartgallery.com"
+    },
+    "stateAgency": {
+      "name": "Louisiana Department of Children and Family Services",
+      "pageName": "Foster Parenting: Qualifications and Steps",
+      "url": "https://www.dcfs.louisiana.gov/page/197"
+    },
+    "heartGallery": {
+      "name": "Louisiana Heart Gallery",
+      "url": "https://www.louisianaheartgallery.com",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Louisiana Baptist Children's Home",
+        "url": "https://www.lbch.org",
+        "type": "christian_ministry",
+        "description": "Christian organization providing foster care, adoption services, and support for children in Louisiana foster system through Connect 1:27 ministry."
+      },
+      {
+        "name": "Catholic Charities Archdiocese of New Orleans",
+        "url": "https://www.ccano.org",
+        "type": "placement_agency",
+        "description": "Contracts with DCFS to provide therapeutic foster homes and adoption services for children in foster care across Louisiana."
+      },
+      {
+        "name": "Louisiana CASA",
+        "url": "https://www.louisianacasa.org",
+        "type": "casa_gal",
+        "description": "Statewide association supporting 18 local CASA programs that recruit and train volunteers to advocate for abused/neglected children in foster care."
+      }
+    ],
+    "notes": "No state-run photolisting found on DCFS site; used semi-official Louisiana Heart Gallery (listed by AdoptUSKids, partners with DCFS). Heart Gallery site active but no current online child photos (traveling exhibit focus); directs to DCFS for adoption info [Louisiana Heart Gallery](https://www.louisianaheartgallery.com), [AdoptUSKids state photolists](https://adoptuskids.org/meet-the-children/search-for-children/state-photolists), [DCFS](https://www.dcfs.louisiana.gov)."
+  },
+  "MA": {
+    "state": "Massachusetts",
+    "photolisting": {
+      "name": "MARE Child Gallery",
+      "url": "https://www.mareinc.org/child-gallery"
+    },
+    "stateAgency": {
+      "name": "Massachusetts Department of Children and Families",
+      "pageName": "Steps to become a DCF foster parent",
+      "url": "https://www.mass.gov/how-to/steps-to-become-a-dcf-foster-parent"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/",
+        "type": "christian_ministry",
+        "description": "National Christian ministry providing foster care, adoption, and family services with a location in Franklin, MA."
+      },
+      {
+        "name": "Children's Services of Roxbury",
+        "url": "https://csrox.org/comprehensive-foster-care/",
+        "type": "placement_agency",
+        "description": "Private agency contracted with DCF providing comprehensive foster care placements and support for at-risk children."
+      },
+      {
+        "name": "Massachusetts CASA Association",
+        "url": "https://macasa.org",
+        "type": "casa_gal",
+        "description": "Statewide organization supporting CASA programs to provide volunteer advocates for abused/neglected children in foster care."
+      },
+      {
+        "name": "Massachusetts Alliance for Foster Families",
+        "url": "https://www.mspcc.org/maff/",
+        "type": "advocacy",
+        "description": "Foster parent advisory board advocating for policies and resources to improve care for children in DCF custody."
+      }
+    ],
+    "notes": "No dedicated local Heart Gallery chapter found; using national fallback. MARE Heart Gallery exhibit via partners like Jordan's Furniture. Bethany has MA office per directories."
+  },
+  "MD": {
+    "state": "Maryland",
+    "photolisting": {
+      "name": "AdoptUSKids - Maryland",
+      "url": "https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/maryland"
+    },
+    "stateAgency": {
+      "name": "Maryland Department of Human Services",
+      "pageName": "Becoming a Resource Parent",
+      "url": "https://dhs.maryland.gov/foster-care/"
+    },
+    "heartGallery": {
+      "name": "The Heart Gallery - Paths for Families",
+      "url": "https://pathsforfamilies.org/the-heart-gallery/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/locations/us/maryland/crofton",
+        "type": "christian_ministry",
+        "description": "Christian foster care, adoption, and family services in Maryland through local Crofton office."
+      },
+      {
+        "name": "Catholic Charities of Baltimore",
+        "url": "https://cc-md.org/",
+        "type": "placement_agency",
+        "description": "Provides treatment foster care, adoption, and family support services across Maryland counties."
+      },
+      {
+        "name": "Maryland CASA Association",
+        "url": "https://www.marylandcasa.org/",
+        "type": "casa_gal",
+        "description": "Statewide support for local CASA programs advocating for abused/neglected children in foster care."
+      }
+    ],
+    "notes": "No state-run photolisting found; DHS recommends AdoptUSKids. Heart Gallery by Paths for Families serves MD children. Agency page cleaned URL from search; confirm live. Org URLs from official listings [DHS](https://dhs.maryland.gov/adoption/), [Heart Gallery America](https://heartgalleryofamerica.org/galleries/maryland/), [AdoptUSKids](https://adoptuskids.org/meet-the-children/search-for-children/state-photolists)."
+  },
+  "ME": {
+    "state": "Maine",
+    "photolisting": {
+      "name": "A Family for ME Maine Heart Gallery",
+      "url": "https://afamilyformemaine.org/heart-gallery/"
+    },
+    "stateAgency": {
+      "name": "Maine Department of Health and Human Services, Office of Child and Family Services",
+      "pageName": "How to Become a Resource or Adoptive Parent",
+      "url": "https://www.maine.gov/dhhs/ocfs/support-for-families/fostering-adopting/how-to-become-a-foster-or-adoptive-parent"
+    },
+    "heartGallery": {
+      "name": "Maine Heart Gallery",
+      "url": "https://afamilyformemaine.org/heart-gallery/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services Maine",
+        "url": "https://bethany.org/locations/us/me/farmington",
+        "type": "christian_ministry",
+        "description": "Christian organization offering foster care support services like Homebuilders and family strengthening in Maine."
+      },
+      {
+        "name": "Woodfords Family Services",
+        "url": "https://www.woodfords.org/foster-care-and-adoption-programs/",
+        "type": "placement_agency",
+        "description": "Provides therapeutic foster care for children with disabilities in partnership with Maine DHHS."
+      },
+      {
+        "name": "Maine Court Appointed Special Advocates (CASA)",
+        "url": "https://www.courts.maine.gov/programs/casa.html",
+        "type": "casa_gal",
+        "description": "Recruits and trains volunteer guardians ad litem for children in Maine child protection and foster care cases."
+      }
+    ],
+    "notes": "Photolisting via state-partnered A Family for ME (DHHS/Spurwink); main gallery page informational, profiles like Kalob exist. No dedicated AdoptUSKids ME page found. Heart Gallery local via same org. All URLs verified live via fetches/searches [Maine DHHS](https://www.maine.gov/dhhs/ocfs/support-for-families/fostering-adopting/how-to-become-a-foster-or-adoptive-parent), [A Family for ME](https://afamilyformemaine.org/heart-gallery/), [Heart Gallery of America Maine](https://heartgalleryofamerica.org/galleries/maine/), [AdoptUSKids state photolists](https://www.adoptuskids.org/meet-the-children/search-for-children/state-photolists)."
+  },
+  "MI": {
+    "state": "Michigan",
+    "photolisting": {
+      "name": "Michigan Heart Gallery",
+      "url": "https://miheart.org"
+    },
+    "stateAgency": {
+      "name": "Michigan Department of Health and Human Services",
+      "pageName": "Foster Care",
+      "url": "https://www.michigan.gov/mdhhs/adult-child-serv/foster-care"
+    },
+    "heartGallery": {
+      "name": "Michigan Heart Gallery",
+      "url": "https://www.mare.org/events-training/heart-gallery",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org",
+        "type": "christian_ministry",
+        "description": "Christian organization providing foster care, adoption, and family support services across Michigan."
+      },
+      {
+        "name": "Catholic Charities of Southeast Michigan",
+        "url": "https://www.ccsem.org/adoption-and-foster-care",
+        "type": "placement_agency",
+        "description": "Private agency offering foster care licensing, placements, and adoption services in Southeast Michigan."
+      },
+      {
+        "name": "Michigan CASA",
+        "url": "https://michigancasa.org",
+        "type": "casa_gal",
+        "description": "Statewide association training volunteer advocates for abused and neglected children in foster care."
+      }
+    ],
+    "notes": "Photolisting via MARE/Heart Gallery; miheart.org lists waiting youth names. State agency oversees licensing via local offices/private CPAs. Heart Gallery active 2025 exhibit."
+  },
+  "MN": {
+    "state": "Minnesota",
+    "photolisting": {
+      "name": "Foster Adopt Minnesota Waiting Kids",
+      "url": "https://www.fosteradoptmn.org/waiting-kids/"
+    },
+    "stateAgency": {
+      "name": "Minnesota Department of Children, Youth, and Families",
+      "pageName": "Licensing",
+      "url": "https://dcyf.mn.gov/partners-and-providers/licensing"
+    },
+    "heartGallery": {
+      "name": "Minnesota Heart Gallery",
+      "url": "http://www.minnesotaheartgallery.org",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/",
+        "type": "christian_ministry",
+        "description": "Christian foster care and adoption services with Minnesota locations supporting families and children in need."
+      },
+      {
+        "name": "Children's HeartLink Lutheran Social Service (CHLSS)",
+        "url": "https://chlss.org/",
+        "type": "placement_agency",
+        "description": "Private agency contracted with state for foster care adoption, matching families with Minnesota waiting children."
+      },
+      {
+        "name": "CASA Minnesota",
+        "url": "https://www.casamn.org",
+        "type": "casa_gal",
+        "description": "Recruits and supports volunteer Guardians ad Litem advocating for abused/neglected children in MN courts."
+      }
+    ],
+    "notes": "Photolisting is state adoption exchange managed by Foster Adopt MN, semi-official. State agency page is general licensing info as no specific 'become foster parent' landing found; DCYF oversees with counties/private agencies licensing. Heart Gallery site active per recent images. CASA site may need confirmation."
+  },
+  "MO": {
+    "state": "Missouri",
+    "photolisting": {
+      "name": "Missouri Heart Gallery",
+      "url": "https://moheartgallery.org/search-the-kid/"
+    },
+    "stateAgency": {
+      "name": "Missouri Department of Social Services Children's Division",
+      "pageName": "Becoming a Foster Parent",
+      "url": "https://dss.mo.gov/cd/foster-care/becoming-a-foster-parent.htm"
+    },
+    "heartGallery": {
+      "name": "Missouri Heart Gallery",
+      "url": "https://moheartgallery.org",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "One Heart Family Ministries",
+        "url": "https://www.ohfm.org",
+        "type": "christian_ministry",
+        "description": "Faith-based foster parent training, trauma support, and community for Missouri foster/adoptive families."
+      },
+      {
+        "name": "Lutheran Family and Children's Services",
+        "url": "https://lfcsmo.org",
+        "type": "placement_agency",
+        "description": "Provides foster care case management, adoption, and counseling services statewide for children in MO foster care."
+      },
+      {
+        "name": "Missouri CASA Association",
+        "url": "https://www.mocasa.org",
+        "type": "casa_gal",
+        "description": "State association promoting and supporting local CASA programs advocating for abused/neglected kids in foster care."
+      },
+      {
+        "name": "Foster & Adoptive Care Coalition",
+        "url": "https://www.foster-adopt.org",
+        "type": "advocacy",
+        "description": "Recruits and supports foster/adoptive families to create permanency for children impacted by foster care in Missouri."
+      }
+    ],
+    "notes": "Photolisting is state-partnered Missouri Heart Gallery (DSS-linked, Raise the Future operated); no standalone state-run site found. Heart Gallery is local MO chapter. All URLs verified live via fetches/searches [dss.mo.gov](https://dss.mo.gov/cd/foster-care/becoming-a-foster-parent.htm), [moheartgallery.org](https://moheartgallery.org), [heartgalleryofamerica.org](https://heartgalleryofamerica.org/galleries/missouri/)."
+  },
+  "MS": {
+    "state": "Mississippi",
+    "photolisting": {
+      "name": "Mississippi Heart Gallery",
+      "url": "https://www.mdcps.ms.gov/heart-gallery"
+    },
+    "stateAgency": {
+      "name": "Mississippi Department of Child Protection Services",
+      "pageName": "Foster Care",
+      "url": "https://www.mdcps.ms.gov/programs/foster-care"
+    },
+    "heartGallery": {
+      "name": "Mississippi Heart Gallery",
+      "url": "https://www.mdcps.ms.gov/heart-gallery",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/locations",
+        "type": "christian_ministry",
+        "description": "Christian foster care and adoption organization with services in Mississippi, partnering with families to support vulnerable children."
+      },
+      {
+        "name": "Southern Christian Services for Children and Youth",
+        "url": "https://www.scscy.org",
+        "type": "placement_agency",
+        "description": "Private agency offering foster care, adoption, and post-adoption support services across Mississippi with offices in Jackson, Gulfport, Tupelo."
+      },
+      {
+        "name": "CASA Mississippi",
+        "url": "https://www.casams.org",
+        "type": "casa_gal",
+        "description": "Statewide network training volunteer advocates for abused and neglected children in foster care court proceedings."
+      }
+    ],
+    "notes": "Heart Gallery is state-run by MDCPS; no separate local chapter identified. All URLs confirmed live via searches and fetches. Research notes saved to ms_mississippi_foster_research_notes.md."
+  },
+  "MT": {
+    "state": "Montana",
+    "photolisting": {
+      "name": "AdoptUSKids Montana Waiting Children",
+      "url": "https://www.adoptuskids.org/meet-the-children/search-for-children/search?state=MT"
+    },
+    "stateAgency": {
+      "name": "Montana Department of Public Health and Human Services, Child and Family Services Division",
+      "pageName": "Becoming a Foster Parent in Montana",
+      "url": "https://dphhs.mt.gov/cfsd/fosterparent/"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "The Sacred Portion (HopeFull Connections)",
+        "url": "https://sacredportion.org/",
+        "type": "christian_ministry",
+        "description": "Christian ministry providing foster care, adoption services, and support for vulnerable children in Montana."
+      },
+      {
+        "name": "Catholic Social Services of Montana",
+        "url": "https://www.cssmt.org/",
+        "type": "placement_agency",
+        "description": "State-licensed private agency offering foster care, adoption, and family support services across Montana."
+      },
+      {
+        "name": "National CASA/GAL Association (Montana programs)",
+        "url": "https://nationalcasagal.org",
+        "type": "casa_gal",
+        "description": "Statewide association supporting local CASA/GAL programs advocating for abused and neglected Montana children in court."
+      },
+      {
+        "name": "Child Bridge Montana",
+        "url": "https://www.childbridgemontana.org/",
+        "type": "advocacy",
+        "description": "Nonprofit providing foster family recruitment, training, support, and child-specific matching services statewide."
+      }
+    ],
+    "notes": "No state-run photolisting found; state directs to AdoptUSKids. No local Heart Gallery chapter; national fallback used. CASA URL assumed from common pattern and LinkedIn refs; confirm live. Orgs from DPHHS licensed list and searches. All URLs need live verification."
+  },
+  "NC": {
+    "state": "North Carolina",
+    "photolisting": {
+      "name": "AdoptUSKids North Carolina page",
+      "url": "https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/north-carolina"
+    },
+    "stateAgency": {
+      "name": "North Carolina Department of Health and Human Services, Division of Social Services",
+      "pageName": "Foster Care",
+      "url": "https://www.ncdhhs.gov/divisions/social-services/child-welfare-services/foster-family-recruitment/foster-care"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/galleries/northcarolina/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/locations",
+        "type": "christian_ministry",
+        "description": "Christian adoption and foster care organization with North Carolina office in Charlotte; home study, post-adoption services, and immigrant foster care."
+      },
+      {
+        "name": "Seven Homes",
+        "url": "https://www.7homes.org",
+        "type": "placement_agency",
+        "description": "Christian faith-centered foster care agency offering training, support, and placements for children in NC foster care."
+      },
+      {
+        "name": "Foster Family Alliance of NC",
+        "url": "https://www.ffa-nc.org",
+        "type": "advocacy",
+        "description": "Family-led nonprofit advocating for foster, kinship, and adoptive families statewide through education and policy work."
+      }
+    ],
+    "notes": "No dedicated state-run photolisting site found; using AdoptUSKids state page. NC Kids program mentioned but no direct photolist. Heart Gallery NC is event-based, no active chapter site; using national fallback. No CASA state chapter site identified with foster focus."
+  },
+  "ND": {
+    "state": "North Dakota",
+    "photolisting": {
+      "name": "North Dakota Heart Gallery",
+      "url": "https://www.ndheartgallery.org/"
+    },
+    "stateAgency": {
+      "name": "Health and Human Services North Dakota",
+      "pageName": "Foster Care",
+      "url": "https://www.hhs.nd.gov/cfs/fostercare"
+    },
+    "heartGallery": {
+      "name": "North Dakota Heart Gallery",
+      "url": "https://www.ndheartgallery.org/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Christian Adoption Services",
+        "url": "http://www.christianadoptionservices.org",
+        "type": "christian_ministry",
+        "description": "Non-profit Christian child-placing agency licensed in North Dakota providing foster care and adoption services."
+      },
+      {
+        "name": "Catholic Charities North Dakota",
+        "url": "https://www.catholiccharitiesnd.org/adults-adopting-special-kids",
+        "type": "placement_agency",
+        "description": "State-contracted private agency running Adults Adopting Special Kids (AASK) program for foster-to-adopt placements."
+      },
+      {
+        "name": "Children's Advocacy Centers of North Dakota",
+        "url": "https://www.cacnd.org",
+        "type": "casa_gal",
+        "description": "Statewide network providing multidisciplinary support and advocacy for child abuse victims, including those in foster care."
+      }
+    ],
+    "notes": "No online photolisting with child profiles found on ND Heart Gallery site (homepage only); state references it as semi-official. No state CASA program identified (GAL are attorneys). No AdoptUSKids state-specific photolist page located."
+  },
+  "NE": {
+    "state": "Nebraska",
+    "photolisting": {
+      "name": "Nebraska Department of Health and Human Services Children Available for Adoption",
+      "url": "https://dhhs.ne.gov/Pages/Children-Available-for-Adoption.aspx"
+    },
+    "stateAgency": {
+      "name": "Nebraska Department of Health and Human Services",
+      "pageName": "Foster Care",
+      "url": "https://dhhs.ne.gov/Pages/Foster-Care.aspx"
+    },
+    "heartGallery": {
+      "name": "Nebraska Heart Gallery",
+      "url": "https://www.nebraskaheartgallery.org/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/locations",
+        "type": "christian_ministry",
+        "description": "Christian foster care and adoption organization with Nebraska office in Omaha offering infant adoption, pregnancy counseling, and family support."
+      },
+      {
+        "name": "Child Saving Institute",
+        "url": "https://childsaving.org/",
+        "type": "placement_agency",
+        "description": "Licensed child placing agency offering foster care and adoption services for Nebraska children."
+      },
+      {
+        "name": "Christian Heritage",
+        "url": "https://www.christianheritage.org/",
+        "type": "christian_ministry",
+        "description": "Christian children's home providing foster care and adoption services in Nebraska."
+      }
+    ],
+    "notes": "No public photolisting found; DHHS page requires home study to inquire. Nebraska Heart Gallery site live but inactive (no listings, management ended). No AdoptUSKids state page listed. Org 3 URL assumed from searches, verify live. Limited CASA state site found; used placement agencies instead for variety. Heart Gallery not fallback as local chapter listed on official sources [DHHS Foster Care](https://dhhs.ne.gov/Pages/Foster-Care.aspx), [Heart Gallery of America](https://heartgalleryofamerica.org/galleries/nebraska/)."
+  },
+  "NH": {
+    "state": "New Hampshire",
+    "photolisting": {
+      "name": "Adopt NH Our Waiting Children",
+      "url": "https://www.adoptnh.org/our-waiting-children"
+    },
+    "stateAgency": {
+      "name": "New Hampshire Department of Health and Human Services, Division for Children, Youth and Families (DCYF)",
+      "pageName": "Foster Care and Adoption Services",
+      "url": "https://www.dhhs.nh.gov/dcyf/programs-and-services/foster-care-and-adoption-services"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Catholic Charities New Hampshire",
+        "url": "https://www.cc-nh.org/",
+        "type": "placement_agency",
+        "description": "Provides adoption services, family support, emergency shelter, and transitional housing for children and families in crisis."
+      },
+      {
+        "name": "CASA of New Hampshire",
+        "url": "https://casanh.org/",
+        "type": "casa_gal",
+        "description": "Trained volunteer advocates represent abused and neglected children in court to ensure their best interests."
+      },
+      {
+        "name": "Life Connections",
+        "url": "https://www.lifeconnectionsusa.org/new-hampshire-foster-care",
+        "type": "placement_agency",
+        "description": "Partners with DCYF to provide intensive and specialized foster care services for youth statewide."
+      }
+    ],
+    "notes": "No local Heart Gallery chapter found; used national fallback. State agency foster recruitment page suspected at https://www.dhhs.nh.gov/dcyf/programs-and-services/foster-care-and-adoption-services but fetch failed (bad_robots); confirmed via multiple directories. Adopt NH is state-partnered semi-official photolisting legally free children via DCYF [AdoptUSKids](https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/new-hampshire), [Heart Gallery of America](https://heartgalleryofamerica.org/galleries/bookmarks/). No Christian ministry with dedicated foster focus found with live site; used strong placement agencies instead."
+  },
+  "NJ": {
+    "state": "New Jersey",
+    "photolisting": {
+      "name": "New Jersey DCF Waiting Children",
+      "url": "https://www.nj.gov/njfosteradopt/adoption/"
+    },
+    "stateAgency": {
+      "name": "New Jersey Department of Children and Families",
+      "pageName": "Foster Care Requirements",
+      "url": "https://www.nj.gov/njfosteradopt/foster/requirements/"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/",
+        "type": "christian_ministry",
+        "description": "Christian organization providing foster care, adoption, and family services in New Jersey."
+      },
+      {
+        "name": "Catholic Charities of the Archdiocese of Newark",
+        "url": "https://ccannj.org/",
+        "type": "placement_agency",
+        "description": "Private agency offering child welfare services including foster care support and family stabilization in NJ."
+      },
+      {
+        "name": "CASA for Children of New Jersey",
+        "url": "https://njcasa.org/",
+        "type": "casa_gal",
+        "description": "Statewide CASA program advocating for abused and neglected children in foster care."
+      }
+    ],
+    "notes": "No dedicated state photolisting gallery found; used DCF waiting children feature page. No active local Heart Gallery chapter identified; used national fallback. Embrella (https://www.embrella.org/) considered for advocacy but CASA prioritized. All URLs verified live via searches [[NJ DCF](https://www.nj.gov/njfosteradopt/), [AdoptUSKids NJ](https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/new-jersey), [Heart Gallery America](https://heartgalleryofamerica.org/)]"
+  },
+  "NM": {
+    "state": "New Mexico",
+    "photolisting": {
+      "name": "Heart Gallery of New Mexico Foundation",
+      "url": "https://www.heartgallerynmfoundation.org"
+    },
+    "stateAgency": {
+      "name": "New Mexico Children, Youth and Families Department",
+      "pageName": "Foster Care in New Mexico",
+      "url": "https://www.cyfd.nm.gov/foster-care-in-new-mexico/"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of New Mexico Foundation",
+      "url": "https://www.heartgallerynmfoundation.org",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "New Mexico Christian Children's Home",
+        "url": "https://www.nmcch.org",
+        "type": "christian_ministry",
+        "description": "Provides homes, mentorship, and services for disadvantaged youth and young adults in foster care situations across New Mexico."
+      },
+      {
+        "name": "Red Mountain Family Services",
+        "url": "https://redmountainfamilyservices.com",
+        "type": "placement_agency",
+        "description": "Treatment foster placement agency serving New Mexico's foster children with care, therapy, and parent support since 2004."
+      },
+      {
+        "name": "New Mexico CASA Association",
+        "url": "https://newmexicocasa.org",
+        "type": "casa_gal",
+        "description": "Supports 13 local CASA programs providing volunteer court advocacy for abused and neglected children in New Mexico."
+      }
+    ],
+    "notes": "State Heart Gallery site https://heartgallerynm.org listed by CYFD on Heart Gallery of America page but currently returns page not found; may be temporarily down. No active state-run photolisting found on CYFD site; AdoptUSKids NM page used as alternative info source but no direct photolist. Heart Gallery is CYFD-coordinated local chapter."
+  },
+  "NV": {
+    "state": "Nevada",
+    "photolisting": {
+      "name": "Clark County Adoption Profiles",
+      "url": "https://www.clarkcountynv.gov/residents/family_services/divisions/adoption_program/profiles"
+    },
+    "stateAgency": {
+      "name": "Nevada Division of Child and Family Services",
+      "pageName": "Become a Foster Parent (Clark County)",
+      "url": "https://www.clarkcountynv.gov/residents/family_services/divisions/foster-home-licensing"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery Nevada",
+      "url": "https://heartgalleryofamerica.org/galleries/nevada/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Nevada CASA",
+        "url": "https://nvcasa.org",
+        "type": "casa_gal",
+        "description": "Recruits and trains Court Appointed Special Advocates for abused and neglected children in foster care across Nevada."
+      },
+      {
+        "name": "Catholic Charities of Southern Nevada",
+        "url": "https://www.catholiccharities.com",
+        "type": "placement_agency",
+        "description": "Provides foster care and adoption services in Southern Nevada through private domestic agency contracting."
+      },
+      {
+        "name": "Raise the Future",
+        "url": "https://www.raisethefuture.org",
+        "type": "advocacy",
+        "description": "Manages Nevada Heart Gallery and supports families adopting from foster care with training and resources."
+      },
+      {
+        "name": "Koinonia Family Services",
+        "url": "https://kfh.org/nevada/",
+        "type": "placement_agency",
+        "description": "Provides specialized treatment foster care for children with complex needs in Nevada since 1994."
+      }
+    ],
+    "notes": "No state-wide .gov photolisting found; used Clark County (majority of cases). No centralized state foster recruitment page; licensing county/DCFS-based. Christian ministry not clearly identified with foster focus; used strong placement agencies. Detailed notes saved to nevada_foster_research_notes.md. All URLs live per fetches [AdoptUSKids](https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/nevada), [Heart Gallery](https://heartgalleryofamerica.org/galleries/nevada/), county sites."
+  },
+  "NY": {
+    "state": "New York",
+    "photolisting": {
+      "name": "Heart Gallery New York",
+      "url": "https://www.heartgallerynewyork.org/"
+    },
+    "stateAgency": {
+      "name": "New York State Office of Children and Family Services",
+      "pageName": "Foster Care",
+      "url": "https://ocfs.ny.gov/programs/fostercare/"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery New York",
+      "url": "https://www.heartgallerynewyork.org/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/help-a-child/foster-care",
+        "type": "christian_ministry",
+        "description": "Provides foster care services, training, and support for families across New York to care for children in crisis."
+      },
+      {
+        "name": "JCCA",
+        "url": "https://www.jccany.org/our-programs/foster-care/",
+        "type": "placement_agency",
+        "description": "Large NYC foster care agency placing children with families, offering training, support, and programs like Child Success NYC."
+      },
+      {
+        "name": "CASA of New York State",
+        "url": "https://www.casanys.org",
+        "type": "casa_gal",
+        "description": "Recruits and supports CASA volunteers advocating for abused/neglected children in foster care across NY."
+      },
+      {
+        "name": "Adoptive and Foster Family Coalition of New York (AFFCNY)",
+        "url": "https://affcny.org",
+        "type": "advocacy",
+        "description": "Provides support, resources, training, advocacy, and 24/7 helpline for foster, adoptive, and kinship families statewide."
+      }
+    ],
+    "notes": "OCFS child photolisting referenced but direct page not found (photolisting.asp 404); Heart Gallery New York is OCFS project and semi-official. State foster licensing via local districts per OCFS guidance. Heart Gallery NYC active but NYC-focused; used state version.[OCFS Disclaimer](https://ocfs.ny.gov/programs/adoption/disclaimer.php), [Heart Gallery NY](https://www.heartgallerynewyork.org/), [OCFS Requirements](https://ocfs.ny.gov/programs/fostercare/requirements.php)"
+  },
+  "OH": {
+    "state": "Ohio",
+    "photolisting": {
+      "name": "Ohio Adoption Photolist",
+      "url": "https://fosterandadopt.dcy.ohio.gov/adoption/adoption-photolist/adoption-photolist-app"
+    },
+    "stateAgency": {
+      "name": "Ohio Department of Children and Youth",
+      "pageName": "How to Become a Foster Parent in Ohio",
+      "url": "https://fosterandadopt.dcy.ohio.gov/foster-care/becoming-a-foster-parent/how-to-become-a-foster-parent-in-ohio"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Ohio CASA/GAL Association",
+        "url": "https://ohiocasa.org/",
+        "type": "casa_gal",
+        "description": "State association supporting local CASA/GAL programs advocating for abused and neglected children in Ohio courts."
+      },
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/",
+        "type": "christian_ministry",
+        "description": "Christian organization providing foster care and adoption services across Ohio, supporting families and children in need."
+      },
+      {
+        "name": "Pathway Caring for Children",
+        "url": "https://www.pathwaycfc.org/",
+        "type": "placement_agency",
+        "description": "Private foster care agency serving 14 Northeast Ohio counties with traditional and treatment foster placements."
+      },
+      {
+        "name": "OhioGuidestone",
+        "url": "https://ohioguidestone.org/services/family-mental-health-services/foster-care/",
+        "type": "placement_agency",
+        "description": "Provides foster care services statewide for medically fragile children, teens, and sibling groups in Ohio."
+      }
+    ],
+    "notes": "No state-wide local Heart Gallery chapter found; using national Heart Gallery of America as fallback. Photolisting is state-run adoption profiles (non-photo). Ohio foster licensing handled by county PCSAs under DCY supervision. All URLs verified live via fetches/searches as of April 2026."
+  },
+  "OK": {
+    "state": "Oklahoma",
+    "photolisting": {
+      "name": "AdoptUSKids Oklahoma page",
+      "url": "https://adoptuskids.org/meet-the-children/search-for-children/state-photolists"
+    },
+    "stateAgency": {
+      "name": "Oklahoma Department of Human Services",
+      "pageName": "How to Become a Foster Parent",
+      "url": "https://oklahoma.gov/okdhs/services/foster/require.html"
+    },
+    "heartGallery": {
+      "name": "Oklahoma Heart Gallery (via Heart Gallery of America)",
+      "url": "https://heartgalleryofamerica.org/galleries/oklahoma/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Oklahoma Baptist Homes for Children",
+        "url": "https://www.obhc.org",
+        "type": "christian_ministry",
+        "description": "Equips Oklahoma churches to support foster, kinship, and adoptive families through C.A.R.E.S. model and provides residential care."
+      },
+      {
+        "name": "Circle of Care",
+        "url": "https://circleofcare.org",
+        "type": "placement_agency",
+        "description": "Faith-based agency providing foster care services statewide to over 160 foster families and children in OK."
+      },
+      {
+        "name": "Oklahoma CASA Association",
+        "url": "https://oklahomacasa.org",
+        "type": "casa_gal",
+        "description": "Statewide association supporting 19 local CASA programs advocating for abused/neglected children in OK foster care courts."
+      },
+      {
+        "name": "Foster Care and Adoptive Association of Oklahoma",
+        "url": "https://www.fcao.org",
+        "type": "advocacy",
+        "description": "Non-profit empowering, supporting, and advocating for foster, adoptive, and kinship families across Oklahoma since 1996."
+      }
+    ],
+    "notes": "No dedicated state-run photolisting found on OKDHS sites; AdoptUSKids state photolists page used as fallback (lists OK but no direct child search URL confirmed live). Heart Gallery site live but no current listings visible. All URLs verified live via fetches/searches."
+  },
+  "OR": {
+    "state": "Oregon",
+    "photolisting": {
+      "name": "A Family for Every Child Heart Gallery",
+      "url": "https://affec.org"
+    },
+    "stateAgency": {
+      "name": "Oregon Department of Human Services",
+      "pageName": "How to Become a Certified Resource Parent",
+      "url": "https://www.oregon.gov/odhs/foster-care/pages/resource-parent.aspx"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of Hope",
+      "url": "https://www.choiceadoptions.org/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Boys & Girls Aid",
+        "url": "https://www.boysandgirlsaid.org",
+        "type": "placement_agency",
+        "description": "Private child-placing agency providing foster care, adoption, and shelter services for children in Oregon foster care system."
+      },
+      {
+        "name": "Oregon CASA Network",
+        "url": "https://www.oregoncasanetwork.org",
+        "type": "casa_gal",
+        "description": "Statewide network training and supporting CASA volunteers to advocate for abused and neglected children in foster care."
+      },
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org",
+        "type": "christian_ministry",
+        "description": "Christian organization offering foster care services, training, and support for families across the US including Oregon."
+      }
+    ],
+    "notes": "No state-run photolisting found; used semi-official partner A Family for Every Child Heart Gallery listed in Heart Gallery of America and ODHS partners. Heart Gallery through local affiliate Choice Adoptions. Bethany used as national Christian ministry with foster services; no Oregon-specific chapter found. All URLs live as of research [Oregon DHS](https://www.oregon.gov/odhs/foster-care/pages/resource-parent.aspx), [AdoptUSKids state photolists](https://adoptuskids.org/meet-the-children/search-for-children/state-photolists), [Heart Gallery of America Oregon](https://heartgalleryofamerica.org/galleries/oregon-heart-gallery-of-hope/), [Boys & Girls Aid](https://www.boysandgirlsaid.org), [Oregon CASA](https://www.oregoncasanetwork.org)."
+  },
+  "PA": {
+    "state": "Pennsylvania",
+    "photolisting": {
+      "name": "Waiting Kids | Department of Human Services",
+      "url": "https://www.pa.gov/agencies/dhs/resources/adopt-pa-kids/waiting-kids"
+    },
+    "stateAgency": {
+      "name": "Pennsylvania Department of Human Services",
+      "pageName": "Become a Foster Parent",
+      "url": "https://www.pa.gov/agencies/dhs/resources/adopt-pa-kids/foster-parent"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/locations/us/pennsylvania/western-pennsylvania",
+        "type": "christian_ministry",
+        "description": "Christian foster care and adoption services supporting families in Western Pennsylvania."
+      },
+      {
+        "name": "Catholic Charities of Philadelphia",
+        "url": "https://ccphila.org/become-a-foster-parent/",
+        "type": "placement_agency",
+        "description": "Provides foster and kinship care services for children birth to 21 in Philadelphia area."
+      },
+      {
+        "name": "PA CASA",
+        "url": "https://pacasa.org",
+        "type": "casa_gal",
+        "description": "Statewide association developing and supporting local CASA programs for abused/neglected children."
+      }
+    ],
+    "notes": "No dedicated local Heart Gallery chapter found for PA; used national fallback. State has official DHS Waiting Kids photolisting. PA CASA is state-level org supporting local chapters."
+  },
+  "RI": {
+    "state": "Rhode Island",
+    "photolisting": {
+      "name": "Meet the Children - Adoption RI",
+      "url": "https://adoptionri.org/meet-the-children/"
+    },
+    "stateAgency": {
+      "name": "Rhode Island Department of Children, Youth and Families (DCYF)",
+      "pageName": "Who Can Be A Resource Parent?",
+      "url": "https://dcyf.ri.gov/be-an-anchor/become-resource-parent.php"
+    },
+    "heartGallery": {
+      "name": "Rhode Island Heart Gallery",
+      "url": "https://adoptionri.org/heart-gallery/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services Rhode Island",
+        "url": "https://bethany.org/",
+        "type": "christian_ministry",
+        "description": "Provides Homebuilders intensive family preservation services in RI to prevent foster care entry, keeping 400+ children at home with 88% success rate."
+      },
+      {
+        "name": "Family Service of Rhode Island",
+        "url": "https://www.familyserviceri.org/programs/foster-care/",
+        "type": "placement_agency",
+        "description": "Private foster care agency matching children in state care with safe homes, providing licensing support, training, and 24/7 crisis response."
+      },
+      {
+        "name": "Friends of RI CASA",
+        "url": "https://friendsofricasa.org/",
+        "type": "casa_gal",
+        "description": "Statewide CASA program under RI Family Court providing volunteer advocates for abused/neglected children in DCYF/foster care cases for permanency."
+      }
+    ],
+    "notes": "Photolisting and Heart Gallery via Adoption RI, state-contracted partner. State agency uses 'resource parent' terminology. No local Christian foster placement ministry found; Bethany does prevention. CASA site via Friends of RI CASA supporting court program. All URLs live per fetches."
+  },
+  "SC": {
+    "state": "South Carolina",
+    "photolisting": {
+      "name": "DSS Public Adoption Portal",
+      "url": "https://dss.sc.gov/child-well-being/adoption/"
+    },
+    "stateAgency": {
+      "name": "South Carolina Department of Social Services",
+      "pageName": "Start the Application Process",
+      "url": "https://dss.sc.gov/child-well-being/foster-care/prospective-foster-parent/start-the-application-process/"
+    },
+    "heartGallery": {
+      "name": "South Carolina Heart Gallery",
+      "url": "https://scheartgallery.sc.gov/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Lifeline Children's Services",
+        "url": "https://lifelinechild.org/fostering-in-south-carolina/",
+        "type": "christian_ministry",
+        "description": "Christian foster care licensing and placement services in SC Lowcountry and statewide offices."
+      },
+      {
+        "name": "SAFY of South Carolina",
+        "url": "https://www.safy.org/south-carolina",
+        "type": "placement_agency",
+        "description": "Foster care and family preservation services in Charleston, Columbia, Greenville."
+      },
+      {
+        "name": "Richland County Court Appointed Special Advocates",
+        "url": "https://www.richlandcountysc.gov/Government/Organization/Departments/Court-Appointed-Special-Advocates",
+        "type": "casa_gal",
+        "description": "Advocates for abused and neglected children in Richland County Family Court."
+      }
+    ],
+    "notes": "Photolisting is state DSS adoption portal; DSS Public Adoption Portal link not hyperlinked on page but featured there. Heart Gallery is state-affiliated program. No state-level CASA found; used major county chapter. All URLs verified via search results [DSS](https://dss.sc.gov/child-well-being/adoption/), [Heart Gallery](https://scheartgallery.sc.gov/), [AdoptUSKids SC](https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/south-carolina), [Heartfelt Calling](https://heartfeltcalling.org)."
+  },
+  "SD": {
+    "state": "South Dakota",
+    "photolisting": {
+      "name": "Stronger Families Together - Meet the Children",
+      "url": "https://strongerfamiliestogether.sd.gov/meet_the_children.aspx"
+    },
+    "stateAgency": {
+      "name": "South Dakota Department of Social Services",
+      "pageName": "Foster Parenting",
+      "url": "https://dss.sd.gov/childprotection/fostercare/"
+    },
+    "heartGallery": {
+      "name": "South Dakota Heart Gallery",
+      "url": "https://heartgalleryofamerica.org/galleries/southdakota/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Lutheran Social Services",
+        "url": "https://lsssd.org/",
+        "type": "placement_agency",
+        "description": "Private agency contracted by state for foster parent training, inquiry, and home studies in South Dakota."
+      },
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/locations",
+        "type": "christian_ministry",
+        "description": "Christian foster care and adoption agency with offices in Sioux Falls and Rapid City serving South Dakota families."
+      },
+      {
+        "name": "South Dakota CASA",
+        "url": "https://sdcasa.org",
+        "type": "casa_gal",
+        "description": "Statewide CASA programs appointing advocates for abused and neglected children in court."
+      },
+      {
+        "name": "Children's Home Society of South Dakota",
+        "url": "https://chssd.org/",
+        "type": "placement_agency",
+        "description": "Provides foster care, adoption, residential treatment, and Wendy's Wonderful Kids recruitment for waiting children in SD."
+      }
+    ],
+    "notes": "No state-run photolisting; DSS directs to AdoptUSKids. Heart Gallery page lists contact but no photos. Stronger Families Together (sd.gov) is key recruitment site. URLs verified via search snippets and fetches where possible."
+  },
+  "TN": {
+    "state": "Tennessee",
+    "photolisting": {
+      "name": "Meet the Kids - Parent a Child",
+      "url": "https://parentachild.org/meet-the-kids/"
+    },
+    "stateAgency": {
+      "name": "Tennessee Department of Children's Services",
+      "pageName": "Foster Care and Adoption",
+      "url": "https://www.tn.gov/dcs/program-areas/foster-care-and-adoption.html"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Tennessee Baptist Children's Homes",
+        "url": "https://tennesseechildren.org/foster-care/",
+        "type": "christian_ministry",
+        "description": "Contracts with DCS to provide certified Christian foster homes for children in state custody across Tennessee."
+      },
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/locations",
+        "type": "placement_agency",
+        "description": "National Christian foster care and adoption organization serving Tennessee families with home study and post-adoption services."
+      },
+      {
+        "name": "Tennessee CASA Association",
+        "url": "https://www.tncasa.org",
+        "type": "casa_gal",
+        "description": "Statewide network training CASA volunteers to advocate for abused and neglected children in juvenile court."
+      },
+      {
+        "name": "America's Kids Belong Tennessee Kids Belong",
+        "url": "https://americaskidsbelong.org/states/tn/",
+        "type": "advocacy",
+        "description": "Nonprofit uplifting stories of TN foster kids free for adoption and leading coalitions for foster care improvement."
+      }
+    ],
+    "notes": "Parent a Child appears semi-official as primary TN photolisting; Heart Gallery of TN site (heartgalleryoftn.com) not live; used national fallback. All URLs verified live."
+  },
+  "TX": {
+    "state": "Texas",
+    "photolisting": {
+      "name": "Texas Adoption Resource Exchange (TARE)",
+      "url": "https://tare.dfps.texas.gov/application/TAREPublic/child/childSearch"
+    },
+    "stateAgency": {
+      "name": "Texas Department of Family and Protective Services",
+      "pageName": "Get Started",
+      "url": "https://www.dfps.texas.gov/Adoption_and_Foster_Care/Get_Started/"
+    },
+    "heartGallery": {
+      "name": "Heart Galleries of Texas",
+      "url": "https://heartgallerytexas.org",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Christian Homes & Family Services",
+        "url": "https://christianhomes.com",
+        "type": "christian_ministry",
+        "description": "Christian foster-to-adopt ministry providing homes for children in East and West Texas foster care."
+      },
+      {
+        "name": "Buckner Children and Family Services",
+        "url": "https://www.buckner.org",
+        "type": "placement_agency",
+        "description": "Private child-placing agency contracting with DFPS for foster care and adoption services statewide."
+      },
+      {
+        "name": "Texas CASA",
+        "url": "https://texascasa.org",
+        "type": "casa_gal",
+        "description": "Statewide organization supporting local CASA programs advocating for abused and neglected children in court."
+      }
+    ],
+    "notes": "TARE photolisting requires family account for full profiles; confirmed via DFPS pages [DFPS TARE](https://www.dfps.texas.gov/Adoption_and_Foster_Care/About_TARE/), [DFPS Contact](https://www.dfps.texas.gov/Adoption_and_Foster_Care/About_TARE/contact.asp). Buckner URL assumed from knowledge, verified in DFPS agency list [DFPS Agencies](https://www.dfps.texas.gov/adoption_and_foster_care/adoption_partners/private.asp). Heart Gallery is statewide coordinator with local chapters."
+  },
+  "UT": {
+    "state": "Utah",
+    "photolisting": {
+      "name": "Utah's Adoption Connection Heart Gallery",
+      "url": "https://www.utahadopt.org/building-your-family/heart-gallery"
+    },
+    "stateAgency": {
+      "name": "Utah Division of Child and Family Services",
+      "pageName": "Foster Care",
+      "url": "https://dcfs.utah.gov/services/foster-care/"
+    },
+    "heartGallery": {
+      "name": "Utah Heart Gallery",
+      "url": "https://www.utahadopt.org/building-your-family/heart-gallery",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Utah Foster Care Foundation",
+        "url": "https://utahfostercare.org/",
+        "type": "placement_agency",
+        "description": "State-contracted agency for recruiting, training, and supporting foster and adoptive families statewide."
+      },
+      {
+        "name": "Utah CASA",
+        "url": "https://www.utahcasa.org",
+        "type": "casa_gal",
+        "description": "Statewide Court Appointed Special Advocate program advocating for abused and neglected children in court."
+      },
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/",
+        "type": "christian_ministry",
+        "description": "Christian organization providing foster care, adoption, and family support services with presence in Utah."
+      }
+    ],
+    "notes": "Heart Gallery page appears to have older photos (e.g. photographers like Bry Cox); Utah's Adoption Connection partners with DCFS. No direct AdoptUSKids state page found; used semi-official partner photolisting. State agency directs to Utah Foster Care for recruitment. Bethany used as Christian ministry; local chapter not distinctly separate."
+  },
+  "VA": {
+    "state": "Virginia",
+    "photolisting": {
+      "name": "AdoptUSKids - Virginia",
+      "url": "https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/virginia"
+    },
+    "stateAgency": {
+      "name": "Virginia Department of Social Services",
+      "pageName": "Foster Care",
+      "url": "https://fosterva.dss.virginia.gov"
+    },
+    "heartGallery": {
+      "name": "The Heart Gallery - Paths for Families",
+      "url": "https://pathsforfamilies.org/the-heart-gallery/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services of Virginia",
+        "url": "https://legacy.dss.virginia.gov/facility/search/cc2.cgi",
+        "type": "christian_ministry",
+        "description": "Christian child-placing agency providing foster care and adoption services in Virginia."
+      },
+      {
+        "name": "People Places, Inc.",
+        "url": "https://peopleplaces.org",
+        "type": "placement_agency",
+        "description": "Licensed nonprofit child-placing agency offering treatment foster care in Shenandoah Valley and Central Piedmont regions of Virginia."
+      },
+      {
+        "name": "Virginia CASA",
+        "url": "https://virginiacasa.org",
+        "type": "casa_gal",
+        "description": "Recruits and trains volunteers to advocate for abused and neglected children in Virginia juvenile court proceedings."
+      }
+    ],
+    "notes": "DSS photolisting page active but no children listed in fetch (may require JS/cookies); Heart Gallery covers VA/MD/DC; Bethany verified via official DSS licensing page."
+  },
+  "VT": {
+    "state": "Vermont",
+    "photolisting": {
+      "name": "Children Waiting for Adoptive Families",
+      "url": "https://dcf.vermont.gov/fsd/adopt/waiting"
+    },
+    "stateAgency": {
+      "name": "Vermont Department for Children and Families",
+      "pageName": "Foster Parent Guide",
+      "url": "https://outside.vermont.gov/dept/DCF/Shared%20Documents/FSD/Publications/Foster-Parent-Guide.pdf"
+    },
+    "heartGallery": {
+      "name": "Lund Heart Gallery",
+      "url": "https://lundvt.org/the-heart-gallery/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/locations",
+        "type": "christian_ministry",
+        "description": "Christian foster care and adoption organization providing home study and post-adoption services in Vermont."
+      },
+      {
+        "name": "LUND",
+        "url": "https://lundvt.org/",
+        "type": "placement_agency",
+        "description": "Nonprofit partner with DCF via Project Family for foster/adoption recruitment and Heart Gallery photolisting support."
+      },
+      {
+        "name": "Vermont Foster/Adoptive Family Alliance",
+        "url": "https://vfafa.org",
+        "type": "advocacy",
+        "description": "Statewide alliance empowering and supporting foster and adoptive families in Vermont."
+      }
+    ],
+    "notes": "No prominent CASA chapter found; state uses judiciary GAL volunteer program. No dedicated 'Become a Foster Parent' landing page on DCF site; used official Foster Parent Guide PDF. All URLs confirmed live via fetches/searches [AdoptUSKids](https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/vermont), [Heart Gallery of America](https://heartgalleryofamerica.org/galleries/vermont/), [Lund](https://lundvt.org/the-heart-gallery/), DCF pages."
+  },
+  "WA": {
+    "state": "Washington",
+    "photolisting": {
+      "name": "AdoptUSKids Washington page",
+      "url": "https://adoptuskids.org/adoption-and-foster-care/how-to-adopt-and-foster/state-information/washington"
+    },
+    "stateAgency": {
+      "name": "Washington State Department of Children, Youth, and Families",
+      "pageName": "Become a Foster Parent",
+      "url": "https://dcyf.wa.gov/services/foster-parenting/become-a-foster-parent"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/help-a-child/foster-care",
+        "type": "christian_ministry",
+        "description": "Christian foster care and adoption services supporting family reunification and permanency for children in WA foster care."
+      },
+      {
+        "name": "Catholic Community Services of Western Washington",
+        "url": "https://ccsww.org/services/international-foster-care/",
+        "type": "placement_agency",
+        "description": "Provides licensed foster homes and case management for unaccompanied refugee minors and foster youth in WA."
+      },
+      {
+        "name": "Foster Parent Association of Washington State",
+        "url": "https://fpawscares.org",
+        "type": "advocacy",
+        "description": "Supports, educates, and advocates for foster, adoptive, and kinship families across Washington state."
+      }
+    ],
+    "notes": "No state-run photolisting found; AdoptUSKids used with state-specific info page. No local Heart Gallery chapter identified for WA. CASA/GAL programs exist locally but no statewide chapter found; advocacy filled by FPAWS."
+  },
+  "WI": {
+    "state": "Wisconsin",
+    "photolisting": {
+      "name": "Wisconsin Adoption Coalition Photo Listing",
+      "url": "https://wiadopt.org/child-specific-recruitment-services/"
+    },
+    "stateAgency": {
+      "name": "Wisconsin Department of Children and Families",
+      "pageName": "Wisconsin Foster Parent Information",
+      "url": "https://dcf.wisconsin.gov/fostercare/parent"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/",
+        "type": "christian_ministry",
+        "description": "Christian organization providing foster care and adoption services through Wisconsin offices."
+      },
+      {
+        "name": "Catholic Charities of the Archdiocese of Milwaukee",
+        "url": "https://www.ccmke.org/Catholic-Charities.htm",
+        "type": "placement_agency",
+        "description": "Private Catholic agency offering foster care and adoption services in Milwaukee area."
+      },
+      {
+        "name": "Wisconsin CASA Association",
+        "url": "https://www.wisconsin-casa.org",
+        "type": "casa_gal",
+        "description": "Statewide network supporting local CASA programs advocating for abused/neglected children in court."
+      }
+    ],
+    "notes": "No state-run waiting children photolisting gallery found with direct child profiles; using semi-official Wisconsin Adoption Coalition photo listing service page referenced in state docs. No local Heart Gallery chapter; using national fallback. All URLs verified live via searches as of 2026."
+  },
+  "WV": {
+    "state": "West Virginia",
+    "photolisting": {
+      "name": "Mission West Virginia Heart Gallery",
+      "url": "https://heartgalleryofamerica.org/galleries/westvirginia/"
+    },
+    "stateAgency": {
+      "name": "West Virginia Department of Human Services, Bureau for Children and Families",
+      "pageName": "Foster Care Coalition Recruitment Campaign",
+      "url": "https://dhhr.wv.gov/News/2024/Pages/Foster-Care-Coalition-Launches-Statewide-Recruitment-Campaign-to-Address-Foster-Parent-Shortage.aspx"
+    },
+    "heartGallery": {
+      "name": "Mission West Virginia Heart Gallery",
+      "url": "https://heartgalleryofamerica.org/galleries/westvirginia/",
+      "isRegionalFallback": false
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services of West Virginia",
+        "url": "https://bethany.org/locations",
+        "type": "christian_ministry",
+        "description": "Christian foster care and adoption agency with West Virginia office in Martinsburg providing home study and family support services."
+      },
+      {
+        "name": "Children's Home Society of West Virginia",
+        "url": "https://childhswv.org",
+        "type": "placement_agency",
+        "description": "Statewide private agency providing foster care, adoption, and counseling services throughout WV."
+      },
+      {
+        "name": "TEAM for West Virginia Children - Western Regional CASA",
+        "url": "https://teamwv.org/western-regional-casa/",
+        "type": "casa_gal",
+        "description": "Regional CASA program recruiting volunteer advocates for abused and neglected children in court."
+      },
+      {
+        "name": "Burlington United Methodist Family Services",
+        "url": "https://bumfs.org/",
+        "type": "placement_agency",
+        "description": "Faith-based agency offering foster care, adoption, and kinship support services in northern WV."
+      }
+    ],
+    "notes": "No active state-run photolisting found; Mission WV (state partner) Heart Gallery used, page lists sponsor/contact but no photos. State .gov lacks dedicated foster recruitment page, uses news linking to wefosterwv.org (Mission WV); policy confirms BCF handles licensing mainly for kinship, private agencies for general foster. adoptwvchild.org not resolving. Heart Gallery local via Mission WV."
+  },
+  "WY": {
+    "state": "Wyoming",
+    "photolisting": {
+      "name": "Raise the Future Wyoming Waiting Children",
+      "url": "https://www.raisethefuture.org/waiting-children"
+    },
+    "stateAgency": {
+      "name": "Wyoming Department of Family Services",
+      "pageName": "Wyoming Foster Care Frequently Asked Questions",
+      "url": "https://dfs.wyo.gov/services/child-youth-services/foster-care-foster-care-training/wyoming-foster-care-frequently-asked-questions/"
+    },
+    "heartGallery": {
+      "name": "Heart Gallery of America",
+      "url": "https://heartgalleryofamerica.org/",
+      "isRegionalFallback": true
+    },
+    "orgs": [
+      {
+        "name": "Bethany Christian Services",
+        "url": "https://bethany.org/locations",
+        "type": "christian_ministry",
+        "description": "Christian foster care and adoption organization serving Wyoming families through home study and family support services."
+      },
+      {
+        "name": "Catholic Charities of Wyoming",
+        "url": "http://www.charitieswyoming.org",
+        "type": "placement_agency",
+        "description": "Provides foster care and adoption services for children in Wyoming."
+      },
+      {
+        "name": "CASA of Natrona County",
+        "url": "https://www.casaofnatronacounty.net",
+        "type": "casa_gal",
+        "description": "Court Appointed Special Advocates for abused and neglected children in foster care in Natrona County, Wyoming."
+      },
+      {
+        "name": "Wyoming Children's Society",
+        "url": "https://www.wyomingcs.org/",
+        "type": "placement_agency",
+        "description": "Private agency offering waiting child adoption and foster care services in Wyoming."
+      }
+    ],
+    "notes": "No state-run photolisting; using regional Raise the Future as recommended by DFS. No local Heart Gallery; national fallback. No single state CASA; used county-level. Bethany Wyoming contact from official directory [Heart Gallery of America directory](https://heartgalleryofamerica.org/adoption/state-links/wy-directory/). Catholic Charities URL from directory. All URLs live per searches."
+  }
+}
