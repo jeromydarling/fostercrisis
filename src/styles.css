@@ -168,6 +168,10 @@ body {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  /* Offset target when scrollIntoView brings the section back into
+     view after a chapter change, so the sticky mode switcher doesn't
+     overlay the top of the map. */
+  scroll-margin-top: 56px;
 }
 
 /* ---- Mode switcher (persistent header on Map / Essay views) ------- */
@@ -4823,12 +4827,12 @@ body {
 
 /* --- Phone: condense typography + collapse all grids --------------- */
 @media (max-width: 560px) {
-  /* Sidebar: slightly taller on phones since phones are narrow */
-  .sidebar {
-    height: 62vh;
-    height: 62dvh;
-    padding: 1.25rem 1rem 0.65rem;
-  }
+  /* NOTE: do NOT re-impose a fixed sidebar height here. The 900px
+     breakpoint puts the sidebar in normal page flow (position: static,
+     height: auto, overflow: visible); any fixed height at this tier
+     would cause the sidebar's content to overflow and bleed over the
+     following section (Sources block).  */
+  .sidebar { padding: 1.25rem 1rem 0.65rem; }
 
   .brand { font-size: 0.65rem; letter-spacing: 0.2em; }
   .brand-sub { font-size: 0.95rem; }
@@ -4836,11 +4840,6 @@ body {
   .headline-number { font-size: 2rem; }
   .headline-sub { font-size: 0.88rem; line-height: 1.35; }
   .chapter-text { font-size: 0.9rem; }
-
-  .mapboxgl-ctrl-bottom-right {
-    bottom: 63vh !important;
-    bottom: 63dvh !important;
-  }
 
   /* Essay sections — uniform tight padding */
   .feed-section,

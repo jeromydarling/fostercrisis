@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { CHAPTERS } from '../data/chapters';
 import { CrisisMap } from './CrisisMap';
 import { ChapterPanel } from './ChapterPanel';
@@ -35,6 +35,23 @@ export function MapExperience({ selectedFips, onSelectedFipsChange }: Props) {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [selectedFips]);
+
+  // On chapter change, scroll the map back into view. Necessary on
+  // mobile — where the map is at the top and the sidebar below fills
+  // a long scroll — so the user actually sees the updated choropleth
+  // after pressing Next instead of staying parked on the text they
+  // just finished reading. On desktop (map-section fills viewport) the
+  // scroll is a near no-op.
+  const firstChapterRender = useRef(true);
+  useEffect(() => {
+    if (firstChapterRender.current) {
+      firstChapterRender.current = false;
+      return;
+    }
+    const el = document.getElementById('map');
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [chapterIndex]);
 
   const onHoverState = useCallback((fips: string | null) => {
     setHoveredFips(fips);
