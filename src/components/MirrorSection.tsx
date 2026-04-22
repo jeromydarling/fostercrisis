@@ -12,14 +12,14 @@ const REDIRECTS = [
   },
   {
     from: 'One year of Netflix (511 hours)',
-    to: '17 foster-parent licensing courses',
-    note: '30 hrs each, required once',
+    to: '511 evenings at the kitchen table with a child who has never had one',
+    note: 'Licensing takes 30 hrs, one-time — you burn that every 20 days',
     bucket: 'Time',
   },
   {
     from: 'One year of social media (876 hours)',
-    to: '73 years of foster-parent continuing education',
-    note: 'MN requires 12 hrs/yr',
+    to: '876 hours of presence, eye contact, homework help — for a child who has never had any of it',
+    note: '73 years of foster-parent CE (MN: 12 hrs/yr)',
     bucket: 'Time',
   },
   {
@@ -42,8 +42,8 @@ const REDIRECTS = [
   },
   {
     from: '0.5% of American Christianity\'s $124B annual take',
-    to: 'Every one of the 125,000 waiting children, full stipend, for a year',
-    note: '$620M',
+    to: 'A full year of stipend for every one of the 70,418 children legally free and waiting for a forever family',
+    note: '$620M · AFCARS legally-free count',
     bucket: 'Money',
   },
 ];
@@ -185,7 +185,9 @@ export function MirrorSection() {
           </div>
           <div className="redirect-arrow" aria-hidden>→</div>
           <div className="redirect-to">
-            <span className="redirect-label">You would fund</span>
+            <span className="redirect-label">
+              {current.bucket === 'Time' ? 'Time better spent' : 'You would fund'}
+            </span>
             <span className="redirect-content">{current.to}</span>
             {current.note && <span className="redirect-note">{current.note}</span>}
           </div>
