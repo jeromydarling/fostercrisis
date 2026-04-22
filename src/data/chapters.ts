@@ -5,6 +5,7 @@ export type Metric =
   | 'homesPer100'
   | 'childPoverty'
   | 'overdoseRate'
+  | 'pollution'
   | 'missingFromCare'
   | 'capacityGap'
   | 'miseryIndex'
@@ -49,6 +50,8 @@ export function metricValue(row: StateRow, metric: Metric): number {
       return row.childPovertyPct;
     case 'overdoseRate':
       return (row.overdoseDeaths / (row.childPop * 4)) * 100000;
+    case 'pollution':
+      return row.pm25;
     case 'missingFromCare':
       return (row.missingFromCare / Math.max(1, row.fosterCare)) * 100;
     case 'capacityGap':
@@ -86,6 +89,8 @@ export function metricFormat(metric: Metric, v: number): string {
       return v.toFixed(1) + '%';
     case 'overdoseRate':
       return v.toFixed(1) + ' / 100k';
+    case 'pollution':
+      return v.toFixed(1) + ' µg/m³ PM2.5';
     case 'miseryIndex':
       return v.toFixed(2) + ' (z-score sum)';
     case 'complicity':
@@ -167,10 +172,26 @@ export const CHAPTERS: Chapter[] = [
     source: 'CDC Provisional County-Level Drug Overdose Deaths',
   },
   {
-    id: 'missing',
+    id: 'pollution',
     number: 'V',
+    title: 'The air they breathe',
+    eyebrow: 'Chapter V — Root Cause: Pollution',
+    metric: 'pollution',
+    geography: 'state',
+    ramp: ['#1a1f2b', '#2a2a48', '#4b2d5c', '#873468', '#c73b5a', '#ff8a3a'],
+    unit: 'Annual mean PM2.5 (µg/m³) — EPA',
+    headline: '9 µg/m³',
+    subline:
+      'is the WHO safe limit. Half of U.S. states exceed it. The heaviest air sits on top of the same counties filling the foster system.',
+    body:
+      'Lead paint in pre-1978 housing, diesel particulates on Delta and Rust Belt corridors, PM2.5 from coal-fired grids — the environmental insults that derail child development do not spread evenly. They concentrate in exactly the ZIP codes where poverty, addiction, and foster-care removal already concentrate. Prenatal PM2.5 exposure is linked to low birth weight, asthma, and neurodevelopmental delay. Blood-lead levels above 5 µg/dL remain common in Appalachia, the Delta, and industrial Midwest counties. The air and the water are part of the pipeline.',
+    source: 'EPA EJScreen 2024 · EPA AQS annual mean PM2.5',
+  },
+  {
+    id: 'missing',
+    number: 'VI',
     title: 'The children who disappear',
-    eyebrow: 'Chapter V — Missing From Care',
+    eyebrow: 'Chapter VI — Missing From Care',
     metric: 'missingFromCare',
     geography: 'state',
     ramp: ['#14151c', '#28182f', '#501a4b', '#901f55', '#d1244d', '#ff2b2b'],
@@ -183,9 +204,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'belt',
-    number: 'VI',
+    number: 'VII',
     title: 'The Bible Belt is the foster belt',
-    eyebrow: 'Chapter VI — The Mirror',
+    eyebrow: 'Chapter VII — The Mirror',
     metric: 'religiosity',
     geography: 'state',
     ramp: ['#14151c', '#312040', '#5e2756', '#972f5c', '#cd3a53', '#ffb347'],
@@ -198,9 +219,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'weight',
-    number: 'VII',
+    number: 'VIII',
     title: 'The discipline went to food',
-    eyebrow: 'Chapter VII — The Weight',
+    eyebrow: 'Chapter VIII — The Weight',
     metric: 'obesity',
     geography: 'state',
     ramp: ['#14151c', '#2c1f3a', '#5a2450', '#912e52', '#c73745', '#ffb347'],
@@ -213,9 +234,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'revolution',
-    number: 'VIII',
+    number: 'IX',
     title: 'The revolution\'s map',
-    eyebrow: 'Chapter VIII — The Sexual Revolution',
+    eyebrow: 'Chapter IX — The Sexual Revolution',
     metric: 'revolution',
     geography: 'state',
     ramp: ['#14151c', '#2a1428', '#541a3a', '#8f2440', '#c72f38', '#ffb347'],
@@ -228,9 +249,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'quiethour',
-    number: 'IX',
+    number: 'X',
     title: 'The quiet hour',
-    eyebrow: 'Chapter IX — What the Bible Belt watches',
+    eyebrow: 'Chapter X — What the Bible Belt watches',
     metric: 'pornSession',
     geography: 'state',
     ramp: ['#14151c', '#261636', '#4e1a48', '#8f245a', '#c72f54', '#ffb347'],
@@ -243,9 +264,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'misery',
-    number: 'X',
+    number: 'XI',
     title: 'The misery map',
-    eyebrow: 'Chapter X — The Misery Index',
+    eyebrow: 'Chapter XI — The Misery Index',
     metric: 'miseryIndex',
     geography: 'county',
     countyProp: 'misery',
@@ -259,9 +280,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'complicity',
-    number: 'XI',
+    number: 'XII',
     title: 'Churches are right there',
-    eyebrow: 'Chapter XI — Complicity',
+    eyebrow: 'Chapter XII — Complicity',
     metric: 'miseryIndex',
     geography: 'county',
     countyProp: 'misery',
@@ -278,9 +299,9 @@ export const CHAPTERS: Chapter[] = [
   // rewrites its headline for the selected state.
   {
     id: 'solution',
-    number: 'XII',
+    number: 'XIII',
     title: 'What the pews could end overnight',
-    eyebrow: 'Chapter XII — The Solution',
+    eyebrow: 'Chapter XIII — The Solution',
     metric: 'churchSolution',
     geography: 'state',
     ramp: ['#3d0a1a', '#6d1728', '#a1302a', '#cf6426', '#e6a42a', '#f7e26b'],
@@ -352,6 +373,18 @@ export function frameForState(chapter: Chapter, row: StateRow): Framing {
         subline: `drug overdose deaths in ${name} last year (~${odRate.toFixed(0)} per 100k).`,
         body: `A 10% rise in county overdose deaths predicts a 4.4% rise in foster-care entries twelve months later. For infants under age 1, more than half of all removals in ${name} are drug-related. The opioid map is not a parallel tragedy — it is the pipeline.`,
       };
+    case 'pollution': {
+      const pm = row.pm25;
+      const overLimit = pm > 9;
+      return {
+        ...base,
+        headline: `${pm.toFixed(1)} µg/m³`,
+        subline: overLimit
+          ? `${name}'s air sits above the WHO safe limit of 9 µg/m³.`
+          : `${name} is at or below the WHO safe limit of 9 µg/m³.`,
+        body: `${name}'s annual mean PM2.5 is ${pm.toFixed(1)} µg/m³ (EPA AQS). The heaviest pollution in any state does not spread evenly — it concentrates on the same ZIP codes where poverty, addiction, and foster-care removal already concentrate. Lead paint, diesel corridors, and prenatal particulate exposure are part of the pipeline into the system.`,
+      };
+    }
     case 'missing':
       return {
         ...base,

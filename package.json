@@ -12,6 +12,7 @@
     "data:cdc": "node scripts/fetch-cdc-overdose.mjs",
     "data:chr": "node scripts/fetch-county-health-rankings.mjs",
     "data:acs": "node scripts/fetch-acs-county.mjs",
+    "data:ejscreen": "node scripts/fetch-ejscreen.mjs",
     "data:churches": "node scripts/fetch-churches.mjs",
     "data:misery": "node scripts/build-misery-index.mjs",
     "data:feeds": "node scripts/fetch-feeds.mjs"

@@ -15,6 +15,7 @@ const fetchers = [
   'fetch-cdc-overdose.mjs',
   'fetch-county-health-rankings.mjs',
   'fetch-acs-county.mjs',
+  'fetch-ejscreen.mjs',
   'fetch-churches.mjs',
   'fetch-feeds.mjs',
 ];

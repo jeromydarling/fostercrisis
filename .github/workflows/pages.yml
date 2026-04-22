@@ -69,6 +69,10 @@ jobs:
         run: npm run data:acs
         continue-on-error: true
 
+      - name: Refresh EPA EJScreen (pollution)
+        run: npm run data:ejscreen
+        continue-on-error: true
+
       # Churches — OSM Overpass is flaky under load, so we split the
       # cache into restore + save and the fetcher is resume-aware:
       # every run RESTORES the latest partial file, only re-fetches

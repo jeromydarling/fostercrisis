@@ -21,6 +21,7 @@ const SAIPE_URL = `${BASE}data/saipe-counties.json`;
 const CDC_URL = `${BASE}data/cdc-overdose-counties.json`;
 const CHURCHES_URL = `${BASE}data/churches.geojson`;
 const MISERY_URL = `${BASE}data/misery-counties.json`;
+const EJSCREEN_URL = `${BASE}data/ejscreen-states.json`;
 
 export interface StateFeatureProps extends Partial<StateRow> {
   fips: string;
@@ -106,29 +107,36 @@ async function fetchCountiesTopo(): Promise<FeatureCollection<Geometry, { name: 
 }
 
 export async function loadAll(): Promise<GeoBundle> {
-  const [statesFc, countiesFc, saipe, cdc, churches, misery] = await Promise.all([
+  const [statesFc, countiesFc, saipe, cdc, churches, misery, ejscreen] = await Promise.all([
     fetchStatesTopo(),
     fetchCountiesTopo(),
     tryFetch<{ values: Record<string, number> }>(SAIPE_URL),
     tryFetch<{ values: Record<string, number> }>(CDC_URL),
     tryFetch<FeatureCollection>(CHURCHES_URL),
     tryFetch<MiseryFile>(MISERY_URL),
+    tryFetch<{ values: Record<string, { pm25?: number }> }>(EJSCREEN_URL),
   ]);
 
   // --- States: join per-state statistics + precompute each chapter metric ---
   const metrics: Metric[] = CHAPTERS.map((c) => c.metric);
+  const ejVals = ejscreen?.values ?? {};
   const states: FeatureCollection<Geometry, StateFeatureProps> = {
     ...statesFc,
     features: statesFc.features.map((f) => {
       const fips = String(f.id).padStart(2, '0');
       const row = STATE_INDEX[fips];
+      // Overlay live EPA PM2.5 over the seeded value when the fetcher ran.
+      const livePm25 = ejVals[fips]?.pm25;
+      const hydrated: StateRow | undefined = row
+        ? { ...row, pm25: Number.isFinite(livePm25) ? (livePm25 as number) : row.pm25 }
+        : undefined;
       const props: StateFeatureProps = {
-        ...(row ?? {}),
+        ...(hydrated ?? {}),
         fips,
-        name: row?.name ?? f.properties.name,
+        name: hydrated?.name ?? f.properties.name,
       };
-      if (row) {
-        for (const m of metrics) props[`metric_${m}`] = metricValue(row, m);
+      if (hydrated) {
+        for (const m of metrics) props[`metric_${m}`] = metricValue(hydrated, m);
       }
       return { ...f, id: fips, properties: props };
     }),
