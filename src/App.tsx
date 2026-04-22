@@ -28,9 +28,16 @@ export default function App() {
 
   const chapter = CHAPTERS[chapterIndex];
   const countyChapter = chapter.geography === 'county';
-  const seedNotice = countyChapter &&
-    ((chapter.countyProp === 'poverty' && bundle && !bundle.hasCountyPoverty) ||
-     (chapter.countyProp === 'overdose' && bundle && !bundle.hasCountyOverdose));
+  const seedNotice = countyChapter && bundle && (
+    (chapter.countyProp === 'poverty' && !bundle.hasCountyPoverty) ||
+    (chapter.countyProp === 'overdose' && !bundle.hasCountyOverdose) ||
+    ((chapter.countyProp === 'misery' || chapter.countyProp === 'complicity') && !bundle.hasFullMisery)
+  );
+  const seedCmd = (
+    chapter.countyProp === 'poverty' ? 'saipe' :
+    chapter.countyProp === 'overdose' ? 'cdc' :
+    'misery'
+  );
 
   return (
     <div className="app">
@@ -44,10 +51,9 @@ export default function App() {
 
       {seedNotice && (
         <div className="banner" role="note">
-          <strong>Showing state-level seed data.</strong>
+          <strong>Showing seed data.</strong>
           <span>
-            Run <code>npm run data:{chapter.countyProp === 'poverty' ? 'saipe' : 'cdc'}</code>
-            {' '}for real county-level values.
+            Run <code>npm run data:{seedCmd}</code> for the real county values.
           </span>
         </div>
       )}

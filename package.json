@@ -10,7 +10,10 @@
     "data:all": "node scripts/build-all.mjs",
     "data:saipe": "node scripts/fetch-saipe.mjs",
     "data:cdc": "node scripts/fetch-cdc-overdose.mjs",
-    "data:churches": "node scripts/fetch-churches.mjs"
+    "data:chr": "node scripts/fetch-county-health-rankings.mjs",
+    "data:acs": "node scripts/fetch-acs-county.mjs",
+    "data:churches": "node scripts/fetch-churches.mjs",
+    "data:misery": "node scripts/build-misery-index.mjs"
   },
   "dependencies": {
     "mapbox-gl": "^3.8.0",

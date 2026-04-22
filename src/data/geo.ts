@@ -20,6 +20,7 @@ const COUNTIES_URL = `${BASE}data/counties-10m.json`;
 const SAIPE_URL = `${BASE}data/saipe-counties.json`;
 const CDC_URL = `${BASE}data/cdc-overdose-counties.json`;
 const CHURCHES_URL = `${BASE}data/churches.geojson`;
+const MISERY_URL = `${BASE}data/misery-counties.json`;
 
 export interface StateFeatureProps extends Partial<StateRow> {
   fips: string;
@@ -33,6 +34,19 @@ export interface CountyFeatureProps {
   name: string;
   poverty?: number;
   overdose?: number;
+  /** Composite misery score. Higher = worse. Either loaded from
+   *  misery-counties.json (z-score sum of poverty + overdose + CHR
+   *  health outcomes + disability) or computed as a two-signal fallback
+   *  from poverty + overdose when the real file isn't present. */
+  misery?: number;
+  /** Christian congregations per 10k residents. Either from the
+   *  misery file (real PIP against HIFLD points) or approximated from
+   *  state-level congregation totals scaled by child population. */
+  churchesPer10k?: number;
+  /** Complicity score = misery_percentile − (100 − churches_percentile).
+   *  Positive = high misery + high church presence (the accusation).
+   *  Negative = high misery + low church presence (unserved). */
+  complicity?: number;
 }
 
 export interface GeoBundle {
@@ -45,6 +59,24 @@ export interface GeoBundle {
   hasCountyPoverty: boolean;
   /** Whether county-level CDC overdose was loaded. */
   hasCountyOverdose: boolean;
+  /** Whether the full misery-index file was loaded (CHR + ACS + PIP). */
+  hasFullMisery: boolean;
+}
+
+interface MiseryFile {
+  _meta: {
+    indicators: string[];
+    source: string;
+    generated: string;
+  };
+  counties: Record<
+    string,
+    {
+      misery: number;
+      churchesPer10k?: number;
+      complicity?: number;
+    }
+  >;
 }
 
 async function tryFetch<T>(url: string): Promise<T | null> {
@@ -74,12 +106,13 @@ async function fetchCountiesTopo(): Promise<FeatureCollection<Geometry, { name: 
 }
 
 export async function loadAll(): Promise<GeoBundle> {
-  const [statesFc, countiesFc, saipe, cdc, churches] = await Promise.all([
+  const [statesFc, countiesFc, saipe, cdc, churches, misery] = await Promise.all([
     fetchStatesTopo(),
     fetchCountiesTopo(),
     tryFetch<{ values: Record<string, number> }>(SAIPE_URL),
     tryFetch<{ values: Record<string, number> }>(CDC_URL),
     tryFetch<FeatureCollection>(CHURCHES_URL),
+    tryFetch<MiseryFile>(MISERY_URL),
   ]);
 
   // --- States: join per-state statistics + precompute each chapter metric ---
@@ -114,26 +147,115 @@ export async function loadAll(): Promise<GeoBundle> {
     stateFallback.set(s.fips, { pov: s.childPovertyPct, od: rate });
   }
 
+  // --- Pass 1: compute per-county poverty + overdose (with state fallback) ---
+  const provisional = countiesFc.features.map((f) => {
+    const fips = String(f.id).padStart(5, '0');
+    const stateFips = fips.slice(0, 2);
+    const fb = stateFallback.get(stateFips);
+    const pov = saipeVals[fips];
+    const od = cdcVals[fips];
+    return {
+      f,
+      fips,
+      stateFips,
+      poverty: Number.isFinite(pov) ? pov : fb?.pov,
+      overdose: Number.isFinite(od) ? od : fb?.od,
+    };
+  });
+
+  // --- Pass 2: compute seed misery (z-score of poverty + overdose) and
+  //              churches-per-10k-residents (seeded from state totals)
+  //              when the full misery-counties.json isn't available.
+  const miseryMap = misery?.counties ?? {};
+
+  const povVals = provisional.map((p) => p.poverty).filter((v): v is number => typeof v === 'number');
+  const odVals = provisional.map((p) => p.overdose).filter((v): v is number => typeof v === 'number');
+  const zStats = (arr: number[]) => {
+    const n = arr.length || 1;
+    const mean = arr.reduce((a, b) => a + b, 0) / n;
+    const variance = arr.reduce((a, b) => a + (b - mean) ** 2, 0) / n;
+    return { mean, sd: Math.sqrt(variance) || 1 };
+  };
+  const povZ = zStats(povVals);
+  const odZ = zStats(odVals);
+
+  // Pop estimate used only when we don't have a real ACS pop per county:
+  // approximate county pop = state child pop * 4 * (county_pop / state_pop).
+  // Without that denominator we fall back to per-state uniform share.
+  const stateChurchPerPop = new Map<string, number>();
+  for (const s of STATES) {
+    const pop = s.childPop * 4; // rough total pop
+    stateChurchPerPop.set(s.fips, (s.congregations / pop) * 10000);
+  }
+
+  const seededMisery = provisional.map((p) => {
+    const real = miseryMap[p.fips];
+    let miseryScore: number | undefined;
+    let churchesPer10k: number | undefined;
+    let complicity: number | undefined;
+
+    if (real) {
+      miseryScore = real.misery;
+      churchesPer10k = real.churchesPer10k;
+      complicity = real.complicity;
+    } else {
+      // Seed misery: z-score sum (poverty + overdose). Two signals is
+      // weak but directionally correct — the same counties win either way.
+      const povRaw = p.poverty;
+      const odRaw = p.overdose;
+      if (typeof povRaw === 'number' || typeof odRaw === 'number') {
+        const zp = typeof povRaw === 'number' ? (povRaw - povZ.mean) / povZ.sd : 0;
+        const zo = typeof odRaw === 'number' ? (odRaw - odZ.mean) / odZ.sd : 0;
+        miseryScore = zp + zo;
+      }
+      // Seed churches-per-10k from state aggregates. All counties in a
+      // state get the same value — the PIP script replaces this later.
+      churchesPer10k = stateChurchPerPop.get(p.stateFips);
+    }
+    return { ...p, misery: miseryScore, churchesPer10k, complicity };
+  });
+
+  // Complicity: percentile(misery) + percentile(churchesPer10k) − 100.
+  // Positive = both high (the indictment). Negative = low church + low
+  // misery (neither acute). We rank separately so both can be seeded.
+  if (!misery) {
+    const mVals = seededMisery.map((s) => s.misery).filter((v): v is number => typeof v === 'number');
+    const cVals = seededMisery.map((s) => s.churchesPer10k).filter((v): v is number => typeof v === 'number');
+    mVals.sort((a, b) => a - b);
+    cVals.sort((a, b) => a - b);
+    const pct = (arr: number[], v: number) => {
+      if (!arr.length) return 50;
+      let lo = 0;
+      let hi = arr.length;
+      while (lo < hi) {
+        const m = (lo + hi) >> 1;
+        if (arr[m] < v) lo = m + 1;
+        else hi = m;
+      }
+      return (lo / arr.length) * 100;
+    };
+    for (const s of seededMisery) {
+      if (typeof s.misery !== 'number' || typeof s.churchesPer10k !== 'number') continue;
+      s.complicity = pct(mVals, s.misery) + pct(cVals, s.churchesPer10k) - 100;
+    }
+  }
+
   const counties: FeatureCollection<Geometry, CountyFeatureProps> = {
     ...countiesFc,
-    features: countiesFc.features.map((f) => {
-      const fips = String(f.id).padStart(5, '0');
-      const stateFips = fips.slice(0, 2);
-      const fb = stateFallback.get(stateFips);
-      const pov = saipeVals[fips];
-      const od = cdcVals[fips];
-      return {
-        ...f,
-        id: fips,
-        properties: {
-          fips,
-          stateFips,
-          name: f.properties.name,
-          poverty: Number.isFinite(pov) ? pov : fb?.pov,
-          overdose: Number.isFinite(od) ? od : fb?.od,
-        },
-      };
-    }),
+    features: seededMisery.map((s) => ({
+      ...s.f,
+      id: s.fips,
+      properties: {
+        fips: s.fips,
+        stateFips: s.stateFips,
+        name: s.f.properties.name,
+        poverty: s.poverty,
+        overdose: s.overdose,
+        misery: s.misery,
+        churchesPer10k: s.churchesPer10k,
+        complicity: s.complicity,
+      },
+    })),
   };
 
   return {
@@ -143,6 +265,7 @@ export async function loadAll(): Promise<GeoBundle> {
     realChurches: !!churches,
     hasCountyPoverty: !!saipe,
     hasCountyOverdose: !!cdc,
+    hasFullMisery: !!misery,
   };
 }
 

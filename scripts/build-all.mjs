@@ -1,24 +1,23 @@
 #!/usr/bin/env node
 // scripts/build-all.mjs
 //
-// Runs every data-refresh script in the correct order. Fails fast if any
-// upstream source is unavailable, so CI or local users see a loud error
-// rather than stale data.
+// Runs every data-refresh script in order, then composes the misery index.
 //
 //   npm run data:all
-//
-// Individual scripts can also be run on their own via npm scripts.
 
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const scripts = [
+const fetchers = [
   'fetch-saipe.mjs',
   'fetch-cdc-overdose.mjs',
+  'fetch-county-health-rankings.mjs',
+  'fetch-acs-county.mjs',
   'fetch-churches.mjs',
 ];
+const composers = ['build-misery-index.mjs'];
 
 function run(rel) {
   return new Promise((resolve, reject) => {
@@ -30,7 +29,11 @@ function run(rel) {
   });
 }
 
-for (const s of scripts) {
-  await run(s);
+for (const s of [...fetchers, ...composers]) {
+  try {
+    await run(s);
+  } catch (e) {
+    console.error(`  ! ${s} failed: ${e.message}`);
+  }
 }
 console.log('\n✓ data refresh complete — see public/data/*.json');

@@ -16,8 +16,12 @@ adoption waitlist overnight.
 3. **Root Cause: Poverty** — child poverty rates (**county**, SAIPE)
 4. **Root Cause: Overdose** — drug overdose deaths (**county**, CDC)
 5. **Missing From Care** — NCMEC runaway / trafficking pipeline (state)
-6. **The Solution** — Christian congregations per waiting child + HIFLD
-   church points overlay (state + points)
+6. **The Misery Index** — composite heatmap (**county**): z-score sum of
+   poverty + overdose + poor-health + premature death + disability
+7. **Complicity** — the same misery heatmap with every Christian
+   congregation in America overlaid on top
+8. **The Solution** — Christian congregations per waiting child +
+   HIFLD church points overlay (state + points)
 
 ## Running locally
 

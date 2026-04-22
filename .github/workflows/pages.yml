@@ -47,15 +47,21 @@ jobs:
 
       - run: npm ci
 
-      # SAIPE (county child poverty) — small, annual dataset. Safe to run
-      # on every deploy.
+      # Small, reliable datasets refreshed on every deploy.
       - name: Refresh SAIPE (county child poverty)
         run: npm run data:saipe
         continue-on-error: true
 
-      # CDC provisional county overdose — small, monthly dataset.
       - name: Refresh CDC overdose (county)
         run: npm run data:cdc
+        continue-on-error: true
+
+      - name: Refresh County Health Rankings
+        run: npm run data:chr
+        continue-on-error: true
+
+      - name: Refresh ACS (population + disability)
+        run: npm run data:acs
         continue-on-error: true
 
       # HIFLD / OSM churches — only on manual dispatch since the pull is
@@ -64,6 +70,11 @@ jobs:
       - name: Refresh churches (HIFLD → OSM)
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.refresh_churches }}
         run: npm run data:churches
+        continue-on-error: true
+
+      # Compose the misery index from whatever fetchers succeeded.
+      - name: Build misery index
+        run: npm run data:misery
         continue-on-error: true
 
       - run: npm run build

@@ -8,9 +8,13 @@ export type Metric =
   | 'overdoseRate'
   | 'missingFromCare'
   | 'capacityGap'
+  | 'miseryIndex'
+  | 'complicity'
   | 'churchSolution';
 
 export type Geography = 'state' | 'county';
+
+export type CountyProp = 'poverty' | 'overdose' | 'misery' | 'complicity';
 
 export interface Chapter {
   id: string;
@@ -21,7 +25,7 @@ export interface Chapter {
   /** Which geography drives this chapter's choropleth. */
   geography: Geography;
   /** For county chapters: which property on the county feature to read. */
-  countyProp?: 'poverty' | 'overdose';
+  countyProp?: CountyProp;
   /** Ramp of hex colors from low → bleak. */
   ramp: string[];
   unit: string;
@@ -46,6 +50,12 @@ export function metricValue(row: StateRow, metric: Metric): number {
       return (row.missingFromCare / Math.max(1, row.fosterCare)) * 100;
     case 'capacityGap':
       return Math.max(0, 100 - (row.licensedHomes / Math.max(1, row.fosterCare)) * 100);
+    case 'miseryIndex':
+    case 'complicity':
+      // These are county-level composites computed in geo.ts; when used
+      // as state-level values, fall back to a rough average of poverty
+      // and overdose z-space.
+      return row.childPovertyPct / 30 + (row.overdoseDeaths / (row.childPop * 4)) * 1000;
     case 'churchSolution':
       return row.congregations / Math.max(1, row.waitingAdoption);
   }
@@ -62,6 +72,10 @@ export function metricFormat(metric: Metric, v: number): string {
       return v.toFixed(1) + '%';
     case 'overdoseRate':
       return v.toFixed(1) + ' / 100k';
+    case 'miseryIndex':
+      return v.toFixed(2) + ' (z-score sum)';
+    case 'complicity':
+      return v > 0 ? '+' + v.toFixed(0) + ' pts complicity' : v.toFixed(0) + ' pts';
     case 'churchSolution':
       return v.toFixed(1) + ' churches / waiting child';
   }
@@ -146,10 +160,43 @@ export const CHAPTERS: Chapter[] = [
     source: 'NCMEC 2024 Impact Report · FBI / Congressional Record',
   },
   {
-    id: 'solution',
+    id: 'misery',
     number: 'VI',
+    title: 'The misery map',
+    eyebrow: 'Chapter VI — The Misery Index',
+    metric: 'miseryIndex',
+    geography: 'county',
+    countyProp: 'misery',
+    ramp: ['#11131a', '#2a1f3a', '#572450', '#922a54', '#d9334d', '#ff4a2b'],
+    unit: 'Composite misery score (higher = worse)',
+    headline: 'The same map. Every time.',
+    subline: 'Poverty. Overdose. Disability. Despair. They draw the same borders.',
+    body:
+      'Layer child poverty over overdose deaths over poor-health days over disability rates, and the map does not scatter — it coheres. The same counties light up, decade after decade. These are the places our children come from. This is where the entry point to foster care opens.',
+    source: 'County Health Rankings · Census SAIPE · CDC NCHS · ACS disability',
+  },
+  {
+    id: 'complicity',
+    number: 'VII',
+    title: 'Churches are right there',
+    eyebrow: 'Chapter VII — Complicity',
+    metric: 'miseryIndex',
+    geography: 'county',
+    countyProp: 'misery',
+    ramp: ['#11131a', '#2a1f3a', '#572450', '#922a54', '#d9334d', '#ff4a2b'],
+    unit: 'Misery score with Christian congregations overlaid',
+    headline: 'The pews are not empty.',
+    subline: 'They are next door to the suffering. They look away.',
+    body:
+      'This is the same misery map, with every Christian congregation in America dropped on top. In the Delta, in Appalachia, in South Texas, in the Rust Belt — the churches are not missing. They are right there. The capacity to end the foster waitlist exists. It is standing on every corner. It is choosing not to act.',
+    source: 'HIFLD All Places of Worship · County Health Rankings · AFCARS',
+    showChurches: true,
+  },
+  {
+    id: 'solution',
+    number: 'VIII',
     title: 'What the pews could end overnight',
-    eyebrow: 'Chapter VI — The Solution',
+    eyebrow: 'Chapter VIII — The Solution',
     metric: 'churchSolution',
     geography: 'state',
     ramp: ['#3d0a1a', '#6d1728', '#a1302a', '#cf6426', '#e6a42a', '#f7e26b'],
