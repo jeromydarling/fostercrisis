@@ -24,12 +24,26 @@ const URLS = [
   `https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data${YEAR}_0.csv`,
 ];
 
+// Column names change format year to year. Accept both the legacy
+// `v002_rawvalue` style AND the new "Premature Death raw value" style
+// (with spaces). Matchers are case-insensitive and tolerate the
+// space/underscore/hyphen substitutions CHR cycles through.
+const RAW = /\b[_\s-]*raw[_\s-]*value\b/i;
+
 const COLUMN_HINTS = {
-  poorHealth: [/poor.or.fair.health.*rawvalue/i, /v002.*rawvalue/i],
-  prematureDeath: [/premature.death.*rawvalue/i, /v001.*rawvalue/i],
-  fipsState: [/^statecode$/i, /state.?fips/i],
-  fipsCounty: [/^countycode$/i, /county.?fips/i],
+  poorHealth: [
+    /poor.{0,3}or.{0,3}fair.{0,3}health.*raw/i,
+    /\bv002[_\s-]*rawvalue\b/i,
+  ],
+  prematureDeath: [
+    /premature.{0,3}death.*raw/i,
+    /\bv001[_\s-]*rawvalue\b/i,
+    /\byears.{0,3}of.{0,3}potential.{0,3}life.{0,3}lost.*raw/i,
+  ],
+  fipsState: [/^state.{0,3}fips.{0,3}code$/i, /^statecode$/i, /^state.{0,3}fips$/i],
+  fipsCounty: [/^county.{0,3}fips.{0,3}code$/i, /^countycode$/i, /^county.{0,3}fips$/i],
 };
+void RAW; // exported helper kept for future expansion
 
 function findCol(header, hints) {
   for (const h of hints) {
@@ -67,12 +81,25 @@ const col = {
   poorHealth: findCol(header, COLUMN_HINTS.poorHealth),
   prematureDeath: findCol(header, COLUMN_HINTS.prematureDeath),
 };
-for (const [k, v] of Object.entries(col)) {
-  if (v < 0) {
-    log.err(`Could not locate column: ${k}`);
-    log.err(`Header was: ${header.slice(0, 10).join(', ')}...`);
-    process.exit(1);
-  }
+
+// FIPS columns are non-negotiable — without them we can't key to county.
+if (col.state < 0 || col.county < 0) {
+  log.err('Could not locate FIPS columns in CHR CSV. Columns:');
+  log.err(`  ${header.slice(0, 10).join(', ')}...`);
+  process.exit(1);
+}
+
+// Indicator columns are optional — log warnings and keep whatever we can.
+// The misery-index builder handles missing fields via z-score filtering.
+if (col.poorHealth < 0) log.warn('poorHealth column not found — skipping that indicator');
+if (col.prematureDeath < 0) log.warn('prematureDeath column not found — skipping that indicator');
+if (col.poorHealth < 0 && col.prematureDeath < 0) {
+  log.warn('No CHR indicator columns located. Writing empty file; misery index will fall back to SAIPE + CDC only.');
+  writeJson('county-health-rankings.json', {
+    _meta: { year: YEAR, source: 'CHR (empty — column schema changed)', url },
+    values: {},
+  });
+  process.exit(0);
 }
 
 const values = {};
@@ -82,8 +109,8 @@ for (const r of rows) {
   const cf = String(vs[col.county] ?? '').padStart(3, '0');
   if (sf === '00' || cf === '000') continue; // state / nation rollups
   const fips = sf + cf;
-  const ph = parseFloat(vs[col.poorHealth]);
-  const pd = parseFloat(vs[col.prematureDeath]);
+  const ph = col.poorHealth >= 0 ? parseFloat(vs[col.poorHealth]) : NaN;
+  const pd = col.prematureDeath >= 0 ? parseFloat(vs[col.prematureDeath]) : NaN;
   if (!Number.isFinite(ph) && !Number.isFinite(pd)) continue;
   values[fips] = {
     poorHealth: Number.isFinite(ph) ? ph : null,
