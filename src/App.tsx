@@ -4,6 +4,7 @@ import { CrisisMap } from './components/CrisisMap';
 import { ChapterPanel } from './components/ChapterPanel';
 import { StateTooltip } from './components/StateTooltip';
 import { FeedSection } from './components/FeedSection';
+import { MirrorSection } from './components/MirrorSection';
 import type { GeoBundle } from './data/geo';
 
 export default function App() {
@@ -101,6 +102,7 @@ export default function App() {
       </div>
       </div>
       <FeedSection selectedFips={selectedFips} />
+      <MirrorSection />
       <footer className="page-footer">
         <p>
           <strong>fostercrisis.com</strong> — a map, an indictment, and a

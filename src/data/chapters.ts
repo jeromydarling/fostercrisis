@@ -9,6 +9,8 @@ export type Metric =
   | 'capacityGap'
   | 'miseryIndex'
   | 'complicity'
+  | 'religiosity'
+  | 'obesity'
   | 'churchSolution';
 
 export type Geography = 'state' | 'county';
@@ -55,6 +57,10 @@ export function metricValue(row: StateRow, metric: Metric): number {
       // as state-level values, fall back to a rough average of poverty
       // and overdose z-space.
       return row.childPovertyPct / 30 + (row.overdoseDeaths / (row.childPop * 4)) * 1000;
+    case 'religiosity':
+      return row.religiosityPct;
+    case 'obesity':
+      return row.obesityPct;
     case 'churchSolution':
       return row.congregations / Math.max(1, row.waitingAdoption);
   }
@@ -75,6 +81,10 @@ export function metricFormat(metric: Metric, v: number): string {
       return v.toFixed(2) + ' (z-score sum)';
     case 'complicity':
       return v > 0 ? '+' + v.toFixed(0) + ' pts complicity' : v.toFixed(0) + ' pts';
+    case 'religiosity':
+      return v.toFixed(0) + '% highly religious';
+    case 'obesity':
+      return v.toFixed(1) + '% obese';
     case 'churchSolution':
       return v.toFixed(1) + ' churches / waiting child';
   }
@@ -159,10 +169,40 @@ export const CHAPTERS: Chapter[] = [
     source: 'NCMEC 2024 Impact Report · FBI / Congressional Record',
   },
   {
-    id: 'misery',
+    id: 'belt',
     number: 'VI',
+    title: 'The Bible Belt is the foster belt',
+    eyebrow: 'Chapter VI — The Church Mirror',
+    metric: 'religiosity',
+    geography: 'state',
+    ramp: ['#14151c', '#312040', '#5e2756', '#972f5c', '#cd3a53', '#ffb347'],
+    unit: '% of adults who are "highly religious" (Pew RLS)',
+    headline: 'The most Christian states',
+    subline: 'are the states where foster children are hungriest, highest-count, and most forgotten.',
+    body:
+      'Overlay the Pew religiosity map on the foster-children map and the borders match. Alabama, Arkansas, Louisiana, Mississippi, Oklahoma, Tennessee, West Virginia — the reddest pews produce the longest waiting lists. This is not a coincidence. It is a mirror the American Church has refused to look into.',
+    source: 'Pew Research Religious Landscape Study',
+  },
+  {
+    id: 'weight',
+    number: 'VII',
+    title: 'The discipline went to food',
+    eyebrow: 'Chapter VII — The Weight',
+    metric: 'obesity',
+    geography: 'state',
+    ramp: ['#14151c', '#2c1f3a', '#5a2450', '#912e52', '#c73745', '#ffb347'],
+    unit: 'Adult obesity rate (%) — CDC BRFSS',
+    headline: 'The same map a third time.',
+    subline: 'The most-churched states are also the heaviest. Discipline left the table and went to the table.',
+    body:
+      'Baptists have the highest obesity rate of any religious group in America (30%). Jews: 1%. Muslims: 0.7%. When alcohol and tobacco are discouraged but food is not, food becomes the last socially-sanctioned vice. The physical body of American Christianity is a map of misdirected discipline — and it is the same map where the foster children are waiting.',
+    source: 'CDC BRFSS 2022 · Purdue/Ferraro denominational study',
+  },
+  {
+    id: 'misery',
+    number: 'VIII',
     title: 'The misery map',
-    eyebrow: 'Chapter VI — The Misery Index',
+    eyebrow: 'Chapter VIII — The Misery Index',
     metric: 'miseryIndex',
     geography: 'county',
     countyProp: 'misery',
@@ -176,9 +216,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'complicity',
-    number: 'VII',
+    number: 'IX',
     title: 'Churches are right there',
-    eyebrow: 'Chapter VII — Complicity',
+    eyebrow: 'Chapter IX — Complicity',
     metric: 'miseryIndex',
     geography: 'county',
     countyProp: 'misery',
@@ -195,9 +235,9 @@ export const CHAPTERS: Chapter[] = [
   // rewrites its headline for the selected state.
   {
     id: 'solution',
-    number: 'VIII',
+    number: 'X',
     title: 'What the pews could end overnight',
-    eyebrow: 'Chapter VIII — The Solution',
+    eyebrow: 'Chapter X — The Solution',
     metric: 'churchSolution',
     geography: 'state',
     ramp: ['#3d0a1a', '#6d1728', '#a1302a', '#cf6426', '#e6a42a', '#f7e26b'],
@@ -274,6 +314,20 @@ export function frameForState(chapter: Chapter, row: StateRow): Framing {
         headline: `~${nf(row.missingFromCare)}`,
         subline: `${name} children reported missing from care in 2024.`,
         body: `86% of child sex-trafficking victims reported to NCMEC nationally were in the child welfare system at the time. ${name}'s share of that pipeline runs through group homes, shelter placements, and the children no one knew where to put.`,
+      };
+    case 'belt':
+      return {
+        ...base,
+        headline: `${row.religiosityPct}% highly religious`,
+        subline: `${name} is more religious than ${Math.round(((row.religiosityPct - 55) / 55) * 100)}% of the national average — and its foster waitlist is ${nf(row.waitingAdoption)}.`,
+        body: `${nf(row.congregations)} congregations across ${name}. ${row.religiosityPct}% of adults pray daily, attend weekly, and say religion is very important. ${nf(row.waitingAdoption)} of the state's children are waiting for a family. The reddest pews produce the longest waiting lists. This is the mirror.`,
+      };
+    case 'weight':
+      return {
+        ...base,
+        headline: `${row.obesityPct.toFixed(1)}%`,
+        subline: `of ${name} adults are obese. The state ranks ${row.obesityPct >= 35 ? 'among the heaviest in the nation' : 'near the national average'}.`,
+        body: `In ${name}, ${row.obesityPct.toFixed(1)}% of adults are obese while ${nf(kids)} children wait in state custody. Physical discipline is the first kind of discipline. It is not accidentally missing here — it is a symptom of the same disordered priorities that leave foster homes empty.`,
       };
     case 'misery':
       return {
