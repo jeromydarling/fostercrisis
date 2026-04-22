@@ -93,7 +93,7 @@ const TALLY = [
   { claim: 'We are pro-life and pro-family.',
     reality: '3% foster rate. 368,000 in care tonight. 70,418 legally free and waiting. The 4-bedroom house has one empty bedroom.' },
   { claim: 'We are a Christian nation.',
-    reality: '62% Christian (from ~90% in 1970). Weekly attendance 30%. AWVI 4%. Gen Z 1%.' },
+    reality: '63 million babies killed since 1973. 75% of Christian men view pornography. 3% have ever fostered one of the 368,000 orphans in their own community.' },
 ];
 
 const WARS = [
