@@ -46,7 +46,10 @@ export function metricValue(row: StateRow, metric: Metric): number {
     case 'fosterCarePerCapita':
       return (row.fosterCare / row.childPop) * 1000;
     case 'fosterDisability':
-      return row.fosterDisabled;
+      // Disabled foster kids per 1,000 children in the state population —
+      // same denominator as fosterCarePerCapita, so the map reads as
+      // burden on a state's kids, not as population scale.
+      return (row.fosterDisabled / row.childPop) * 1000;
     case 'homesPer100':
       return (row.licensedHomes / Math.max(1, row.fosterCare)) * 100;
     case 'childPoverty':
@@ -86,7 +89,7 @@ export function metricFormat(metric: Metric, v: number): string {
     case 'fosterCarePerCapita':
       return v.toFixed(1) + ' / 1,000 kids';
     case 'fosterDisability':
-      return Math.round(v).toLocaleString() + ' kids';
+      return v.toFixed(2) + ' disabled / 1,000 kids';
     case 'homesPer100':
     case 'missingFromCare':
     case 'capacityGap':
@@ -137,12 +140,12 @@ export const CHAPTERS: Chapter[] = [
     metric: 'fosterDisability',
     geography: 'state',
     ramp: ['#1a1f2b', '#3a2a48', '#6b2f56', '#a2345e', '#cf3a5a', '#ff6d5a'],
-    unit: 'Foster children with a diagnosed disability (AFCARS)',
+    unit: 'Disabled foster kids per 1,000 children in the state',
     headline: '~129,000',
     subline:
-      'foster children in America carry a clinically diagnosed disability — and the system was not built for them.',
+      'American foster children carry a clinically diagnosed disability — and the system was not built for them.',
     body:
-      'Roughly a third of all children in foster care are flagged by AFCARS as having a clinically diagnosed disability — mental, emotional, physical, or intellectual. HHS analyses put the broader "any special health need" share closer to 44%. These are the kids who wait longest for a forever home, cycle through the most placements, and are hardest to match with a family. State-level reporting of this field is uneven — some states flag mental-health diagnoses, some only capture IEPs — so read these counts as the SCALE of the subset, not a ranking of which states neglect disabled kids most. The point is simpler: hundreds of thousands of disabled kids are in American foster care, and the pipeline was designed for typically-developing ones.',
+      'Roughly a third of all children in foster care are flagged by AFCARS as having a clinically diagnosed disability — mental, emotional, physical, or intellectual. HHS analyses put the broader "any special health need" share closer to 44%. Mapped here as disabled foster kids per 1,000 children in each state (same denominator as Chapter I) so the reading is the burden a state\'s kid population is carrying, not just its raw size. West Virginia, Montana, Alaska, Oklahoma, and Kentucky light up for the same reason their baseline foster rates do — the pipeline feeding the system is worst where poverty, addiction, and neglect are most concentrated, and within that pipeline the disabled kids wait longest, move the most, and are hardest to place. State-level reporting of this AFCARS field is uneven, so read the choropleth as the shape of the problem, not a strict ranking.',
     source: 'AFCARS Report 30 · HHS ASPE foster-care disability analyses',
   },
   {
@@ -375,12 +378,13 @@ export function frameForState(chapter: Chapter, row: StateRow): Framing {
       };
     case 'disability': {
       const disabled = row.fosterDisabled;
+      const perThousand = (disabled / Math.max(1, row.childPop)) * 1000;
       const share = (disabled / Math.max(1, kids)) * 100;
       return {
         ...base,
-        headline: nf(disabled),
-        subline: `children in ${name} foster care flagged with a diagnosed disability.`,
-        body: `Of ${nf(kids)} children in ${name}'s system, roughly ${nf(disabled)} (~${share.toFixed(0)}%) are flagged with a clinically diagnosed disability. State reporting of this AFCARS field is uneven — some states capture mental-health diagnoses and IEPs aggressively, others barely at all — so read this as the scale of disabled kids in ${name}'s pipeline, not a ranking. They wait longest, move the most, and are hardest for the system to place.`,
+        headline: `${perThousand.toFixed(2)} / 1,000 kids`,
+        subline: `~${nf(disabled)} ${name} foster children carry a diagnosed disability (~${share.toFixed(0)}% of those in care).`,
+        body: `${name} has ${nf(disabled)} foster children flagged with a clinically diagnosed disability — roughly ${perThousand.toFixed(2)} for every 1,000 children in the state. State reporting of this AFCARS field is uneven — some states capture mental-health diagnoses and IEPs aggressively, others barely at all — so read this as the shape of the problem, not a strict ranking. What isn't in doubt: these kids wait longest, move the most, and are hardest for the system to place.`,
       };
     }
     case 'capacity':
