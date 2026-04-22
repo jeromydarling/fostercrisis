@@ -366,7 +366,9 @@ export function MirrorSection() {
           Christians could not find 30 hours to become licensed.
         </p>
         <p className="indictment-kicker">
-          The phone won the argument. The child lost it.
+          Where your treasure is, there your heart will also be. The
+          phone won your heart &mdash; a heart that could have given
+          a home to a child.
         </p>
       </div>
 
