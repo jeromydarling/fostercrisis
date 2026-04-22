@@ -5,6 +5,8 @@
 import { SourceDetails, type Citation } from './SourceDetails';
 import { Prayer } from './Prayer';
 import { PRAYERS } from '../data/prayers';
+import { EssayEpigraph } from './EssayEpigraph';
+import { EPIGRAPHS } from '../data/epigraphs';
 
 const CITATIONS: Citation[] = [
   {
@@ -232,6 +234,7 @@ const BODY_COUNT = [
 export function ConvergenceSection() {
   return (
     <section className="convergence-section" id="convergence">
+      <EssayEpigraph epigraph={EPIGRAPHS.convergence} />
       <div className="conv-hero">
         <p className="conv-eyebrow">Part IV · The Convergence</p>
         <h2 className="conv-title">

@@ -5,6 +5,8 @@
 import { SourceDetails, type Citation } from './SourceDetails';
 import { Prayer } from './Prayer';
 import { PRAYERS } from '../data/prayers';
+import { EssayEpigraph } from './EssayEpigraph';
+import { EPIGRAPHS } from '../data/epigraphs';
 
 const CITATIONS: Citation[] = [
   {
@@ -244,6 +246,7 @@ export function TimelineSection() {
 
   return (
     <section className="timeline-section" id="timeline">
+      <EssayEpigraph epigraph={EPIGRAPHS.timeline} />
       <div className="tl-hero">
         <p className="tl-eyebrow">The Nerds' View · Master Timeline</p>
         <h2 className="tl-title">

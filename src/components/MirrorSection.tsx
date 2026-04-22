@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { SourceDetails, type Citation } from './SourceDetails';
 import { Prayer } from './Prayer';
 import { PRAYERS } from '../data/prayers';
+import { EssayEpigraph } from './EssayEpigraph';
+import { EPIGRAPHS } from '../data/epigraphs';
 
 const CITATIONS: Citation[] = [
   {
@@ -130,6 +132,7 @@ export function MirrorSection() {
 
   return (
     <section className="mirror-section" id="mirror">
+      <EssayEpigraph epigraph={EPIGRAPHS.mirror} />
       <div className="mirror-hero">
         <p className="mirror-eyebrow">Part II · The Mirror of American Christianity</p>
         <h2 className="mirror-title">

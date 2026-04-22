@@ -5,6 +5,8 @@
 import { SourceDetails, type Citation } from './SourceDetails';
 import { Prayer } from './Prayer';
 import { PRAYERS } from '../data/prayers';
+import { EssayEpigraph } from './EssayEpigraph';
+import { EPIGRAPHS } from '../data/epigraphs';
 
 const CITATIONS: Citation[] = [
   {
@@ -87,6 +89,7 @@ const BIBLE = [
 export function EmptyCradleSection() {
   return (
     <section className="cradle-section" id="cradle">
+      <EssayEpigraph epigraph={EPIGRAPHS.cradle} />
       <div className="cradle-hero">
         <p className="cradle-eyebrow">Part III · The Empty Cradle</p>
         <h2 className="cradle-title">

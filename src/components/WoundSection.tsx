@@ -11,6 +11,8 @@
 import { SourceDetails, type Citation } from './SourceDetails';
 import { Prayer } from './Prayer';
 import { PRAYERS } from '../data/prayers';
+import { EssayEpigraph } from './EssayEpigraph';
+import { EPIGRAPHS } from '../data/epigraphs';
 
 interface Stat {
   figure: string;
@@ -192,6 +194,7 @@ const CITATIONS: Citation[] = [
 export function WoundSection() {
   return (
     <section className="wound-section" id="wound">
+      <EssayEpigraph epigraph={EPIGRAPHS.wound} />
       <div className="wound-hero">
         <p className="wound-eyebrow">Part VIII · The Wound Inside the Wound</p>
         <h2 className="wound-title">

@@ -1,6 +1,8 @@
 import { SourceDetails, type Citation } from './SourceDetails';
 import { Prayer } from './Prayer';
 import { PRAYERS } from '../data/prayers';
+import { EssayEpigraph } from './EssayEpigraph';
+import { EPIGRAPHS } from '../data/epigraphs';
 
 const CITATIONS: Citation[] = [
   {
@@ -223,6 +225,7 @@ const NATION_LEDGER = [
 export function SubstitutionSection() {
   return (
     <section className="subst-section" id="substitution">
+      <EssayEpigraph epigraph={EPIGRAPHS.substitution} />
       <div className="subst-hero">
         <p className="subst-eyebrow">Part V · The Substitution &amp; The Lost War</p>
         <h2 className="subst-title">

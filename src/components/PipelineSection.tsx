@@ -10,6 +10,8 @@
 import { SourceDetails, type Citation } from './SourceDetails';
 import { Prayer } from './Prayer';
 import { PRAYERS } from '../data/prayers';
+import { EssayEpigraph } from './EssayEpigraph';
+import { EPIGRAPHS } from '../data/epigraphs';
 
 interface Stat {
   figure: string;
@@ -144,6 +146,7 @@ const EXITS = [
 export function PipelineSection() {
   return (
     <section className="pipe-section" id="pipeline">
+      <EssayEpigraph epigraph={EPIGRAPHS.pipeline} />
       <div className="pipe-hero">
         <p className="pipe-eyebrow">Part VII · The Pipeline</p>
         <h2 className="pipe-title">

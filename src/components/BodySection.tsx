@@ -12,6 +12,8 @@
 import { SourceDetails, type Citation } from './SourceDetails';
 import { Prayer } from './Prayer';
 import { PRAYERS } from '../data/prayers';
+import { EssayEpigraph } from './EssayEpigraph';
+import { EPIGRAPHS } from '../data/epigraphs';
 
 interface Stat {
   figure: string;
@@ -165,6 +167,7 @@ const CITATIONS: Citation[] = [
 export function BodySection() {
   return (
     <section className="score-section" id="score">
+      <EssayEpigraph epigraph={EPIGRAPHS.score} />
       <div className="score-hero">
         <p className="score-eyebrow">Part IX · The Body Keeps the Score</p>
         <h2 className="score-title">

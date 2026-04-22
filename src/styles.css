@@ -6055,6 +6055,78 @@ body {
 }
 
 /* ==================================================================
+ * ESSAY EPIGRAPH
+ *
+ * Quiet scripture opener at the top of each essay section. Italic
+ * serif verse, muted gold rule, mono reference beneath. The verse
+ * and the prayer at the bottom of the same section act as bookends —
+ * Scripture opens the argument, prayer closes it.
+ * ================================================================ */
+
+.essay-epigraph {
+  max-width: 620px;
+  margin: 0 auto 3rem;
+  padding: 1rem 1.5rem 0;
+  text-align: center;
+}
+
+.essay-epigraph-verse {
+  margin: 0 0 1rem;
+  padding: 0;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.55vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--fg-dim);
+  letter-spacing: 0.002em;
+  quotes: none;
+}
+
+.essay-epigraph-mark {
+  display: inline;
+  color: var(--accent-warm);
+  opacity: 0.55;
+  font-style: normal;
+  margin: 0 0.15rem;
+  font-size: 1.05em;
+  vertical-align: -0.05em;
+}
+
+.essay-epigraph-rule {
+  width: 40px;
+  height: 1px;
+  margin: 0 auto 0.85rem;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 179, 71, 0.55),
+    transparent);
+}
+
+.essay-epigraph-ref {
+  margin: 0;
+  font-family: var(--ff-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--fg-dimmer);
+}
+
+@media (max-width: 640px) {
+  .essay-epigraph {
+    margin: 0 auto 2rem;
+    padding: 0.5rem 1rem 0;
+  }
+  .essay-epigraph-verse {
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+  .essay-epigraph-ref {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+  }
+}
+
+/* ==================================================================
  * PRAYER
  *
  * A cream-parchment meditation block appended to the end of every
