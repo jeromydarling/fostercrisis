@@ -9,6 +9,7 @@ import { EmptyCradleSection } from './components/EmptyCradleSection';
 import { ConvergenceSection } from './components/ConvergenceSection';
 import { TimelineSection } from './components/TimelineSection';
 import { SubstitutionSection } from './components/SubstitutionSection';
+import { EpigraphSection } from './components/EpigraphSection';
 import type { GeoBundle } from './data/geo';
 
 export default function App() {
@@ -58,7 +59,8 @@ export default function App() {
 
   return (
     <div className="app">
-      <div className="map-section">
+      <EpigraphSection />
+      <div className="map-section" id="map">
       <CrisisMap
         chapterIndex={chapterIndex}
         selectedFips={selectedFips}
