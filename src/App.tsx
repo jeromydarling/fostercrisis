@@ -5,6 +5,7 @@ import { MapExperience } from './components/MapExperience';
 import { EssayExperience } from './components/EssayExperience';
 import { SolutionExperience } from './components/SolutionExperience';
 import { ClosingEpigraph } from './components/ClosingEpigraph';
+import { FinalBenediction } from './components/FinalBenediction';
 
 /** Hash router:
  *    (no hash, or #)  → Landing (epigraph + choose)
@@ -68,6 +69,7 @@ export default function App() {
       {mode !== 'landing' && (
         <>
           <ClosingEpigraph />
+          <FinalBenediction />
           <footer className="page-footer">
             <p>
               <strong>fostercrisis.com</strong> — a map, an indictment, and a
