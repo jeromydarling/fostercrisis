@@ -4471,6 +4471,129 @@ body {
   .subst-nation { padding: 2rem 1.25rem; }
 }
 
+/* ==================================================================
+ * SOURCES
+ *
+ * Dense provenance block rendered at the bottom of every non-landing
+ * mode. Intentionally quiet typography so it doesn't steal attention
+ * from the argument, but thorough enough that nothing on the site is
+ * unsourced.
+ * ================================================================ */
+
+.sources {
+  border-top: 1px solid var(--rule);
+  padding: 3rem 2rem 2rem;
+  max-width: 1120px;
+  margin: 3rem auto 0;
+  color: var(--fg-dim);
+  font-family: var(--ff-sans);
+}
+
+.sources-header {
+  max-width: 640px;
+  margin-bottom: 2rem;
+}
+
+.sources-title {
+  font-family: var(--ff-serif);
+  color: var(--fg);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem;
+}
+
+.sources-lede {
+  color: var(--fg-dim);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.sources-grid {
+  display: grid;
+  gap: 1.75rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.source-group h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  font-weight: 500;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.35rem;
+}
+
+.source-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.source-group li {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: 0 0 0.85rem;
+  color: var(--fg-dim);
+}
+
+.source-group li strong {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.source-group a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(247, 226, 107, 0.3);
+  word-break: break-word;
+}
+
+.source-group a:hover,
+.source-group a:focus-visible {
+  color: var(--accent-warm);
+  border-bottom-color: var(--accent-warm);
+}
+
+.source-group code {
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  color: var(--fg-dim);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0 0.25rem;
+  border-radius: 2px;
+}
+
+.sources-notes {
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+}
+
+.sources-notes h3 { color: var(--fg-dim); }
+
+.sources-notes li {
+  font-size: 0.8rem;
+  color: var(--fg-dimmer);
+}
+
+.sources-notes li strong { color: var(--fg-dim); }
+
+@media (max-width: 640px) {
+  .sources {
+    padding: 2rem 1.25rem 1.5rem;
+    margin-top: 2rem;
+  }
+  .sources-title { font-size: 1.2rem; }
+  .sources-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
 .page-footer {
   padding: 2.5rem 2rem 3rem;
   border-top: 1px solid var(--rule);
