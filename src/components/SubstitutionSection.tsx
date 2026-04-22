@@ -458,8 +458,8 @@ export function SubstitutionSection() {
           </article>
         </div>
         <p className="subst-possibilities-kicker">
-          Either reading is damning. There is no third reading in which
-          the ledger clears.
+          Either reading is damning. The only reading that clears the
+          ledger is the one American Christianity has not yet lived.
         </p>
       </div>
 
@@ -498,8 +498,8 @@ export function SubstitutionSection() {
         <p className="subst-final-eyebrow">The closer</p>
         <blockquote className="subst-final-quote">
           <span className="subst-final-line">American Christianity is in debt.</span>
-          <span className="subst-final-line">They are in debt to all of the children.</span>
-          <span className="subst-final-line subst-final-kicker">Crystal clear.</span>
+          <span className="subst-final-line">They are in debt to all of the children&mdash;</span>
+          <span className="subst-final-line subst-final-kicker">a debt that could be cleared overnight.</span>
         </blockquote>
       </div>
 

@@ -262,8 +262,8 @@ export function EmptyCradleSection() {
         </p>
         <p className="cradle-closing-kicker">
           The quiver is not full. The spare bedroom is not full. The pew,
-          increasingly, is not full. The only thing that is full is the
-          church parking lot on Sunday and the Netflix queue on Monday.
+          increasingly, is not full. If children are a heritage &mdash;
+          what heritage have you left them?
         </p>
       </div>
 

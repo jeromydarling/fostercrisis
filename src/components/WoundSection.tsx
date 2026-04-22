@@ -348,8 +348,8 @@ export function WoundSection() {
         </div>
         <p className="wound-suicide-kicker">
           One in four California 17-year-olds in foster care has already
-          tried to kill themselves. The American Church is arguing about
-          whether to modernize the sanctuary lighting.
+          tried to kill themselves. The American Church is planning its
+          next building campaign.
         </p>
       </div>
 
