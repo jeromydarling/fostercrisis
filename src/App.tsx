@@ -3,6 +3,7 @@ import { CHAPTERS } from './data/chapters';
 import { CrisisMap } from './components/CrisisMap';
 import { ChapterPanel } from './components/ChapterPanel';
 import { StateTooltip } from './components/StateTooltip';
+import { FeedSection } from './components/FeedSection';
 import type { GeoBundle } from './data/geo';
 
 export default function App() {
@@ -52,6 +53,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <div className="map-section">
       <CrisisMap
         chapterIndex={chapterIndex}
         selectedFips={selectedFips}
@@ -88,11 +90,24 @@ export default function App() {
         </div>
       )}
 
-      <footer className="footer">
+      <div className="footer">
         <span>
           380,000 congregations × 1 family = 380,000 homes.  The waitlist is
           70,418. You would end it five times over.
         </span>
+        <a className="footer-scroll" href="#feeds">
+          Scroll for real faces ↓
+        </a>
+      </div>
+      </div>
+      <FeedSection selectedFips={selectedFips} />
+      <footer className="page-footer">
+        <p>
+          <strong>fostercrisis.com</strong> — a map, an indictment, and a
+          directory. Sources credited in every chapter. Feeds embed from the
+          originating organizations; we never re-host children's videos or
+          images.
+        </p>
       </footer>
     </div>
   );

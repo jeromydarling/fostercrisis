@@ -1,0 +1,226 @@
+#!/usr/bin/env node
+// scripts/fetch-feeds.mjs
+//
+// Ingests the sources listed in scripts/feeds.config.json and writes a
+// compact public/data/feeds.json consumed by <FeedSection />.
+//
+// Supported source kinds:
+//   youtube-user    /feeds/videos.xml?user=<handle>
+//   youtube-channel /feeds/videos.xml?channel_id=UC...
+//   rss             any Atom/RSS2 feed URL
+//
+// Each failed source logs a warning and is skipped — the workflow must
+// keep going so one dead channel can't blank the whole feeds section.
+//
+// Run:  node scripts/fetch-feeds.mjs
+
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { fetchText, log, OUT_DIR, ensureOutDir } from './lib.mjs';
+
+const here = path.dirname(fileURLToPath(import.meta.url));
+const config = JSON.parse(fs.readFileSync(path.join(here, 'feeds.config.json'), 'utf8'));
+
+const MAX_PER_SOURCE = 24; // cap so one prolific channel doesn't crowd others
+const US_STATE_NAMES = {
+  AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California',
+  CO: 'Colorado', CT: 'Connecticut', DE: 'Delaware', DC: 'District of Columbia',
+  FL: 'Florida', GA: 'Georgia', HI: 'Hawaii', ID: 'Idaho', IL: 'Illinois',
+  IN: 'Indiana', IA: 'Iowa', KS: 'Kansas', KY: 'Kentucky', LA: 'Louisiana',
+  ME: 'Maine', MD: 'Maryland', MA: 'Massachusetts', MI: 'Michigan',
+  MN: 'Minnesota', MS: 'Mississippi', MO: 'Missouri', MT: 'Montana',
+  NE: 'Nebraska', NV: 'Nevada', NH: 'New Hampshire', NJ: 'New Jersey',
+  NM: 'New Mexico', NY: 'New York', NC: 'North Carolina', ND: 'North Dakota',
+  OH: 'Ohio', OK: 'Oklahoma', OR: 'Oregon', PA: 'Pennsylvania',
+  RI: 'Rhode Island', SC: 'South Carolina', SD: 'South Dakota', TN: 'Tennessee',
+  TX: 'Texas', UT: 'Utah', VT: 'Vermont', VA: 'Virginia', WA: 'Washington',
+  WV: 'West Virginia', WI: 'Wisconsin', WY: 'Wyoming',
+};
+
+/** Try to detect a U.S. state from a title/description. Returns FIPS or null. */
+function detectState(text) {
+  if (!text) return null;
+  const upper = text.toUpperCase();
+  for (const [code, name] of Object.entries(US_STATE_NAMES)) {
+    const re = new RegExp(`\\b(${code}|${name.replace(/ /g, '\\s')})\\b`, 'i');
+    if (re.test(text) || upper.includes(` ${code} `)) return code;
+  }
+  return null;
+}
+
+// --- Minimal XML extractors (regex-based). YouTube + RSS share enough
+//     predictable structure that we don't need a real parser for the
+//     specific fields we want. -----------------------------------------
+const rxEntry = /<entry[\s\S]*?<\/entry>/g;
+const rxItem = /<item[\s\S]*?<\/item>/g;
+
+function attr(s, key) {
+  const re = new RegExp(`${key}=["']([^"']+)["']`);
+  const m = re.exec(s);
+  return m ? decodeHtml(m[1]) : null;
+}
+
+function tag(s, name) {
+  const re = new RegExp(`<${name}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${name}>`);
+  const m = re.exec(s);
+  return m ? decodeHtml(m[1].trim().replace(/<!\[CDATA\[|\]\]>/g, '')) : null;
+}
+
+function tagAttr(s, name, att) {
+  // Self-closing-or-not, first-occurrence attribute read.
+  const re = new RegExp(`<${name}[^>]*\\b${att}=["']([^"']+)["']`);
+  const m = re.exec(s);
+  return m ? decodeHtml(m[1]) : null;
+}
+
+function decodeHtml(s) {
+  return s
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'");
+}
+
+// --- Per-source fetchers ---------------------------------------------
+
+async function fetchYouTube(src) {
+  const url =
+    src.kind === 'youtube-channel'
+      ? `https://www.youtube.com/feeds/videos.xml?channel_id=${src.id}`
+      : `https://www.youtube.com/feeds/videos.xml?user=${src.id}`;
+  const xml = await fetchText(url, { timeoutMs: 20_000 });
+  const items = [];
+  const entries = xml.match(rxEntry) ?? [];
+  for (const e of entries.slice(0, MAX_PER_SOURCE)) {
+    const videoId = tag(e, 'yt:videoId');
+    if (!videoId) continue;
+    const title = tag(e, 'title') ?? '';
+    const published = tag(e, 'published') ?? '';
+    const description = tag(e, 'media:description') ?? '';
+    items.push({
+      id: `yt:${videoId}`,
+      source: src.name,
+      title,
+      url: `https://www.youtube.com/watch?v=${videoId}`,
+      embedUrl: `https://www.youtube.com/embed/${videoId}`,
+      thumbnail: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+      type: 'youtube',
+      publishedAt: published,
+      state: detectState(`${title} ${description}`),
+      feed: src.feed,
+    });
+  }
+  return items;
+}
+
+async function fetchRss(src) {
+  const xml = await fetchText(src.url, { timeoutMs: 20_000 });
+  // Try RSS 2.0 <item> first; if empty, try Atom <entry>.
+  const rawItems = xml.match(rxItem) ?? xml.match(rxEntry) ?? [];
+  const items = [];
+  for (const raw of rawItems.slice(0, MAX_PER_SOURCE)) {
+    const title = tag(raw, 'title') ?? '';
+    let url =
+      tag(raw, 'link') ??
+      tagAttr(raw, 'link', 'href') ??
+      null;
+    const pubDate =
+      tag(raw, 'pubDate') ??
+      tag(raw, 'published') ??
+      tag(raw, 'updated') ??
+      '';
+    const description =
+      tag(raw, 'description') ??
+      tag(raw, 'summary') ??
+      tag(raw, 'content:encoded') ??
+      tag(raw, 'content') ??
+      '';
+    // Podcast: enclosure url
+    const audioUrl = tagAttr(raw, 'enclosure', 'url');
+    // Cover image: itunes:image, media:thumbnail, or nothing
+    const img =
+      tagAttr(raw, 'itunes:image', 'href') ??
+      tagAttr(raw, 'media:thumbnail', 'url') ??
+      null;
+    if (!title || !url) continue;
+    // Strip HTML from description for card excerpt.
+    const excerpt = description.replace(/<[^>]+>/g, '').trim().slice(0, 220);
+    items.push({
+      id: url,
+      source: src.name,
+      title,
+      url,
+      audioUrl,
+      thumbnail: img,
+      excerpt,
+      type: audioUrl ? 'podcast' : 'article',
+      publishedAt: pubDate,
+      state: detectState(`${title} ${description}`),
+      feed: src.feed,
+    });
+  }
+  return items;
+}
+
+async function fetchSource(src) {
+  try {
+    let items;
+    if (src.kind === 'youtube-user' || src.kind === 'youtube-channel') {
+      items = await fetchYouTube(src);
+    } else if (src.kind === 'rss') {
+      items = await fetchRss(src);
+    } else {
+      log.warn(`Unknown source kind: ${src.kind}`);
+      return [];
+    }
+    log.ok(`${src.name}: ${items.length} items`);
+    return items;
+  } catch (e) {
+    log.warn(`${src.name} failed (${e.message})`);
+    return [];
+  }
+}
+
+// ---------------------------------------------------------------------
+
+log.step(`Ingest ${config.sources.length} feed sources`);
+
+const all = [];
+for (const src of config.sources) {
+  const items = await fetchSource(src);
+  all.push(...items);
+}
+
+// Sort newest-first per bucket, cap final totals.
+const byFeed = { waiting_children: [], system_news: [] };
+for (const it of all) {
+  if (byFeed[it.feed]) byFeed[it.feed].push(it);
+}
+for (const key of Object.keys(byFeed)) {
+  byFeed[key].sort((a, b) => {
+    const ta = Date.parse(a.publishedAt) || 0;
+    const tb = Date.parse(b.publishedAt) || 0;
+    return tb - ta;
+  });
+  byFeed[key] = byFeed[key].slice(0, 96);
+}
+
+const out = {
+  _meta: {
+    generated: new Date().toISOString(),
+    sources: config.sources.map((s) => ({ name: s.name, kind: s.kind, feed: s.feed })),
+  },
+  waiting_children: byFeed.waiting_children,
+  system_news: byFeed.system_news,
+};
+
+ensureOutDir();
+const p = path.join(OUT_DIR, 'feeds.json');
+fs.writeFileSync(p, JSON.stringify(out));
+const sz = fs.statSync(p).size;
+log.ok(
+  `wrote feeds.json — ${out.waiting_children.length} waiting, ${out.system_news.length} news (${(sz / 1024).toFixed(1)} KB)`
+);

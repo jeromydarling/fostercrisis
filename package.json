@@ -13,7 +13,8 @@
     "data:chr": "node scripts/fetch-county-health-rankings.mjs",
     "data:acs": "node scripts/fetch-acs-county.mjs",
     "data:churches": "node scripts/fetch-churches.mjs",
-    "data:misery": "node scripts/build-misery-index.mjs"
+    "data:misery": "node scripts/build-misery-index.mjs",
+    "data:feeds": "node scripts/fetch-feeds.mjs"
   },
   "dependencies": {
     "mapbox-gl": "^3.8.0",

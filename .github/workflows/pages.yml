@@ -9,6 +9,11 @@ on:
         description: Force-refresh churches (ignore cache)
         type: boolean
         default: false
+  # Daily refresh at 05:00 UTC (midnight US East) so the feeds under
+  # the map (waiting-child videos, podcast episodes, advocacy news)
+  # stay current without anyone pushing a commit.
+  schedule:
+    - cron: '0 5 * * *'
 
 # Single concurrent deploy per ref; in-progress runs are cancelled when a
 # newer one arrives so the live site always reflects the latest commit.
@@ -84,6 +89,12 @@ jobs:
       # Compose the misery index from whatever fetchers succeeded.
       - name: Build misery index
         run: npm run data:misery
+        continue-on-error: true
+
+      # Content feeds (YouTube RSS + podcast RSS). Cheap, ~100-200 KB
+      # output; refreshed on every deploy and on the daily cron.
+      - name: Refresh content feeds
+        run: npm run data:feeds
         continue-on-error: true
 
       - run: npm run build

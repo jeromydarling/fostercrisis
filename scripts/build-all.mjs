@@ -16,6 +16,7 @@ const fetchers = [
   'fetch-county-health-rankings.mjs',
   'fetch-acs-county.mjs',
   'fetch-churches.mjs',
+  'fetch-feeds.mjs',
 ];
 const composers = ['build-misery-index.mjs'];
 

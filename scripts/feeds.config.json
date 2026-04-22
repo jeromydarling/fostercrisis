@@ -1,0 +1,54 @@
+{
+  "_comment": "Sources for public/data/feeds.json. Each entry has: kind (youtube-user | youtube-channel | rss), id/url, feed bucket, optional stateTag. For YouTube: 'youtube-user' uses the legacy /user/USERNAME RSS form, 'youtube-channel' uses channel_id=UC...  If a 'user' URL 404s, find the UC... id at https://commentpicker.com/youtube-channel-id.php and switch kind.",
+  "sources": [
+    {
+      "name": "Heart Gallery Films",
+      "kind": "youtube-user",
+      "id": "heartgalleryfilms",
+      "feed": "waiting_children",
+      "description": "Heart Gallery of America national video network. 126+ waiting-child profiles."
+    },
+    {
+      "name": "Grant Me Hope",
+      "kind": "youtube-user",
+      "id": "GrantMeHopeVideos",
+      "feed": "waiting_children",
+      "description": "Professional bio-video producer syndicated to TV affiliates in 30+ markets."
+    },
+    {
+      "name": "AdoptUSKids",
+      "kind": "youtube-user",
+      "id": "AdoptUSKids",
+      "feed": "waiting_children",
+      "description": "Federally funded national photolisting (HHS)."
+    },
+    {
+      "name": "America's Kids Belong",
+      "kind": "youtube-user",
+      "id": "americaskidsbelong",
+      "feed": "waiting_children",
+      "description": "State-by-state video partnerships through the I Belong Project."
+    },
+    {
+      "name": "Forever Family",
+      "kind": "youtube-user",
+      "id": "foreverfamily",
+      "feed": "waiting_children",
+      "description": "TV-affiliate network producing the Forever Families segment."
+    },
+    {
+      "name": "The Imprint Weekly Podcast",
+      "kind": "rss",
+      "url": "https://feeds.buzzsprout.com/1376827.rss",
+      "feed": "system_news",
+      "description": "Weekly news review from the independent child-welfare newsroom."
+    },
+    {
+      "name": "NCCPR (Nat'l Coalition for Child Protection Reform)",
+      "kind": "rss",
+      "url": "https://www.nccprblog.org/feeds/posts/default",
+      "feed": "system_news",
+      "description": "Advocacy blog on foster-care reform."
+    }
+  ]
+}
