@@ -51,10 +51,11 @@ const LEDGER = [
       'Seven Supreme Court justices legalized abortion in Roe v. Wade in 1973. Six of them were Protestant. Two years earlier, the Southern Baptist Convention — the largest Protestant denomination in America — had voted FOR legalization. By 1970, mainline Protestants (PCUSA, UCC) were endorsing "abortion on demand" in their own resolutions. Evangelicals did not organize politically against Roe until 1980 — seven years after the decision, and roughly eight million abortions deep. The billion-dollar campaign that followed finally overturned Roe in 2022. It did not reduce abortion: 1.126 million in 2024, up 21% from 2020. American Christianity did not prevent this. It helped enable it, then cleaned up with a bumper sticker.',
   },
   {
-    pillar: 'Fund',
+    pillar: 'Funded',
     figure: '$452 M / yr',
-    sub: '· 2,775 PRCs · $1B+ public funding since 1995',
-    body: 'Pregnancy Resource Centers provide meaningful material aid to 1M+ clients per year. Private evangelical pro-life giving over fifty years totals tens of billions more.',
+    sub: 'to Pregnancy Resource Centers alone. Almost none of it reaches the 368,000 already-born children living in foster care tonight.',
+    body:
+      '$452M/yr on PRCs across 2,775 locations. Over $1B in public PRC funding since 1995. Tens of billions more across fifty years of March for Life, Susan B. Anthony List, Family Research Council, denominational lobbying arms, and state ballot campaigns. Meanwhile the 368,000 children already born and waiting in foster care tonight see almost none of it. Bethany Christian Services — the largest Christian foster-care nonprofit in America — runs on roughly $84M a year. That is less than one-fifth of a single year of PRC spending. The ~23,000 kids who age out every year with no family face devastating outcomes: 22–46% experience homelessness within a few years; 20% of the U.S. prison population is former foster youth; 86% of child sex-trafficking victims were in the child-welfare system at the time of victimization. American Christianity opens its wallet to prevent a birth. It closes it when the child actually arrives and ends up in the system the movement failed to notice.',
   },
   {
     pillar: 'Receive',
