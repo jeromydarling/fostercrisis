@@ -3673,11 +3673,12 @@ body {
  * MOBILE PASS
  *
  * Tablet breakpoint (<= 900px):
- *   - Map section: the sidebar becomes a bottom sheet; the map takes
- *     the top of the viewport instead of being crushed by the sidebar.
- *   - Chapter rail collapses to a horizontal scroll ribbon.
- *   - Floating tooltip + map footer hide (sidebar already shows state
- *     data and the quote reads on scroll sections).
+ *   - Map section becomes a non-sticky two-row flex container:
+ *     map on top (fixed 50vh), sidebar below in-flow (auto height).
+ *     Rest of the page scrolls normally past both — no overlay, no
+ *     fixed positioning, no trapped touches.
+ *   - Mapbox is initialized with cooperativeGestures:true so a
+ *     one-finger swipe scrolls the page; two fingers pan/zoom.
  *
  * Phone breakpoint (<= 560px):
  *   - Global type scale shrinks.
@@ -3686,43 +3687,61 @@ body {
  *     2-col exceptions for stat tiles where that reads better).
  * ================================================================== */
 
-/* --- Tablet: map becomes bottom-sheet layout ----------------------- */
+/* --- Tablet/mobile: in-flow map + sidebar -------------------------- */
 @media (max-width: 900px) {
+  /* The map section becomes a normal-flow stack instead of a 100vh
+     absolute container. Map on top, sidebar below, both in the page
+     scroll. */
   .map-section {
-    height: 100vh;
-    height: 100dvh;
+    position: relative;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
   }
 
+  /* The map fills the top of the section at a fixed tap-friendly
+     height, with its own isolation context. */
+  .map-root {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 50vh;
+    min-height: 320px;
+    flex: 0 0 auto;
+    overflow: hidden;
+  }
+
+  .map-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Mapbox's cooperative-gesture overlay text positioning */
+  .mapboxgl-canvas-container { touch-action: pan-y !important; }
+
+  /* Sidebar becomes an in-flow block under the map. No fixed
+     positioning, no drag handle, no bottom-sheet chrome. */
   .sidebar {
-    position: fixed;
-    inset: auto 0 0 0;
-    top: auto;
-    width: 100vw;
-    max-width: 100vw;
-    height: 58vh;
-    height: 58dvh;
-    padding: 1.4rem 1.25rem 0.75rem;
-    background: rgba(14, 17, 24, 0.96);
+    position: static;
+    inset: auto;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding: 1.5rem 1.25rem 1.1rem;
+    background: var(--bg-panel-solid);
     border-right: 0;
     border-top: 1px solid var(--rule);
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.55);
-    z-index: 12;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: auto;
+    flex: 0 0 auto;
   }
 
-  /* Drag-handle dash at top of bottom sheet */
-  .sidebar::before {
-    content: '';
-    position: absolute;
-    top: 6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 44px;
-    height: 3px;
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.16);
-  }
+  .sidebar::before { display: none; } /* no drag handle in flow */
 
   .sidebar-header { padding-bottom: 0.7rem; }
   .chapter-title { font-size: 1.55rem; }
@@ -3730,6 +3749,14 @@ body {
   .headline-number { font-size: 2.4rem; }
   .headline-sub { font-size: 0.95rem; }
   .chapter-text { font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.1rem; }
+
+  /* Chapter body no longer needs to scroll internally — page scroll
+     handles it. Let content lay out normally. */
+  .chapter-body {
+    flex: 0 0 auto;
+    overflow: visible;
+    padding-right: 0;
+  }
 
   /* Chapter rail: horizontal scroll of pill tabs */
   .chapter-nav {
@@ -3778,40 +3805,16 @@ body {
   .chapter-controls { padding-top: 0.6rem; }
   .ctrl { padding: 0.45rem 0.7rem; font-size: 0.7rem; }
 
-  /* Hide the floating tooltip — the sidebar already shows the state
-     data; on touch, hover is meaningless. */
+  /* Hide the floating hover tooltip and the old map-footer quote —
+     neither fits the in-flow layout and the sidebar carries the data. */
   .tooltip { display: none; }
-
-  /* Hide the map footer — it overlaps the sheet and its text reads
-     prominently elsewhere. */
   .footer { display: none; }
 
-  /* Banner: lift to top center, tighten. Multiple banners stack. */
-  .banner {
-    top: 0.55rem;
-    right: 0.55rem;
-    left: 0.55rem;
-    transform: none;
-    padding: 0.4rem 0.65rem;
-    font-size: 0.62rem;
-    gap: 0.4rem;
-    border-radius: 3px;
-  }
-  .banner + .banner { top: 2.4rem; }
-  .banner code { padding: 0.05rem 0.25rem; }
-
-  /* Nudge map controls above the sheet so they stay reachable */
+  /* Mapbox navigation controls — inside the map-root area */
   .mapboxgl-ctrl-top-right {
     top: 0.5rem !important;
     right: 0.5rem !important;
   }
-  .mapboxgl-ctrl-bottom-right {
-    bottom: 59vh !important;
-    bottom: 59dvh !important;
-  }
-
-  /* Seed-data banner + synth banner at the top */
-  .map-section .banner { z-index: 14; }
 }
 
 /* --- Epigraph fold on narrow screens ------------------------------ */

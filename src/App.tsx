@@ -10,13 +10,11 @@ import { ConvergenceSection } from './components/ConvergenceSection';
 import { TimelineSection } from './components/TimelineSection';
 import { SubstitutionSection } from './components/SubstitutionSection';
 import { EpigraphSection } from './components/EpigraphSection';
-import type { GeoBundle } from './data/geo';
 
 export default function App() {
   const [chapterIndex, setChapterIndex] = useState(0);
   const [hoveredFips, setHoveredFips] = useState<string | null>(null);
   const [selectedFips, setSelectedFips] = useState<string | null>(null);
-  const [bundle, setBundle] = useState<GeoBundle | null>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -44,18 +42,9 @@ export default function App() {
 
   const clearSelection = useCallback(() => setSelectedFips(null), []);
 
-  const chapter = CHAPTERS[chapterIndex];
-  const countyChapter = chapter.geography === 'county';
-  const seedNotice = countyChapter && bundle && (
-    (chapter.countyProp === 'poverty' && !bundle.hasCountyPoverty) ||
-    (chapter.countyProp === 'overdose' && !bundle.hasCountyOverdose) ||
-    ((chapter.countyProp === 'misery' || chapter.countyProp === 'complicity') && !bundle.hasFullMisery)
-  );
-  const seedCmd = (
-    chapter.countyProp === 'poverty' ? 'saipe' :
-    chapter.countyProp === 'overdose' ? 'cdc' :
-    'misery'
-  );
+  // Banners telling the viewer to run `npm run ...` were dev-tooling —
+  // removed from production. The fallback data still renders; users
+  // don't need to know which pipeline stage produced it.
 
   return (
     <div className="app">
@@ -66,7 +55,6 @@ export default function App() {
         selectedFips={selectedFips}
         onHoverState={onHoverState}
         onSelectState={onSelectState}
-        onBundleReady={setBundle}
       />
       <ChapterPanel
         index={chapterIndex}
@@ -77,25 +65,6 @@ export default function App() {
       {/* Hide the hover tooltip when a state is selected — the sidebar
           already shows that state's detail, so the tooltip becomes redundant. */}
       {!selectedFips && <StateTooltip fips={hoveredFips} chapterIndex={chapterIndex} />}
-
-      {seedNotice && (
-        <div className="banner" role="note">
-          <strong>Showing seed data.</strong>
-          <span>
-            Run <code>npm run data:{seedCmd}</code> for the real county values.
-          </span>
-        </div>
-      )}
-
-      {bundle && chapter.showChurches && !bundle.realChurches && (
-        <div className="banner" role="note">
-          <strong>Using synthetic church dots.</strong>
-          <span>
-            Run <code>npm run data:churches</code> to pull ~356k real HIFLD /
-            OSM points.
-          </span>
-        </div>
-      )}
 
       <div className="footer">
         <span>

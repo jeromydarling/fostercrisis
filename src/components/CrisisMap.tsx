@@ -53,16 +53,27 @@ interface Props {
   onBundleReady?: (bundle: GeoBundle) => void;
 }
 
-// Default framing for the lower-48 view. Alaska/Hawaii are in the us-atlas
-// feature set but we anchor the home view on the contiguous U.S.
-const HOME_VIEW = {
-  center: [-96.5, 38.5] as [number, number],
-  zoom: 3.4,
-};
+// Continental-U.S. bounds (lower 48). Mapbox fits these on load and on
+// "back to national" view, with padding that's mobile-aware (no sidebar
+// chrome on the left at narrow widths).
+const US_BOUNDS: [[number, number], [number, number]] = [
+  [-125, 24.5], // SW corner: San Diego / southern Florida latitude
+  [-66.5, 49.5], // NE corner: Maine / northern border
+];
 
-// fitBounds padding: keep the sidebar (420px) clear and leave air on the
-// other edges so the selected state reads well.
-const FIT_PADDING = { top: 48, right: 48, bottom: 48, left: 460 };
+function isMobileViewport() {
+  return typeof window !== 'undefined' && window.innerWidth < 900;
+}
+
+function fitPaddingFor(mobile: boolean) {
+  if (mobile) {
+    // On mobile the sidebar is below the map in document flow (no
+    // overlay), so padding is symmetric.
+    return { top: 24, right: 20, bottom: 20, left: 20 };
+  }
+  // Desktop keeps the 440px sidebar clear on the left.
+  return { top: 48, right: 48, bottom: 48, left: 460 };
+}
 
 function featureBounds(f: GeoJSON.Feature): mapboxgl.LngLatBounds {
   let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
@@ -103,16 +114,26 @@ export function CrisisMap({
     }
     mapboxgl.accessToken = MAPBOX_TOKEN;
 
+    const mobile = isMobileViewport();
+
     const map = new mapboxgl.Map({
       container: containerRef.current,
       style: 'mapbox://styles/mapbox/dark-v11',
-      center: HOME_VIEW.center,
-      zoom: HOME_VIEW.zoom,
-      minZoom: 2.5,
+      bounds: US_BOUNDS,
+      fitBoundsOptions: { padding: fitPaddingFor(mobile) },
+      minZoom: 2.3,
       maxZoom: 9,
       projection: 'albers',
       attributionControl: false,
       hash: false,
+      // Cooperative gestures on touch so a one-finger vertical swipe
+      // scrolls the page instead of being swallowed by the map. Two
+      // fingers still pan/zoom. Mapbox surfaces a small "use two
+      // fingers" overlay when the user tries a one-finger pan.
+      cooperativeGestures: mobile,
+      // Keep scroll-zoom off on mobile regardless — one-finger scroll
+      // is exclusively for page navigation on small screens.
+      scrollZoom: !mobile,
     });
     map.addControl(new mapboxgl.AttributionControl({ compact: true }));
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
@@ -330,15 +351,15 @@ export function CrisisMap({
       if (feat) {
         const bounds = featureBounds(feat);
         map.fitBounds(bounds, {
-          padding: FIT_PADDING,
+          padding: fitPaddingFor(isMobileViewport()),
           duration: 900,
           maxZoom: 7,
         });
       }
     } else if (prev) {
-      map.easeTo({
-        center: HOME_VIEW.center,
-        zoom: HOME_VIEW.zoom,
+      // Back to the continental-U.S. view with mobile-aware padding.
+      map.fitBounds(US_BOUNDS, {
+        padding: fitPaddingFor(isMobileViewport()),
         duration: 900,
       });
     }
