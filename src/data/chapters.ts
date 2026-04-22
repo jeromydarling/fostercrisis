@@ -2,6 +2,7 @@ import type { StateRow } from './states';
 import { NATIONAL } from './states';
 export type Metric =
   | 'fosterCarePerCapita'
+  | 'fosterDisability'
   | 'homesPer100'
   | 'childPoverty'
   | 'overdoseRate'
@@ -44,6 +45,8 @@ export function metricValue(row: StateRow, metric: Metric): number {
   switch (metric) {
     case 'fosterCarePerCapita':
       return (row.fosterCare / row.childPop) * 1000;
+    case 'fosterDisability':
+      return row.fosterDisabled;
     case 'homesPer100':
       return (row.licensedHomes / Math.max(1, row.fosterCare)) * 100;
     case 'childPoverty':
@@ -82,6 +85,8 @@ export function metricFormat(metric: Metric, v: number): string {
   switch (metric) {
     case 'fosterCarePerCapita':
       return v.toFixed(1) + ' / 1,000 kids';
+    case 'fosterDisability':
+      return Math.round(v).toLocaleString() + ' kids';
     case 'homesPer100':
     case 'missingFromCare':
     case 'capacityGap':
@@ -125,10 +130,26 @@ export const CHAPTERS: Chapter[] = [
     source: 'AFCARS FY2023 · U.S. Dept. of Health & Human Services',
   },
   {
-    id: 'capacity',
+    id: 'disability',
     number: 'II',
+    title: 'The system was not built for them',
+    eyebrow: 'Chapter II — Foster Kids with Disabilities',
+    metric: 'fosterDisability',
+    geography: 'state',
+    ramp: ['#1a1f2b', '#3a2a48', '#6b2f56', '#a2345e', '#cf3a5a', '#ff6d5a'],
+    unit: 'Foster children with a diagnosed disability (AFCARS)',
+    headline: '~129,000',
+    subline:
+      'foster children in America carry a clinically diagnosed disability — and the system was not built for them.',
+    body:
+      'Roughly a third of all children in foster care are flagged by AFCARS as having a clinically diagnosed disability — mental, emotional, physical, or intellectual. HHS analyses put the broader "any special health need" share closer to 44%. These are the kids who wait longest for a forever home, cycle through the most placements, and are hardest to match with a family. State-level reporting of this field is uneven — some states flag mental-health diagnoses, some only capture IEPs — so read these counts as the SCALE of the subset, not a ranking of which states neglect disabled kids most. The point is simpler: hundreds of thousands of disabled kids are in American foster care, and the pipeline was designed for typically-developing ones.',
+    source: 'AFCARS Report 30 · HHS ASPE foster-care disability analyses',
+  },
+  {
+    id: 'capacity',
+    number: 'III',
     title: 'There are not enough beds',
-    eyebrow: 'Chapter II — The Capacity Gap',
+    eyebrow: 'Chapter III — The Capacity Gap',
     metric: 'capacityGap',
     geography: 'state',
     ramp: ['#1a1f2b', '#3a2a3e', '#6b2f4b', '#a23452', '#cf3a4f', '#ff5252'],
@@ -141,9 +162,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'poverty',
-    number: 'III',
+    number: 'IV',
     title: 'Neglect is a symptom of poverty',
-    eyebrow: 'Chapter III — Root Cause: Poverty',
+    eyebrow: 'Chapter IV — Root Cause: Poverty',
     metric: 'childPoverty',
     geography: 'county',
     countyProp: 'poverty',
@@ -157,9 +178,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'opioids',
-    number: 'IV',
+    number: 'V',
     title: 'The drug map is the foster map',
-    eyebrow: 'Chapter IV — Root Cause: Overdose',
+    eyebrow: 'Chapter V — Root Cause: Overdose',
     metric: 'overdoseRate',
     geography: 'county',
     countyProp: 'overdose',
@@ -173,9 +194,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'pollution',
-    number: 'V',
+    number: 'VI',
     title: 'The air they breathe',
-    eyebrow: 'Chapter V — Root Cause: Pollution',
+    eyebrow: 'Chapter VI — Root Cause: Pollution',
     metric: 'pollution',
     geography: 'state',
     ramp: ['#1a1f2b', '#2a2a48', '#4b2d5c', '#873468', '#c73b5a', '#ff8a3a'],
@@ -189,9 +210,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'missing',
-    number: 'VI',
+    number: 'VII',
     title: 'The children who disappear',
-    eyebrow: 'Chapter VI — Missing From Care',
+    eyebrow: 'Chapter VII — Missing From Care',
     metric: 'missingFromCare',
     geography: 'state',
     ramp: ['#14151c', '#28182f', '#501a4b', '#901f55', '#d1244d', '#ff2b2b'],
@@ -204,9 +225,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'belt',
-    number: 'VII',
+    number: 'VIII',
     title: 'The Bible Belt is the foster belt',
-    eyebrow: 'Chapter VII — The Mirror',
+    eyebrow: 'Chapter VIII — The Mirror',
     metric: 'religiosity',
     geography: 'state',
     ramp: ['#14151c', '#312040', '#5e2756', '#972f5c', '#cd3a53', '#ffb347'],
@@ -219,9 +240,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'weight',
-    number: 'VIII',
+    number: 'IX',
     title: 'The discipline went to food',
-    eyebrow: 'Chapter VIII — The Weight',
+    eyebrow: 'Chapter IX — The Weight',
     metric: 'obesity',
     geography: 'state',
     ramp: ['#14151c', '#2c1f3a', '#5a2450', '#912e52', '#c73745', '#ffb347'],
@@ -234,9 +255,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'revolution',
-    number: 'IX',
+    number: 'X',
     title: 'The revolution\'s map',
-    eyebrow: 'Chapter IX — The Sexual Revolution',
+    eyebrow: 'Chapter X — The Sexual Revolution',
     metric: 'revolution',
     geography: 'state',
     ramp: ['#14151c', '#2a1428', '#541a3a', '#8f2440', '#c72f38', '#ffb347'],
@@ -249,9 +270,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'quiethour',
-    number: 'X',
+    number: 'XI',
     title: 'The quiet hour',
-    eyebrow: 'Chapter X — What the Bible Belt watches',
+    eyebrow: 'Chapter XI — What the Bible Belt watches',
     metric: 'pornSession',
     geography: 'state',
     ramp: ['#14151c', '#261636', '#4e1a48', '#8f245a', '#c72f54', '#ffb347'],
@@ -264,9 +285,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'misery',
-    number: 'XI',
+    number: 'XII',
     title: 'The misery map',
-    eyebrow: 'Chapter XI — The Misery Index',
+    eyebrow: 'Chapter XII — The Misery Index',
     metric: 'miseryIndex',
     geography: 'county',
     countyProp: 'misery',
@@ -280,9 +301,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'complicity',
-    number: 'XII',
+    number: 'XIII',
     title: 'Churches are right there',
-    eyebrow: 'Chapter XII — Complicity',
+    eyebrow: 'Chapter XIII — Complicity',
     metric: 'miseryIndex',
     geography: 'county',
     countyProp: 'misery',
@@ -299,9 +320,9 @@ export const CHAPTERS: Chapter[] = [
   // rewrites its headline for the selected state.
   {
     id: 'solution',
-    number: 'XIII',
+    number: 'XIV',
     title: 'What the pews could end overnight',
-    eyebrow: 'Chapter XIII — The Solution',
+    eyebrow: 'Chapter XIV — The Solution',
     metric: 'churchSolution',
     geography: 'state',
     ramp: ['#3d0a1a', '#6d1728', '#a1302a', '#cf6426', '#e6a42a', '#f7e26b'],
@@ -352,6 +373,16 @@ export function frameForState(chapter: Chapter, row: StateRow): Framing {
         subline: `children in ${name} custody tonight.`,
         body: `Across ${name}, ${nf(kids)} children will sleep somewhere tonight that is not a home. That is ${(kids / row.childPop * 1000).toFixed(1)} out of every 1,000 children in the state. They did nothing wrong. They are waiting for an adult, any adult, to choose them.`,
       };
+    case 'disability': {
+      const disabled = row.fosterDisabled;
+      const share = (disabled / Math.max(1, kids)) * 100;
+      return {
+        ...base,
+        headline: nf(disabled),
+        subline: `children in ${name} foster care flagged with a diagnosed disability.`,
+        body: `Of ${nf(kids)} children in ${name}'s system, roughly ${nf(disabled)} (~${share.toFixed(0)}%) are flagged with a clinically diagnosed disability. State reporting of this AFCARS field is uneven — some states capture mental-health diagnoses and IEPs aggressively, others barely at all — so read this as the scale of disabled kids in ${name}'s pipeline, not a ranking. They wait longest, move the most, and are hardest for the system to place.`,
+      };
+    }
     case 'capacity':
       return {
         ...base,
