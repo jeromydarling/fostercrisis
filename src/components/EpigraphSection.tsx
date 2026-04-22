@@ -1,5 +1,5 @@
 // Site epigraph — the single verse that frames everything below.
-// Matthew 19:14 (NASB) · the moment the children's names reach the
+// Matthew 19:14 (ESV) · the moment the children's names reach the
 // kingdom before they reach anyone else.
 
 export function EpigraphSection() {
@@ -8,16 +8,16 @@ export function EpigraphSection() {
       <div className="epigraph-rule epigraph-rule-top" aria-hidden />
 
       <blockquote className="epigraph-quote">
-        Let the little children come to me,
-        <br className="epigraph-break" /> for the kingdom of heaven
-        <br className="epigraph-break" /> belongs to such as these.
+        Let the little children come to me
+        <br className="epigraph-break" /> and do not hinder them,
+        <br className="epigraph-break" /> for to such belongs the kingdom of heaven.
       </blockquote>
 
       <p className="epigraph-attr">
         <span className="epigraph-dash" aria-hidden>—</span>
         <span className="epigraph-speaker">Jesus</span>
         <span className="epigraph-sep" aria-hidden>·</span>
-        <span className="epigraph-ref">Matthew 19:14 (NASB)</span>
+        <span className="epigraph-ref">Matthew 19:14 (ESV)</span>
       </p>
 
       <div className="epigraph-rule epigraph-rule-bot" aria-hidden />
