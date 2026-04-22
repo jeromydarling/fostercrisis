@@ -4,6 +4,7 @@ import { ModeSwitcher, type Mode } from './components/ModeSwitcher';
 import { MapExperience } from './components/MapExperience';
 import { EssayExperience } from './components/EssayExperience';
 import { SolutionExperience } from './components/SolutionExperience';
+import { ClosingEpigraph } from './components/ClosingEpigraph';
 
 /** Hash router:
  *    (no hash, or #)  → Landing (epigraph + choose)
@@ -55,14 +56,17 @@ export default function App() {
       </main>
 
       {mode !== 'landing' && (
-        <footer className="page-footer">
-          <p>
-            <strong>fostercrisis.com</strong> — a map, an indictment, and a
-            directory. Sources credited in every chapter. Feeds embed from
-            the originating organizations; we never re-host children's
-            videos or images.
-          </p>
-        </footer>
+        <>
+          <ClosingEpigraph />
+          <footer className="page-footer">
+            <p>
+              <strong>fostercrisis.com</strong> — a map, an indictment, and a
+              directory. Sources credited in every chapter. Feeds embed from
+              the originating organizations; we never re-host children's
+              videos or images.
+            </p>
+          </footer>
+        </>
       )}
     </div>
   );
