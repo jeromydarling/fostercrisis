@@ -30,9 +30,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Project Pages at https://<user>.github.io/<repo>/ — Vite needs this
-      # prefix so asset URLs resolve correctly under the subpath.
-      VITE_BASE: /${{ github.event.repository.name }}/
+      # Deployed to the custom domain set in public/CNAME, so assets
+      # serve from the apex path. (On a github.io project page without
+      # a CNAME, this would need to be "/<repo>/" instead.)
+      VITE_BASE: /
       VITE_MAPBOX_TOKEN: ${{ secrets.VITE_MAPBOX_TOKEN }}
     steps:
       - uses: actions/checkout@v4
