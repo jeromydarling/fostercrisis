@@ -285,10 +285,11 @@ export const CHAPTERS: Chapter[] = [
     geography: 'state',
     ramp: ['#3d0a1a', '#6d1728', '#a1302a', '#cf6426', '#e6a42a', '#f7e26b'],
     unit: 'Christian congregations per waiting child',
-    headline: '380,000 × 1',
-    subline: 'One family per congregation. The waitlist ends 5× over.',
+    headline: '380,000 churches · ~100 families each',
+    subline:
+      'Families foster. Congregations surround. One family per church says yes — the waitlist ends 5× over, and every fostering family has 99 more standing with them.',
     body:
-      `There are roughly ${NATIONAL.congregations.toLocaleString()} Christian congregations in the United States. ${NATIONAL.waitingAdoption.toLocaleString()} children are waiting for a family. ${NATIONAL.legallyFree.toLocaleString()} of them are legally free right now. One family per church — just one — and the waiting list is gone five times over. The math is brutal, and it favors us.`,
+      `Congregations don't adopt. Families adopt. A congregation's job is to wrap itself around that family: meals for a year, babysitting, tutoring, rides, mentors for the kids, money when the state is slow, counsel for the marriage, and presence in the hardest week. There are roughly ${NATIONAL.congregations.toLocaleString()} Christian congregations in the United States, averaging around 100 families each — tens of millions of American Christian households. 368,000 children are in foster care tonight. ${NATIONAL.waitingAdoption.toLocaleString()} are legally free and waiting for a forever family. ~700,000 cycle through this system in a given year. If just one family in every congregation said yes — one — the legally-free waitlist would disappear five times over, and every one of those fostering families would have ninety-nine more wrapped around them. That is what pure religion looks like. James 1:27.`,
     source: '2020 U.S. Religion Census · HIFLD Places of Worship · AFCARS',
     showChurches: true,
   },
@@ -406,9 +407,9 @@ export function frameForState(chapter: Chapter, row: StateRow): Framing {
     case 'solution':
       return {
         ...base,
-        headline: `${nf(row.congregations)} × 1 = ${nf(row.congregations)}`,
-        subline: `${name}'s waitlist is ${nf(row.waitingAdoption)}. You'd end it ${churchesPerChild.toFixed(0)}× over.`,
-        body: `${nf(row.congregations)} congregations across ${name}. ${nf(row.waitingAdoption)} children waiting. ${nf(homes)} licensed foster homes. If one family from every church in ${name} said yes, the state's waitlist would disappear ${churchesPerChild.toFixed(0)} times over. The math is brutal, and it favors us.`,
+        headline: `${nf(row.congregations)} churches`,
+        subline: `in ${name} · ~${nf(row.congregations * 100)} families worth of community. ${nf(row.waitingAdoption)} children legally free and waiting. ${nf(row.fosterCare)} in care tonight.`,
+        body: `${nf(row.congregations)} Christian congregations across ${name} — roughly ${nf(row.congregations * 100)} families of covenant community. Families foster. Congregations surround. If one family in every ${name} congregation said yes, and every other family in that congregation said yes to supporting them — meals, babysitters, tutors, rides, mentors for the kids — the state's legally-free waitlist would disappear ${churchesPerChild.toFixed(0)} times over, and every fostering family would have ninety-nine more standing with them. That is the math that actually works. James 1:27.`,
       };
     default:
       return {

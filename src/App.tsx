@@ -3,6 +3,7 @@ import { Landing } from './components/Landing';
 import { ModeSwitcher, type Mode } from './components/ModeSwitcher';
 import { MapExperience } from './components/MapExperience';
 import { EssayExperience } from './components/EssayExperience';
+import { SolutionExperience } from './components/SolutionExperience';
 
 /** Hash router:
  *    (no hash, or #)  → Landing (epigraph + choose)
@@ -17,6 +18,7 @@ function parseMode(): Mode {
     .toLowerCase();
   if (h === 'map') return 'map';
   if (h === 'essay') return 'essay';
+  if (h === 'solution') return 'solution';
   return 'landing';
 }
 
@@ -49,6 +51,7 @@ export default function App() {
         {mode === 'landing' && <Landing onChoose={setMode} />}
         {mode === 'map' && <MapExperience />}
         {mode === 'essay' && <EssayExperience />}
+        {mode === 'solution' && <SolutionExperience />}
       </main>
 
       {mode !== 'landing' && (

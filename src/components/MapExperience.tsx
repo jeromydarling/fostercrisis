@@ -3,11 +3,10 @@ import { CHAPTERS } from '../data/chapters';
 import { CrisisMap } from './CrisisMap';
 import { ChapterPanel } from './ChapterPanel';
 import { StateTooltip } from './StateTooltip';
-import { FeedSection } from './FeedSection';
 
-/** The Map experience — action-oriented. Interactive Mapbox with the
- *  12 chapters, state drill-down, then the Feeds of real children
- *  and advocacy news below. */
+/** The Map experience — the cartographic argument. Interactive Mapbox
+ *  with the 12 chapters and state drill-down. Faces of real children
+ *  live under #solution now. */
 export function MapExperience() {
   const [chapterIndex, setChapterIndex] = useState(0);
   const [hoveredFips, setHoveredFips] = useState<string | null>(null);
@@ -59,15 +58,14 @@ export function MapExperience() {
 
         <div className="footer">
           <span>
-            380,000 congregations × 1 family = 380,000 homes. The waitlist is
-            70,418. You would end it five times over.
+            380,000 congregations × ~100 families each. One family per church
+            says yes — the waitlist ends 5× over.
           </span>
-          <a className="footer-scroll" href="#map/feeds">
-            Scroll for real faces ↓
+          <a className="footer-scroll" href="#solution">
+            See the faces → The Solution
           </a>
         </div>
       </div>
-      <FeedSection selectedFips={selectedFips} />
     </>
   );
 }

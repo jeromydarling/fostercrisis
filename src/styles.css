@@ -247,12 +247,266 @@ body {
   font-weight: 600;
 }
 
+/* The Solution pill gets a warmer accent so the trio reads as
+   Map (gold) · Essay (gold) · Solution (warm-gold / call-to-action). */
+.mode-tab-solution {
+  color: var(--accent-warm);
+}
+.mode-tab-solution:hover { color: #ffd08a; }
+.mode-tab-solution.is-active {
+  background: var(--accent-warm);
+  color: #0b0d12;
+}
+
 /* The map view renders its own 100vh map-section directly under the
    header, so we offset the map/feeds region (but not the landing) so
    the fixed map doesn't slip under the sticky header. */
 .mode-map .map-section { height: calc(100vh - 52px); }
 @supports (height: 100dvh) {
   .mode-map .map-section { height: calc(100dvh - 52px); }
+}
+
+/* ---- Solution experience hero ------------------------------------- */
+
+.solution-hero {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 52px);
+  min-height: calc(100dvh - 52px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.15rem;
+  padding: 5rem 2rem 4rem;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255, 179, 71, 0.08), transparent 55%),
+    radial-gradient(ellipse at 50% 90%, rgba(207, 100, 38, 0.06), transparent 55%),
+    #0a0c11;
+  overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+}
+
+.solution-rule {
+  position: relative;
+  width: 260px;
+  max-width: 70vw;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 179, 71, 0.6) 30%,
+    rgba(207, 100, 38, 0.85) 50%,
+    rgba(255, 179, 71, 0.6) 70%,
+    transparent
+  );
+  flex: 0 0 auto;
+}
+
+.solution-rule::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-warm);
+  box-shadow: 0 0 10px rgba(255, 179, 71, 0.7);
+}
+
+.solution-eyebrow {
+  margin: 0;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+}
+
+.solution-title {
+  margin: 0;
+  font-family: var(--ff-serif);
+  font-weight: 500;
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+.solution-lede {
+  margin: 0;
+  max-width: 640px;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: var(--fg-dim);
+}
+
+.solution-body {
+  margin: 0;
+  max-width: 720px;
+  font-family: var(--ff-serif);
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: var(--fg);
+}
+
+.solution-body strong {
+  color: var(--accent-warm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.solution-cta {
+  margin-top: 0.75rem !important;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 1.25rem !important;
+  color: var(--accent);
+}
+
+.solution-scroll {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  text-decoration: none;
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  transition: color 200ms ease;
+}
+
+.solution-scroll span:first-child {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--fg-dim);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.solution-scroll:hover { color: var(--accent-warm); }
+
+.solution-scroll-arrow {
+  font-size: 1.4rem;
+  color: var(--accent-warm);
+  animation: epi-bounce 2.4s ease-in-out infinite;
+}
+
+@media (max-width: 640px) {
+  .solution-hero {
+    padding: 3.5rem 1.25rem 3rem;
+    min-height: calc(100vh - 48px);
+    min-height: calc(100dvh - 48px);
+    gap: 1rem;
+  }
+  .solution-body { font-size: 1rem; }
+  .solution-cta { font-size: 1.1rem !important; }
+  .solution-lede { font-size: 1.05rem; }
+}
+
+/* ---- Essay section nav (sticky under the mode switcher) ----------- */
+
+.essay-nav {
+  position: sticky;
+  top: 52px;
+  z-index: 40;
+  background: rgba(10, 12, 17, 0.92);
+  border-bottom: 1px solid var(--rule);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.essay-nav-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0.5rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.essay-nav-label {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  color: var(--fg-dimmer);
+  flex: 0 0 auto;
+}
+
+.essay-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1 1 auto;
+}
+.essay-nav ul::-webkit-scrollbar { display: none; }
+
+.essay-nav-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  padding: 0.45rem 0.85rem;
+  color: var(--fg-dim);
+  text-decoration: none;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  transition: color 160ms ease, background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.essay-nav-link:hover {
+  color: var(--fg);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.essay-nav-link.is-active {
+  color: var(--accent);
+  background: rgba(247, 226, 107, 0.08);
+  border-color: rgba(247, 226, 107, 0.35);
+}
+
+.essay-nav-roman {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--fg-dimmer);
+}
+
+.essay-nav-link.is-active .essay-nav-roman { color: var(--accent); }
+
+.essay-nav-title {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.1;
+}
+
+@media (max-width: 640px) {
+  .essay-nav-inner {
+    padding: 0.4rem 0.6rem;
+    gap: 0.5rem;
+  }
+  .essay-nav-label { display: none; }
+  .essay-nav-link {
+    padding: 0.35rem 0.7rem;
+  }
+  .essay-nav-title { font-size: 0.88rem; }
+  .essay-nav-roman { font-size: 0.55rem; letter-spacing: 0.14em; }
 }
 
 /* ---- Landing chooser ---------------------------------------------- */
