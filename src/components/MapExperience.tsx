@@ -4,13 +4,20 @@ import { CrisisMap } from './CrisisMap';
 import { ChapterPanel } from './ChapterPanel';
 import { StateTooltip } from './StateTooltip';
 
+interface Props {
+  /** Hoisted to App so it survives mode switches — the Solution view's
+   *  Kids-Waiting directory auto-focuses on this state. */
+  selectedFips: string | null;
+  onSelectedFipsChange: (fips: string | null) => void;
+}
+
 /** The Map experience — the cartographic argument. Interactive Mapbox
  *  with the 12 chapters and state drill-down. Faces of real children
  *  live under #solution now. */
-export function MapExperience() {
+export function MapExperience({ selectedFips, onSelectedFipsChange }: Props) {
   const [chapterIndex, setChapterIndex] = useState(0);
   const [hoveredFips, setHoveredFips] = useState<string | null>(null);
-  const [selectedFips, setSelectedFips] = useState<string | null>(null);
+  const setSelectedFips = onSelectedFipsChange;
 
   // Keyboard chapter navigation.
   useEffect(() => {

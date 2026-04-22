@@ -26,7 +26,12 @@ function parseMode(): Mode {
 export default function App() {
   const [mode, setModeState] = useState<Mode>(() => parseMode());
 
-  // Keep component state in sync with the URL hash.
+  // Cross-mode state: whichever state the visitor drilled into on the
+  // Map survives a mode switch, so the Solution/Kids-Waiting directory
+  // opens focused on the same place.
+  const [selectedFips, setSelectedFips] = useState<string | null>(null);
+
+  // Keep mode in sync with the URL hash.
   useEffect(() => {
     const sync = () => setModeState(parseMode());
     window.addEventListener('hashchange', sync);
@@ -50,9 +55,14 @@ export default function App() {
 
       <main className={`mode-view mode-${mode}`}>
         {mode === 'landing' && <Landing onChoose={setMode} />}
-        {mode === 'map' && <MapExperience />}
+        {mode === 'map' && (
+          <MapExperience
+            selectedFips={selectedFips}
+            onSelectedFipsChange={setSelectedFips}
+          />
+        )}
         {mode === 'essay' && <EssayExperience />}
-        {mode === 'solution' && <SolutionExperience />}
+        {mode === 'solution' && <SolutionExperience selectedFips={selectedFips} />}
       </main>
 
       {mode !== 'landing' && (

@@ -11,7 +11,11 @@ import { FeedSection } from './FeedSection';
  *  contributed to the social contagion that took a home from them in
  *  the first place. Standing in the gap isn't charity. It's restitution.
  */
-export function SolutionExperience() {
+interface Props {
+  selectedFips: string | null;
+}
+
+export function SolutionExperience({ selectedFips }: Props) {
   return (
     <>
       <section className="solution-hero" aria-label="The Solution">
@@ -64,7 +68,7 @@ export function SolutionExperience() {
         </a>
       </section>
 
-      <FeedSection selectedFips={null} />
+      <FeedSection selectedFips={selectedFips} />
     </>
   );
 }

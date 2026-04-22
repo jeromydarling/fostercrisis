@@ -1522,6 +1522,281 @@ body {
   gap: 1.5rem;
 }
 
+/* ---- Kids Waiting directory ---------------------------------------- */
+
+.dir {
+  width: 100%;
+}
+
+.dir-status {
+  margin: 3rem auto;
+  max-width: 420px;
+  text-align: center;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  color: var(--fg-dim);
+}
+
+.dir-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 1.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(14, 17, 24, 0.55);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+
+.dir-search {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex: 1 1 auto;
+}
+
+.dir-search-label {
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-dimmer);
+  flex: 0 0 auto;
+}
+
+.dir-search input {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  padding: 0.45rem 0.2rem;
+  color: var(--fg);
+  font-family: var(--ff-serif);
+  font-size: 1rem;
+  font-style: italic;
+  outline: none;
+  transition: border-color 160ms ease;
+}
+
+.dir-search input::placeholder {
+  color: var(--fg-dimmer);
+  opacity: 0.8;
+}
+
+.dir-search input:focus-visible {
+  border-bottom-color: var(--accent);
+  outline: none;
+}
+
+.dir-count {
+  margin: 0;
+  font-family: var(--ff-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--fg-dim);
+  flex: 0 0 auto;
+}
+
+.dir-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1rem;
+}
+
+/* --- State card --- */
+
+.dir-card {
+  scroll-margin-top: 120px;
+  padding: 1.35rem 1.4rem 1.25rem;
+  background: rgba(14, 17, 24, 0.55);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.dir-card.is-active {
+  border-color: rgba(247, 226, 107, 0.55);
+  box-shadow: 0 0 0 1px rgba(247, 226, 107, 0.28),
+    0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.dir-card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0.85rem;
+}
+
+.dir-card-code {
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  background: rgba(247, 226, 107, 0.08);
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  flex: 0 0 auto;
+}
+
+.dir-card-state {
+  margin: 0;
+  font-family: var(--ff-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  line-height: 1.1;
+}
+
+/* --- Primary links (photolisting / state agency / heart gallery) --- */
+
+.dir-primary {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dir-primary li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.dir-primary-label {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-dimmer);
+}
+
+.dir-primary a {
+  font-family: var(--ff-serif);
+  font-size: 0.98rem;
+  line-height: 1.3;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.dir-primary a:hover {
+  color: #fff6d5;
+  text-decoration: underline;
+}
+
+.dir-primary-page,
+.dir-primary-note {
+  color: var(--fg-dim);
+  font-style: italic;
+  font-size: 0.88rem;
+}
+
+.dir-arrow {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* --- Orgs list --- */
+
+.dir-orgs-heading {
+  margin: 0 0 0.55rem;
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-dimmer);
+}
+
+.dir-orgs ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.dir-org {
+  padding: 0.6rem 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 2px solid var(--rule);
+  border-radius: 0 3px 3px 0;
+}
+
+.dir-org-christian_ministry { border-left-color: var(--accent-warm); }
+.dir-org-placement_agency   { border-left-color: var(--accent); }
+.dir-org-casa_gal           { border-left-color: #8a5a2b; }
+.dir-org-advocacy           { border-left-color: var(--danger); }
+
+.dir-org-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+}
+
+.dir-org-name {
+  font-family: var(--ff-serif);
+  font-size: 0.96rem;
+  line-height: 1.3;
+  color: var(--fg);
+  text-decoration: none;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.dir-org-name:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.dir-org-chip {
+  font-family: var(--ff-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.1rem 0.4rem;
+  border-radius: 2px;
+  flex: 0 0 auto;
+}
+
+.dir-org-desc {
+  margin: 0;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--fg-dim);
+}
+
+@media (max-width: 720px) {
+  .dir-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.7rem 0.85rem;
+  }
+  .dir-grid { grid-template-columns: 1fr; }
+  .dir-card { padding: 1.1rem 1.1rem 1rem; }
+  .dir-card-state { font-size: 1.2rem; }
+}
+
 .feed-card {
   display: flex;
   flex-direction: column;

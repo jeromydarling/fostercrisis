@@ -1,19 +1,20 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { loadFeeds, type FeedBucket, type FeedItem, type FeedsFile } from '../data/feeds';
 import { STATE_INDEX } from '../data/states';
+import { StateOrgsDirectory } from './StateOrgsDirectory';
 
 const BUCKETS: { key: FeedBucket; label: string; intro: string }[] = [
   {
     key: 'waiting_children',
     label: 'Kids waiting',
     intro:
-      'Children across America hoping to be adopted. Every video embeds from the original source — the Heart Gallery, Grant Me Hope, AdoptUSKids, or the state program that produced it.',
+      'A state-by-state directory of the people already in the fight — every state\'s official photolisting, the intake page you need to become a foster parent, the local Heart Gallery chapter, and a short list of orgs working on the ground. If your state is on the map above, it is on the list below. Start there.',
   },
   {
     key: 'system_news',
     label: 'State of the system',
     intro:
-      'The news, research, and advocacy shaping American foster care. Independent reporting from The Imprint and reform voices.',
+      'The news, research, and advocacy shaping American foster care. Independent reporting from The Imprint, reform voices, and the stories families are telling in their own words.',
   },
 ];
 
@@ -44,25 +45,8 @@ export function FeedSection({ selectedFips }: Props) {
   }, []);
 
   const selectedCode = selectedFips ? STATE_INDEX[selectedFips]?.code ?? null : null;
-  const selectedName = selectedFips ? STATE_INDEX[selectedFips]?.name ?? null : null;
 
-  const rawItems = feeds?.[bucket] ?? [];
-  // When a state is selected, surface state-matched items first; otherwise
-  // chronological order (feeds.json is already sorted newest-first).
-  const items = useMemo(() => {
-    if (!selectedCode) return rawItems;
-    const matched: FeedItem[] = [];
-    const rest: FeedItem[] = [];
-    for (const it of rawItems) {
-      if (it.state === selectedCode) matched.push(it);
-      else rest.push(it);
-    }
-    return [...matched, ...rest];
-  }, [rawItems, selectedCode]);
-
-  const matchedCount = selectedCode
-    ? rawItems.filter((it) => it.state === selectedCode).length
-    : 0;
+  const newsItems = feeds?.system_news ?? [];
 
   return (
     <section className="feed-section" id="feeds">
@@ -70,8 +54,9 @@ export function FeedSection({ selectedFips }: Props) {
         <p className="feed-eyebrow">Faces, voices, the system</p>
         <h2 className="feed-title">This is not a statistic.</h2>
         <p className="feed-lede">
-          The numbers above are real children. These feeds refresh daily,
-          pulled directly from the organizations producing the stories.
+          The numbers above are real children and the people already moving
+          toward them. The directory refreshes when we refresh it; the news
+          feed refreshes daily.
         </p>
         <nav className="feed-tabs" role="tablist">
           {BUCKETS.map((b) => (
@@ -87,39 +72,29 @@ export function FeedSection({ selectedFips }: Props) {
           ))}
         </nav>
         <p className="feed-intro">{BUCKETS.find((b) => b.key === bucket)?.intro}</p>
-        {selectedCode && bucket === 'waiting_children' && (
-          <p className="feed-state-note">
-            {matchedCount > 0 ? (
-              <>
-                <strong>{matchedCount}</strong> item{matchedCount === 1 ? '' : 's'} tagged
-                for {selectedName}, followed by national picks.
-              </>
-            ) : (
-              <>
-                No {selectedName}-specific items yet. Showing national stories —
-                every one of them could be a {selectedName} child's story next week.
-              </>
-            )}
-          </p>
-        )}
       </header>
 
-      {loading && <p className="feed-status">Loading stories…</p>}
-      {!loading && !feeds && (
-        <p className="feed-status">
-          Feeds haven't been generated yet. They'll populate on the next
-          GitHub Actions run.
-        </p>
+      {bucket === 'waiting_children' ? (
+        <StateOrgsDirectory activeCode={selectedCode} />
+      ) : (
+        <>
+          {loading && <p className="feed-status">Loading stories…</p>}
+          {!loading && !feeds && (
+            <p className="feed-status">
+              Feeds haven't been generated yet. They'll populate on the next
+              GitHub Actions run.
+            </p>
+          )}
+          {!loading && feeds && newsItems.length === 0 && (
+            <p className="feed-status">No items in this feed yet.</p>
+          )}
+          <ul className="feed-grid" role="list">
+            {newsItems.slice(0, 24).map((it) => (
+              <FeedCard key={it.id} item={it} highlight={false} />
+            ))}
+          </ul>
+        </>
       )}
-      {!loading && feeds && items.length === 0 && (
-        <p className="feed-status">No items in this feed yet.</p>
-      )}
-
-      <ul className="feed-grid" role="list">
-        {items.slice(0, 24).map((it) => (
-          <FeedCard key={it.id} item={it} highlight={it.state === selectedCode} />
-        ))}
-      </ul>
     </section>
   );
 }
