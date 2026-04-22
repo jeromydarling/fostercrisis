@@ -223,7 +223,7 @@ export const CHAPTERS: Chapter[] = [
     headline: 'The Bible Belt divorces, too.',
     subline: 'And has its babies out of wedlock. And fills its foster homes. The revolution won inside the sanctuary first.',
     body:
-      'Mississippi is the most religious state in America and has the highest unwed-birth rate (52%). Louisiana is third-most religious; half its births are outside of marriage. Arkansas — 70% "highly religious" — has the second-highest divorce rate in the country. American Christianity did not hold a line here. It adopted the package and then preached against it. The children born into that contradiction are the ones waiting for a family tonight.',
+      'Mississippi is the most religious state in America and has the highest unwed-birth rate (52%). Louisiana is third-most religious; half its births are outside of marriage. Arkansas — 70% "highly religious" — has the second-highest divorce rate in the country. American Christianity did not hold a line here. It adopted the package and then preached against it. The children born into that contradiction are the ones now in foster care.',
     source: 'CDC NVSS divorce 2022 · CDC NCHS unwed births 2022',
   },
   {

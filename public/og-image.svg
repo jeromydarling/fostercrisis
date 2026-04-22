@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="The Foster Crisis — 70,418 children waiting. 380,000 Christian congregations. The math is brutal, and it favors us.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="The Foster Crisis — 368,000 children in foster care tonight. 70,418 legally free, waiting for a forever family. 700,000 cycle through in a year. 380,000 Christian congregations.">
   <!-- Background -->
   <defs>
     <radialGradient id="bgGlow" cx="50%" cy="38%" r="65%">
@@ -38,25 +38,26 @@
   <!-- Top rule -->
   <rect x="450" y="118" width="300" height="1" fill="url(#accentRule)"/>
 
-  <!-- Headline number -->
-  <text x="600" y="280"
-        text-anchor="middle"
-        font-family="'Cormorant Garamond', 'Iowan Old Style', Georgia, serif"
-        font-size="196"
-        font-weight="600"
-        letter-spacing="-4"
-        fill="#ffb347">70,418</text>
+  <!-- Three AFCARS numbers — the whole crisis in one row -->
+  <g font-family="'Cormorant Garamond', 'Iowan Old Style', Georgia, serif">
+    <!-- Tonight's bed -->
+    <text x="260" y="240" text-anchor="middle" font-size="78" font-weight="600" fill="#ffb347" letter-spacing="-2">368K</text>
+    <text x="260" y="280" text-anchor="middle" font-size="20" font-style="italic" fill="#e6e7ea">in foster care</text>
+    <text x="260" y="308" text-anchor="middle" font-size="20" font-style="italic" fill="#9aa0aa">tonight</text>
 
-  <!-- Subhead -->
-  <text x="600" y="348"
-        text-anchor="middle"
-        font-family="'Cormorant Garamond', 'Iowan Old Style', Georgia, serif"
-        font-size="40"
-        font-style="italic"
-        fill="#e6e7ea">children waiting for a family tonight.</text>
+    <!-- Waiting for a forever family (hero — this is the solve-math number) -->
+    <text x="600" y="260" text-anchor="middle" font-size="128" font-weight="600" fill="#ffb347" letter-spacing="-3">70,418</text>
+    <text x="600" y="302" text-anchor="middle" font-size="22" font-style="italic" fill="#e6e7ea">legally free, waiting</text>
+    <text x="600" y="330" text-anchor="middle" font-size="22" font-style="italic" fill="#9aa0aa">for a forever family</text>
+
+    <!-- A year of American childhood -->
+    <text x="940" y="240" text-anchor="middle" font-size="78" font-weight="600" fill="#ffb347" letter-spacing="-2">700K</text>
+    <text x="940" y="280" text-anchor="middle" font-size="20" font-style="italic" fill="#e6e7ea">cycle through</text>
+    <text x="940" y="308" text-anchor="middle" font-size="20" font-style="italic" fill="#9aa0aa">in a year</text>
+  </g>
 
   <!-- Divider -->
-  <line x1="440" y1="400" x2="760" y2="400" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <line x1="300" y1="400" x2="900" y2="400" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
 
   <!-- The argument -->
   <text x="600" y="448"

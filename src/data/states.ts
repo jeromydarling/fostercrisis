@@ -138,9 +138,15 @@ export const STATES: StateRow[] = [
 ];
 
 export const NATIONAL = {
+  // AFCARS point-in-time (9/30/2023). "Tonight's bed" framing.
   fosterCare: 368530,
+  // AFCARS children waiting to be adopted.
   waitingAdoption: 70418,
+  // AFCARS children with parental rights terminated ("legally free").
   legallyFree: 34817,
+  // Children who cycled through foster care in FY2023. "A year of
+  // American childhood" framing — the flow number, not the stock.
+  throughYear: 700000,
   licensedHomes: 195404,
   licensedHomesPrior: 220000,
   agingOutYearly: 20000,

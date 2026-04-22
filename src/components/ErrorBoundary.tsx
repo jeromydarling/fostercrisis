@@ -30,13 +30,14 @@ export class ErrorBoundary extends Component<Props, State> {
             <p className="error-fallback-eyebrow">Something broke on the map.</p>
             <h1>But the argument is the same.</h1>
             <p className="error-fallback-body">
-              There are roughly <strong>380,000 Christian congregations</strong>
-              in the United States and <strong>70,418 children</strong> waiting
-              for a family tonight. One family per church ends the waitlist
-              five times over.
+              <strong>368,000</strong> American children are in foster care
+              tonight. <strong>70,418</strong> are legally free and waiting
+              for a forever family. There are roughly <strong>380,000
+              Christian congregations</strong>. One family per church ends
+              the waitlist five times over.
               <br /><br />
-              <em>American Christianity is in debt. They are in debt to all
-              of the children. Crystal clear.</em>
+              <em>American Christianity is in debt. They are in debt to
+              all of the children. Crystal clear.</em>
             </p>
             <p className="error-fallback-retry">
               <button type="button" onClick={() => location.reload()}>

@@ -59,7 +59,7 @@ const LEDGER = [
     pillar: 'Receive',
     figure: '3%',
     sub: 'of American Christians have ever fostered',
-    body: '70,418 legally-free children wait for a family. If one family per evangelical home that voted pro-life, donated to a PRC, or marched had fostered, the crisis would not exist. There would be a multi-year Christian waitlist.',
+    body: '368,000 children in foster care tonight. 70,418 legally free and waiting for a forever family. 700,000 cycling through in a year. If one family per evangelical home that voted pro-life, donated to a PRC, or marched had fostered, the crisis would not exist. There would be a multi-year Christian waitlist.',
   },
 ];
 
@@ -89,7 +89,7 @@ const TALLY = [
   { claim: 'We are salt and light.',
     reality: '67% of pastors struggle with porn. 62% of Christians say it is fine.' },
   { claim: 'We are pro-life and pro-family.',
-    reality: '3% foster rate. 70,418 waiting children. The 4-bedroom house has one empty bedroom.' },
+    reality: '3% foster rate. 368,000 in care tonight. 70,418 legally free and waiting. The 4-bedroom house has one empty bedroom.' },
   { claim: 'We are a Christian nation.',
     reality: '62% Christian (from ~90% in 1970). Weekly attendance 30%. AWVI 4%. Gen Z 1%.' },
 ];
@@ -133,10 +133,10 @@ const NATION_LEDGER = [
   { n: '4%', lbl: 'hold a biblical worldview', sub: 'from 12% in 1992' },
   { n: '1%', lbl: 'of Gen Z hold a biblical worldview' },
   { n: '40%', lbl: 'of U.S. children born outside marriage' },
-  { n: '1.126 M', lbl: 'abortions, 2025', sub: '+21% from 2020' },
-  { n: '67%', lbl: 'of U.S. pastors have struggled with pornography' },
+  { n: '368 K', lbl: 'children in foster care tonight', sub: 'AFCARS point-in-time' },
+  { n: '700 K', lbl: 'cycle through foster care each year' },
   { n: '3%', lbl: 'of American Christians have ever fostered' },
-  { n: '70,418', lbl: 'children waiting for a family tonight' },
+  { n: '70,418', lbl: 'legally free, waiting for a forever family' },
 ];
 
 export function SubstitutionSection() {
@@ -364,9 +364,10 @@ export function SubstitutionSection() {
               it claimed to oppose.
             </p>
             <p className="subst-possibility-k">
-              The 70,418 children waiting are not collateral damage of
-              a lost war. They are the predictable consequence of a
-              theology that had already surrendered.
+              The 70,418 legally-free children waiting — and the 368,000
+              in care tonight — are not collateral damage of a lost war.
+              They are the predictable consequence of a theology that had
+              already surrendered.
             </p>
           </article>
         </div>

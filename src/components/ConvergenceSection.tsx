@@ -159,10 +159,10 @@ const LIES = [
 const BODY_COUNT = [
   { n: '1.2 M', label: 'out-of-wedlock births in 1990 alone' },
   { n: '40%', label: 'of U.S. children now born outside marriage' },
-  { n: '~1 M', label: 'children per year whose parents divorce' },
-  { n: '700 K', label: 'children cycling through foster care annually' },
+  { n: '368 K', label: 'in foster care on any given night' },
+  { n: '700 K', label: 'cycling through foster care in a year' },
   { n: '23 K', label: 'who age out every year with no family' },
-  { n: '70,418', label: 'waiting right now' },
+  { n: '70,418', label: 'legally free, waiting for a forever family' },
 ];
 
 export function ConvergenceSection() {
