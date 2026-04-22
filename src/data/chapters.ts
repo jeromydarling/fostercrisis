@@ -11,6 +11,7 @@ export type Metric =
   | 'complicity'
   | 'religiosity'
   | 'obesity'
+  | 'revolution'
   | 'churchSolution';
 
 export type Geography = 'state' | 'county';
@@ -61,6 +62,11 @@ export function metricValue(row: StateRow, metric: Metric): number {
       return row.religiosityPct;
     case 'obesity':
       return row.obesityPct;
+    case 'revolution':
+      // Composite "revolution" index: divorce rate (per 1k) normalized to
+      // 0–50 + unwed-births-% directly. Rough but directional — both
+      // signals bend at the same time in the same states.
+      return row.divorceRate * 5 + row.unwedBirthPct;
     case 'churchSolution':
       return row.congregations / Math.max(1, row.waitingAdoption);
   }
@@ -85,6 +91,8 @@ export function metricFormat(metric: Metric, v: number): string {
       return v.toFixed(0) + '% highly religious';
     case 'obesity':
       return v.toFixed(1) + '% obese';
+    case 'revolution':
+      return v.toFixed(0) + ' pts (divorce + unwed-births)';
     case 'churchSolution':
       return v.toFixed(1) + ' churches / waiting child';
   }
@@ -199,10 +207,25 @@ export const CHAPTERS: Chapter[] = [
     source: 'CDC BRFSS 2022 · Purdue/Ferraro denominational study',
   },
   {
-    id: 'misery',
+    id: 'revolution',
     number: 'VIII',
+    title: 'The revolution\'s map',
+    eyebrow: 'Chapter VIII — The Sexual Revolution',
+    metric: 'revolution',
+    geography: 'state',
+    ramp: ['#14151c', '#2a1428', '#541a3a', '#8f2440', '#c72f38', '#ffb347'],
+    unit: 'Revolution Index · divorce + unwed births',
+    headline: 'The Bible Belt divorces, too.',
+    subline: 'And has its babies out of wedlock. And fills its foster homes. The revolution won inside the sanctuary first.',
+    body:
+      'Mississippi is the most religious state in America and has the highest unwed-birth rate (52%). Louisiana is third-most religious; half its births are outside of marriage. Arkansas — 70% "highly religious" — has the second-highest divorce rate in the country. The American Church did not hold a line here. It adopted the package and then preached against it. The children born into that contradiction are the ones waiting for a family tonight.',
+    source: 'CDC NVSS divorce 2022 · CDC NCHS unwed births 2022',
+  },
+  {
+    id: 'misery',
+    number: 'IX',
     title: 'The misery map',
-    eyebrow: 'Chapter VIII — The Misery Index',
+    eyebrow: 'Chapter IX — The Misery Index',
     metric: 'miseryIndex',
     geography: 'county',
     countyProp: 'misery',
@@ -216,9 +239,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'complicity',
-    number: 'IX',
+    number: 'X',
     title: 'Churches are right there',
-    eyebrow: 'Chapter IX — Complicity',
+    eyebrow: 'Chapter X — Complicity',
     metric: 'miseryIndex',
     geography: 'county',
     countyProp: 'misery',
@@ -235,9 +258,9 @@ export const CHAPTERS: Chapter[] = [
   // rewrites its headline for the selected state.
   {
     id: 'solution',
-    number: 'X',
+    number: 'XI',
     title: 'What the pews could end overnight',
-    eyebrow: 'Chapter X — The Solution',
+    eyebrow: 'Chapter XI — The Solution',
     metric: 'churchSolution',
     geography: 'state',
     ramp: ['#3d0a1a', '#6d1728', '#a1302a', '#cf6426', '#e6a42a', '#f7e26b'],
@@ -328,6 +351,13 @@ export function frameForState(chapter: Chapter, row: StateRow): Framing {
         headline: `${row.obesityPct.toFixed(1)}%`,
         subline: `of ${name} adults are obese. The state ranks ${row.obesityPct >= 35 ? 'among the heaviest in the nation' : 'near the national average'}.`,
         body: `In ${name}, ${row.obesityPct.toFixed(1)}% of adults are obese while ${nf(kids)} children wait in state custody. Physical discipline is the first kind of discipline. It is not accidentally missing here — it is a symptom of the same disordered priorities that leave foster homes empty.`,
+      };
+    case 'revolution':
+      return {
+        ...base,
+        headline: `${row.unwedBirthPct}% unwed · ${row.divorceRate.toFixed(1)} / 1k divorced`,
+        subline: `${name} is ${row.religiosityPct}% "highly religious" — and still broke this way.`,
+        body: `${row.unwedBirthPct}% of ${name}'s babies are born outside of marriage. ${row.divorceRate.toFixed(1)} divorces per 1,000 residents. And ${row.religiosityPct}% of adults call themselves "highly religious." The sexual revolution didn't skip ${name}. It was adopted inside the sanctuary first, and the children born into the contradiction are the ones waiting for a foster family tonight.`,
       };
     case 'misery':
       return {

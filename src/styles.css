@@ -1835,6 +1835,443 @@ body {
   .cradle-closing-kicker { font-size: 1.15rem; }
 }
 
+/* ---- Convergence section ------------------------------------------- */
+
+.convergence-section {
+  padding: 6rem 2rem 5rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  border-top: 1px solid var(--rule);
+}
+
+.conv-hero {
+  max-width: 840px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.conv-eyebrow {
+  margin: 0 0 0.85rem;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--danger);
+}
+
+.conv-title {
+  margin: 0 0 1.5rem;
+  font-family: var(--ff-serif);
+  font-size: clamp(2.3rem, 4.8vw, 3.8rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+.conv-lede {
+  margin: 0 auto;
+  max-width: 720px;
+  font-family: var(--ff-serif);
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--fg-dim);
+}
+
+.conv-lede strong { color: var(--accent); font-weight: 600; }
+.conv-lede em { color: var(--fg); font-style: italic; }
+
+/* --- The four-curves chart --- */
+
+.conv-chart-wrap { margin-bottom: 5rem; }
+
+.conv-chart-heading {
+  margin: 0 0 0.45rem;
+  font-family: var(--ff-serif);
+  font-size: 1.85rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  text-align: center;
+}
+
+.conv-chart-sub {
+  margin: 0 auto 1.75rem;
+  max-width: 640px;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--fg-dim);
+  text-align: center;
+}
+
+.conv-chart-scroll {
+  overflow-x: auto;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+.conv-chart {
+  width: 100%;
+  min-width: 620px;
+  height: auto;
+  display: block;
+}
+
+.conv-legend {
+  list-style: none;
+  padding: 0;
+  margin: 1rem auto 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.5rem 1.25rem;
+  max-width: 780px;
+}
+
+.conv-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--ff-mono);
+  font-size: 0.78rem;
+  color: var(--fg-dim);
+  letter-spacing: 0.02em;
+}
+
+.conv-legend-swatch {
+  width: 16px;
+  height: 3px;
+  border-radius: 2px;
+  flex: 0 0 auto;
+}
+
+.conv-chart-caption {
+  margin: 0 auto;
+  max-width: 780px;
+  font-family: var(--ff-serif);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--fg-dim);
+  text-align: center;
+}
+
+.conv-chart-caption strong {
+  color: var(--accent-warm);
+  font-weight: 600;
+}
+
+/* --- Timeline of the break --- */
+
+.conv-timeline-wrap {
+  margin-bottom: 5rem;
+}
+
+.conv-timeline-heading {
+  margin: 0 0 0.45rem;
+  font-family: var(--ff-serif);
+  font-size: 1.85rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  text-align: center;
+}
+
+.conv-timeline-sub {
+  margin: 0 auto 2.5rem;
+  max-width: 640px;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--fg-dim);
+  text-align: center;
+}
+
+.conv-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.conv-timeline::before {
+  content: '';
+  position: absolute;
+  left: 90px;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(247, 226, 107, 0.15) 10%,
+    rgba(247, 226, 107, 0.4) 50%,
+    rgba(247, 226, 107, 0.15) 90%,
+    transparent 100%
+  );
+}
+
+.conv-event {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 2rem;
+  padding: 1rem 0;
+  position: relative;
+}
+
+.conv-event::before {
+  content: '';
+  position: absolute;
+  left: 84px;
+  top: 1.35rem;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--bg-panel-solid);
+  border: 2px solid var(--accent);
+  z-index: 2;
+}
+
+.conv-event-year {
+  font-family: var(--ff-mono);
+  font-size: 0.95rem;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  text-align: right;
+  padding-top: 0.1rem;
+}
+
+.conv-event-body {
+  padding-left: 2rem;
+}
+
+.conv-event-body h4 {
+  margin: 0 0 0.3rem;
+  font-family: var(--ff-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--fg);
+}
+
+.conv-event-body p {
+  margin: 0;
+  font-family: var(--ff-serif);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--fg-dim);
+}
+
+/* --- Three lies --- */
+
+.conv-lies { margin-bottom: 5rem; }
+
+.conv-lies-heading {
+  margin: 0 0 2rem;
+  font-family: var(--ff-serif);
+  font-size: 1.85rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  text-align: center;
+}
+
+.conv-lies-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.conv-lie {
+  padding: 1.9rem 1.6rem 1.7rem;
+  background: rgba(14, 17, 24, 0.6);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--danger);
+  border-radius: 4px;
+  position: relative;
+}
+
+.conv-lie-num {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  font-family: var(--ff-serif);
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: var(--danger);
+  opacity: 0.7;
+  letter-spacing: 0.02em;
+}
+
+.conv-lie h4 {
+  margin: 0 0 0.85rem;
+  font-family: var(--ff-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--accent);
+  padding-right: 2rem;
+}
+
+.conv-lie p {
+  margin: 0;
+  font-family: var(--ff-serif);
+  font-size: 0.96rem;
+  line-height: 1.6;
+  color: var(--fg-dim);
+}
+
+/* --- Body count --- */
+
+.conv-count {
+  margin-bottom: 5rem;
+  padding: 3rem 2rem;
+  background: rgba(14, 17, 24, 0.45);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+
+.conv-count-heading {
+  margin: 0 0 0.45rem;
+  font-family: var(--ff-serif);
+  font-size: 1.85rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  text-align: center;
+}
+
+.conv-count-sub {
+  margin: 0 auto 2.5rem;
+  max-width: 640px;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--fg-dim);
+  text-align: center;
+}
+
+.conv-count-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+}
+
+.conv-count-grid li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.conv-count-num {
+  font-family: var(--ff-serif);
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--danger);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.conv-count-lbl {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  color: var(--fg-dim);
+}
+
+.conv-count-kicker {
+  margin: 1.5rem auto 0;
+  max-width: 720px;
+  font-family: var(--ff-serif);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--fg);
+  text-align: center;
+}
+
+.conv-count-kicker strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* --- Closing indictment --- */
+
+.conv-closing {
+  padding: 3.5rem 2rem 1rem;
+  border-top: 1px solid var(--rule);
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.conv-closing-eyebrow {
+  margin: 0 0 1.25rem;
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--danger);
+}
+
+.conv-closing-body {
+  margin: 0 0 1.35rem;
+  font-family: var(--ff-serif);
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: var(--fg);
+}
+
+.conv-closing-body em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.conv-closing-body strong {
+  color: var(--accent-warm);
+  font-weight: 600;
+}
+
+.conv-closing-kicker {
+  margin: 2rem 0 0;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.4;
+  color: var(--danger);
+  letter-spacing: -0.005em;
+}
+
+/* --- Mobile --- */
+
+@media (max-width: 820px) {
+  .convergence-section { padding: 3.5rem 1.25rem 3rem; }
+  .conv-title { font-size: 2rem; }
+  .conv-lies-grid { grid-template-columns: 1fr; }
+  .conv-timeline::before { left: 54px; }
+  .conv-event { grid-template-columns: 56px 1fr; gap: 1rem; }
+  .conv-event::before { left: 48px; }
+  .conv-event-body { padding-left: 1.25rem; }
+  .conv-count { padding: 2rem 1.25rem; }
+  .conv-count-num { font-size: 2rem; }
+  .conv-closing-body { font-size: 1.02rem; }
+  .conv-closing-kicker { font-size: 1.15rem; }
+}
+
 .page-footer {
   padding: 2.5rem 2rem 3rem;
   border-top: 1px solid var(--rule);

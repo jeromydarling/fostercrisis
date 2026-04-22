@@ -6,6 +6,7 @@ import { StateTooltip } from './components/StateTooltip';
 import { FeedSection } from './components/FeedSection';
 import { MirrorSection } from './components/MirrorSection';
 import { EmptyCradleSection } from './components/EmptyCradleSection';
+import { ConvergenceSection } from './components/ConvergenceSection';
 import type { GeoBundle } from './data/geo';
 
 export default function App() {
@@ -105,6 +106,7 @@ export default function App() {
       <FeedSection selectedFips={selectedFips} />
       <MirrorSection />
       <EmptyCradleSection />
+      <ConvergenceSection />
       <footer className="page-footer">
         <p>
           <strong>fostercrisis.com</strong> — a map, an indictment, and a
