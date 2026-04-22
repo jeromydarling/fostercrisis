@@ -10,6 +10,8 @@
 // Anchored to church_mirror_section_12.md in the repo root.
 
 import { SourceDetails, type Citation } from './SourceDetails';
+import { Prayer } from './Prayer';
+import { PRAYERS } from '../data/prayers';
 
 interface Stat {
   figure: string;
@@ -429,6 +431,7 @@ export function BodySection() {
         </blockquote>
       </div>
 
+      <Prayer prayer={PRAYERS.score} />
       <SourceDetails citations={CITATIONS} />
     </section>
   );

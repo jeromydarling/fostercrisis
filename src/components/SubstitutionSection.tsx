@@ -1,4 +1,6 @@
 import { SourceDetails, type Citation } from './SourceDetails';
+import { Prayer } from './Prayer';
+import { PRAYERS } from '../data/prayers';
 
 const CITATIONS: Citation[] = [
   {
@@ -498,6 +500,7 @@ export function SubstitutionSection() {
         </blockquote>
       </div>
 
+      <Prayer prayer={PRAYERS.substitution} />
       <SourceDetails citations={CITATIONS} />
     </section>
   );

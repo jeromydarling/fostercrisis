@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { SourceDetails, type Citation } from './SourceDetails';
+import { Prayer } from './Prayer';
+import { PRAYERS } from '../data/prayers';
 
 const CITATIONS: Citation[] = [
   {
@@ -365,6 +367,7 @@ export function MirrorSection() {
         </p>
       </div>
 
+      <Prayer prayer={PRAYERS.mirror} />
       <SourceDetails citations={CITATIONS} />
     </section>
   );

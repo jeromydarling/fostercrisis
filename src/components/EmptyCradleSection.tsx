@@ -3,6 +3,8 @@
 // children are still waiting for a family.
 
 import { SourceDetails, type Citation } from './SourceDetails';
+import { Prayer } from './Prayer';
+import { PRAYERS } from '../data/prayers';
 
 const CITATIONS: Citation[] = [
   {
@@ -262,6 +264,7 @@ export function EmptyCradleSection() {
         </p>
       </div>
 
+      <Prayer prayer={PRAYERS.cradle} />
       <SourceDetails citations={CITATIONS} />
     </section>
   );

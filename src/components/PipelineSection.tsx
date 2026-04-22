@@ -8,6 +8,8 @@
 // Anchored to the foster_to_crime_pipeline.md doc in the repo root.
 
 import { SourceDetails, type Citation } from './SourceDetails';
+import { Prayer } from './Prayer';
+import { PRAYERS } from '../data/prayers';
 
 interface Stat {
   figure: string;
@@ -268,6 +270,7 @@ export function PipelineSection() {
         </blockquote>
       </div>
 
+      <Prayer prayer={PRAYERS.pipeline} />
       <SourceDetails citations={CITATIONS} />
     </section>
   );

@@ -3,6 +3,8 @@
 // The single clearest thing this whole site argues. The two collapses —
 
 import { SourceDetails, type Citation } from './SourceDetails';
+import { Prayer } from './Prayer';
+import { PRAYERS } from '../data/prayers';
 
 const CITATIONS: Citation[] = [
   {
@@ -474,6 +476,7 @@ export function ConvergenceSection() {
         </p>
       </div>
 
+      <Prayer prayer={PRAYERS.convergence} />
       <SourceDetails citations={CITATIONS} />
     </section>
   );

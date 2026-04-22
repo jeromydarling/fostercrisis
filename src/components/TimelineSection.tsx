@@ -3,6 +3,8 @@
 // era bands, event pins, and a hover scrubber.
 
 import { SourceDetails, type Citation } from './SourceDetails';
+import { Prayer } from './Prayer';
+import { PRAYERS } from '../data/prayers';
 
 const CITATIONS: Citation[] = [
   {
@@ -600,6 +602,7 @@ export function TimelineSection() {
         </p>
       </div>
 
+      <Prayer prayer={PRAYERS.timeline} />
       <SourceDetails citations={CITATIONS} />
     </section>
   );

@@ -9,6 +9,8 @@
 // Anchored to church_mirror_section_11.md in the repo root.
 
 import { SourceDetails, type Citation } from './SourceDetails';
+import { Prayer } from './Prayer';
+import { PRAYERS } from '../data/prayers';
 
 interface Stat {
   figure: string;
@@ -382,6 +384,7 @@ export function WoundSection() {
         </blockquote>
       </div>
 
+      <Prayer prayer={PRAYERS.wound} />
       <SourceDetails citations={CITATIONS} />
     </section>
   );
