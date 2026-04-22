@@ -69,22 +69,40 @@ jobs:
         run: npm run data:acs
         continue-on-error: true
 
-      # Churches (~200k OSM points, ~30 MB). Cache between runs so we
-      # only hit Overpass on the first deploy and on forced refreshes.
-      # Bump the cache key suffix (`-v1`) to invalidate without UI access.
-      - name: Restore churches cache
-        id: churches-cache
+      # Churches — OSM Overpass is flaky under load, so we split the
+      # cache into restore + save and the fetcher is resume-aware:
+      # every run RESTORES the latest partial file, only re-fetches
+      # states below the 30-feature floor, then SAVES back under a
+      # run-unique key. Successive runs converge toward full 51-state
+      # coverage without anyone having to delete the cache.
+      - name: Restore churches cache (latest partial)
+        id: churches-restore
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.refresh_churches) }}
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: public/data/churches.geojson
-          key: churches-osm-v1
+          key: churches-osm-${{ github.run_id }}
+          restore-keys: |
+            churches-osm-
 
-      - name: Refresh churches (Overpass → HIFLD)
-        if: ${{ steps.churches-cache.outputs.cache-hit != 'true' }}
+      - name: Force-refresh reset
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.refresh_churches }}
+        run: rm -f public/data/churches.geojson
+
+      - name: Refresh / patch churches (Overpass → HIFLD)
         run: npm run data:churches
         continue-on-error: true
         timeout-minutes: 30
+
+      # Save whatever the fetcher produced — partial or complete —
+      # under a unique key. Next run's restore-keys prefix scan picks
+      # up the newest.
+      - name: Save churches cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: public/data/churches.geojson
+          key: churches-osm-${{ github.run_id }}-${{ github.run_attempt }}
 
       # Compose the misery index from whatever fetchers succeeded.
       - name: Build misery index

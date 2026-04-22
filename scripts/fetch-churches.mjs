@@ -175,95 +175,136 @@ async function fetchStateChunked(iso, bbox) {
   return { elements, mirror: `${successful}/${chunks.length} chunks` };
 }
 
-async function fetchOsm() {
-  log.step('OpenStreetMap Overpass — christian places of worship');
-  const features = [];
-
-  for (const iso of US_STATE_ISO) {
-    // First try the full-state query.
-    let got = await fetchState(iso);
-
-    // If it failed and this is a known-huge state, try chunking.
-    if ((!got || got.elements.length === 0) && CHUNK_BBOX[iso]) {
-      log.warn(`${iso}: full-state query exhausted; chunking into 4 bboxes`);
-      got = await fetchStateChunked(iso, CHUNK_BBOX[iso]);
-    }
-
-    if (!got || got.elements.length === 0) {
-      log.err(`${iso}: no features after all attempts; skipping state`);
-      continue;
-    }
-
-    for (const el of got.elements) {
-      const lon = el.lon ?? el.center?.lon;
-      const lat = el.lat ?? el.center?.lat;
-      if (typeof lon !== 'number' || typeof lat !== 'number') continue;
-      features.push({
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: [lon, lat] },
-        properties: {
-          n: el.tags?.name ?? null,
-          s: iso,
-          d: el.tags?.denomination ?? null,
-        },
-      });
-    }
-    log.ok(`OSM ${iso}: ${got.elements.length} (running ${features.length})`);
-
-    // Be polite to Overpass mirrors: pause briefly between states.
-    await sleep(500);
-  }
-  return { features, sourceLabel: 'OpenStreetMap Overpass' };
-}
-
 // --- main -----------------------------------------------------------------
 
+// A state is "complete enough" if it already has at least this many
+// features in the existing file. DC is the smallest real state at ~535,
+// so 30 is a safe floor — anything below means the prior run failed or
+// was truncated.
+const MIN_FEATURES_PER_STATE = 30;
+
 async function main() {
-  let result = null;
+  ensureOutDir();
+  const outPath = path.join(OUT_DIR, 'churches.geojson');
 
-  if (SOURCE === 'osm' || SOURCE === 'auto') {
+  // --- Load existing file (from the restored cache) so we can resume. ---
+  let existingFeatures = [];
+  const existingCounts = new Map(); // ISO → count
+  if (fs.existsSync(outPath)) {
     try {
-      result = await fetchOsm();
+      const prev = JSON.parse(fs.readFileSync(outPath, 'utf8'));
+      if (Array.isArray(prev.features)) {
+        existingFeatures = prev.features;
+        for (const f of existingFeatures) {
+          const s = f.properties?.s;
+          if (s) existingCounts.set(s, (existingCounts.get(s) ?? 0) + 1);
+        }
+        log.ok(
+          `loaded existing file: ${existingFeatures.length.toLocaleString()} features across ${existingCounts.size} states`
+        );
+      }
     } catch (e) {
-      log.warn(`OSM threw: ${e.message}`);
+      log.warn(`existing churches.geojson unreadable (${e.message}); starting fresh`);
+      existingFeatures = [];
+      existingCounts.clear();
     }
   }
 
-  if ((!result || result.features.length === 0) && (SOURCE === 'hifld' || SOURCE === 'auto')) {
-    try {
-      result = await fetchHifld();
-    } catch (e) {
-      log.warn(`HIFLD threw: ${e.message}`);
+  // Build the "needs fetching" state list.
+  const needs = US_STATE_ISO.filter((iso) => (existingCounts.get(iso) ?? 0) < MIN_FEATURES_PER_STATE);
+  const skipped = US_STATE_ISO.length - needs.length;
+  if (skipped > 0) {
+    log.ok(
+      `${skipped} state${skipped === 1 ? '' : 's'} already have ≥${MIN_FEATURES_PER_STATE} features — skipping. Fetching ${needs.length}: ${needs.join(', ') || '(none)'}`
+    );
+  }
+
+  // --- Fetch just the missing ones. ---
+  const newFeatures = [];
+
+  if (needs.length > 0 && (SOURCE === 'osm' || SOURCE === 'auto')) {
+    log.step('OpenStreetMap Overpass — christian places of worship');
+    for (const iso of needs) {
+      let got = await fetchState(iso);
+      if ((!got || got.elements.length === 0) && CHUNK_BBOX[iso]) {
+        log.warn(`${iso}: full-state query exhausted; chunking into 4 bboxes`);
+        got = await fetchStateChunked(iso, CHUNK_BBOX[iso]);
+      }
+      if (!got || got.elements.length === 0) {
+        log.err(`${iso}: no features after all attempts; leaving for next run`);
+        continue;
+      }
+      for (const el of got.elements) {
+        const lon = el.lon ?? el.center?.lon;
+        const lat = el.lat ?? el.center?.lat;
+        if (typeof lon !== 'number' || typeof lat !== 'number') continue;
+        newFeatures.push({
+          type: 'Feature',
+          geometry: { type: 'Point', coordinates: [lon, lat] },
+          properties: {
+            n: el.tags?.name ?? null,
+            s: iso,
+            d: el.tags?.denomination ?? null,
+          },
+        });
+      }
+      log.ok(`OSM ${iso}: +${got.elements.length} (new total ${existingFeatures.length + newFeatures.length})`);
+      await sleep(500);
     }
   }
 
-  // Always write a file, even if features is 0 — the app reads the file
-  // at runtime and handles an empty FeatureCollection by falling back
-  // to synthetic dots with a banner. Exit 0 either way so the deploy
-  // proceeds.
-  const features = result?.features ?? [];
-  const sourceLabel = result?.sourceLabel ?? 'no source succeeded';
+  if (
+    newFeatures.length === 0 &&
+    existingFeatures.length === 0 &&
+    (SOURCE === 'hifld' || SOURCE === 'auto')
+  ) {
+    log.step('Falling back to HIFLD');
+    try {
+      const hifld = await fetchHifld();
+      newFeatures.push(...hifld.features);
+    } catch (e) {
+      log.warn(`HIFLD failed: ${e.message}`);
+    }
+  }
+
+  // Merge existing + new. No dedupe needed — we only fetched states we
+  // didn't already have, so there's no overlap.
+  const merged = [...existingFeatures, ...newFeatures];
 
   const fc = {
     type: 'FeatureCollection',
-    features,
+    features: merged,
     metadata: {
-      source: sourceLabel,
+      source: 'OpenStreetMap Overpass',
       fetched: new Date().toISOString(),
-      count: features.length,
+      count: merged.length,
+      patched: newFeatures.length > 0,
     },
   };
 
-  ensureOutDir();
-  const outPath = path.join(OUT_DIR, 'churches.geojson');
   fs.writeFileSync(outPath, JSON.stringify(fc));
   const sz = fs.statSync(outPath).size;
 
-  if (features.length === 0) {
-    log.warn(`wrote EMPTY churches.geojson — every mirror failed. Deploy will proceed with synthetic dots.`);
+  const stateSummary = US_STATE_ISO.map((iso) => {
+    const prev = existingCounts.get(iso) ?? 0;
+    const added = newFeatures.filter((f) => f.properties?.s === iso).length;
+    return { iso, prev, added, total: prev + added };
+  });
+  const missing = stateSummary.filter((s) => s.total < MIN_FEATURES_PER_STATE).map((s) => s.iso);
+  const addedStates = stateSummary.filter((s) => s.added > 0).map((s) => `${s.iso}(+${s.added})`);
+
+  log.ok(
+    `wrote churches.geojson — ${merged.length.toLocaleString()} features (${(sz / 1024 / 1024).toFixed(1)} MB)`
+  );
+  if (addedStates.length) log.ok(`  added this run: ${addedStates.join(', ')}`);
+  if (missing.length) {
+    log.warn(
+      `  still missing (<${MIN_FEATURES_PER_STATE} features): ${missing.join(', ')} — re-run to patch`
+    );
   } else {
-    log.ok(`wrote churches.geojson — ${features.length.toLocaleString()} features (${(sz / 1024 / 1024).toFixed(1)} MB)`);
+    log.ok(`  all 51 states have ≥${MIN_FEATURES_PER_STATE} features. Cache is complete.`);
   }
 }
 
 await main();
+
