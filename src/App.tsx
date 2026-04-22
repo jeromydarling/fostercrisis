@@ -8,10 +8,15 @@ import type { GeoBundle } from './data/geo';
 export default function App() {
   const [chapterIndex, setChapterIndex] = useState(0);
   const [hoveredFips, setHoveredFips] = useState<string | null>(null);
+  const [selectedFips, setSelectedFips] = useState<string | null>(null);
   const [bundle, setBundle] = useState<GeoBundle | null>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && selectedFips) {
+        setSelectedFips(null);
+        return;
+      }
       if (e.key === 'ArrowRight' || e.key === 'PageDown') {
         setChapterIndex((i) => Math.min(CHAPTERS.length - 1, i + 1));
       } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
@@ -20,11 +25,17 @@ export default function App() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, []);
+  }, [selectedFips]);
 
   const onHoverState = useCallback((fips: string | null) => {
     setHoveredFips(fips);
   }, []);
+
+  const onSelectState = useCallback((fips: string | null) => {
+    setSelectedFips(fips);
+  }, []);
+
+  const clearSelection = useCallback(() => setSelectedFips(null), []);
 
   const chapter = CHAPTERS[chapterIndex];
   const countyChapter = chapter.geography === 'county';
@@ -43,11 +54,20 @@ export default function App() {
     <div className="app">
       <CrisisMap
         chapterIndex={chapterIndex}
+        selectedFips={selectedFips}
         onHoverState={onHoverState}
+        onSelectState={onSelectState}
         onBundleReady={setBundle}
       />
-      <ChapterPanel index={chapterIndex} onChange={setChapterIndex} />
-      <StateTooltip fips={hoveredFips} chapterIndex={chapterIndex} />
+      <ChapterPanel
+        index={chapterIndex}
+        onChange={setChapterIndex}
+        selectedFips={selectedFips}
+        onClearSelection={clearSelection}
+      />
+      {/* Hide the hover tooltip when a state is selected — the sidebar
+          already shows that state's detail, so the tooltip becomes redundant. */}
+      {!selectedFips && <StateTooltip fips={hoveredFips} chapterIndex={chapterIndex} />}
 
       {seedNotice && (
         <div className="banner" role="note">

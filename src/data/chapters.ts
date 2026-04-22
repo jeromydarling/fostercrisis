@@ -1,6 +1,5 @@
 import type { StateRow } from './states';
 import { NATIONAL } from './states';
-
 export type Metric =
   | 'fosterCarePerCapita'
   | 'homesPer100'
@@ -192,6 +191,8 @@ export const CHAPTERS: Chapter[] = [
     source: 'HIFLD All Places of Worship · County Health Rankings · AFCARS',
     showChurches: true,
   },
+  // Final chapter uses id='solution' and the state-framing helper below
+  // rewrites its headline for the selected state.
   {
     id: 'solution',
     number: 'VIII',
@@ -209,3 +210,98 @@ export const CHAPTERS: Chapter[] = [
     showChurches: true,
   },
 ];
+
+export interface Framing {
+  eyebrow: string;
+  title: string;
+  headline: string;
+  subline: string;
+  body: string;
+}
+
+const nf = (n: number) => Math.round(n).toLocaleString();
+
+/**
+ * Reframe a chapter's copy around a specific state when the viewer has
+ * drilled in. Falls back to national framing by returning undefined.
+ */
+export function frameForState(chapter: Chapter, row: StateRow): Framing {
+  const name = row.name;
+  const homes = row.licensedHomes;
+  const kids = row.fosterCare;
+  const homesPer100 = (homes / Math.max(1, kids)) * 100;
+  const odRate = (row.overdoseDeaths / Math.max(1, row.childPop * 4)) * 100000;
+  const churchesPerChild = row.congregations / Math.max(1, row.waitingAdoption);
+  const povertyKids = Math.round(row.childPop * row.childPovertyPct / 100);
+
+  const base = {
+    eyebrow: chapter.eyebrow,
+    title: chapter.title,
+  };
+
+  switch (chapter.id) {
+    case 'baseline':
+      return {
+        ...base,
+        headline: nf(kids),
+        subline: `children in ${name} custody tonight.`,
+        body: `Across ${name}, ${nf(kids)} children will sleep somewhere tonight that is not a home. That is ${(kids / row.childPop * 1000).toFixed(1)} out of every 1,000 children in the state. They did nothing wrong. They are waiting for an adult, any adult, to choose them.`,
+      };
+    case 'capacity':
+      return {
+        ...base,
+        headline: `${homesPer100.toFixed(0)} homes / 100 kids`,
+        subline: `${name} has ${nf(homes)} licensed foster homes for ${nf(kids)} children in care.`,
+        body: `If every licensed foster home in ${name} took in one child, ${nf(Math.max(0, kids - homes))} would still be without a family. The math doesn't work here either. It was never meant to.`,
+      };
+    case 'poverty':
+      return {
+        ...base,
+        headline: `${row.childPovertyPct.toFixed(0)}%`,
+        subline: `of ${name} children live in poverty.`,
+        body: `That is roughly ${nf(povertyKids)} kids in ${name} living below the poverty line. A hungry family is not an unsafe family — but state law often cannot tell the difference. This is where the entry point to foster care opens.`,
+      };
+    case 'opioids':
+      return {
+        ...base,
+        headline: nf(row.overdoseDeaths),
+        subline: `drug overdose deaths in ${name} last year (~${odRate.toFixed(0)} per 100k).`,
+        body: `A 10% rise in county overdose deaths predicts a 4.4% rise in foster-care entries twelve months later. For infants under age 1, more than half of all removals in ${name} are drug-related. The opioid map is not a parallel tragedy — it is the pipeline.`,
+      };
+    case 'missing':
+      return {
+        ...base,
+        headline: `~${nf(row.missingFromCare)}`,
+        subline: `${name} children reported missing from care in 2024.`,
+        body: `86% of child sex-trafficking victims reported to NCMEC nationally were in the child welfare system at the time. ${name}'s share of that pipeline runs through group homes, shelter placements, and the children no one knew where to put.`,
+      };
+    case 'misery':
+      return {
+        ...base,
+        headline: name,
+        subline: `Poverty + overdose + poor health + disability — the same counties every time.`,
+        body: `Zoom the misery map anywhere in ${name} and the same counties keep lighting up, decade after decade. These are the places ${name}'s foster children come from. This is where the entry point opens.`,
+      };
+    case 'complicity':
+      return {
+        ...base,
+        headline: `${nf(row.congregations)} churches`,
+        subline: `in ${name}. ${nf(row.waitingAdoption)} children are waiting for a family.`,
+        body: `Every Christian congregation in ${name} is a dot on this map. They are not missing. They stand in the Delta, in Appalachia, in the suburbs, in the city. The capacity to end ${name}'s foster waitlist is already here. It is choosing not to act.`,
+      };
+    case 'solution':
+      return {
+        ...base,
+        headline: `${nf(row.congregations)} × 1 = ${nf(row.congregations)}`,
+        subline: `${name}'s waitlist is ${nf(row.waitingAdoption)}. You'd end it ${churchesPerChild.toFixed(0)}× over.`,
+        body: `${nf(row.congregations)} congregations across ${name}. ${nf(row.waitingAdoption)} children waiting. ${nf(homes)} licensed foster homes. If one family from every church in ${name} said yes, the state's waitlist would disappear ${churchesPerChild.toFixed(0)} times over. The math is brutal, and it favors us.`,
+      };
+    default:
+      return {
+        ...base,
+        headline: chapter.headline,
+        subline: chapter.subline,
+        body: chapter.body,
+      };
+  }
+}

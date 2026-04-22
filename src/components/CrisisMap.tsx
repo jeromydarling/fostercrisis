@@ -47,11 +47,48 @@ function percentileDomain(values: number[], low = 0.05, high = 0.98): [number, n
 
 interface Props {
   chapterIndex: number;
+  selectedFips: string | null;
   onHoverState?: (fips: string | null) => void;
+  onSelectState?: (fips: string | null) => void;
   onBundleReady?: (bundle: GeoBundle) => void;
 }
 
-export function CrisisMap({ chapterIndex, onHoverState, onBundleReady }: Props) {
+// Default framing for the lower-48 view. Alaska/Hawaii are in the us-atlas
+// feature set but we anchor the home view on the contiguous U.S.
+const HOME_VIEW = {
+  center: [-96.5, 38.5] as [number, number],
+  zoom: 3.4,
+};
+
+// fitBounds padding: keep the sidebar (420px) clear and leave air on the
+// other edges so the selected state reads well.
+const FIT_PADDING = { top: 48, right: 48, bottom: 48, left: 460 };
+
+function featureBounds(f: GeoJSON.Feature): mapboxgl.LngLatBounds {
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  const visit = (c: unknown): void => {
+    if (Array.isArray(c) && typeof c[0] === 'number') {
+      const [x, y] = c as [number, number];
+      if (x < minX) minX = x;
+      if (x > maxX) maxX = x;
+      if (y < minY) minY = y;
+      if (y > maxY) maxY = y;
+    } else if (Array.isArray(c)) {
+      for (const inner of c) visit(inner);
+    }
+  };
+  const g = f.geometry;
+  if (g && 'coordinates' in g) visit(g.coordinates);
+  return new mapboxgl.LngLatBounds([minX, minY], [maxX, maxY]);
+}
+
+export function CrisisMap({
+  chapterIndex,
+  selectedFips,
+  onHoverState,
+  onSelectState,
+  onBundleReady,
+}: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const bundleRef = useRef<GeoBundle | null>(null);
@@ -69,8 +106,8 @@ export function CrisisMap({ chapterIndex, onHoverState, onBundleReady }: Props) 
     const map = new mapboxgl.Map({
       container: containerRef.current,
       style: 'mapbox://styles/mapbox/dark-v11',
-      center: [-96.5, 38.5],
-      zoom: 3.4,
+      center: HOME_VIEW.center,
+      zoom: HOME_VIEW.zoom,
       minZoom: 2.5,
       maxZoom: 9,
       projection: 'albers',
@@ -118,10 +155,11 @@ export function CrisisMap({ chapterIndex, onHoverState, onBundleReady }: Props) 
             'line-color': '#fff6d5',
             'line-width': [
               'case',
-              ['boolean', ['feature-state', 'hover'], false],
-              1.8,
+              ['boolean', ['feature-state', 'selected'], false], 2.4,
+              ['boolean', ['feature-state', 'hover'], false], 1.8,
               0,
             ],
+            'line-opacity': 0.95,
           },
         });
 
@@ -173,6 +211,20 @@ export function CrisisMap({ chapterIndex, onHoverState, onBundleReady }: Props) 
             'circle-color': '#ffffff',
             'circle-opacity': 0.85,
           },
+        });
+
+        // --- Click: select / deselect ---
+        map.on('click', 'states-fill', (e) => {
+          const f = e.features?.[0];
+          if (!f) return;
+          e.originalEvent?.stopPropagation();
+          const fips = f.id as string;
+          onSelectState?.(fips);
+        });
+        // Click on empty canvas (outside any state) clears selection.
+        map.on('click', (e) => {
+          const hit = map.queryRenderedFeatures(e.point, { layers: ['states-fill'] });
+          if (!hit.length) onSelectState?.(null);
         });
 
         // --- Hover ---
@@ -259,6 +311,40 @@ export function CrisisMap({ chapterIndex, onHoverState, onBundleReady }: Props) 
     map.setLayoutProperty('churches-glow', 'visibility', churchVis);
     map.setLayoutProperty('churches-core', 'visibility', churchVis);
   }, [chapterIndex, ready]);
+
+  // Selected state: toggle feature-state + animate the camera.
+  const prevSelectedRef = useRef<string | null>(null);
+  useEffect(() => {
+    const map = mapRef.current;
+    const bundle = bundleRef.current;
+    if (!ready || !map || !bundle) return;
+
+    const prev = prevSelectedRef.current;
+    if (prev && prev !== selectedFips) {
+      map.setFeatureState({ source: 'states', id: prev }, { selected: false });
+    }
+
+    if (selectedFips) {
+      map.setFeatureState({ source: 'states', id: selectedFips }, { selected: true });
+      const feat = bundle.states.features.find((f) => f.id === selectedFips);
+      if (feat) {
+        const bounds = featureBounds(feat);
+        map.fitBounds(bounds, {
+          padding: FIT_PADDING,
+          duration: 900,
+          maxZoom: 7,
+        });
+      }
+    } else if (prev) {
+      map.easeTo({
+        center: HOME_VIEW.center,
+        zoom: HOME_VIEW.zoom,
+        duration: 900,
+      });
+    }
+
+    prevSelectedRef.current = selectedFips;
+  }, [selectedFips, ready]);
 
   return (
     <div className="map-root">

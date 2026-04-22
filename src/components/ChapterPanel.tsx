@@ -1,29 +1,76 @@
-import { CHAPTERS } from '../data/chapters';
+import { CHAPTERS, frameForState } from '../data/chapters';
+import { STATE_INDEX } from '../data/states';
 
 interface Props {
   index: number;
   onChange: (i: number) => void;
+  selectedFips: string | null;
+  onClearSelection: () => void;
 }
 
-export function ChapterPanel({ index, onChange }: Props) {
+export function ChapterPanel({ index, onChange, selectedFips, onClearSelection }: Props) {
   const chapter = CHAPTERS[index];
+  const stateRow = selectedFips ? STATE_INDEX[selectedFips] : null;
+  const framing = stateRow ? frameForState(chapter, stateRow) : null;
+
+  const eyebrow = framing?.eyebrow ?? chapter.eyebrow;
+  const title = framing?.title ?? chapter.title;
+  const headline = framing?.headline ?? chapter.headline;
+  const subline = framing?.subline ?? chapter.subline;
+  const body = framing?.body ?? chapter.body;
+
   return (
     <aside className="sidebar">
       <header className="sidebar-header">
-        <p className="brand">THE FOSTER CRISIS</p>
-        <p className="brand-sub">A map of American silence.</p>
+        {stateRow ? (
+          <button className="back-btn" onClick={onClearSelection} type="button">
+            <span aria-hidden>←</span> National view
+          </button>
+        ) : (
+          <>
+            <p className="brand">THE FOSTER CRISIS</p>
+            <p className="brand-sub">A map of American silence.</p>
+          </>
+        )}
       </header>
 
       <div className="chapter-body">
-        <p className="eyebrow">{chapter.eyebrow}</p>
-        <h1 className="chapter-title">{chapter.title}</h1>
+        <p className="eyebrow">
+          {eyebrow}
+          {stateRow && <span className="eyebrow-state"> · {stateRow.name}</span>}
+        </p>
+        <h1 className="chapter-title">{title}</h1>
 
         <div className="headline">
-          <span className="headline-number">{chapter.headline}</span>
-          <span className="headline-sub">{chapter.subline}</span>
+          <span className="headline-number">{headline}</span>
+          <span className="headline-sub">{subline}</span>
         </div>
 
-        <p className="chapter-text">{chapter.body}</p>
+        <p className="chapter-text">{body}</p>
+
+        {stateRow && (
+          <div className="state-cta">
+            {stateRow.adoptionSite ? (
+              <a
+                className="state-cta-link"
+                href={stateRow.adoptionSite}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Find a child waiting in {stateRow.name} →
+              </a>
+            ) : (
+              <a
+                className="state-cta-link muted"
+                href={`https://www.adoptuskids.org/meet-the-children/search?state=${stateRow.code}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Meet {stateRow.name}'s waiting children (AdoptUSKids) →
+              </a>
+            )}
+          </div>
+        )}
 
         <div className="legend">
           <div className="legend-label">{chapter.unit}</div>

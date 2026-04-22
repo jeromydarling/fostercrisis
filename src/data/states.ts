@@ -36,6 +36,9 @@ export interface StateRow {
   overdoseDeaths: number;
   missingFromCare: number;
   congregations: number;
+  /** Official state adoption / foster recruitment site. Perplexity will
+   *  fill these in; see scripts/update-adoption-sites.mjs (coming). */
+  adoptionSite?: string;
   /** True when a value is scaled from a national aggregate rather than
    *  pulled from a per-state table. */
   _modeledMissing?: boolean;
