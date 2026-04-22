@@ -2,10 +2,15 @@
 // scripts/fetch-churches.mjs
 //
 // Fetches Christian places of worship across the U.S. and writes a minimal
-// GeoJSON point set. Tries HIFLD first (authoritative, ~356k points),
-// falls back to OpenStreetMap via Overpass if HIFLD is unavailable.
+// GeoJSON point set.
 //
-// Run:  node scripts/fetch-churches.mjs [--source hifld|osm]
+// Default source is OpenStreetMap via Overpass — reliable, free, and
+// well-populated for the U.S. (~200k Christian places-of-worship). HIFLD
+// is available via --source hifld but the public ArcGIS endpoint URL has
+// shifted over the years; update HIFLD_SERVICE if the default 403s.
+//
+// Run:  node scripts/fetch-churches.mjs [--source osm|hifld|auto]
+//       default: auto (OSM first, HIFLD fallback)
 //
 // Output: public/data/churches.geojson
 
@@ -79,12 +84,11 @@ async function fetchOsm() {
     let got = null;
     for (const base of OVERPASS_ENDPOINTS) {
       try {
-        const body = 'data=' + encodeURIComponent(q);
-        const text = await fetchText(base, {
-          timeoutMs: 180_000,
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        });
-        void body; // POSTs vary per mirror; some require POST, some accept GET.
+        // Overpass accepts both GET (?data=...) and POST (form body).
+        // Our queries are small per-state, so GET is simpler and plays
+        // well with CDN caches.
+        const url = `${base}?data=${encodeURIComponent(q)}`;
+        const text = await fetchText(url, { timeoutMs: 180_000 });
         got = JSON.parse(text);
         break;
       } catch (e) {
@@ -116,16 +120,23 @@ async function fetchOsm() {
 
 async function main() {
   let result = null;
-  if (SOURCE === 'hifld' || SOURCE === 'auto') {
+  // Try OSM first in 'auto' mode — it's the more reliable endpoint.
+  if (SOURCE === 'osm' || SOURCE === 'auto') {
+    try {
+      result = await fetchOsm();
+      if (result && !result.features.length) result = null;
+    } catch (e) {
+      log.warn(`OSM failed: ${e.message}`);
+      if (SOURCE === 'osm') process.exit(1);
+    }
+  }
+  if (!result && (SOURCE === 'hifld' || SOURCE === 'auto')) {
     try {
       result = await fetchHifld();
     } catch (e) {
       log.warn(`HIFLD failed: ${e.message}`);
       if (SOURCE === 'hifld') process.exit(1);
     }
-  }
-  if (!result && (SOURCE === 'osm' || SOURCE === 'auto')) {
-    result = await fetchOsm();
   }
   if (!result || !result.features.length) {
     log.err('No features fetched from any source.');

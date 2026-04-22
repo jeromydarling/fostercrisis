@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       refresh_churches:
-        description: Pull fresh HIFLD/OSM church data (slow, ~5-15 min)
+        description: Force-refresh churches (ignore cache)
         type: boolean
         default: false
 
@@ -47,7 +47,7 @@ jobs:
 
       - run: npm ci
 
-      # Small, reliable datasets refreshed on every deploy.
+      # Small datasets — refresh on every deploy.
       - name: Refresh SAIPE (county child poverty)
         run: npm run data:saipe
         continue-on-error: true
@@ -64,13 +64,22 @@ jobs:
         run: npm run data:acs
         continue-on-error: true
 
-      # HIFLD / OSM churches — only on manual dispatch since the pull is
-      # large (~30-50 MB) and slow. Normal pushes reuse whatever was
-      # committed under public/data/churches.geojson.
-      - name: Refresh churches (HIFLD → OSM)
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.refresh_churches }}
+      # Churches (~200k OSM points, ~30 MB). Cache between runs so we
+      # only hit Overpass on the first deploy and on forced refreshes.
+      # Bump the cache key suffix (`-v1`) to invalidate without UI access.
+      - name: Restore churches cache
+        id: churches-cache
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.refresh_churches) }}
+        uses: actions/cache@v4
+        with:
+          path: public/data/churches.geojson
+          key: churches-osm-v1
+
+      - name: Refresh churches (Overpass → HIFLD)
+        if: ${{ steps.churches-cache.outputs.cache-hit != 'true' }}
         run: npm run data:churches
         continue-on-error: true
+        timeout-minutes: 30
 
       # Compose the misery index from whatever fetchers succeeded.
       - name: Build misery index
