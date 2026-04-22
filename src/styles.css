@@ -4259,8 +4259,12 @@ body {
 @media (max-width: 900px) {
   /* The map section becomes a normal-flow stack instead of a 100vh
      absolute container. Map on top, sidebar below, both in the page
-     scroll. */
-  .map-section {
+     scroll. The `.mode-map` qualifier is required so this rule has
+     the same specificity as the desktop
+     `.mode-map .map-section { height: calc(100vh - 52px) }` rule and
+     can override it inside the media query. */
+  .map-section,
+  .mode-map .map-section {
     position: relative;
     height: auto;
     min-height: 0;
@@ -4292,7 +4296,10 @@ body {
   .mapboxgl-canvas-container { touch-action: pan-y !important; }
 
   /* Sidebar becomes an in-flow block under the map. No fixed
-     positioning, no drag handle, no bottom-sheet chrome. */
+     positioning, no drag handle, no bottom-sheet chrome. Overflow
+     must be visible — on desktop the sidebar is a fixed-height
+     scroll container, but on mobile we want it to grow to contain
+     the chapter rail + controls so nothing gets clipped. */
   .sidebar {
     position: static;
     inset: auto;
@@ -4307,6 +4314,7 @@ body {
     box-shadow: none;
     z-index: auto;
     flex: 0 0 auto;
+    overflow: visible;
   }
 
   .sidebar::before { display: none; } /* no drag handle in flow */
