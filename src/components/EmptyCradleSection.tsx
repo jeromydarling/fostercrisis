@@ -1,6 +1,41 @@
 // Section III — The Empty Cradle. 500 years of Christian fertility
 // collapsing into three generations, on the same page where 70,418
 // children are still waiting for a family.
+
+import { SourceDetails, type Citation } from './SourceDetails';
+
+const CITATIONS: Citation[] = [
+  {
+    label: 'CDC NCHS — National Vital Statistics System, births & fertility',
+    note: 'U.S. total fertility rate, births by year, births to unmarried women. Source for the fertility-collapse chart and every decade-by-decade TFR number.',
+    href: 'https://www.cdc.gov/nchs/nvss/births.htm',
+    display: 'cdc.gov/nchs',
+  },
+  {
+    label: 'CIA World Factbook — Global total fertility rates',
+    note: 'Benchmark TFRs used in the comparative chart (U.S. vs. European post-Christian cultures vs. global replacement).',
+    href: 'https://www.cia.gov/the-world-factbook/field/total-fertility-rate/',
+    display: 'cia.gov/world-factbook',
+  },
+  {
+    label: 'Pew Research — Religion and fertility',
+    note: 'Religiosity × fertility cross-tabulations; evangelical vs. mainline vs. non-religious birth-rate differentials.',
+    href: 'https://www.pewresearch.org/religion/',
+    display: 'pewresearch.org',
+  },
+  {
+    label: 'AFCARS Report #30 — 70,418 children waiting for adoption',
+    note: 'The anchor number for the vacancy argument — the empty bedrooms vs. the waiting children.',
+    href: 'https://www.acf.hhs.gov/cb/data-research/adoption-fostercare',
+    display: 'acf.hhs.gov',
+  },
+  {
+    label: 'U.S. Religion Census 2020 — congregations / attendance',
+    note: '~380,000 Christian congregations averaging ~100 families each. The pool against which "3% have ever fostered" is computed.',
+    href: 'https://www.usreligioncensus.org/',
+    display: 'usreligioncensus.org',
+  },
+];
 //
 // The argument is not that modern Christians *should* have 9 kids like
 // the Puritans. It is that the combined refusal to have biological
@@ -226,6 +261,8 @@ export function EmptyCradleSection() {
           church parking lot on Sunday and the Netflix queue on Monday.
         </p>
       </div>
+
+      <SourceDetails citations={CITATIONS} />
     </section>
   );
 }

@@ -5,7 +5,6 @@ import { MapExperience } from './components/MapExperience';
 import { EssayExperience } from './components/EssayExperience';
 import { SolutionExperience } from './components/SolutionExperience';
 import { ClosingEpigraph } from './components/ClosingEpigraph';
-import { Sources } from './components/Sources';
 
 /** Hash router:
  *    (no hash, or #)  → Landing (epigraph + choose)
@@ -68,15 +67,15 @@ export default function App() {
 
       {mode !== 'landing' && (
         <>
-          <Sources />
           <ClosingEpigraph />
           <footer className="page-footer">
             <p>
               <strong>fostercrisis.com</strong> — a map, an indictment, and a
-              directory. Every chart, every claim, every choropleth traces
-              back to a source in the block above. Feeds embed from the
-              originating organizations; we never re-host children's videos
-              or images.
+              directory. Every essay section carries its own
+              <em> Sources</em> drawer; every map chapter names its
+              source inline. Nothing on this site is unsourced. Feeds
+              embed from the originating organizations; we never
+              re-host children's videos or images.
             </p>
           </footer>
         </>

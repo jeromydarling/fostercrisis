@@ -1,3 +1,80 @@
+import { SourceDetails, type Citation } from './SourceDetails';
+
+const CITATIONS: Citation[] = [
+  {
+    label: 'Roe v. Wade (1973) — Supreme Court of the United States',
+    note: '7–2 decision. Six of the seven majority justices were Protestant. Primary text of the decision.',
+    href: 'https://www.law.cornell.edu/supremecourt/text/410/113',
+    display: 'law.cornell.edu',
+  },
+  {
+    label: 'Southern Baptist Convention — 1971 Resolution on Abortion',
+    note: 'Messengers voted FOR legalization of abortion under specified circumstances, two years before Roe. The primary-source resolution.',
+    href: 'https://www.sbc.net/resource-library/resolutions/resolution-on-abortion-2/',
+    display: 'sbc.net',
+  },
+  {
+    label: 'Guttmacher Institute — U.S. abortion statistics',
+    note: 'Year-by-year totals 1973–present; pre-Roe estimates; post-Dobbs 2022/2024 numbers (1.126M in 2024, +21% from 2020).',
+    href: 'https://www.guttmacher.org/united-states/abortion',
+    display: 'guttmacher.org',
+  },
+  {
+    label: 'Charlotte Lozier Institute — PRC spending and reach',
+    note: 'Source for $452M/yr to pregnancy-resource centers across 2,775 locations.',
+    href: 'https://lozierinstitute.org/',
+    display: 'lozierinstitute.org',
+  },
+  {
+    label: 'Bethany Christian Services — IRS Form 990',
+    note: 'The largest Christian foster-care nonprofit in America runs on ~$84M/yr — less than one-fifth of annual PRC spending.',
+    href: 'https://bethany.org/',
+    display: 'bethany.org',
+  },
+  {
+    label: 'Hartford Institute for Religion Research — megachurch data',
+    note: '1,800+ megachurches in the U.S.; ~$28M average annual budget; total operating spend. Willow Creek 1975 / Saddleback 1980 / Life.Church 1996 founding data.',
+    href: 'https://hartfordinstitute.org/megachurch-definition',
+    display: 'hartfordinstitute.org',
+  },
+  {
+    label: 'RIAA — U.S. Christian music industry revenue',
+    note: '$1.7B/year Christian/gospel music industry; 28.4B streams (2023). Used for the worship-economy line.',
+    href: 'https://www.riaa.com/',
+    display: 'riaa.com',
+  },
+  {
+    label: 'Pew Research — Religious Landscape Study',
+    note: 'Denominational breakdown and attendance data underpinning the "5 substitutes" scale figures.',
+    href: 'https://www.pewresearch.org/religion/religious-landscape-study/',
+    display: 'pewresearch.org',
+  },
+  {
+    label: 'Barna Research — Christian fostering / adoption rates',
+    note: '~3% of American Christians have ever fostered; practicing-Christian rates on the tally row.',
+    href: 'https://www.barna.com/',
+    display: 'barna.com',
+  },
+  {
+    label: 'Pornhub Insights — State of the Union',
+    note: 'Bible Belt / Mississippi rank-order across 2014–2019. Counter-evidence to purity-culture claims.',
+    href: 'https://www.pornhub.com/insights/united-states',
+    display: 'pornhub.com/insights',
+  },
+  {
+    label: 'Purdue / Ferraro (2006) — Religion and Obesity in American Adults',
+    note: 'Denominational obesity table (Baptists 30%, Jews 1%, Muslims 0.7%) cited in the "lost war" section.',
+    href: 'https://journals.sagepub.com/doi/10.1177/002214650604700203',
+    display: 'journals.sagepub.com',
+  },
+  {
+    label: 'True Love Waits campaign archive / SBC',
+    note: 'True Love Waits (1993) and purity-culture movement scale — millions of pledges. Primary archive.',
+    href: 'https://www.lifeway.com/en/product-family/true-love-waits',
+    display: 'lifeway.com',
+  },
+];
+
 // Part V — The Substitution & The Lost War.
 //
 // The closing argument of the entire site. What American Christianity did
@@ -420,6 +497,8 @@ export function SubstitutionSection() {
           <span className="subst-final-line subst-final-kicker">Crystal clear.</span>
         </blockquote>
       </div>
+
+      <SourceDetails citations={CITATIONS} />
     </section>
   );
 }

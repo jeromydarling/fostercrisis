@@ -13,6 +13,7 @@ const PARTS: Part[] = [
   { id: 'timeline',     roman: 'V',   label: 'Master Timeline' },
   { id: 'substitution', roman: 'VI',  label: 'The Substitution' },
   { id: 'pipeline',     roman: 'VII', label: 'The Pipeline' },
+  { id: 'wound',        roman: 'VIII', label: 'The Wound' },
 ];
 
 /** Sticky secondary nav rail under the main header on the essay view.

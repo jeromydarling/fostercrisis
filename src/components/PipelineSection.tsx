@@ -7,6 +7,8 @@
 //
 // Anchored to the foster_to_crime_pipeline.md doc in the repo root.
 
+import { SourceDetails, type Citation } from './SourceDetails';
+
 interface Stat {
   figure: string;
   label: string;
@@ -50,6 +52,81 @@ const HEADLINE_STATS: Stat[] = [
     label: 'taxpayer bill',
     sub: 'over 10 years from ~300,000 failed transitions.',
     source: 'Annie E. Casey Foundation',
+  },
+];
+
+const CITATIONS: Citation[] = [
+  {
+    label: 'Bald, Chyn, Humlum & Stephenson (2022) — NBER / CEPR',
+    note: '"~1 in 5 U.S. prison inmates is a former foster child." Also the causal finding that, for the marginal child, foster placement reduces arrest / conviction / incarceration vs. being left home.',
+    href: 'https://cepr.org/voxeu/columns/foster-care-prison-pipeline',
+    display: 'cepr.org',
+  },
+  {
+    label: 'Chapin Hall Midwest Evaluation of the Adult Functioning of Former Foster Youth',
+    note: '732 youth followed 17→26 across IL, IA, WI. Source for "70% arrested by 26" / "~81% of males" and the 55% pregnant by 19 / 71% by 21 figures.',
+    href: 'https://ocfcpacourts.us/wp-content/uploads/2020/06/Midwest_Evaluation_of_the_Adult_Functioning_001015.pdf',
+    display: 'Midwest Study PDF',
+  },
+  {
+    label: 'Foster care, permanency, and risk of prison entry — NIH PMC',
+    note: 'Prospective study of WA foster youth. Source for the prison-entry-by-exit-type table (Adopted 3.2% → Juvenile detention 48.2%).',
+    href: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8975219/',
+    display: 'pmc.ncbi.nlm.nih.gov',
+  },
+  {
+    label: 'Children and Youth Services Review (2025)',
+    note: 'Longitudinal analysis — 42% lifetime incarceration rate by age 20.',
+    href: 'https://www.sciencedirect.com/science/article/abs/pii/S0145213425002248',
+    display: 'sciencedirect.com',
+  },
+  {
+    label: 'American University — Criminal Law Practitioner',
+    note: '"The Foster-Care-to-Prison Pipeline." Source for the 5+ placements → 90% criminal-legal involvement finding.',
+    href: 'https://www.crimlawpractitioner.org/post/the-foster-care-to-prison-pipeline-a-road-to-incarceration',
+    display: 'crimlawpractitioner.org',
+  },
+  {
+    label: 'American Journal of Public Health — NIH PMC',
+    note: 'Foster-care homelessness outcomes. 22–30% homeless during transition; 31–46% by 26.',
+    href: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3969135/',
+    display: 'pmc.ncbi.nlm.nih.gov',
+  },
+  {
+    label: 'Dworsky & Courtney — Teen pregnancy among young women in foster care',
+    note: 'NIH PMC. Foster females pregnant at 50% vs. 20% general population by 19.',
+    href: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3902972/',
+    display: 'pmc.ncbi.nlm.nih.gov',
+  },
+  {
+    label: 'Iowa HHS — Human Trafficking Safety of Children in Foster Care',
+    note: '~60% of child sex-trafficking victims recovered in 2013 FBI raid came from foster care or group homes.',
+    href: 'https://hhs.iowa.gov/media/6797',
+    display: 'hhs.iowa.gov',
+  },
+  {
+    label: 'Loyola Children\'s Legal Rights Journal',
+    note: 'Confirms FBI 60%, NCMEC 86%, and Connecticut 86-of-88 trafficking-victim figures.',
+    href: 'https://lawecommons.luc.edu/cgi/viewcontent.cgi?article=1160&context=clrj',
+    display: 'lawecommons.luc.edu',
+  },
+  {
+    label: 'Annie E. Casey Foundation — Cost Avoidance',
+    note: '~$250 billion over a decade from failed foster transitions; justice-system / lost-earnings / teen-parenthood breakdown.',
+    href: 'https://www.aecf.org/resources/cost-avoidance-the-business-case-for-investing-in-youth-aging-out-of-foster',
+    display: 'aecf.org',
+  },
+  {
+    label: 'The Imprint — "Decriminalize young people who grew up in foster care"',
+    note: 'Framing context on the transition-window arrest/incarceration numbers.',
+    href: 'https://imprintnews.org/top-stories/decriminalize-young-people-who-grew-up-in-foster-care/246740',
+    display: 'imprintnews.org',
+  },
+  {
+    label: 'Casey Family Programs (2024) — pregnant-and-parenting foster youth',
+    note: '"Continuity of involvement" — the intergenerational foster-removal cycle.',
+    href: 'https://www.casey.org/pregnant-parenting-strategies/',
+    display: 'casey.org',
   },
 ];
 
@@ -190,6 +267,8 @@ export function PipelineSection() {
           </span>
         </blockquote>
       </div>
+
+      <SourceDetails citations={CITATIONS} />
     </section>
   );
 }

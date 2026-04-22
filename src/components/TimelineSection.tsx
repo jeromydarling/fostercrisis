@@ -1,6 +1,53 @@
 // The Nerds' View — a rigorous, interactive master timeline that plots
 // every series the site argues from on a single 1620 → 2030 axis, with
 // era bands, event pins, and a hover scrubber.
+
+import { SourceDetails, type Citation } from './SourceDetails';
+
+const CITATIONS: Citation[] = [
+  {
+    label: 'U.S. Census Bureau — historical vital statistics',
+    note: 'Total fertility rate and birth totals back to 1800. Source for the fertility line across the 400-year axis.',
+    href: 'https://www.census.gov/topics/population/fertility.html',
+    display: 'census.gov',
+  },
+  {
+    label: 'CDC NCHS — marriage / divorce historical series',
+    note: 'Crude marriage rate, crude divorce rate, 1867–present. Source for the "revolution" leg of the timeline.',
+    href: 'https://www.cdc.gov/nchs/nvss/marriage-divorce.htm',
+    display: 'cdc.gov/nchs',
+  },
+  {
+    label: 'Guttmacher Institute — abortion time series',
+    note: 'Annual U.S. abortions 1973–present; pre-Roe estimates; post-Dobbs 2022–2024 totals (1.126 million in 2024, +21% from 2020).',
+    href: 'https://www.guttmacher.org/united-states/abortion',
+    display: 'guttmacher.org',
+  },
+  {
+    label: 'AFCARS — foster-care census, 1982–present',
+    note: 'The foster-care line on the timeline uses AFCARS annual report-year totals back to the program\'s inception.',
+    href: 'https://www.acf.hhs.gov/cb/data-research/adoption-fostercare',
+    display: 'acf.hhs.gov',
+  },
+  {
+    label: 'U.S. Religion Census — congregation counts through time',
+    note: 'Religious attendance and congregation totals used for the religiosity overlay on the 400-year axis.',
+    href: 'https://www.usreligioncensus.org/',
+    display: 'usreligioncensus.org',
+  },
+  {
+    label: 'CDC WONDER — drug overdose deaths, 1999–present',
+    note: 'Annual overdose totals used for the addiction series on the timeline.',
+    href: 'https://wonder.cdc.gov/',
+    display: 'wonder.cdc.gov',
+  },
+  {
+    label: 'Event pins — historical record',
+    note: 'Roe v. Wade (1973), Humanae Vitae (1968), SBC resolution on abortion (1971), Dobbs (2022), Obergefell (2015), etc. Sourced from primary legal and ecclesial documents.',
+    href: 'https://www.supremecourt.gov/',
+    display: 'primary sources',
+  },
+];
 //
 // Swimlane layout: one horizontal strip per series, all sharing the
 // same x-axis. Era backgrounds run top-to-bottom behind every lane.
@@ -552,6 +599,8 @@ export function TimelineSection() {
           spoke, shrugged, or stayed silent.
         </p>
       </div>
+
+      <SourceDetails citations={CITATIONS} />
     </section>
   );
 }

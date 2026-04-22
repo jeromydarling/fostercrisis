@@ -1,6 +1,47 @@
 // Section IV — The Convergence.
 //
 // The single clearest thing this whole site argues. The two collapses —
+
+import { SourceDetails, type Citation } from './SourceDetails';
+
+const CITATIONS: Citation[] = [
+  {
+    label: 'CDC NVSS — Marriage and divorce',
+    note: 'Crude divorce rate per 1,000 population, 1940–present. Some states (CA, HI, IN, MN, NM, OK) don\'t report to NVSS — those values are state vital-records estimates.',
+    href: 'https://www.cdc.gov/nchs/nvss/marriage-divorce.htm',
+    display: 'cdc.gov/nchs/nvss',
+  },
+  {
+    label: 'CDC NCHS — Births to unmarried women, NVSR 72-1',
+    note: 'Share of births to unmarried women by state, 2022. Source for the unwed-births leg of the revolution chart.',
+    href: 'https://www.cdc.gov/nchs/data/nvsr/nvsr72/nvsr72-01.pdf',
+    display: 'cdc.gov/nchs/nvsr',
+  },
+  {
+    label: 'Guttmacher Institute — U.S. abortion statistics',
+    note: 'Year-by-year abortion totals, 1973–2024, used in the cumulative abortion line on the convergence chart.',
+    href: 'https://www.guttmacher.org/united-states/abortion',
+    display: 'guttmacher.org',
+  },
+  {
+    label: 'AFCARS — Children in foster care, 1980–present',
+    note: 'Historical foster-care census used as the downstream line of the convergence chart.',
+    href: 'https://www.acf.hhs.gov/cb/data-research/adoption-fostercare',
+    display: 'acf.hhs.gov',
+  },
+  {
+    label: 'CDC / NIDA — Opioid overdose deaths',
+    note: 'Annual overdose-death totals, 1999–present. Source for the addiction leg of the convergence chart.',
+    href: 'https://www.cdc.gov/drugoverdose/',
+    display: 'cdc.gov',
+  },
+  {
+    label: 'Pornhub Insights — State of the Union (2014–2019)',
+    note: 'Average session duration by U.S. state, year-over-year rankings. The authoritative public source for what the telemetry actually shows.',
+    href: 'https://www.pornhub.com/insights/united-states',
+    display: 'pornhub.com/insights',
+  },
+];
 // Christian fertility down, foster care up — are not coincidences. They
 // are the same event, seen from two sides of the same door. They begin
 // in the same decade (1960–1975), for the same reasons, with the same
@@ -432,6 +473,8 @@ export function ConvergenceSection() {
           is still the one who won't open the spare bedroom.
         </p>
       </div>
+
+      <SourceDetails citations={CITATIONS} />
     </section>
   );
 }

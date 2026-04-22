@@ -1,4 +1,38 @@
 import { useEffect, useState } from 'react';
+import { SourceDetails, type Citation } from './SourceDetails';
+
+const CITATIONS: Citation[] = [
+  {
+    label: 'AFCARS Report #30 (FY2023) — HHS / Children\'s Bureau',
+    note: 'Point-in-time census: 368,530 children in care; 70,418 waiting for adoption; 34,817 legally free.',
+    href: 'https://www.acf.hhs.gov/cb/data-research/adoption-fostercare',
+    display: 'acf.hhs.gov',
+  },
+  {
+    label: '2020 U.S. Religion Census',
+    note: '~380,000 Christian congregations nationally. Source for every "churches per waiting child" calculation.',
+    href: 'https://www.usreligioncensus.org/',
+    display: 'usreligioncensus.org',
+  },
+  {
+    label: 'Pew Research — Religious Landscape Study',
+    note: 'State-level "% highly religious" composite (prayer, attendance, importance, certain belief). The reddest pews / longest waitlists overlay.',
+    href: 'https://www.pewresearch.org/religion/religious-landscape-study/',
+    display: 'pewresearch.org',
+  },
+  {
+    label: 'Barna Research — Faith and fostering',
+    note: 'Source for "3% of American Christians have ever fostered" and practicing-Christian adoption/fostering rates cited across the site.',
+    href: 'https://www.barna.com/',
+    display: 'barna.com',
+  },
+  {
+    label: 'Pew — American Christianity attendance + giving',
+    note: 'Weekly-attendance shares, denominational breakdown, giving data used in the stacks section.',
+    href: 'https://www.pewresearch.org/religion/',
+    display: 'pewresearch.org',
+  },
+];
 
 // Every "Redirect" swap. One animated card cycles these every few seconds.
 // The argument is: you already have the time. You already have the money.
@@ -330,6 +364,8 @@ export function MirrorSection() {
           The phone won the argument. The child lost it.
         </p>
       </div>
+
+      <SourceDetails citations={CITATIONS} />
     </section>
   );
 }
