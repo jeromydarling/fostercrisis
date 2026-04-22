@@ -89,6 +89,183 @@ export function Sources() {
         </section>
 
         <section className="source-group">
+          <h3>The foster-to-crime pipeline</h3>
+          <ul>
+            <li>
+              <strong>Bald, Chyn, Humlum &amp; Stephenson (2022)</strong> — NBER
+              working paper / CEPR summary. Source for the "~1 in 5 U.S.
+              prison inmates is a former foster child" headline and for the
+              causal finding that, for the marginal child, foster placement
+              reduces arrest / conviction / incarceration vs. being left
+              home.{' '}
+              <a
+                href="https://cepr.org/voxeu/columns/foster-care-prison-pipeline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                cepr.org/voxeu
+              </a>
+            </li>
+            <li>
+              <strong>Chapin Hall Midwest Evaluation of the Adult Functioning
+              of Former Foster Youth</strong> (University of Chicago). 732 youth
+              followed from age 17 to 26 across IL, IA, WI. Source for the
+              "70% arrested by 26" / "~81% of males" figure, the 7%
+              currently-incarcerated-at-interview number, and the 55% pregnant
+              by 19 / 71% by 21 figures.{' '}
+              <a
+                href="https://ocfcpacourts.us/wp-content/uploads/2020/06/Midwest_Evaluation_of_the_Adult_Functioning_001015.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Midwest Study PDF
+              </a>
+            </li>
+            <li>
+              <strong>Foster care, permanency, and risk of prison entry</strong>
+              — Journal of Research in Crime and Delinquency (NIH PMC).
+              Prospective study of WA foster youth. Source for the prison-entry
+              table by exit type (adopted 3.2%, aged out 8.6%, reunified 13.2%,
+              runaway 19.1%, juvenile detention 48.2%).{' '}
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8975219/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                pmc.ncbi.nlm.nih.gov
+              </a>
+            </li>
+            <li>
+              <strong>Children and Youth Services Review (2025)</strong> —
+              longitudinal analysis. Source for the "42% lifetime incarceration
+              rate by age 20" figure.{' '}
+              <a
+                href="https://www.sciencedirect.com/science/article/abs/pii/S0145213425002248"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                sciencedirect.com
+              </a>
+            </li>
+            <li>
+              <strong>The Criminal Law Practitioner, American University</strong>
+              — &ldquo;The Foster-Care-to-Prison Pipeline: A Road to Incarceration.&rdquo;
+              Source for the "5+ placements → 90% criminal-legal involvement"
+              finding and the "50%+ juvenile-justice encounter by 17" figure.{' '}
+              <a
+                href="https://www.crimlawpractitioner.org/post/the-foster-care-to-prison-pipeline-a-road-to-incarceration"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                crimlawpractitioner.org
+              </a>
+            </li>
+            <li>
+              <strong>American Journal of Public Health</strong> (NIH PMC)
+              on foster-care homelessness outcomes. Source for the "22–30%
+              experience homelessness during transition" and "31–46% homeless
+              by 26" figures.{' '}
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3969135/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                pmc.ncbi.nlm.nih.gov/AJPH
+              </a>
+            </li>
+            <li>
+              <strong>Dworsky &amp; Courtney — Teen pregnancy among young
+              women in foster care</strong> (NIH PMC / Guttmacher Institute).
+              Source for the "foster females pregnant at 50% vs. 20% general
+              population by 19" figure.{' '}
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3902972/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                pmc.ncbi.nlm.nih.gov/Dworsky
+              </a>
+            </li>
+            <li>
+              <strong>Iowa HHS — Human Trafficking Safety of Children in
+              Foster Care</strong>. Source for the "~60% of child
+              sex-trafficking victims recovered in 2013 FBI raid came from
+              foster care or group homes" figure.{' '}
+              <a
+                href="https://hhs.iowa.gov/media/6797"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                hhs.iowa.gov
+              </a>
+            </li>
+            <li>
+              <strong>Loyola Children's Legal Rights Journal</strong> on
+              child welfare and sex trafficking. Confirms the FBI 60%, NCMEC
+              86%, and Connecticut 86-of-88 trafficking-victim figures.{' '}
+              <a
+                href="https://lawecommons.luc.edu/cgi/viewcontent.cgi?article=1160&context=clrj"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                lawecommons.luc.edu
+              </a>
+            </li>
+            <li>
+              <strong>Annie E. Casey Foundation — Cost Avoidance</strong>.
+              Source for the "$250 billion over a decade" taxpayer-cost
+              figure and the per-cohort justice-system / lost-earnings /
+              teen-parenthood breakdown.{' '}
+              <a
+                href="https://www.aecf.org/resources/cost-avoidance-the-business-case-for-investing-in-youth-aging-out-of-foster"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                aecf.org
+              </a>
+            </li>
+            <li>
+              <strong>Casey Family Programs (2024)</strong> — pregnant-and-parenting
+              foster youth programs. Source for the intergenerational
+              foster-removal cycle referenced as &ldquo;continuity of involvement.&rdquo;{' '}
+              <a
+                href="https://www.casey.org/pregnant-parenting-strategies/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                casey.org
+              </a>
+            </li>
+            <li>
+              <strong>Alternative Family Services — Foster-Youth
+              Homelessness Statistics</strong>. Secondary synthesis used for the
+              "29% of unhoused youth have been in foster care" and "75% of
+              SF Bay Area unhoused youth came through foster / juvenile
+              justice" figures.{' '}
+              <a
+                href="https://www.afs4kids.org/blog/35-foster-youth-homelessness-statistics-you-should-know/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                afs4kids.org
+              </a>
+            </li>
+            <li>
+              <strong>The Imprint — decriminalize young people who grew
+              up in foster care</strong>. Source for framing context on the
+              transition-window arrest / incarceration numbers.{' '}
+              <a
+                href="https://imprintnews.org/top-stories/decriminalize-young-people-who-grew-up-in-foster-care/246740"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                imprintnews.org
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <section className="source-group">
           <h3>Poverty, health &amp; substance use</h3>
           <ul>
             <li>
@@ -431,6 +608,17 @@ export function Sources() {
               and refreshed on each deploy by{' '}
               <code>scripts/fetch-ejscreen.mjs</code>. When the fetcher fails,
               the seeded values remain in place.
+            </li>
+            <li>
+              The <strong>Pipeline</strong> map chapter projects adult inmates
+              per 1,000 state children as{' '}
+              <code>fosterCare × 0.20 / childPop × 1,000</code>. The 20% is the
+              BJS &ldquo;~1 in 5 U.S. prisoners is a former foster child&rdquo;
+              headline applied as a flat forward-projection to the current
+              foster census. State-to-state ranking therefore tracks the
+              Chapter I baseline by construction; what differs is the stake
+              being named: not how many kids are in care, but how many of
+              them are being walked toward a prison cell.
             </li>
           </ul>
         </section>

@@ -15,6 +15,7 @@ export type Metric =
   | 'obesity'
   | 'revolution'
   | 'pornSession'
+  | 'pipeline'
   | 'churchSolution';
 
 export type Geography = 'state' | 'county';
@@ -79,6 +80,14 @@ export function metricValue(row: StateRow, metric: Metric): number {
       return row.divorceRate * 5 + row.unwedBirthPct;
     case 'pornSession':
       return row.pornSessionSec;
+    case 'pipeline':
+      // Projected adult prisoners from this state's current foster
+      // cohort, per 1,000 kids. Applies the BJS "~1 in 5 inmates is
+      // a former foster child" multiplier — tightened to 20% of the
+      // current foster census as a rough forward-projection. Same
+      // ordering as Chapter I by construction, but the NUMBER is
+      // the stake, not just the census.
+      return (row.fosterCare * 0.2 / row.childPop) * 1000;
     case 'churchSolution':
       return row.congregations / Math.max(1, row.waitingAdoption);
   }
@@ -111,6 +120,8 @@ export function metricFormat(metric: Metric, v: number): string {
       return v.toFixed(0) + ' pts (divorce + unwed-births)';
     case 'pornSession':
       return `${Math.floor(v / 60)}:${String(Math.round(v % 60)).padStart(2, '0')} avg visit`;
+    case 'pipeline':
+      return v.toFixed(2) + ' projected inmates / 1,000 kids';
     case 'churchSolution':
       return v.toFixed(1) + ' churches / waiting child';
   }
@@ -319,13 +330,29 @@ export const CHAPTERS: Chapter[] = [
     source: 'HIFLD All Places of Worship · County Health Rankings · AFCARS',
     showChurches: true,
   },
+  {
+    id: 'pipeline',
+    number: 'XIV',
+    title: 'The foster-to-crime pipeline',
+    eyebrow: 'Chapter XIV — The Pipeline',
+    metric: 'pipeline',
+    geography: 'state',
+    ramp: ['#140f14', '#321222', '#6b1a2a', '#9e2630', '#d63930', '#ff5a2b'],
+    unit: 'Projected adult inmates from this foster cohort · per 1,000 kids',
+    headline: '1 in 5',
+    subline:
+      'American prison inmates is a former foster child. American conservatism won\'t do the easiest thing to solve crime: raise the children who become the criminals.',
+    body:
+      "American conservatism is obsessed with crime. It won't do the single cheapest thing to reduce it: raise the children who become the criminals. ~1 in 5 U.S. prison inmates is a former foster child — roughly 25x overrepresentation (BJS / CEPR 2022). ~70% of former foster youth are arrested at least once by age 26; for males, nearly 81% (Chapin Hall Midwest Study). By age 20, lifetime incarceration rate reaches 42% (Children & Youth Services Review, 2025). A child bounced through 5+ placements faces a 90% chance of criminal-legal involvement. And it's not just prison: 22–30% of aged-out foster youth are homeless within a year, ~60% of child sex-trafficking victims recovered in FBI raids came from foster or group homes, and 71% of girls aging out are pregnant by 21 (vs. 34% nationally). The 2022 NBER causal study is the twist that closes the argument: for the marginal child, foster placement actually REDUCES crime risk — which means the homes these children were removed from were even worse. American Christianity let those homes exist. Then let the state inherit the children. Then looked away while the state handed them to prisons, pimps, and the street. The cheapest crime-reduction program in America is a spare bedroom.",
+    source: 'BJS via CEPR 2022 · Chapin Hall Midwest Study · NIH PMC · Annie E. Casey Foundation',
+  },
   // Final chapter uses id='solution' and the state-framing helper below
   // rewrites its headline for the selected state.
   {
     id: 'solution',
-    number: 'XIV',
+    number: 'XV',
     title: 'What the pews could end overnight',
-    eyebrow: 'Chapter XIV — The Solution',
+    eyebrow: 'Chapter XV — The Solution',
     metric: 'churchSolution',
     geography: 'state',
     ramp: ['#3d0a1a', '#6d1728', '#a1302a', '#cf6426', '#e6a42a', '#f7e26b'],
@@ -472,6 +499,17 @@ export function frameForState(chapter: Chapter, row: StateRow): Framing {
         subline: `in ${name}. ${nf(row.waitingAdoption)} children are waiting for a family.`,
         body: `Every Christian congregation in ${name} is a dot on this map. They are not missing. They stand in the Delta, in Appalachia, in the suburbs, in the city. The capacity to end ${name}'s foster waitlist is already here. It is choosing not to act.`,
       };
+    case 'pipeline': {
+      const projectedInmates = Math.round(row.fosterCare * 0.2);
+      const projectedTrafficked = Math.round(row.missingFromCare * 0.6);
+      const agedOutPerYear = Math.round(row.fosterCare * 0.055);
+      return {
+        ...base,
+        headline: `~${nf(projectedInmates)}`,
+        subline: `projected future inmates from ${name}'s current foster cohort (~20% of today's census).`,
+        body: `${name} has ${nf(row.fosterCare)} children in state custody tonight. On current national pipeline rates, roughly ${nf(projectedInmates)} of them will serve prison time as adults, ~${nf(Math.round(row.fosterCare * 0.25))} will experience homelessness, and ~${nf(projectedTrafficked)} of the ~${nf(row.missingFromCare)} who go missing from care each year are at acute risk of sex trafficking. ${nf(agedOutPerYear)} will age out without a family each year — and 71% of the girls among them will be pregnant by 21. American conservatism built its politics on hating crime. It refuses to do the easiest thing to end it: raise these children.`,
+      };
+    }
     case 'solution':
       return {
         ...base,
