@@ -185,7 +185,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'belt',
     number: 'VI',
     title: 'The Bible Belt is the foster belt',
-    eyebrow: 'Chapter VI — The Church Mirror',
+    eyebrow: 'Chapter VI — The Mirror',
     metric: 'religiosity',
     geography: 'state',
     ramp: ['#14151c', '#312040', '#5e2756', '#972f5c', '#cd3a53', '#ffb347'],
@@ -387,7 +387,7 @@ export function frameForState(chapter: Chapter, row: StateRow): Framing {
         ...base,
         headline: `${mm}:${ss} per visit`,
         subline: `What ${name} actually does in private — Pornhub's own data.`,
-        body: `Pornhub Insights has published the numbers: ${name}'s average visitor stays ${mm}:${ss}. The state is also ${row.religiosityPct}% "highly religious." The private life of American Christianity is measured by the website American Christianity preaches against, and the website is keeping better records than the church is.`,
+        body: `Pornhub Insights has published the numbers: ${name}'s average visitor stays ${mm}:${ss}. The state is also ${row.religiosityPct}% "highly religious." The private life of American Christianity is measured by the website American Christianity preaches against, and the website is keeping better records than American Christianity is.`,
       };
     }
     case 'misery':

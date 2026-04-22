@@ -3,7 +3,7 @@
 // The closing argument of the entire site. What American Christianity did
 // INSTEAD of fostering, 1980-2026. The pro-life movement that prevented
 // and funded but refused to receive. The pornography battle won in
-// public and lost in private. The six wars the church claimed to fight
+// public and lost in private. The six wars American Christianity claimed to fight
 // and lost all six. The Christian-nation paradox that names itself by
 // church attendance while failing every test the Bible actually uses.
 //
@@ -154,7 +154,7 @@ export function SubstitutionSection() {
           The answer: it built a parallel economy and political apparatus
           in <em>response</em> to the sexual revolution that is, measured
           in dollars and hours, vastly larger than its fostering
-          commitment. The church did not do nothing after 1980. It did
+          commitment. American Christianity did not do nothing after 1980. It did
           many things.
           <br /><br />
           <strong>It simply did not do the one thing that would have
@@ -169,7 +169,7 @@ export function SubstitutionSection() {
           Five things American Christianity built instead of fostering
           networks. Each is real, well-funded, and institutionally serious.
           None of them is absorbing the 70,000 children produced by the
-          revolution the church lost.
+          revolution American Christianity lost.
         </p>
         <ul className="subst-list">
           {SUBSTITUTES.map((s) => (
@@ -271,7 +271,7 @@ export function SubstitutionSection() {
       <div className="subst-tally">
         <h3 className="subst-heading">The 46-year tally</h3>
         <p className="subst-sub">
-          What the church claimed it was doing, versus what the data
+          What American Christianity claimed it was doing, versus what the data
           actually shows, measured since the founding of the Moral
           Majority in 1979.
         </p>
@@ -321,7 +321,7 @@ export function SubstitutionSection() {
           Six wars. Six losses. And in the losing, the casualties were
           not its own institutions — the institutions <em>thrived</em>
           on the war. The casualties were the children the war
-          produced, that the church refused to receive.
+          produced, that American Christianity refused to receive.
         </p>
       </div>
 
@@ -334,7 +334,7 @@ export function SubstitutionSection() {
         <div className="subst-possibilities-grid">
           <article className="subst-possibility">
             <span className="subst-possibility-num">I</span>
-            <h4>The Church lost the war.</h4>
+            <h4>American Christianity lost the war.</h4>
             <p>
               The most politically mobilized, best-funded, most
               institutionally organized Christian movement in history —
@@ -346,14 +346,14 @@ export function SubstitutionSection() {
               worldview.
             </p>
             <p className="subst-possibility-k">
-              If the war was real and the church fought sincerely, this
+              If the war was real and American Christianity fought sincerely, this
               is the most comprehensive institutional defeat in American
               religious history.
             </p>
           </article>
           <article className="subst-possibility">
             <span className="subst-possibility-num">II</span>
-            <h4>The Church wrote it.</h4>
+            <h4>American Christianity wrote it.</h4>
             <p>
               By accepting contraception in the 1960s, remaining silent
               on abortion until 1980, divorcing at pagan rates, consuming

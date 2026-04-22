@@ -37,8 +37,8 @@ const TIMELINE = [
     body: 'Nine years after calling for it. Seven years after Roe. Evangelical political pro-life movement begins a full generation too late to prevent the cultural shift.' },
 ];
 
-// Four convergent curves, 1950→2024. Each normalized to its own scale
-// (0–1) against the series maximum so all four lines fit the same chart.
+// Five convergent curves, 1950→2024. Each normalized to its own scale
+// (0–1) against the series maximum so all five lines fit the same chart.
 // Raw values stored for the tooltips / legend numbers.
 interface CurvePoint { year: number; value: number }
 interface Curve { id: string; label: string; color: string; unit: string; points: CurvePoint[] }
@@ -106,6 +106,27 @@ const CURVES: Curve[] = [
       { year: 2000, value: 4.0 },
       { year: 2010, value: 3.6 },
       { year: 2024, value: 2.9 },
+    ],
+  },
+  {
+    id: 'abortion',
+    label: 'U.S. abortions per year (thousands)',
+    color: '#8b2440',
+    unit: 'K',
+    points: [
+      // Pre-Roe estimates are necessarily imprecise (illegal procedures
+      // weren't counted), but Guttmacher retroactively models
+      // 200–500K/yr for 1950–1970. Post-Roe figures are CDC + Guttmacher.
+      { year: 1950, value: 200 },
+      { year: 1960, value: 200 },
+      { year: 1970, value: 400 },
+      { year: 1973, value: 745 },
+      { year: 1980, value: 1554 },
+      { year: 1990, value: 1609 },
+      { year: 2000, value: 1313 },
+      { year: 2010, value: 1102 },
+      { year: 2020, value: 930 },
+      { year: 2024, value: 1126 },
     ],
   },
 ];
@@ -177,7 +198,8 @@ export function ConvergenceSection() {
         <p className="conv-lede">
           Christian fertility down, foster care up. Out-of-wedlock births
           from <strong>5%</strong> to <strong>40%</strong>. Divorce
-          doubled in twenty years. All four curves bend in
+          doubled in twenty years. Abortion crossed a million a year
+          within five years of <em>Roe</em>. All five curves bend in
           <strong> 1960–1975</strong>, for the same reason, because the
           same people said yes to the same lie.
           <br /><br />
@@ -190,13 +212,13 @@ export function ConvergenceSection() {
         </p>
       </div>
 
-      {/* The four-curves chart. One SVG, four normalized lines, shaded
+      {/* The five-curves chart. One SVG, five normalized lines, shaded
           break-window 1960-1975 behind them. */}
       <div className="conv-chart-wrap">
-        <h3 className="conv-chart-heading">Four lines. One break window. Fifteen years.</h3>
+        <h3 className="conv-chart-heading">Five lines. One break window. Fifteen years.</h3>
         <p className="conv-chart-sub">
           Each line is plotted on its own scale — the point is not the
-          height, but the shape. All four bend in the same shaded
+          height, but the shape. All five bend in the same shaded
           fifteen-year window.
         </p>
         <div className="conv-chart-scroll">
@@ -205,7 +227,7 @@ export function ConvergenceSection() {
             viewBox={`0 0 ${CHART_W} ${CHART_H}`}
             preserveAspectRatio="xMidYMid meet"
             role="img"
-            aria-label="Four convergent curves across 1950-2024"
+            aria-label="Five convergent curves across 1950-2024"
           >
             {/* The shaded "break window" 1960-1975. */}
             <rect
@@ -253,7 +275,7 @@ export function ConvergenceSection() {
               </g>
             ))}
 
-            {/* The four lines. */}
+            {/* The five lines. */}
             {CURVES.map((c) => (
               <g key={c.id}>
                 <path
@@ -302,13 +324,16 @@ export function ConvergenceSection() {
         <p className="conv-chart-caption">
           The Christian line goes down. The foster line goes up. The
           out-of-wedlock line goes up <strong>eight times over</strong>.
-          The divorce line more than doubles in twenty years. All four
-          curves bend in the same decade because a single package —
-          the Pill, no-fault divorce, sexual liberation, individual
-          autonomy elevated above covenant — landed on American life
-          simultaneously, and American Christianity either endorsed it,
-          stayed silent, or adopted it privately while condemning it
-          publicly.
+          The divorce line more than doubles in twenty years. The
+          abortion line crosses <strong>one million a year</strong>
+          within five years of <em>Roe</em>, peaks in 1990, and —
+          after a thirty-year decline — is climbing again post-
+          <em>Dobbs</em>. All five curves bend in the same decade
+          because a single package — the Pill, no-fault divorce,
+          sexual liberation, individual autonomy elevated above
+          covenant — landed on American life simultaneously, and
+          American Christianity either endorsed it, stayed silent, or
+          adopted it privately while condemning it publicly.
         </p>
       </div>
 
@@ -335,7 +360,7 @@ export function ConvergenceSection() {
 
       {/* Three lies. */}
       <div className="conv-lies">
-        <h3 className="conv-lies-heading">Three lies the church bought</h3>
+        <h3 className="conv-lies-heading">Three lies American Christianity bought</h3>
         <div className="conv-lies-grid">
           {LIES.map((l) => (
             <article key={l.num} className="conv-lie">
@@ -403,8 +428,8 @@ export function ConvergenceSection() {
         </p>
         <p className="conv-closing-kicker">
           The revolution cost two generations of children their families.
-          The church that helped fund it is the church that still won't
-          open the spare bedroom.
+          American Christianity helped fund it — and American Christianity
+          is still the one who won't open the spare bedroom.
         </p>
       </div>
     </section>

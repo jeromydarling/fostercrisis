@@ -108,7 +108,7 @@ export function MirrorSection() {
           fosters at a rate of <strong>3%</strong> — barely above
           the <strong>2%</strong> of the general, often-godless public.
           <br /><br />
-          <em>Every excuse about time and money is answered by the numbers the Church already wrote down about itself.</em>
+          <em>Every excuse about time and money is answered by the numbers American Christianity already wrote down about itself.</em>
         </p>
       </div>
 
@@ -246,7 +246,7 @@ export function MirrorSection() {
           </div>
         </div>
         <p className="budget-pnote">
-          The Church's annual take is <strong>four times</strong> the cost of
+          American Christianity's annual take is <strong>four times</strong> the cost of
           the entire national foster system. Since 1994 — the span in which
           biblical worldview collapsed from 12% to 4% — the total has been
           roughly <strong>$3.7 trillion</strong>. That's 123 years of the

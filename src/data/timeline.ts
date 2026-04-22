@@ -166,7 +166,7 @@ export const EVENTS: TimelineEvent[] = [
   { year: 1935, title: 'Social Security Act', kind: 'baseline',
     body: 'Aid to Dependent Children establishes the federal architecture that becomes the modern foster-care system.' },
   { year: 1957, title: 'Baby Boom peak', kind: 'baseline',
-    body: 'American TFR hits 3.77. The last pre-Pill generation is born. The church is full; the country is post-war religious.' },
+    body: 'American TFR hits 3.77. The last pre-Pill generation is born. Pews are full; the country is post-war religious.' },
   { year: 1959, title: 'Billy Graham shrugs at the Pill', kind: 'church',
     body: 'The leading evangelical of the century tells reporters: "nothing in the Bible which would forbid birth control." Protestant cover is in place.' },
   { year: 1960, title: 'FDA approves the Pill', kind: 'culture',
