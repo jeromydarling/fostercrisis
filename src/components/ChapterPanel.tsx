@@ -21,6 +21,21 @@ export function ChapterPanel({ index, onChange, selectedFips, onClearSelection }
 
   return (
     <aside className="sidebar">
+      <div className="legend">
+        <div className="legend-label">{chapter.unit}</div>
+        <div
+          className="legend-ramp"
+          style={{
+            background: `linear-gradient(90deg, ${chapter.ramp.join(', ')})`,
+          }}
+        />
+        <div className="legend-ticks">
+          <span>less</span>
+          <span>more</span>
+        </div>
+        <p className="legend-source">{chapter.source}</p>
+      </div>
+
       <header className="sidebar-header">
         {stateRow ? (
           <button className="back-btn" onClick={onClearSelection} type="button">
@@ -71,21 +86,6 @@ export function ChapterPanel({ index, onChange, selectedFips, onClearSelection }
             )}
           </div>
         )}
-
-        <div className="legend">
-          <div className="legend-label">{chapter.unit}</div>
-          <div
-            className="legend-ramp"
-            style={{
-              background: `linear-gradient(90deg, ${chapter.ramp.join(', ')})`,
-            }}
-          />
-          <div className="legend-ticks">
-            <span>less</span>
-            <span>more</span>
-          </div>
-          <p className="legend-source">{chapter.source}</p>
-        </div>
       </div>
 
       <nav className="chapter-nav" aria-label="Chapters">
