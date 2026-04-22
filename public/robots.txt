@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Let the argument reach anyone who searches for it.

@@ -2,16 +2,75 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Foster Crisis — A Map of American Silence</title>
-    <meta
-      name="description"
-      content="380,000 congregations. 70,418 children waiting. This is a map of what we could end overnight."
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0b0d12" />
+
+    <title>fostercrisis.com — The map American Christianity doesn't want to see</title>
+
+    <meta name="description" content="70,418 children are waiting for a family tonight. There are 380,000 Christian congregations in America. The math is brutal, and it favors us." />
+
+    <!--
+      URLs below reference the current GitHub Pages host. When DNS for
+      fostercrisis.com cuts over, find-and-replace
+      `https://jeromydarling.github.io/fostercrisis` → `https://fostercrisis.com`
+      in this file (5 occurrences) and add a `public/CNAME` with the
+      one line "fostercrisis.com".
+    -->
+    <link rel="canonical" href="https://jeromydarling.github.io/fostercrisis/" />
+
+    <!-- Favicon (inline SVG, no extra HTTP request). -->
+    <link rel="icon" type="image/svg+xml" href="/fostercrisis/favicon.svg" />
+    <link rel="alternate icon" href="/fostercrisis/favicon.svg" />
+    <link rel="mask-icon" href="/fostercrisis/favicon.svg" color="#f7e26b" />
+
+    <!-- Open Graph / Facebook / LinkedIn / iMessage / Slack -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="fostercrisis.com" />
+    <meta property="og:title" content="The map American Christianity doesn't want to see" />
+    <meta property="og:description" content="70,418 children waiting. 380,000 Christian congregations. The math is brutal, and it favors us." />
+    <meta property="og:url" content="https://jeromydarling.github.io/fostercrisis/" />
+    <meta property="og:image" content="https://jeromydarling.github.io/fostercrisis/og-image.svg" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="The Foster Crisis — 70,418 children waiting, 380,000 Christian congregations." />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The map American Christianity doesn't want to see" />
+    <meta name="twitter:description" content="70,418 children waiting. 380,000 Christian congregations. The math is brutal, and it favors us." />
+    <meta name="twitter:image" content="https://jeromydarling.github.io/fostercrisis/og-image.svg" />
+
+    <!-- Performance: warm up the connection to Mapbox. -->
     <link rel="preconnect" href="https://api.mapbox.com" />
+    <link rel="preconnect" href="https://events.mapbox.com" />
+    <link rel="dns-prefetch" href="https://api.mapbox.com" />
+
+    <!-- Editorial webfonts (drop-in, progressive enhancement — falls back
+         to Iowan/Palatino/Georgia on the serif side, Inter/system on
+         the sans side, JetBrains/ui-monospace on the mono side). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <a class="skip-link" href="#map">Skip to the map</a>
+
     <div id="root"></div>
+
+    <noscript>
+      <div style="max-width: 620px; margin: 4rem auto; padding: 0 1.5rem; color: #e6e7ea; font-family: 'Cormorant Garamond', Georgia, serif; line-height: 1.55;">
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: #f7e26b;">fostercrisis.com</p>
+        <h1 style="font-size: 2rem; margin: 0 0 1.25rem; font-weight: 500;">This visualization requires JavaScript.</h1>
+        <p style="font-size: 1.05rem;">The argument in one paragraph: there are roughly <strong style="color:#ffb347">380,000 Christian congregations</strong> in the United States and <strong style="color:#ffb347">70,418 children</strong> legally free and waiting to be adopted from foster care. One family per church would end the waitlist five times over. American Christianity is in debt. They are in debt to all of the children. Crystal clear.</p>
+        <p style="font-size: 0.9rem; color: #9aa0aa;">Enable JavaScript to see the map, the data, and the five-chapter argument.</p>
+      </div>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

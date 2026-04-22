@@ -21,6 +21,126 @@
   box-sizing: border-box;
 }
 
+/* ---- Skip link (keyboard / screen-reader bypass) ------------------ */
+
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 0.5rem;
+  z-index: 1000;
+  padding: 0.55rem 0.9rem;
+  background: var(--accent);
+  color: #0b0d12;
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: top 150ms ease;
+}
+
+.skip-link:focus {
+  top: 0.5rem;
+  outline: 2px solid var(--accent-warm);
+  outline-offset: 2px;
+}
+
+/* ---- Error boundary fallback -------------------------------------- */
+
+.error-fallback {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+  background: #0a0c11;
+}
+
+.error-fallback-inner {
+  max-width: 620px;
+  color: var(--fg);
+  font-family: var(--ff-serif);
+  text-align: center;
+}
+
+.error-fallback-eyebrow {
+  margin: 0 0 0.75rem;
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--danger);
+}
+
+.error-fallback h1 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--fg);
+  letter-spacing: -0.015em;
+}
+
+.error-fallback-body {
+  margin: 0 0 2rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--fg-dim);
+}
+
+.error-fallback-body strong { color: var(--accent-warm); font-weight: 600; }
+.error-fallback-body em { color: var(--accent); font-style: italic; }
+
+.error-fallback-retry {
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  color: var(--fg-dimmer);
+  letter-spacing: 0.04em;
+}
+
+.error-fallback-retry button {
+  padding: 0.55rem 1rem;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.error-fallback-retry button:hover {
+  background: var(--accent);
+  color: #0b0d12;
+}
+
+.error-fallback-retry code {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  background: rgba(255, 82, 82, 0.08);
+  border-radius: 2px;
+  color: var(--danger);
+  font-size: 0.68rem;
+  margin-left: 0.3rem;
+  max-width: 100%;
+  word-break: break-all;
+}
+
+/* ---- Global focus ring for all interactive elements --------------- */
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 html,
 body,
 #root {

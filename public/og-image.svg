@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="The Foster Crisis — 70,418 children waiting. 380,000 Christian congregations. The math is brutal, and it favors us.">
+  <!-- Background -->
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#1a1220" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#0a0c11" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="accentRule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f7e26b" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#f7e26b" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#f7e26b" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bgGlow)"/>
+
+  <!-- Star scatter -->
+  <g fill="#fff6d5" opacity="0.4">
+    <circle cx="140"  cy="95"  r="1.5"/>
+    <circle cx="340"  cy="55"  r="1"/>
+    <circle cx="620"  cy="75"  r="1.5"/>
+    <circle cx="860"  cy="110" r="1"/>
+    <circle cx="1050" cy="70"  r="1.5"/>
+    <circle cx="210"  cy="520" r="1"/>
+    <circle cx="490"  cy="555" r="1.5"/>
+    <circle cx="820"  cy="530" r="1"/>
+    <circle cx="1050" cy="560" r="1.5"/>
+  </g>
+
+  <!-- Top eyebrow -->
+  <text x="600" y="92"
+        text-anchor="middle"
+        font-family="'JetBrains Mono', ui-monospace, Menlo, monospace"
+        font-size="22"
+        font-weight="500"
+        letter-spacing="6"
+        fill="#f7e26b">FOSTERCRISIS.COM</text>
+
+  <!-- Top rule -->
+  <rect x="450" y="118" width="300" height="1" fill="url(#accentRule)"/>
+
+  <!-- Headline number -->
+  <text x="600" y="280"
+        text-anchor="middle"
+        font-family="'Cormorant Garamond', 'Iowan Old Style', Georgia, serif"
+        font-size="196"
+        font-weight="600"
+        letter-spacing="-4"
+        fill="#ffb347">70,418</text>
+
+  <!-- Subhead -->
+  <text x="600" y="348"
+        text-anchor="middle"
+        font-family="'Cormorant Garamond', 'Iowan Old Style', Georgia, serif"
+        font-size="40"
+        font-style="italic"
+        fill="#e6e7ea">children waiting for a family tonight.</text>
+
+  <!-- Divider -->
+  <line x1="440" y1="400" x2="760" y2="400" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+  <!-- The argument -->
+  <text x="600" y="448"
+        text-anchor="middle"
+        font-family="'Cormorant Garamond', 'Iowan Old Style', Georgia, serif"
+        font-size="30"
+        fill="#e6e7ea">
+    There are <tspan fill="#f7e26b" font-weight="500">380,000</tspan> Christian congregations in America.
+  </text>
+  <text x="600" y="492"
+        text-anchor="middle"
+        font-family="'Cormorant Garamond', 'Iowan Old Style', Georgia, serif"
+        font-size="30"
+        font-style="italic"
+        fill="#ffb347"
+        font-weight="500">
+    The math is brutal, and it favors us.
+  </text>
+
+  <!-- Bottom rule -->
+  <rect x="450" y="548" width="300" height="1" fill="url(#accentRule)"/>
+
+  <!-- Footer -->
+  <text x="600" y="584"
+        text-anchor="middle"
+        font-family="'JetBrains Mono', ui-monospace, Menlo, monospace"
+        font-size="18"
+        letter-spacing="4"
+        fill="#9aa0aa">AFCARS · HIFLD · PEW · NCMEC · CDC</text>
+</svg>
