@@ -12,6 +12,7 @@ export type Metric =
   | 'religiosity'
   | 'obesity'
   | 'revolution'
+  | 'pornSession'
   | 'churchSolution';
 
 export type Geography = 'state' | 'county';
@@ -67,6 +68,8 @@ export function metricValue(row: StateRow, metric: Metric): number {
       // 0–50 + unwed-births-% directly. Rough but directional — both
       // signals bend at the same time in the same states.
       return row.divorceRate * 5 + row.unwedBirthPct;
+    case 'pornSession':
+      return row.pornSessionSec;
     case 'churchSolution':
       return row.congregations / Math.max(1, row.waitingAdoption);
   }
@@ -93,6 +96,8 @@ export function metricFormat(metric: Metric, v: number): string {
       return v.toFixed(1) + '% obese';
     case 'revolution':
       return v.toFixed(0) + ' pts (divorce + unwed-births)';
+    case 'pornSession':
+      return `${Math.floor(v / 60)}:${String(Math.round(v % 60)).padStart(2, '0')} avg visit`;
     case 'churchSolution':
       return v.toFixed(1) + ' churches / waiting child';
   }
@@ -222,10 +227,25 @@ export const CHAPTERS: Chapter[] = [
     source: 'CDC NVSS divorce 2022 · CDC NCHS unwed births 2022',
   },
   {
-    id: 'misery',
+    id: 'quiethour',
     number: 'IX',
+    title: 'The quiet hour',
+    eyebrow: 'Chapter IX — What the Bible Belt watches',
+    metric: 'pornSession',
+    geography: 'state',
+    ramp: ['#14151c', '#261636', '#4e1a48', '#8f245a', '#c72f54', '#ffb347'],
+    unit: 'Average Pornhub visit duration (seconds)',
+    headline: 'Mississippi watches the longest.',
+    subline: 'Every year, in every annual Pornhub Insights report. The most religious state stays the longest.',
+    body:
+      'The authoritative source on this is the only one that owns the telemetry: Pornhub. In their 2014–2019 "State of the Union" Insights series, Mississippi ranked #1 every time. Louisiana, Alabama, Arkansas, Oklahoma — the same Bible Belt states that ranked highest in religiosity, obesity, unwed births, and foster-care demand — also watched the longest. The private life of the American Church is documented by the website the American Church preaches against.',
+    source: 'Pornhub Insights · 2014–2019 U.S. State-of-the-Union series',
+  },
+  {
+    id: 'misery',
+    number: 'X',
     title: 'The misery map',
-    eyebrow: 'Chapter IX — The Misery Index',
+    eyebrow: 'Chapter X — The Misery Index',
     metric: 'miseryIndex',
     geography: 'county',
     countyProp: 'misery',
@@ -239,9 +259,9 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: 'complicity',
-    number: 'X',
+    number: 'XI',
     title: 'Churches are right there',
-    eyebrow: 'Chapter X — Complicity',
+    eyebrow: 'Chapter XI — Complicity',
     metric: 'miseryIndex',
     geography: 'county',
     countyProp: 'misery',
@@ -258,9 +278,9 @@ export const CHAPTERS: Chapter[] = [
   // rewrites its headline for the selected state.
   {
     id: 'solution',
-    number: 'XI',
+    number: 'XII',
     title: 'What the pews could end overnight',
-    eyebrow: 'Chapter XI — The Solution',
+    eyebrow: 'Chapter XII — The Solution',
     metric: 'churchSolution',
     geography: 'state',
     ramp: ['#3d0a1a', '#6d1728', '#a1302a', '#cf6426', '#e6a42a', '#f7e26b'],
@@ -359,6 +379,16 @@ export function frameForState(chapter: Chapter, row: StateRow): Framing {
         subline: `${name} is ${row.religiosityPct}% "highly religious" — and still broke this way.`,
         body: `${row.unwedBirthPct}% of ${name}'s babies are born outside of marriage. ${row.divorceRate.toFixed(1)} divorces per 1,000 residents. And ${row.religiosityPct}% of adults call themselves "highly religious." The sexual revolution didn't skip ${name}. It was adopted inside the sanctuary first, and the children born into the contradiction are the ones waiting for a foster family tonight.`,
       };
+    case 'quiethour': {
+      const mm = Math.floor(row.pornSessionSec / 60);
+      const ss = String(Math.round(row.pornSessionSec % 60)).padStart(2, '0');
+      return {
+        ...base,
+        headline: `${mm}:${ss} per visit`,
+        subline: `What ${name} actually does in private — Pornhub's own data.`,
+        body: `Pornhub Insights has published the numbers: ${name}'s average visitor stays ${mm}:${ss}. The state is also ${row.religiosityPct}% "highly religious." The private life of the American Church is measured by the website the American Church preaches against, and the website is keeping better records than the church is.`,
+      };
+    }
     case 'misery':
       return {
         ...base,
