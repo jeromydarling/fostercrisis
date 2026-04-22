@@ -102,7 +102,12 @@ jobs:
       - name: Add .nojekyll so Pages serves _vite-generated files
         run: touch dist/.nojekyll
 
+      # enablement: true lets this step turn Pages on itself on the very
+      # first run — avoids the manual "Settings → Pages → Source: Actions"
+      # step. Requires the `pages: write` permission granted above.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
