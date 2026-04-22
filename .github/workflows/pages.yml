@@ -30,10 +30,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Deployed to the custom domain set in public/CNAME, so assets
-      # serve from the apex path. (On a github.io project page without
-      # a CNAME, this would need to be "/<repo>/" instead.)
-      VITE_BASE: /
+      # The CNAME file is in public/ so the custom domain is wired, but
+      # DNS may still be propagating — so we keep the base as the repo
+      # subpath until fostercrisis.com is fully live. Flip to "/" once
+      # the custom domain resolves and HTTPS is provisioned.
+      VITE_BASE: /${{ github.event.repository.name }}/
       VITE_MAPBOX_TOKEN: ${{ secrets.VITE_MAPBOX_TOKEN }}
     steps:
       - uses: actions/checkout@v4
