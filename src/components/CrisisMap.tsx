@@ -67,9 +67,10 @@ function isMobileViewport() {
 
 function fitPaddingFor(mobile: boolean) {
   if (mobile) {
-    // On mobile the sidebar is below the map in document flow (no
-    // overlay), so padding is symmetric.
-    return { top: 24, right: 20, bottom: 20, left: 20 };
+    // Generous symmetric padding on mobile so the continental US sits
+    // comfortably inside the 50vh map strip without any trimming at
+    // the edges — effectively a further zoom-out.
+    return { top: 60, right: 40, bottom: 60, left: 40 };
   }
   // Desktop keeps the 440px sidebar clear on the left.
   return { top: 48, right: 48, bottom: 48, left: 460 };

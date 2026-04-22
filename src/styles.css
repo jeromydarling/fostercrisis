@@ -170,6 +170,181 @@ body {
   overflow: hidden;
 }
 
+/* ---- Mode switcher (persistent header on Map / Essay views) ------- */
+
+.mode-switcher {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 1.1rem;
+  background: rgba(10, 12, 17, 0.86);
+  border-bottom: 1px solid var(--rule);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  font-family: var(--ff-mono);
+}
+
+.mode-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.3rem 0.4rem;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--fg-dim);
+  transition: color 140ms ease;
+}
+
+.mode-brand:hover { color: var(--fg); }
+
+.mode-brand-mark {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.mode-brand-name {
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.mode-pill {
+  display: inline-flex;
+  gap: 0.15rem;
+  padding: 0.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+}
+
+.mode-tab {
+  padding: 0.38rem 0.95rem;
+  border: 0;
+  background: transparent;
+  color: var(--fg-dim);
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.mode-tab:hover { color: var(--fg); }
+
+.mode-tab.is-active {
+  background: var(--accent);
+  color: #0b0d12;
+  font-weight: 600;
+}
+
+/* The map view renders its own 100vh map-section directly under the
+   header, so we offset the map/feeds region (but not the landing) so
+   the fixed map doesn't slip under the sticky header. */
+.mode-map .map-section { height: calc(100vh - 52px); }
+@supports (height: 100dvh) {
+  .mode-map .map-section { height: calc(100dvh - 52px); }
+}
+
+/* ---- Landing chooser ---------------------------------------------- */
+
+.landing-chooser {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  max-width: 820px;
+  width: 100%;
+  margin: 1rem auto 0;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.landing-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.7rem 1.5rem 1.55rem;
+  background: rgba(14, 17, 24, 0.6);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  color: var(--fg);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
+  font-family: inherit;
+}
+
+.landing-card:hover {
+  border-color: rgba(247, 226, 107, 0.5);
+  background: rgba(247, 226, 107, 0.04);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.landing-eyebrow {
+  font-family: var(--ff-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-dimmer);
+}
+
+.landing-title {
+  font-family: var(--ff-serif);
+  font-size: 2.1rem;
+  font-weight: 500;
+  line-height: 1.05;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+
+.landing-card-map .landing-title { color: var(--accent); }
+.landing-card-essay .landing-title { color: var(--accent-warm); }
+
+.landing-sub {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--fg-dim);
+}
+
+.landing-cta {
+  margin-top: 0.3rem;
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transition: color 140ms ease, transform 140ms ease;
+}
+
+.landing-card:hover .landing-cta {
+  color: #fff6d5;
+  transform: translateX(3px);
+}
+
+/* On landing, the epigraph gets a tiny bit more breathing room above
+   the chooser, and drops the scroll-cue animation entirely. */
+.mode-landing .epigraph { min-height: 100vh; }
+@supports (height: 100dvh) {
+  .mode-landing .epigraph { min-height: 100dvh; }
+}
+
 /* ---- Site epigraph (Matthew 19:14) --------------------------------- */
 
 .epigraph {
@@ -3686,6 +3861,32 @@ body {
  *   - Every multi-column grid collapses to 1-col (with a handful of
  *     2-col exceptions for stat tiles where that reads better).
  * ================================================================== */
+
+/* --- Mode switcher / landing on narrow viewports ------------------- */
+@media (max-width: 640px) {
+  .mode-switcher { padding: 0.5rem 0.8rem; }
+  .mode-brand-name { font-size: 0.62rem; letter-spacing: 0.18em; }
+  .mode-pill { padding: 0.18rem; }
+  .mode-tab {
+    padding: 0.34rem 0.7rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+  .landing-chooser {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    padding: 0 0.5rem;
+  }
+  .landing-card { padding: 1.3rem 1.25rem 1.25rem; }
+  .landing-title { font-size: 1.7rem; }
+  .landing-sub { font-size: 0.92rem; line-height: 1.45; }
+}
+
+@media (max-width: 420px) {
+  /* At the tightest end, drop the brand name text and keep only the
+     mark so the pill has room to breathe. */
+  .mode-brand-name { display: none; }
+}
 
 /* --- Tablet/mobile: in-flow map + sidebar -------------------------- */
 @media (max-width: 900px) {
