@@ -339,9 +339,15 @@ body {
   z-index: 0;
 }
 
+/* Mapbox GL JS adds the .mapboxgl-map class to the container on init,
+   which sets `position: relative` — that overrides our `position:
+   absolute; inset: 0` and collapses the container to 0 height. Force
+   explicit width/height so Mapbox has a canvas to measure. */
 .map-canvas {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .map-error {
