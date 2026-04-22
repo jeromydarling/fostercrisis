@@ -44,10 +44,11 @@ const SUBSTITUTES = [
 
 const LEDGER = [
   {
-    pillar: 'Prevent',
+    pillar: 'Legalized',
     figure: '63 million',
-    sub: 'abortions (1973–2022)',
-    body: 'The movement ran a fifty-year billion-dollar campaign. Roe overturned in 2022. Abortions then rose again: 1.126 million in 2025, up 21% from 2020.',
+    sub: 'abortions, 1973–2022. American Christianity wrote the ruling, then slept, then marched — in that order.',
+    body:
+      'Seven Supreme Court justices legalized abortion in Roe v. Wade in 1973. Six of them were Protestant. Two years earlier, the Southern Baptist Convention — the largest Protestant denomination in America — had voted FOR legalization. By 1970, mainline Protestants (PCUSA, UCC) were endorsing "abortion on demand" in their own resolutions. Evangelicals did not organize politically against Roe until 1980 — seven years after the decision, and roughly eight million abortions deep. The billion-dollar campaign that followed finally overturned Roe in 2022. It did not reduce abortion: 1.126 million in 2024, up 21% from 2020. American Christianity did not prevent this. It helped enable it, then cleaned up with a bumper sticker.',
   },
   {
     pillar: 'Fund',
@@ -191,10 +192,12 @@ export function SubstitutionSection() {
       <div className="subst-ledger">
         <h3 className="subst-heading">The pro-life ledger</h3>
         <p className="subst-sub">
-          Prevent. Fund. <strong>Receive.</strong>
+          Legalized. Funded. <strong>Refused to receive.</strong>
           <br />
-          The movement organized itself around the first two for fifty
-          years. On the third, it has a single-digit participation rate.
+          American Christianity helped legalize abortion, spent fifty
+          years funding the cleanup, and — on the one ask the Bible
+          actually made (James 1:27) — has a single-digit participation
+          rate.
         </p>
         <div className="subst-ledger-grid">
           {LEDGER.map((col) => (

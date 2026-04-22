@@ -3534,7 +3534,13 @@ body {
   text-align: center;
 }
 
-.subst-col-prevent { border-top-color: rgba(255, 179, 71, 0.7); }
+/* First column used to be 'Prevent' (pro-life movement's self-descriptor).
+   Reframed to 'Legalized' — the historical record is that Protestant
+   justices wrote Roe and the SBC had already voted for legalization two
+   years earlier, so the 'prevent' narrative is dishonest. Color stays
+   warm-gold but sits adjacent to the danger-red of Receive to grade
+   the indictment: enabled → funded → refused to receive. */
+.subst-col-legalized { border-top-color: rgba(255, 179, 71, 0.7); }
 .subst-col-fund { border-top-color: rgba(247, 226, 107, 0.7); }
 .subst-col-receive {
   border-top-color: var(--danger);
