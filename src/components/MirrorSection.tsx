@@ -124,10 +124,17 @@ export function MirrorSection() {
             <li><span className="stack-num">54 hrs / yr</span><span className="stack-lbl">at church (≈36 services × 1.5 hrs)</span></li>
           </ul>
           <p className="stack-need">
-            <strong>What fostering needs:</strong> 30 hours once (licensing),
-            then 12 hours per year (continuing education).
-            <br />
-            <span className="stack-burn">Your Netflix year burns 30 hours every 20 days.</span>
+            <strong>What the license costs in time:</strong> about
+            <strong> 30 hours once</strong> (training, paperwork, home
+            study), then <strong>12 hours a year</strong> of continuing
+            education. You already burn that in a Netflix fortnight.
+            <br /><br />
+            <span className="stack-burn">
+              What the child costs you is the rest of your life. The license
+              is cheap. The calling is not. The only question is whether
+              you're going to spend your life loving a human being that no
+              one else would love — or scrolling.
+            </span>
           </p>
         </div>
 
@@ -142,9 +149,24 @@ export function MirrorSection() {
             <li><span className="stack-num">$5,000 / yr</span><span className="stack-lbl">average family vacation</span></li>
           </ul>
           <p className="stack-need">
-            <strong>What fostering costs the family:</strong> $0.
-            <br />
-            <span className="stack-burn">The stipend covers the child. You already have the money.</span>
+            <strong>What fostering costs the family: nothing. The state
+            pays <em>you</em>.</strong>
+            <br /><br />
+            Every state pays a monthly stipend — typically
+            <strong> $450–$1,200 per child per month</strong>, more for
+            teens and kids with medical or trauma needs. Medicaid covers
+            the child's health and dental. Most adoptions from foster
+            care cost the family <strong>$0</strong> — no placement fees,
+            no legal fees — and come with an ongoing adoption-assistance
+            subsidy to age 18 (often 21). The federal adoption tax credit
+            adds roughly <strong>$16,000</strong>. About 30 states waive
+            state-college tuition for kids who came out of care.
+            <br /><br />
+            <span className="stack-burn">
+              This isn't a financial ask. It's a spiritual one. The state
+              has already handled the money. What's left is whether you
+              have the yes.
+            </span>
           </p>
         </div>
       </div>
