@@ -154,4 +154,23 @@ Through Christ our Lord. Amen.`,
     attribution: 'Catholic Prayers for Healing, lightly expanded with Revelation 21:4',
     sourceHref: 'https://covenantcatholic.org/prayers-devotions/catholic-prayers-for-healing/',
   },
+
+  receipt: {
+    id: 'receipt',
+    theme: 'For the map that does not match the creed',
+    title: 'A Prayer for Our Cities, Counties, and States',
+    body: `Lord of every land and every family, you set the borders of the nations and you number the hairs of every child.
+
+We confess that we have drawn lines on maps and imagined they reflect your heart. We have called our side righteous and the other side lost, while children on both sides of every line have slept tonight without a parent.
+
+Forgive us for arguing about the color of the state when the children in it are without a home.
+
+Give us eyes to see what the data sees, and then eyes to see past it — to the particular child, on the particular street, in the particular county, whose life our abstractions overlook.
+
+Make your Church the body that shows up in both red counties and blue ones, in opioid hollows and commuter suburbs, in Appalachian trailers and New Jersey apartments.
+
+Through Christ our Lord, who crossed every boundary to reach us. Amen.`,
+    attribution: 'Original composition in the Catholic "Prayer for the Nation" pattern',
+    sourceHref: 'https://www.usccb.org/prayer-and-worship/prayers-and-devotions/prayers/prayer-for-our-nation',
+  },
 };

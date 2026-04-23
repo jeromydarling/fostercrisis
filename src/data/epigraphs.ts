@@ -63,4 +63,10 @@ export const EPIGRAPHS: Record<string, Epigraph> = {
       'Bless the Lord, O my soul, and forget not all his benefits — who forgives all your iniquity, who heals all your diseases, who redeems your life from the pit.',
     reference: 'Psalm 103:2–4',
   },
+  receipt: {
+    id: 'receipt',
+    verse:
+      'I hate, I despise your feasts, and I take no delight in your solemn assemblies … But let justice roll down like waters, and righteousness like an ever-flowing stream.',
+    reference: 'Amos 5:21, 24',
+  },
 };

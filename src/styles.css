@@ -6191,6 +6191,485 @@ body {
 }
 
 /* ==================================================================
+ * RECEIPT  (Part X — essay)
+ *
+ * The red-state receipt. Scatter plot + top/bottom tables + three
+ * confounders + two readings (charitable / uncharitable). Visually
+ * sits between Pipeline/Wound/Score and the benediction — dark
+ * polemic around a crisp scientific chart as "the proof."
+ * ================================================================ */
+
+.receipt-section {
+  padding: 6rem 2rem 5rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  border-top: 1px solid var(--rule);
+  position: relative;
+}
+
+.receipt-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 160px;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.receipt-hero {
+  max-width: 820px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.receipt-eyebrow {
+  margin: 0 0 0.95rem;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.receipt-title {
+  margin: 0 0 1.5rem;
+  font-family: var(--ff-serif);
+  font-size: clamp(2.2rem, 4.8vw, 3.8rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+.receipt-underline {
+  color: var(--accent);
+  font-style: italic;
+  position: relative;
+  display: inline-block;
+}
+
+.receipt-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.receipt-lede {
+  margin: 0 auto;
+  max-width: 680px;
+  font-family: var(--ff-serif);
+  font-size: 1.12rem;
+  line-height: 1.65;
+  color: var(--fg-dim);
+}
+
+.receipt-lede em { color: var(--accent-warm); font-style: italic; }
+
+.receipt-heading {
+  margin: 0 0 0.9rem;
+  font-family: var(--ff-serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  text-align: center;
+}
+
+.receipt-sub {
+  margin: 0 auto 2rem;
+  max-width: 720px;
+  font-family: var(--ff-serif);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--fg-dim);
+  text-align: center;
+}
+
+.receipt-sub em { color: var(--accent-warm); font-style: italic; }
+
+/* ---- Three headline stats ---- */
+
+.receipt-headline-stats { margin-bottom: 4.5rem; }
+
+.receipt-stats-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.85rem;
+}
+
+.receipt-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.6rem 1.35rem 1.4rem;
+  background: rgba(247, 226, 107, 0.04);
+  border: 1px solid rgba(247, 226, 107, 0.22);
+  border-radius: 6px;
+}
+
+.receipt-stat-figure {
+  font-family: var(--ff-serif);
+  font-size: clamp(2.4rem, 4.5vw, 3.2rem);
+  line-height: 1;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.receipt-stat-label {
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-top: 0.15rem;
+}
+
+.receipt-stat-sub {
+  font-family: var(--ff-serif);
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: var(--fg);
+  margin-top: 0.35rem;
+}
+
+/* ---- Scatter plot ---- */
+
+.receipt-scatter {
+  margin: 0 auto 4.5rem;
+  max-width: 960px;
+}
+
+.receipt-scatter figure {
+  margin: 0;
+  padding: 1.35rem 1.35rem 1.1rem;
+  background: #fafaf6;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.receipt-scatter img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+
+.receipt-scatter figcaption {
+  margin: 1rem 0.25rem 0;
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  line-height: 1.55;
+  color: #565247;
+  letter-spacing: 0.02em;
+}
+
+.receipt-scatter figcaption strong {
+  color: #2a2a22;
+  font-weight: 500;
+}
+
+/* ---- Top 10 / Bottom 10 tables ---- */
+
+.receipt-tables { margin-bottom: 4.5rem; }
+
+.receipt-tables-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.1rem;
+}
+
+.receipt-table {
+  padding: 1.5rem 1.25rem 1.25rem;
+  background: rgba(16, 18, 24, 0.55);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+
+.receipt-table-caption {
+  margin: 0 0 0.9rem;
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  text-align: center;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.receipt-table ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.receipt-table-row {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto 2.6rem;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.45rem 0.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-family: var(--ff-serif);
+  font-size: 0.92rem;
+  color: var(--fg);
+}
+
+.receipt-table-row:last-child { border-bottom: 0; }
+
+.receipt-table-rank {
+  font-family: var(--ff-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--fg-dimmer);
+}
+
+.receipt-table-state { color: var(--fg); }
+
+.receipt-table-rate {
+  font-family: var(--ff-mono);
+  font-size: 0.82rem;
+  color: var(--fg);
+  letter-spacing: 0.02em;
+}
+
+.receipt-table-pvi {
+  font-family: var(--ff-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 0.18rem 0.4rem;
+  border-radius: 3px;
+  min-width: 2.6rem;
+  display: inline-block;
+  line-height: 1.3;
+}
+
+.receipt-table-pvi-red {
+  background: rgba(255, 82, 82, 0.15);
+  color: #ff8c8c;
+  border: 1px solid rgba(255, 82, 82, 0.3);
+}
+
+.receipt-table-pvi-blue {
+  background: rgba(94, 143, 255, 0.15);
+  color: #9db6ff;
+  border: 1px solid rgba(94, 143, 255, 0.3);
+}
+
+.receipt-table-pvi-purple {
+  background: rgba(180, 110, 220, 0.15);
+  color: #cda5e0;
+  border: 1px solid rgba(180, 110, 220, 0.3);
+}
+
+.receipt-table-legend {
+  margin: 0;
+  text-align: center;
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  color: var(--fg-dimmer);
+  letter-spacing: 0.04em;
+}
+
+.receipt-table-legend .receipt-table-pvi {
+  margin: 0 0.15rem;
+  vertical-align: middle;
+}
+
+/* ---- Three confounders ---- */
+
+.receipt-confounders { margin-bottom: 4.5rem; }
+
+.receipt-confounders-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.receipt-confounder {
+  padding: 1.5rem 1.35rem 1.25rem;
+  background: rgba(255, 255, 255, 0.025);
+  border-left: 2px solid var(--accent-warm);
+  border-radius: 0 4px 4px 0;
+}
+
+.receipt-confounder-label {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+}
+
+.receipt-confounder-body {
+  margin: 0;
+  font-family: var(--ff-serif);
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: var(--fg);
+}
+
+/* ---- Two readings ---- */
+
+.receipt-readings { margin-bottom: 4rem; }
+
+.receipt-readings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.receipt-reading {
+  padding: 1.75rem 1.5rem 1.5rem;
+  border-radius: 6px;
+}
+
+.receipt-reading-charitable {
+  background: rgba(94, 143, 255, 0.05);
+  border: 1px solid rgba(94, 143, 255, 0.2);
+}
+
+.receipt-reading-uncharitable {
+  background: rgba(255, 82, 82, 0.06);
+  border: 1px solid rgba(255, 82, 82, 0.28);
+}
+
+.receipt-reading-tag {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.receipt-reading-charitable .receipt-reading-tag { color: #9db6ff; }
+.receipt-reading-uncharitable .receipt-reading-tag { color: #ff8c8c; }
+
+.receipt-reading-body {
+  margin: 0;
+  font-family: var(--ff-serif);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--fg);
+}
+
+.receipt-reading-body em { color: var(--accent-warm); font-style: italic; }
+
+.receipt-readings-note {
+  margin: 0 auto;
+  max-width: 640px;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--fg-dim);
+  text-align: center;
+}
+
+/* ---- Indictment ---- */
+
+.receipt-indictment {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 0;
+  text-align: center;
+}
+
+.receipt-indictment-eyebrow {
+  margin: 0 0 1.25rem;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.receipt-indictment-quote {
+  margin: 0;
+  padding: 0;
+  font-family: var(--ff-serif);
+  font-weight: 500;
+  color: var(--fg);
+  letter-spacing: -0.015em;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.receipt-indictment-quote::before,
+.receipt-indictment-quote::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 1px;
+  margin: 2rem auto;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.receipt-indictment-line {
+  display: block;
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  line-height: 1.35;
+  color: var(--fg);
+  font-style: italic;
+}
+
+.receipt-indictment-line:first-of-type { color: var(--accent); }
+
+.receipt-indictment-kicker {
+  margin-top: 0.5rem !important;
+  font-size: clamp(1.4rem, 2.9vw, 1.95rem) !important;
+  color: var(--accent-warm) !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.015em !important;
+}
+
+/* ---- Receipt mobile ---- */
+
+@media (max-width: 820px) {
+  .receipt-section { padding: 4rem 1.5rem 3.5rem; }
+  .receipt-stats-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .receipt-tables-grid { grid-template-columns: 1fr; }
+  .receipt-readings-grid { grid-template-columns: 1fr; }
+  .receipt-scatter figure { padding: 1rem 1rem 0.85rem; }
+}
+
+@media (max-width: 560px) {
+  .receipt-section { padding: 3rem 1rem 3rem; }
+  .receipt-hero { margin-bottom: 2.75rem; }
+  .receipt-stats-grid { grid-template-columns: 1fr; }
+  .receipt-stat { padding: 1.35rem 1.2rem 1.2rem; }
+  .receipt-stat-figure { font-size: 2.4rem; }
+  .receipt-confounders-grid { grid-template-columns: 1fr; }
+  .receipt-table-row { font-size: 0.85rem; grid-template-columns: 1.6rem 1fr auto 2.2rem; }
+  .receipt-indictment { padding: 2rem 0.5rem 0; }
+}
+
+/* ==================================================================
  * ESSAY EPIGRAPH
  *
  * Quiet scripture opener at the top of each essay section. Italic
