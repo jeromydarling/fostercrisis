@@ -135,7 +135,7 @@ export function FeedSection({ view }: Props) {
               <p className="feed-featured-kicker">
                 If American Christianity wants to know what James 1:27
                 looks like in the flesh &mdash; here it is. He's not
-                American. He's not Christian. But he outpacing nearly
+                American. He's not Christian. But he's outpacing nearly
                 all American Christians in his capacity to love.
               </p>
               <p className="feed-featured-credit">
