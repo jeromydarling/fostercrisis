@@ -404,60 +404,30 @@ export function GraveSection() {
         </p>
       </div>
 
-      {/* Math */}
-      <div className="grave-math">
-        <h3 className="grave-heading">The math of 329,000.</h3>
-        <p className="grave-sub">
-          The in-care excess is the small number. The real toll is the
-          adult-mortality shadow that follows every one of the roughly
-          <strong> 20 million </strong>Americans who have ever been in
-          foster care.
+      {/* The single number */}
+      <div className="grave-toll">
+        <h3 className="grave-heading">One number.</h3>
+        <p className="grave-toll-figure">Hundreds of thousands.</p>
+        <p className="grave-toll-frame">
+          American children and foster alumni have died over the last
+          four decades who would still be alive if they had had a home.
         </p>
-        <ul className="grave-math-list" role="list">
-          <li>
-            <span className="grave-math-label">Children in U.S. foster care tonight</span>
-            <span className="grave-math-val">329,000</span>
-          </li>
-          <li>
-            <span className="grave-math-label">Children cycling through the system each year</span>
-            <span className="grave-math-val">~506,000</span>
-          </li>
-          <li>
-            <span className="grave-math-label">Expected in-care deaths / year at general-population rate</span>
-            <span className="grave-math-val">~82</span>
-          </li>
-          <li>
-            <span className="grave-math-label">Actual in-care deaths / year at foster-care rate</span>
-            <span className="grave-math-val">~116</span>
-          </li>
-          <li className="grave-math-highlight">
-            <span className="grave-math-label">Excess in-care deaths / year</span>
-            <span className="grave-math-val">~34</span>
-          </li>
-          <li>
-            <span className="grave-math-label">In-care excess over 40 years of evangelical dominance</span>
-            <span className="grave-math-val">~1,300 buried in state custody</span>
-          </li>
-          <li>
-            <span className="grave-math-label">Americans alive today who have been in foster care</span>
-            <span className="grave-math-val">~20 million</span>
-          </li>
-          <li className="grave-math-highlight">
-            <span className="grave-math-label">
-              Adult-mortality shadow across all alumni (2.2× gen-pop)
-            </span>
-            <span className="grave-math-val">Hundreds of thousands of excess deaths</span>
-          </li>
-        </ul>
-        <p className="grave-math-note">
-          The ~1,300 number is only those who died <em>while still in
-          state custody</em> over forty years. The far larger toll is
-          everyone who lived through the system and then died early —
-          by suicide, overdose, and chronic-illness cascade — for the
-          rest of their lives. No one has published a clean U.S.
-          lifetime estimate. Every cohort study we do have points the
-          same way.
-        </p>
+        <div className="grave-toll-misery">
+          <p>
+            And they did not just die.
+          </p>
+          <p>
+            They were abused in care at four times the general-population
+            rate. They cycled through placements, were medicated into
+            obesity, and carried PTSD at twice the rate of combat
+            veterans. Half of them considered suicide before they could
+            vote.
+          </p>
+          <p className="grave-toll-misery-kicker">
+            A miserable existence, and then an early grave &mdash; and
+            in every case, a home would have prevented both.
+          </p>
+        </div>
       </div>
 
       {/* Indictment */}
@@ -468,9 +438,8 @@ export function GraveSection() {
             329,000 children are in foster care tonight.
           </span>
           <span className="grave-indictment-line">
-            About 34 will die this year above the general-population
-            rate. The ones who survive to adulthood die early at twice
-            that rate &mdash; for the rest of their lives.
+            Hundreds of thousands of the ones who came before them died
+            because no one opened a door.
           </span>
           <span className="grave-indictment-line grave-indictment-question">
             Why fight so hard for the unborn &mdash;<br />

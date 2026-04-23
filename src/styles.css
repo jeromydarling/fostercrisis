@@ -7186,71 +7186,69 @@ body {
   font-weight: 500;
 }
 
-/* ---- Math ---- */
+/* ---- Toll (single critical number) ---- */
 
-.grave-math {
+.grave-toll {
   margin-bottom: 5.5rem;
   max-width: 760px;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
-.grave-math-list {
-  list-style: none;
+.grave-toll-figure {
   margin: 0 0 1.5rem;
-  padding: 0;
-  background: rgba(14, 8, 10, 0.5);
-  border: 1px solid var(--rule);
-  border-radius: 4px;
-  overflow: hidden;
+  font-family: var(--ff-serif);
+  font-size: clamp(2.6rem, 6.2vw, 4.6rem);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: rgba(230, 150, 160, 0.97);
 }
 
-.grave-math-list li {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 1rem;
-  align-items: baseline;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+.grave-toll-frame {
+  margin: 0 auto 2.75rem;
+  max-width: 580px;
+  font-family: var(--ff-serif);
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.55;
+  color: var(--fg);
+}
+
+.grave-toll-misery {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 1.75rem 1.75rem 1.5rem;
+  background: rgba(14, 8, 10, 0.5);
+  border: 1px solid rgba(180, 90, 100, 0.2);
+  border-radius: 4px;
+}
+
+.grave-toll-misery p {
+  margin: 0 0 1rem;
   font-family: var(--ff-serif);
   font-size: 1rem;
-  color: var(--fg);
-}
-
-.grave-math-list li:last-child { border-bottom: 0; }
-
-.grave-math-label { color: var(--fg-dim); }
-
-.grave-math-val {
-  font-family: var(--ff-mono);
-  font-size: 1.05rem;
-  color: var(--fg);
-  letter-spacing: 0.02em;
-  text-align: right;
-}
-
-.grave-math-highlight {
-  background: rgba(180, 90, 100, 0.07);
-}
-
-.grave-math-highlight .grave-math-label {
-  color: rgba(230, 150, 160, 0.97);
-  font-weight: 500;
-}
-
-.grave-math-highlight .grave-math-val {
-  color: rgba(230, 150, 160, 0.97);
-  font-size: 1.2rem;
-}
-
-.grave-math-note {
-  margin: 0 auto;
-  max-width: 660px;
-  font-family: var(--ff-serif);
-  font-size: 0.92rem;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--fg-dim);
-  text-align: center;
+}
+
+.grave-toll-misery p:first-child {
+  color: var(--fg);
+  font-size: 1.08rem;
+  font-style: italic;
+}
+
+.grave-toll-misery p:last-child {
+  margin-bottom: 0;
+}
+
+.grave-toll-misery-kicker {
+  color: var(--accent-warm) !important;
+  font-style: italic !important;
+  font-size: 1.05rem !important;
+  font-weight: 500;
+  line-height: 1.55 !important;
 }
 
 /* ---- Indictment (ends on the pro-life hinge question) ---- */
@@ -7340,9 +7338,8 @@ body {
   .grave-sweden-track { height: 160px; }
   .grave-sweden-pct { font-size: 1.6rem; }
   .grave-causes-grid { grid-template-columns: 1fr; }
-  .grave-math-list li { grid-template-columns: 1fr; gap: 0.3rem; }
-  .grave-math-val { text-align: left; font-size: 1rem; }
-  .grave-math-highlight .grave-math-val { font-size: 1.1rem; }
+  .grave-toll-figure { font-size: 2.4rem; }
+  .grave-toll-misery { padding: 1.35rem 1.25rem 1.15rem; }
   .grave-indictment { padding: 2rem 0.5rem 0; }
   .grave-indictment-quote::before,
   .grave-indictment-quote::after { margin: 1.5rem auto; }
