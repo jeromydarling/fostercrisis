@@ -37,7 +37,6 @@ export function ShareModal({ targetNode, label, onClose }: Props) {
         const { blob, dataUrl } = await captureShare({
           node: targetNode,
           attribution: label,
-          width: 1080,
           pixelRatio: 2,
         });
         if (cancelled) return;
