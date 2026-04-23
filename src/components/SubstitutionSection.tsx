@@ -1,5 +1,6 @@
 import { SourceDetails, type Citation } from './SourceDetails';
 import { Prayer } from './Prayer';
+import { PledgeCalendar } from './PledgeCalendar';
 import { PRAYERS } from '../data/prayers';
 import { EssayEpigraph } from './EssayEpigraph';
 import { EPIGRAPHS } from '../data/epigraphs';
@@ -504,6 +505,7 @@ export function SubstitutionSection() {
       </div>
 
       <Prayer prayer={PRAYERS.substitution} />
+      <PledgeCalendar />
       <SourceDetails citations={CITATIONS} />
     </section>
   );

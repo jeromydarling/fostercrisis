@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { SourceDetails, type Citation } from './SourceDetails';
 import { Prayer } from './Prayer';
+import { PledgeCalendar } from './PledgeCalendar';
 import { PRAYERS } from '../data/prayers';
 import { EssayEpigraph } from './EssayEpigraph';
 import { EPIGRAPHS } from '../data/epigraphs';
@@ -373,6 +374,7 @@ export function MirrorSection() {
       </div>
 
       <Prayer prayer={PRAYERS.mirror} />
+      <PledgeCalendar />
       <SourceDetails citations={CITATIONS} />
     </section>
   );

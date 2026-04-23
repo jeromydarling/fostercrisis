@@ -15,7 +15,8 @@
     "data:ejscreen": "node scripts/fetch-ejscreen.mjs",
     "data:churches": "node scripts/fetch-churches.mjs",
     "data:misery": "node scripts/build-misery-index.mjs",
-    "data:feeds": "node scripts/fetch-feeds.mjs"
+    "data:feeds": "node scripts/fetch-feeds.mjs",
+    "data:pledge": "node scripts/build-pledge-ics.mjs"
   },
   "dependencies": {
     "mapbox-gl": "^3.8.0",

@@ -9,6 +9,7 @@
 
 import { SourceDetails, type Citation } from './SourceDetails';
 import { Prayer } from './Prayer';
+import { PledgeCalendar } from './PledgeCalendar';
 import { PRAYERS } from '../data/prayers';
 import { EssayEpigraph } from './EssayEpigraph';
 import { EPIGRAPHS } from '../data/epigraphs';
@@ -450,6 +451,7 @@ export function GraveSection() {
       </div>
 
       <Prayer prayer={PRAYERS.grave} />
+      <PledgeCalendar />
       <SourceDetails citations={CITATIONS} />
     </section>
   );

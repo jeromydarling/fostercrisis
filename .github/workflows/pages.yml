@@ -120,6 +120,12 @@ jobs:
         run: npm run data:feeds
         continue-on-error: true
 
+      # Regenerate the 52-week pledge calendar feed (public/pledge.ics).
+      # Free, no backend — users subscribe via webcal:// and their
+      # calendar app polls it on its own schedule.
+      - name: Build pledge calendar (.ics)
+        run: npm run data:pledge
+
       - run: npm run build
 
       - name: Add .nojekyll so Pages serves _vite-generated files

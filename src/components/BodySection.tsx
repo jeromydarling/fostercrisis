@@ -11,6 +11,7 @@
 
 import { SourceDetails, type Citation } from './SourceDetails';
 import { Prayer } from './Prayer';
+import { PledgeCalendar } from './PledgeCalendar';
 import { PRAYERS } from '../data/prayers';
 import { EssayEpigraph } from './EssayEpigraph';
 import { EPIGRAPHS } from '../data/epigraphs';
@@ -435,6 +436,7 @@ export function BodySection() {
       </div>
 
       <Prayer prayer={PRAYERS.score} />
+      <PledgeCalendar />
       <SourceDetails citations={CITATIONS} />
     </section>
   );
