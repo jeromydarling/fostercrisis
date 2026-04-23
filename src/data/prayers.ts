@@ -173,4 +173,23 @@ Through Christ our Lord, who crossed every boundary to reach us. Amen.`,
     attribution: 'Original composition in the Catholic "Prayer for the Nation" pattern',
     sourceHref: 'https://www.usccb.org/prayer-and-worship/prayers-and-devotions/prayers/prayer-for-our-nation',
   },
+
+  grave: {
+    id: 'grave',
+    theme: 'For those who did not make it',
+    title: 'A Prayer for Those Who Did Not Make It',
+    body: `Lord of life and Lord of the grave —
+
+we confess to you the children whose names we never learned. The ones who were born into harm, taken into state care, and did not live to adulthood. The ones who died before their first birthday, and the ones who took their own lives before their twentieth. The ones who overdosed at twenty-two, who were buried by caseworkers because their families could not be found, who slept their last night in a placement to which you had called one of your churches — and no one went.
+
+You number every hair and every sparrow, and you did not lose count of them.
+
+Receive them, Lord, into the rest they never had on earth. Let the arms that held them in the last moment be yours, even if no human arms were there. Where justice for them is still possible, raise it up. Where it is no longer possible, let your own judgment be their defense.
+
+And for us who are still alive and still have time — do not let us sit through one more sermon about the family without remembering the children who had none. Break our hearts over the bodies your Church did not bury, so that we will fight to keep the next ones alive. Send us — not tomorrow, not when the building campaign ends, not when the schedule clears — but now, to the ones who are still with us.
+
+Through Jesus Christ, who was himself born into danger, fled into exile as a child, and is called in Hebrews 4:15 a high priest able to sympathize with every weakness. Amen.`,
+    attribution: 'Original composition in the tradition of Catholic lament prayers for the dead',
+    sourceHref: 'https://www.usccb.org/prayers/prayer-mourning-loss',
+  },
 };

@@ -16,6 +16,7 @@ const PARTS: Part[] = [
   { id: 'wound',        roman: 'VIII', label: 'The Wound' },
   { id: 'score',        roman: 'IX', label: 'The Score' },
   { id: 'receipt',      roman: 'X',   label: 'The Receipt' },
+  { id: 'grave',        roman: 'XI',  label: 'The Grave' },
 ];
 
 /** Sticky secondary nav rail under the main header on the essay view.

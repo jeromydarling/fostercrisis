@@ -69,4 +69,9 @@ export const EPIGRAPHS: Record<string, Epigraph> = {
       'I hate, I despise your feasts, and I take no delight in your solemn assemblies … But let justice roll down like waters, and righteousness like an ever-flowing stream.',
     reference: 'Amos 5:21, 24',
   },
+  grave: {
+    id: 'grave',
+    verse: 'Jesus wept.',
+    reference: 'John 11:35',
+  },
 };

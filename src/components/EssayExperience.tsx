@@ -7,11 +7,12 @@ import { PipelineSection } from './PipelineSection';
 import { WoundSection } from './WoundSection';
 import { BodySection } from './BodySection';
 import { ReceiptSection } from './ReceiptSection';
+import { GraveSection } from './GraveSection';
 import { EssayNav } from './EssayNav';
 
-/** The Essay experience — argument-oriented. Nine long-form sections
- *  stacked; the cascade Wound (VIII) → Pipeline (VII) → Score (IX)
- *  is followed by the statistical receipt at Part X. An
+/** The Essay experience — argument-oriented. Ten long-form sections
+ *  stacked; Pipeline/Wound/Score (VII–IX) name the harm, Receipt (X)
+ *  and Grave (XI) are the two receipts — geographic and mortal. An
  *  auto-highlighting section nav sits sticky under the main header. */
 export function EssayExperience() {
   return (
@@ -26,6 +27,7 @@ export function EssayExperience() {
       <WoundSection />
       <BodySection />
       <ReceiptSection />
+      <GraveSection />
     </>
   );
 }
