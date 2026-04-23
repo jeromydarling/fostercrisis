@@ -28,9 +28,9 @@ const HEADERS: Record<
   },
   news: {
     eyebrow: 'The state of the system',
-    title: 'What is breaking, and who is saying so.',
+    title: 'Giving a voice to the voiceless.',
     lede:
-      'Independent reporting on American foster care. The Imprint, NCCPR, and the reform voices the mainstream press leaves unread.',
+      'Independent reporting on American foster care. The Imprint, NCCPR, and the reform voices American Christianity desperately needs to hear.',
   },
 };
 
@@ -91,8 +91,8 @@ export function FeedSection({ view }: Props) {
           <article className="feed-featured" aria-label="Featured story">
             <p className="feed-featured-eyebrow">Featured · The Model</p>
             <h3 className="feed-featured-title">
-              The most Christ-shaped life on this page was not lived by
-              a Christian.
+              Meet Mohammad Bzeek, a Libyan-American Muslim who fosters
+              terminally ill children until they die.
             </h3>
             <div className="feed-featured-media">
               {bzeekPlaying ? (
@@ -133,9 +133,10 @@ export function FeedSection({ view }: Props) {
                 die alone.
               </p>
               <p className="feed-featured-kicker">
-                If the American Church wants to know what James 1:27
-                looks like in the flesh &mdash; here it is. And it is
-                not American. And it is not Christian.
+                If American Christianity wants to know what James 1:27
+                looks like in the flesh &mdash; here it is. He's not
+                American. He's not Christian. But he outpacing nearly
+                all American Christians in his capacity to love.
               </p>
               <p className="feed-featured-credit">
                 Video: Great Big Story via YouTube.{' '}
