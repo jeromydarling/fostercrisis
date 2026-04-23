@@ -88,16 +88,22 @@ function startOfToday() {
   return d;
 }
 
-/** Shape each event's description. The body is the Gospel passage
- *  itself, closed by the traditional acclamation. One short line of
- *  context and a link back to the site. */
+/** Shape each event's description. Opens with the pledge-reminder
+ *  framing so the subscriber is always brought back to why this
+ *  calendar exists; the Gospel passage follows as "a word from the
+ *  Lord to ponder." One short line of context and a link back to
+ *  the site. */
 function buildDescription({ title, ref, text, translationName }) {
   const parts = [];
+  parts.push(
+    "Just a gentle reminder that you pledged to seek the Lord's will concerning fostering and adoption. Here's a word from the Lord to ponder."
+  );
+  parts.push('');
   parts.push(`${title}`);
   parts.push(`A reading from the holy Gospel — ${ref}`);
-  parts.push(''); // blank line
+  parts.push('');
   parts.push(text);
-  parts.push(''); // blank line
+  parts.push('');
   parts.push('The Gospel of the Lord.');
   parts.push('');
   parts.push(`— ${translationName}, public domain.`);
@@ -149,7 +155,7 @@ function buildIcs() {
     const dtstart = fmtLocal(y, m, day, START_HOUR, 0);
     const dtend = fmtLocal(y, m, day, START_HOUR, DURATION_MIN);
 
-    const summary = `The Sunday Gospel · ${g.ref}`;
+    const summary = 'Weekly Pledge Reminder';
     const description = buildDescription({
       title: g.title || entry.title,
       ref: g.ref || entry.displayRef,
