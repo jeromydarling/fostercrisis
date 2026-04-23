@@ -4,13 +4,16 @@ import { ModeSwitcher, type Mode } from './components/ModeSwitcher';
 import { MapExperience } from './components/MapExperience';
 import { EssayExperience } from './components/EssayExperience';
 import { SolutionExperience } from './components/SolutionExperience';
+import { FeedExperience } from './components/FeedExperience';
 import { ClosingEpigraph } from './components/ClosingEpigraph';
 import { FinalBenediction } from './components/FinalBenediction';
 
 /** Hash router:
- *    (no hash, or #)  → Landing (epigraph + choose)
- *    #map             → Map experience
- *    #essay           → Essay experience
+ *    (no hash, or #)   → Landing (epigraph + choose)
+ *    #map              → Map experience
+ *    #essay            → Essay experience
+ *    #feed / #stories  → Stories & News experience
+ *    #solution         → Solution + state directory
  *  Everything else falls through to Landing.
  */
 function parseMode(): Mode {
@@ -20,6 +23,7 @@ function parseMode(): Mode {
     .toLowerCase();
   if (h === 'map') return 'map';
   if (h === 'essay') return 'essay';
+  if (h === 'feed' || h === 'stories' || h === 'news') return 'feed';
   if (h === 'solution') return 'solution';
   return 'landing';
 }
@@ -63,6 +67,7 @@ export default function App() {
           />
         )}
         {mode === 'essay' && <EssayExperience />}
+        {mode === 'feed' && <FeedExperience />}
         {mode === 'solution' && <SolutionExperience selectedFips={selectedFips} />}
       </main>
 

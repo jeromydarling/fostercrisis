@@ -90,8 +90,8 @@ export function MapExperience({ selectedFips, onSelectedFipsChange }: Props) {
             380,000 congregations × ~100 families each. One family per church
             says yes — the waitlist ends 5× over.
           </span>
-          <a className="footer-scroll" href="#solution">
-            See the faces → The Solution
+          <a className="footer-scroll" href="#feed">
+            See the faces → Stories &amp; News
           </a>
         </div>
       </div>

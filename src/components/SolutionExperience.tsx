@@ -1,8 +1,11 @@
-import { FeedSection } from './FeedSection';
+import { StateOrgsDirectory } from './StateOrgsDirectory';
+import { STATE_INDEX } from '../data/states';
 
-/** The Solution experience — the call to action. A hero section that
- *  names what the whole site has been arguing toward, followed by the
- *  Kids Waiting / State of the System feeds.
+/** The Solution experience — the call to action, followed by the
+ *  state-by-state directory of people already in the fight. Stories
+ *  and News have been moved to their own top-level mode so this page
+ *  can stay focused on one thing: here are the specific humans in
+ *  your state you could call tomorrow.
  *
  *  The argument behind the argument: you don't owe these children
  *  attention because you're a Christian. You owe them attention because
@@ -16,6 +19,9 @@ interface Props {
 }
 
 export function SolutionExperience({ selectedFips }: Props) {
+  const selectedCode = selectedFips
+    ? STATE_INDEX[selectedFips]?.code ?? null
+    : null;
   return (
     <>
       <section className="solution-hero" aria-label="The Solution">
@@ -60,15 +66,20 @@ export function SolutionExperience({ selectedFips }: Props) {
 
         <div className="solution-rule solution-rule-bot" aria-hidden />
 
-        <a className="solution-scroll" href="#solution/feeds">
-          <span>The faces. The voices. The system.</span>
+        <a className="solution-scroll" href="#solution/directory">
+          <span>Your state. Every org already in the fight.</span>
           <span className="solution-scroll-arrow" aria-hidden>
             ↓
           </span>
         </a>
       </section>
 
-      <FeedSection selectedFips={selectedFips} />
+      <section
+        className="solution-directory-section"
+        id="solution/directory"
+      >
+        <StateOrgsDirectory activeCode={selectedCode} />
+      </section>
     </>
   );
 }

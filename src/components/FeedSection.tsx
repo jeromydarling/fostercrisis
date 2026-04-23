@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { loadFeeds, type FeedItem, type FeedsFile } from '../data/feeds';
-import { STATE_INDEX } from '../data/states';
-import { StateOrgsDirectory } from './StateOrgsDirectory';
 import { Shareable } from './Shareable';
 
-/** Which of the three tabs is visible. Tabs are UI-level, not a 1:1
- *  mapping of feed buckets — the Directory tab is a hardcoded
- *  component, the other two pull from feeds.json. */
-type Tab = 'stories' | 'directory' | 'news';
+/** Which of the two tabs is visible. The Directory tab used to live
+ *  here too; it's been moved to the Solution page as the sole content
+ *  under the call-to-action hero, so this section is Stories + News. */
+type Tab = 'stories' | 'news';
 
 const TABS: { key: Tab; label: string; intro: string }[] = [
   {
@@ -15,12 +13,6 @@ const TABS: { key: Tab; label: string; intro: string }[] = [
     label: 'Stories',
     intro:
       'Real children waiting for families, and the people already showing up for them. Featured here: Mohammad Bzeek — the Libyan-American Muslim who has fostered roughly 80 terminally-ill children in Los Angeles County since 1995. Below him, the national photolisting networks: Heart Gallery, Grant Me Hope, AdoptUSKids, America\'s Kids Belong, and Forever Family. The most Christ-shaped lives on this page were not lived by Christians.',
-  },
-  {
-    key: 'directory',
-    label: 'Directory',
-    intro:
-      "A state-by-state directory of the people already in the fight — every state's official photolisting, the intake page you need to become a foster parent, the local Heart Gallery chapter, and a short list of orgs working on the ground. If your state is on the map above, it is on the list below. Start there.",
   },
   {
     key: 'news',
@@ -40,11 +32,7 @@ function formatDate(iso: string): string {
   });
 }
 
-interface Props {
-  selectedFips: string | null;
-}
-
-export function FeedSection({ selectedFips }: Props) {
+export function FeedSection() {
   const [feeds, setFeeds] = useState<FeedsFile | null>(null);
   const [tab, setTab] = useState<Tab>('stories');
   const [loading, setLoading] = useState(true);
@@ -56,8 +44,6 @@ export function FeedSection({ selectedFips }: Props) {
       setLoading(false);
     });
   }, []);
-
-  const selectedCode = selectedFips ? STATE_INDEX[selectedFips]?.code ?? null : null;
 
   // The `waiting_children` bucket still carries the YouTube video
   // sources (Heart Gallery, Grant Me Hope, AdoptUSKids, etc.). We
@@ -181,8 +167,6 @@ export function FeedSection({ selectedFips }: Props) {
           )}
         </>
       )}
-
-      {tab === 'directory' && <StateOrgsDirectory activeCode={selectedCode} />}
 
       {tab === 'news' && (
         <>

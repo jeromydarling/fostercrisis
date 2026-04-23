@@ -686,14 +686,30 @@ body {
 
 .landing-chooser {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  max-width: 1140px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+  max-width: 1240px;
   width: 100%;
   margin: 1rem auto 0;
   padding: 0 1rem;
   position: relative;
   z-index: 2;
+}
+
+@media (max-width: 960px) {
+  .landing-chooser { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+}
+
+@media (max-width: 520px) {
+  .landing-chooser { grid-template-columns: 1fr; }
+}
+
+/* The Stories & News pill label swaps to a short form under 560 px so
+   four tabs still fit in the header pill on phones. */
+.mode-tab-label-short { display: none; }
+@media (max-width: 560px) {
+  .mode-tab-label-full { display: none; }
+  .mode-tab-label-short { display: inline; }
 }
 
 .landing-card {
