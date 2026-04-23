@@ -19,8 +19,10 @@ const HEADERS: Record<
   stories: {
     eyebrow: 'Faces · the waiting · the model',
     title: 'This is not a statistic.',
-    lede:
-      "The numbers above are real children. Below: Mohammad Bzeek — the Libyan-American Muslim who has fostered roughly 80 terminally-ill children in Los Angeles County since 1995 — and the national photolisting networks that film the rest. Heart Gallery, Grant Me Hope, AdoptUSKids, America's Kids Belong, Forever Family. The most Christ-shaped lives on this page were not lived by Christians.",
+    // Lede intentionally blank — user is writing the intro copy for
+    // this section. Once a non-empty string is set here, the <p> will
+    // render again (see conditional below).
+    lede: '',
   },
   news: {
     eyebrow: 'The state of the system',
@@ -67,7 +69,7 @@ export function FeedSection({ view }: Props) {
       <header className="feed-header">
         <p className="feed-eyebrow">{header.eyebrow}</p>
         <h2 className="feed-title">{header.title}</h2>
-        <p className="feed-lede">{header.lede}</p>
+        {header.lede && <p className="feed-lede">{header.lede}</p>}
       </header>
 
       {view === 'stories' && (
