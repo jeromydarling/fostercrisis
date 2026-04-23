@@ -23,7 +23,7 @@ export interface CaptureOptions {
 export async function captureShare(
   opts: CaptureOptions
 ): Promise<{ blob: Blob; dataUrl: string }> {
-  const { node, attribution, pixelRatio: requestedPr = 1.5 } = opts;
+  const { node, attribution, pixelRatio: requestedPr = 1 } = opts;
 
   // Make sure web fonts have loaded before html-to-image serializes
   // computed styles; otherwise the PNG falls back to system fonts.
@@ -35,39 +35,45 @@ export async function captureShare(
     }
   }
 
-  // Use scrollWidth/scrollHeight so content that overflows the element's
-  // padded box (long word-wrapped paragraphs, italic descenders, etc.)
-  // still makes it into the capture. offsetHeight sometimes under-
-  // reports when line-height + descenders push past the content box.
-  const rawW = Math.max(node.offsetWidth, node.scrollWidth);
-  const rawH = Math.max(node.offsetHeight, node.scrollHeight);
+  // Temporarily pad the element so any overflowing descenders / last-
+  // line italics are safely inside the serialized box. html-to-image
+  // measures the cloned element's own bounds — if a line of italic text
+  // extends past the offset-height via descenders or line-height math,
+  // it silently gets cropped. 48 px of extra padding-bottom guarantees
+  // space without visibly shifting the live page (we restore the prior
+  // value immediately after capture).
+  const priorPaddingBottom = node.style.paddingBottom;
+  node.style.paddingBottom =
+    (parseFloat(getComputedStyle(node).paddingBottom || '0') + 48) + 'px';
 
-  // Mobile browsers cap canvas dimensions around 4096 × 4096 (some older
-  // devices lower). Given our footer reserve, scale the pixel ratio
-  // down until BOTH capture and final canvas stay safely under 3800.
-  const MAX_CANVAS_DIM = 3800;
-  const FOOTER_RAW_H = 170;
-  const maxRaw = Math.max(rawW, rawH + FOOTER_RAW_H);
+  // Keep the total raster under mobile's typical 4096 canvas dim cap.
+  const MAX_CANVAS_DIM = 3600;
+  const rect = node.getBoundingClientRect();
+  const rawW = Math.ceil(rect.width);
+  const rawH = Math.ceil(rect.height);
+  const maxRaw = Math.max(rawW, rawH);
   const pixelRatio = Math.min(requestedPr, Math.max(1, MAX_CANVAS_DIM / maxRaw));
 
-  // Capture the live node. We pass width/height explicitly so html-to-
-  // image doesn't trust a stale or partial bounding box. The filter
-  // keeps our own UI out of the image.
-  const contentDataUrl = await toPng(node, {
-    cacheBust: true,
-    pixelRatio,
-    width: rawW,
-    height: rawH,
-    backgroundColor: '#0b0d12',
-    filter: (el) => {
-      if (el instanceof HTMLIFrameElement) return false;
-      const cls = (el as HTMLElement).classList;
-      if (!cls) return true;
-      if (cls.contains('shareable-trigger')) return false;
-      if (cls.contains('shareable-modal')) return false;
-      return true;
-    },
-  });
+  let contentDataUrl: string;
+  try {
+    contentDataUrl = await toPng(node, {
+      cacheBust: true,
+      pixelRatio,
+      backgroundColor: '#0b0d12',
+      filter: (el) => {
+        if (el instanceof HTMLIFrameElement) return false;
+        const cls = (el as HTMLElement).classList;
+        if (!cls) return true;
+        if (cls.contains('shareable-trigger')) return false;
+        if (cls.contains('shareable-modal')) return false;
+        return true;
+      },
+    });
+  } finally {
+    // Always restore, even on capture failure, so the live page isn't
+    // left with stray padding.
+    node.style.paddingBottom = priorPaddingBottom;
+  }
 
   const contentImage = await loadImage(contentDataUrl);
   const contentW = contentImage.naturalWidth || contentImage.width;
