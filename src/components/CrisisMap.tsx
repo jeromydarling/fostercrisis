@@ -1,22 +1,36 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl, { type ExpressionSpecification } from 'mapbox-gl';
 import type { FeatureCollection } from 'geojson';
-import { CHAPTERS, type Chapter } from '../data/chapters';
+import { CHAPTERS } from '../data/chapters';
 import { loadAll, buildSyntheticChurches, type GeoBundle } from '../data/geo';
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN as string | undefined;
 
-function buildFillPaint(chapter: Chapter, domain: [number, number]): ExpressionSpecification {
+/** Paint expression that reads the chapter's metric value directly off
+ *  the feature's properties rather than feature-state. The metrics are
+ *  already baked into properties by geo.ts (metric_${m} for states,
+ *  poverty/overdose/misery/complicity for counties), so routing them
+ *  through setFeatureState created a race on first load: the source's
+ *  async feature indexing could still be in flight when
+ *  setFeatureState fired, and any feature that missed the window
+ *  rendered as the dark fallback until the next paint cycle nudged it.
+ *  Reading properties directly removes the round-trip and makes first
+ *  paint correct by construction. */
+function buildFillPaint(
+  propKey: string,
+  ramp: string[],
+  domain: [number, number]
+): ExpressionSpecification {
   const [min, max] = domain;
   const span = max - min || 1;
-  const stops = chapter.ramp.map(
-    (c, i) => [min + (span * i) / (chapter.ramp.length - 1), c] as [number, string]
+  const stops = ramp.map(
+    (c, i) => [min + (span * i) / (ramp.length - 1), c] as [number, string]
   );
   return [
     'case',
-    ['==', ['coalesce', ['feature-state', 'value'], null], null],
+    ['==', ['coalesce', ['get', propKey], null], null],
     '#1a1f2b',
-    ['interpolate', ['linear'], ['feature-state', 'value'], ...stops.flat()],
+    ['interpolate', ['linear'], ['get', propKey], ...stops.flat()],
   ] as unknown as ExpressionSpecification;
 }
 
@@ -74,6 +88,47 @@ function fitPaddingFor(mobile: boolean) {
   }
   // Desktop keeps the 440px sidebar clear on the left.
   return { top: 48, right: 48, bottom: 48, left: 460 };
+}
+
+/** Short, human-readable foster-care count used as the overlay label.
+ *   350  → "350"   (tiny states like Wyoming, Vermont)
+ *   5876 → "5.9K"
+ *  45000 → "45K"
+ */
+function formatFosterCount(n: number): string {
+  if (!Number.isFinite(n) || n <= 0) return '—';
+  if (n < 1000) return String(Math.round(n));
+  if (n < 10000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+  return Math.round(n / 1000) + 'K';
+}
+
+/** Build a points FeatureCollection of state-centroid overlays carrying
+ *  the foster-care count + formatted label. Centroids are bbox-centers —
+ *  good enough at continental zoom where the overlay lives, and avoids
+ *  pulling in turf for a single calculation. */
+function buildFosterCountPoints(
+  states: FeatureCollection,
+): FeatureCollection {
+  const features: GeoJSON.Feature[] = [];
+  for (const f of states.features) {
+    const props = f.properties as Record<string, unknown> | null;
+    const count = typeof props?.fosterCare === 'number' ? (props.fosterCare as number) : null;
+    if (count == null || count <= 0) continue;
+    const bounds = featureBounds(f);
+    const center = bounds.getCenter();
+    if (!Number.isFinite(center.lng) || !Number.isFinite(center.lat)) continue;
+    features.push({
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [center.lng, center.lat] },
+      properties: {
+        fips: f.id,
+        name: (props?.name as string | undefined) ?? '',
+        fosterCare: count,
+        label: formatFosterCount(count),
+      },
+    });
+  }
+  return { type: 'FeatureCollection', features };
 }
 
 function featureBounds(f: GeoJSON.Feature): mapboxgl.LngLatBounds {
@@ -235,6 +290,58 @@ export function CrisisMap({
           },
         });
 
+        // --- Persistent foster-care-by-state overlay ----------------
+        // Circles at state centroids, sized proportionally to the
+        // number of children in foster care on any given night. Stays
+        // visible on every chapter so the kid count always reads over
+        // whatever choropleth the current chapter is painting.
+        map.addSource('foster-counts', {
+          type: 'geojson',
+          data: buildFosterCountPoints(bundle.states),
+        });
+        map.addLayer({
+          id: 'foster-counts-circle',
+          type: 'circle',
+          source: 'foster-counts',
+          paint: {
+            'circle-radius': [
+              'interpolate', ['linear'], ['get', 'fosterCare'],
+              0, 4,
+              1000, 9,
+              5000, 15,
+              15000, 23,
+              45000, 36,
+            ],
+            'circle-color': '#ffe9b3',
+            'circle-opacity': 0.92,
+            'circle-stroke-color': '#1a1009',
+            'circle-stroke-width': 1.1,
+            'circle-stroke-opacity': 0.9,
+          },
+        });
+        map.addLayer({
+          id: 'foster-counts-label',
+          type: 'symbol',
+          source: 'foster-counts',
+          layout: {
+            'text-field': ['get', 'label'],
+            'text-size': [
+              'interpolate', ['linear'], ['get', 'fosterCare'],
+              0, 9,
+              5000, 10.5,
+              45000, 13,
+            ],
+            'text-font': ['DIN Pro Bold', 'Arial Unicode MS Bold'],
+            'text-allow-overlap': true,
+            'text-ignore-placement': true,
+          },
+          paint: {
+            'text-color': '#1a1009',
+            'text-halo-color': '#ffe9b3',
+            'text-halo-width': 0.5,
+          },
+        });
+
         // --- Click: select / deselect ---
         map.on('click', 'states-fill', (e) => {
           const f = e.features?.[0];
@@ -291,38 +398,31 @@ export function CrisisMap({
     if (!ready || !map || !bundle) return;
     const chapter = CHAPTERS[chapterIndex];
 
-    // Push the correct per-feature value into feature-state for the active
-    // geography, compute a percentile domain, and paint.
+    // Paint expressions read the active chapter's metric directly off
+    // each feature's properties — metric_* on states, poverty/overdose/
+    // misery/complicity on counties. Both are populated by geo.ts at
+    // bundle assembly time, so they're already present when the source
+    // becomes queryable.
     if (chapter.geography === 'state') {
-      const metricKey = `metric_${chapter.metric}` as const;
+      const propKey = `metric_${chapter.metric}`;
       const values: number[] = [];
       for (const f of bundle.states.features) {
-        const v = (f.properties as unknown as Record<string, number | undefined>)[metricKey];
-        if (typeof v !== 'number' || !f.id) continue;
-        values.push(v);
-        map.setFeatureState({ source: 'states', id: f.id as string }, { value: v });
-      }
-      // Clear counties to prevent stale colors when we come back.
-      for (const f of bundle.counties.features) {
-        if (!f.id) continue;
-        map.setFeatureState({ source: 'counties', id: f.id as string }, { value: null });
+        const v = (f.properties as unknown as Record<string, number | undefined>)[propKey];
+        if (typeof v === 'number') values.push(v);
       }
       const domain = computeDomain(values);
-      map.setPaintProperty('states-fill', 'fill-color', buildFillPaint(chapter, domain));
+      map.setPaintProperty('states-fill', 'fill-color', buildFillPaint(propKey, chapter.ramp, domain));
       map.setLayoutProperty('counties-fill', 'visibility', 'none');
       map.setLayoutProperty('states-fill', 'visibility', 'visible');
     } else {
-      // county choropleth
-      const prop = chapter.countyProp ?? 'poverty';
+      const propKey = chapter.countyProp ?? 'poverty';
       const values: number[] = [];
       for (const f of bundle.counties.features) {
-        const v = (f.properties as unknown as Record<string, number | undefined>)[prop];
-        if (typeof v !== 'number' || !f.id) continue;
-        values.push(v);
-        map.setFeatureState({ source: 'counties', id: f.id as string }, { value: v });
+        const v = (f.properties as unknown as Record<string, number | undefined>)[propKey];
+        if (typeof v === 'number') values.push(v);
       }
       const domain = percentileDomain(values);
-      map.setPaintProperty('counties-fill', 'fill-color', buildFillPaint(chapter, domain));
+      map.setPaintProperty('counties-fill', 'fill-color', buildFillPaint(propKey, chapter.ramp, domain));
       map.setLayoutProperty('counties-fill', 'visibility', 'visible');
       // Keep state fill as a dim backdrop so Alaska/Hawaii still draw.
       map.setPaintProperty('states-fill', 'fill-color', '#12151d');
