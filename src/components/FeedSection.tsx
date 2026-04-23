@@ -2,25 +2,33 @@ import { useEffect, useState } from 'react';
 import { loadFeeds, type FeedItem, type FeedsFile } from '../data/feeds';
 import { Shareable } from './Shareable';
 
-/** Which of the two tabs is visible. The Directory tab used to live
- *  here too; it's been moved to the Solution page as the sole content
- *  under the call-to-action hero, so this section is Stories + News. */
-type Tab = 'stories' | 'news';
+/** Which feed this section is rendering. Stories and News are two
+ *  separate top-level modes in the main nav — the tab rail that used
+ *  to live here has been removed in favor of giving each its own
+ *  page. The component is essentially a switchable content shell now. */
+export type FeedView = 'stories' | 'news';
 
-const TABS: { key: Tab; label: string; intro: string }[] = [
-  {
-    key: 'stories',
-    label: 'Stories',
-    intro:
-      'Real children waiting for families, and the people already showing up for them. Featured here: Mohammad Bzeek — the Libyan-American Muslim who has fostered roughly 80 terminally-ill children in Los Angeles County since 1995. Below him, the national photolisting networks: Heart Gallery, Grant Me Hope, AdoptUSKids, America\'s Kids Belong, and Forever Family. The most Christ-shaped lives on this page were not lived by Christians.',
+interface Props {
+  view: FeedView;
+}
+
+const HEADERS: Record<
+  FeedView,
+  { eyebrow: string; title: string; lede: string }
+> = {
+  stories: {
+    eyebrow: 'Faces · the waiting · the model',
+    title: 'This is not a statistic.',
+    lede:
+      "The numbers above are real children. Below: Mohammad Bzeek — the Libyan-American Muslim who has fostered roughly 80 terminally-ill children in Los Angeles County since 1995 — and the national photolisting networks that film the rest. Heart Gallery, Grant Me Hope, AdoptUSKids, America's Kids Belong, Forever Family. The most Christ-shaped lives on this page were not lived by Christians.",
   },
-  {
-    key: 'news',
-    label: 'News',
-    intro:
-      'The news, research, and advocacy shaping American foster care. Independent reporting from The Imprint, reform voices (NCCPR), and the stories families are telling in their own words.',
+  news: {
+    eyebrow: 'The state of the system',
+    title: 'What is breaking, and who is saying so.',
+    lede:
+      'Independent reporting on American foster care. The Imprint, NCCPR, and the reform voices the mainstream press leaves unread.',
   },
-];
+};
 
 function formatDate(iso: string): string {
   const t = Date.parse(iso);
@@ -32,9 +40,8 @@ function formatDate(iso: string): string {
   });
 }
 
-export function FeedSection() {
+export function FeedSection({ view }: Props) {
   const [feeds, setFeeds] = useState<FeedsFile | null>(null);
-  const [tab, setTab] = useState<Tab>('stories');
   const [loading, setLoading] = useState(true);
   const [bzeekPlaying, setBzeekPlaying] = useState(false);
 
@@ -45,149 +52,110 @@ export function FeedSection() {
     });
   }, []);
 
-  // The `waiting_children` bucket still carries the YouTube video
-  // sources (Heart Gallery, Grant Me Hope, AdoptUSKids, etc.). We
-  // surface it under the Stories tab — the bucket key is legacy, the
-  // content is stories.
-  const storyItems = feeds?.waiting_children ?? [];
-  const newsItems = feeds?.system_news ?? [];
+  // The `waiting_children` feed bucket carries the YouTube video
+  // sources (Heart Gallery, Grant Me Hope, AdoptUSKids, etc.). The
+  // bucket key is legacy; the content is Stories.
+  const items =
+    view === 'stories'
+      ? feeds?.waiting_children ?? []
+      : feeds?.system_news ?? [];
 
-  const currentIntro = TABS.find((t) => t.key === tab)?.intro ?? '';
+  const header = HEADERS[view];
 
   return (
     <section className="feed-section" id="feeds">
       <header className="feed-header">
-        <p className="feed-eyebrow">Faces, voices, the system</p>
-        <h2 className="feed-title">This is not a statistic.</h2>
-        <p className="feed-lede">
-          The numbers above are real children. Below: their stories, the
-          people already in the fight for them, and the state of the
-          system they live in.
-        </p>
-        <nav className="feed-tabs" role="tablist">
-          {TABS.map((t) => (
-            <button
-              key={t.key}
-              role="tab"
-              aria-selected={tab === t.key}
-              className={'feed-tab' + (tab === t.key ? ' is-active' : '')}
-              onClick={() => setTab(t.key)}
-            >
-              {t.label}
-            </button>
-          ))}
-        </nav>
-        <p className="feed-intro">{currentIntro}</p>
+        <p className="feed-eyebrow">{header.eyebrow}</p>
+        <h2 className="feed-title">{header.title}</h2>
+        <p className="feed-lede">{header.lede}</p>
       </header>
 
-      {tab === 'stories' && (
-        <>
-          {/* Bzeek — the featured story, anchors the Stories tab */}
-          <Shareable label="Bzeek · The Model" className="feed-featured-shareable">
-            <article className="feed-featured" aria-label="Featured story">
-              <p className="feed-featured-eyebrow">Featured · The Model</p>
-              <h3 className="feed-featured-title">
-                The most Christ-shaped life on this page was not lived by
-                a Christian.
-              </h3>
-              <div className="feed-featured-media">
-                {bzeekPlaying ? (
-                  <iframe
-                    src="https://www.youtube.com/embed/fqnoGDQ2i2k?autoplay=1&rel=0"
-                    title="Mohammad Bzeek — A Hero's Mission (Great Big Story)"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+      {view === 'stories' && (
+        <Shareable label="Bzeek · The Model" className="feed-featured-shareable">
+          <article className="feed-featured" aria-label="Featured story">
+            <p className="feed-featured-eyebrow">Featured · The Model</p>
+            <h3 className="feed-featured-title">
+              The most Christ-shaped life on this page was not lived by
+              a Christian.
+            </h3>
+            <div className="feed-featured-media">
+              {bzeekPlaying ? (
+                <iframe
+                  src="https://www.youtube.com/embed/fqnoGDQ2i2k?autoplay=1&rel=0"
+                  title="Mohammad Bzeek — A Hero's Mission (Great Big Story)"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <button
+                  type="button"
+                  className="feed-thumb-btn"
+                  onClick={() => setBzeekPlaying(true)}
+                  aria-label="Play: Mohammad Bzeek — A Hero's Mission"
+                >
+                  <img
+                    src="https://i.ytimg.com/vi/fqnoGDQ2i2k/maxresdefault.jpg"
+                    alt=""
+                    loading="lazy"
                   />
-                ) : (
-                  <button
-                    type="button"
-                    className="feed-thumb-btn"
-                    onClick={() => setBzeekPlaying(true)}
-                    aria-label="Play: Mohammad Bzeek — A Hero's Mission"
-                  >
-                    <img
-                      src="https://i.ytimg.com/vi/fqnoGDQ2i2k/maxresdefault.jpg"
-                      alt=""
-                      loading="lazy"
-                    />
-                    <span className="feed-play" aria-hidden>▶</span>
-                  </button>
-                )}
-              </div>
-              <div className="feed-featured-body">
-                <p className="feed-featured-who">
-                  <strong>Mohammad Bzeek.</strong> Libyan-American Muslim.
-                  Los Angeles County, since 1995.
-                </p>
-                <p>
-                  Bzeek takes in terminally-ill foster children no one
-                  else will take &mdash; children with short diagnoses,
-                  many without families willing to be present at the end.
-                  He has fostered approximately{' '}
-                  <strong>80 children</strong>. He has buried{' '}
-                  <strong>10 of them</strong>. When the rest of them die,
-                  he is the one who holds them so they do not die alone.
-                </p>
-                <p className="feed-featured-kicker">
-                  If the American Church wants to know what James 1:27
-                  looks like in the flesh &mdash; here it is. And it is
-                  not American. And it is not Christian.
-                </p>
-                <p className="feed-featured-credit">
-                  Video: Great Big Story via YouTube.{' '}
-                  <a
-                    href="https://youtu.be/fqnoGDQ2i2k"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Watch on YouTube &rarr;
-                  </a>
-                </p>
-              </div>
-            </article>
-          </Shareable>
-
-          {/* Video grid — Heart Gallery, Grant Me Hope, AdoptUSKids, etc. */}
-          {loading && <p className="feed-status">Loading stories&hellip;</p>}
-          {!loading && !feeds && (
-            <p className="feed-status">
-              Feeds haven't been generated yet. They'll populate on the
-              next GitHub Actions run.
-            </p>
-          )}
-          {!loading && feeds && storyItems.length === 0 && (
-            <p className="feed-status">No stories in this feed yet.</p>
-          )}
-          {storyItems.length > 0 && (
-            <ul className="feed-grid" role="list">
-              {storyItems.slice(0, 24).map((it) => (
-                <FeedCard key={it.id} item={it} highlight={false} />
-              ))}
-            </ul>
-          )}
-        </>
+                  <span className="feed-play" aria-hidden>▶</span>
+                </button>
+              )}
+            </div>
+            <div className="feed-featured-body">
+              <p className="feed-featured-who">
+                <strong>Mohammad Bzeek.</strong> Libyan-American Muslim.
+                Los Angeles County, since 1995.
+              </p>
+              <p>
+                Bzeek takes in terminally-ill foster children no one
+                else will take &mdash; children with short diagnoses,
+                many without families willing to be present at the end.
+                He has fostered approximately <strong>80 children</strong>.
+                He has buried <strong>10 of them</strong>. When the rest
+                of them die, he is the one who holds them so they do not
+                die alone.
+              </p>
+              <p className="feed-featured-kicker">
+                If the American Church wants to know what James 1:27
+                looks like in the flesh &mdash; here it is. And it is
+                not American. And it is not Christian.
+              </p>
+              <p className="feed-featured-credit">
+                Video: Great Big Story via YouTube.{' '}
+                <a
+                  href="https://youtu.be/fqnoGDQ2i2k"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Watch on YouTube &rarr;
+                </a>
+              </p>
+            </div>
+          </article>
+        </Shareable>
       )}
 
-      {tab === 'news' && (
-        <>
-          {loading && <p className="feed-status">Loading the news&hellip;</p>}
-          {!loading && !feeds && (
-            <p className="feed-status">
-              Feeds haven't been generated yet. They'll populate on the
-              next GitHub Actions run.
-            </p>
-          )}
-          {!loading && feeds && newsItems.length === 0 && (
-            <p className="feed-status">No items in this feed yet.</p>
-          )}
-          {newsItems.length > 0 && (
-            <ul className="feed-grid" role="list">
-              {newsItems.slice(0, 24).map((it) => (
-                <FeedCard key={it.id} item={it} highlight={false} />
-              ))}
-            </ul>
-          )}
-        </>
+      {loading && (
+        <p className="feed-status">
+          {view === 'stories' ? 'Loading stories…' : 'Loading the news…'}
+        </p>
+      )}
+      {!loading && !feeds && (
+        <p className="feed-status">
+          Feeds haven't been generated yet. They'll populate on the next
+          GitHub Actions run.
+        </p>
+      )}
+      {!loading && feeds && items.length === 0 && (
+        <p className="feed-status">No items in this feed yet.</p>
+      )}
+      {items.length > 0 && (
+        <ul className="feed-grid" role="list">
+          {items.slice(0, 24).map((it) => (
+            <FeedCard key={it.id} item={it} highlight={false} />
+          ))}
+        </ul>
       )}
     </section>
   );

@@ -1,4 +1,4 @@
-export type Mode = 'landing' | 'map' | 'essay' | 'feed' | 'solution';
+export type Mode = 'landing' | 'map' | 'essay' | 'stories' | 'news' | 'solution';
 
 interface Props {
   mode: Mode;
@@ -53,12 +53,19 @@ export function ModeSwitcher({ mode, onChange }: Props) {
         </button>
         <button
           role="tab"
-          aria-selected={mode === 'feed'}
-          className={'mode-tab' + (mode === 'feed' ? ' is-active' : '')}
-          onClick={() => onChange('feed')}
+          aria-selected={mode === 'stories'}
+          className={'mode-tab' + (mode === 'stories' ? ' is-active' : '')}
+          onClick={() => onChange('stories')}
         >
-          <span className="mode-tab-label-full">Stories &amp; News</span>
-          <span className="mode-tab-label-short" aria-hidden>Stories</span>
+          Stories
+        </button>
+        <button
+          role="tab"
+          aria-selected={mode === 'news'}
+          className={'mode-tab' + (mode === 'news' ? ' is-active' : '')}
+          onClick={() => onChange('news')}
+        >
+          News
         </button>
         <button
           role="tab"

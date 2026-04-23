@@ -1,17 +1,20 @@
 import { EpigraphSection } from './EpigraphSection';
 
-/** Landing page — the epigraph with four "choose your experience"
+type LandingMode = 'map' | 'essay' | 'stories' | 'news' | 'solution';
+
+/** Landing page — the epigraph with five "choose your experience"
  *  cards in place of the default scroll cue.
  *
  *  Map       = the data argument.
  *  Essay     = the written argument.
- *  Stories   = the faces — waiting children, Bzeek, the news.
+ *  Stories   = the faces — Bzeek + waiting children.
+ *  News      = the independent reporting on the system.
  *  Solution  = the call to action + state-by-state directory.
  */
 export function Landing({
   onChoose,
 }: {
-  onChoose: (mode: 'map' | 'essay' | 'feed' | 'solution') => void;
+  onChoose: (mode: LandingMode) => void;
 }) {
   return (
     <EpigraphSection
@@ -48,17 +51,32 @@ export function Landing({
 
           <button
             type="button"
-            className="landing-card landing-card-feed"
-            onClick={() => onChoose('feed')}
+            className="landing-card landing-card-stories"
+            onClick={() => onChoose('stories')}
           >
             <span className="landing-eyebrow">View III</span>
-            <span className="landing-title">Stories &amp; News</span>
+            <span className="landing-title">Stories</span>
             <span className="landing-sub">
-              The waiting children. Mohammad Bzeek. The Heart Gallery,
-              Grant Me Hope, AdoptUSKids. And the reporting on a system
-              that has been breaking them for decades.
+              Mohammad Bzeek. The Heart Gallery, Grant Me Hope,
+              AdoptUSKids. The children waiting tonight, and the people
+              who have chosen to show up for them.
             </span>
             <span className="landing-cta">See the stories →</span>
+          </button>
+
+          <button
+            type="button"
+            className="landing-card landing-card-news"
+            onClick={() => onChoose('news')}
+          >
+            <span className="landing-eyebrow">View IV</span>
+            <span className="landing-title">News</span>
+            <span className="landing-sub">
+              Independent reporting on American foster care — The
+              Imprint, NCCPR, reform voices the mainstream press leaves
+              unread.
+            </span>
+            <span className="landing-cta">Read the news →</span>
           </button>
 
           <button
@@ -66,7 +84,7 @@ export function Landing({
             className="landing-card landing-card-solution"
             onClick={() => onChoose('solution')}
           >
-            <span className="landing-eyebrow">View IV</span>
+            <span className="landing-eyebrow">View V</span>
             <span className="landing-title">The Solution</span>
             <span className="landing-sub">
               Stand in the gap. Every org already in the fight in your

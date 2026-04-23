@@ -12,8 +12,10 @@ import { FinalBenediction } from './components/FinalBenediction';
  *    (no hash, or #)   → Landing (epigraph + choose)
  *    #map              → Map experience
  *    #essay            → Essay experience
- *    #feed / #stories  → Stories & News experience
+ *    #stories          → Stories (Bzeek + photolisting videos)
+ *    #news             → News (The Imprint, NCCPR)
  *    #solution         → Solution + state directory
+ *  `#feed` is kept as an alias for `#stories` so old share links still work.
  *  Everything else falls through to Landing.
  */
 function parseMode(): Mode {
@@ -23,7 +25,8 @@ function parseMode(): Mode {
     .toLowerCase();
   if (h === 'map') return 'map';
   if (h === 'essay') return 'essay';
-  if (h === 'feed' || h === 'stories' || h === 'news') return 'feed';
+  if (h === 'stories' || h === 'feed') return 'stories';
+  if (h === 'news') return 'news';
   if (h === 'solution') return 'solution';
   return 'landing';
 }
@@ -67,7 +70,8 @@ export default function App() {
           />
         )}
         {mode === 'essay' && <EssayExperience />}
-        {mode === 'feed' && <FeedExperience />}
+        {mode === 'stories' && <FeedExperience view="stories" />}
+        {mode === 'news' && <FeedExperience view="news" />}
         {mode === 'solution' && <SolutionExperience selectedFips={selectedFips} />}
       </main>
 
