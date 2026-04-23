@@ -1,82 +1,152 @@
 {
-  "_comment": "Sources for public/data/feeds.json. Each entry has: kind (youtube-user | youtube-channel | rss), id/url, feed bucket, optional stateTag. For YouTube: 'youtube-user' uses the legacy /user/USERNAME RSS form, 'youtube-channel' uses channel_id=UC...  If a 'user' URL 404s, find the UC... id at https://commentpicker.com/youtube-channel-id.php and switch kind.",
+  "_comment": "Sources for public/data/feeds.json. Each entry has: kind (youtube-user | youtube-channel | youtube-playlist | rss), id/url, feed bucket. YouTube channel_ids (UC...) and playlist_ids (PL...) are verified against the org's canonical YouTube URL; see description. Prefer playlists when the channel has a dedicated waiting-children or Wednesday's-Child segment — the playlist filters out unrelated content.",
   "sources": [
     {
-      "name": "Heart Gallery Films",
-      "kind": "youtube-user",
-      "id": "heartgalleryfilms",
-      "feed": "waiting_children",
-      "description": "Heart Gallery of America national video network. 126+ waiting-child profiles."
-    },
-    {
       "name": "Grant Me Hope",
-      "kind": "youtube-user",
-      "id": "GrantMeHopeVideos",
+      "kind": "youtube-channel",
+      "id": "UCkemitmFwqRDW7XKPRFiUPA",
       "feed": "waiting_children",
-      "description": "Professional bio-video producer syndicated to TV affiliates in 30+ markets."
+      "description": "National nonprofit producing weekly bio videos of older foster youth; syndicated to TV affiliates in 30+ markets."
     },
     {
       "name": "AdoptUSKids",
-      "kind": "youtube-user",
-      "id": "AdoptUSKids",
+      "kind": "youtube-channel",
+      "id": "UCQlu1S0n9R7lMLf2mbyH4hA",
       "feed": "waiting_children",
-      "description": "Federally funded national photolisting (HHS)."
+      "description": "Federally funded national photolisting (HHS / Children's Bureau)."
     },
     {
       "name": "America's Kids Belong",
-      "kind": "youtube-user",
-      "id": "americaskidsbelong",
+      "kind": "youtube-channel",
+      "id": "UCqG2Hc3ALOiBBbBjN_YZwpg",
       "feed": "waiting_children",
-      "description": "State-by-state video partnerships through the I Belong Project."
+      "description": "I Belong Project — state-organized waiting-child storytelling."
     },
     {
       "name": "Forever Family",
-      "kind": "youtube-user",
-      "id": "foreverfamily",
+      "kind": "youtube-channel",
+      "id": "UCk0GmDbiTo-KOdi4_X64SNw",
       "feed": "waiting_children",
-      "description": "TV-affiliate network producing the Forever Families segment."
+      "description": "National TV-affiliate network producing the Forever Families segment."
     },
     {
       "name": "Bethany Christian Services",
-      "kind": "youtube-user",
-      "id": "bethanyservices",
+      "kind": "youtube-channel",
+      "id": "UC1inTIqO6rLgg_-cwJ_AZtw",
       "feed": "waiting_children",
       "description": "One of the largest Christian adoption and foster-care agencies in the US."
     },
     {
+      "name": "Bethany Christian Services (legacy)",
+      "kind": "youtube-user",
+      "id": "BethanyChristianSvcs",
+      "feed": "waiting_children",
+      "description": "Legacy /user/ handle — carries older content the UC channel doesn't syndicate."
+    },
+    {
       "name": "Dave Thomas Foundation for Adoption",
       "kind": "youtube-user",
-      "id": "davethomasfdn",
+      "id": "DaveThomasFoundation",
       "feed": "waiting_children",
-      "description": "Wendy's founder's foundation; Wendy's Wonderful Kids recruiter program."
+      "description": "Wendy's Wonderful Kids recruiter program; bio videos of specific foster youth."
     },
     {
-      "name": "National CASA/GAL",
+      "name": "A Family For Every Child",
       "kind": "youtube-user",
-      "id": "nationalcasa",
+      "id": "afamilyforeverychild",
       "feed": "waiting_children",
-      "description": "Court Appointed Special Advocates — the volunteer voice for kids in care."
+      "description": "Oregon-based national waiting-child advocate and photolisting partner."
     },
     {
-      "name": "Together We Rise",
-      "kind": "youtube-user",
-      "id": "togetherwerise",
+      "name": "Foster Love (Together We Rise)",
+      "kind": "youtube-channel",
+      "id": "UCPPfkwTMXH-j_I7gii0a1Bg",
       "feed": "waiting_children",
-      "description": "Sweet Cases, Build-a-Bike, and college-bound kits for foster youth."
-    },
-    {
-      "name": "Project 1.27",
-      "kind": "youtube-user",
-      "id": "project127org",
-      "feed": "waiting_children",
-      "description": "Colorado church-based foster-care and adoption network."
+      "description": "Former foster youth nonprofit; Sweet Cases, Build-a-Bikes, and alumni storytelling."
     },
     {
       "name": "Show Hope",
-      "kind": "youtube-user",
-      "id": "showhopeorg",
+      "kind": "youtube-channel",
+      "id": "UCAL7xiDtQfxwXUFofrC9ayw",
       "feed": "waiting_children",
       "description": "Steven Curtis Chapman's orphan-care and adoption-aid nonprofit."
+    },
+    {
+      "name": "National Council For Adoption",
+      "kind": "youtube-channel",
+      "id": "UCIROBhe4oYDO4gVbzICgrjg",
+      "feed": "waiting_children",
+      "description": "National adoption policy and education nonprofit."
+    },
+    {
+      "name": "Barker Adoption Foundation",
+      "kind": "youtube-channel",
+      "id": "UCDh2BVL-rb0UV3wZMVLIkeQ",
+      "feed": "waiting_children",
+      "description": "DC/MD/VA adoption services and family-education content."
+    },
+    {
+      "name": "KVC Health Systems",
+      "kind": "youtube-channel",
+      "id": "UCeAybAefng5tLmy7HENKgMQ",
+      "feed": "waiting_children",
+      "description": "Multistate foster and adoption nonprofit (KS, MO, NE, KY, WV)."
+    },
+    {
+      "name": "Administration for Children & Families (ACF/HHS)",
+      "kind": "youtube-channel",
+      "id": "UCWBKgxPd3mMuv8agsCICHww",
+      "feed": "waiting_children",
+      "description": "Federal umbrella for the Children's Bureau; adoption PSAs and policy content."
+    },
+    {
+      "name": "Oklahoma Heart Gallery",
+      "kind": "youtube-channel",
+      "id": "UC9hmeDAkZ5IMP1HVuGDmxHQ",
+      "feed": "waiting_children",
+      "description": "Regional Heart Gallery chapter — OK DHS + KTUL partnership."
+    },
+    {
+      "name": "Louisiana Heart Gallery",
+      "kind": "youtube-channel",
+      "id": "UCWsf7tvX-AoVowiFyO_MGug",
+      "feed": "waiting_children",
+      "description": "Regional Heart Gallery chapter, Louisiana."
+    },
+    {
+      "name": "Heart Gallery of Broward",
+      "kind": "youtube-channel",
+      "id": "UCsvYj7QMi68jknf6jthC0iA",
+      "feed": "waiting_children",
+      "description": "Regional Heart Gallery chapter, South Florida."
+    },
+    {
+      "name": "Heart Gallery Alabama",
+      "kind": "youtube-channel",
+      "id": "UCvr9YS-CNR0xdowaWKwwyGQ",
+      "feed": "waiting_children",
+      "description": "Regional Heart Gallery chapter, Alabama."
+    },
+    {
+      "name": "WFAA Dallas — Wednesday's Child",
+      "kind": "youtube-playlist",
+      "id": "PLkCeJSrX8m2_S2En3BQQqwl9h_DLwUgb5",
+      "feed": "waiting_children",
+      "description": "ABC Dallas weekly Wednesday's Child segments (Heart Gallery of North Texas)."
+    },
+    {
+      "name": "KSL Utah — Wednesday's Child",
+      "kind": "youtube-playlist",
+      "id": "PLaPEUAJ-ob5PwiS-S6x8L1riYcPOK5iX0",
+      "feed": "waiting_children",
+      "description": "KSL TV Utah weekly Wednesday's Child segments."
+    },
+    {
+      "name": "KVUE Austin — Forever Families",
+      "kind": "youtube-playlist",
+      "id": "PLG7WvHdg9adZ9AYIUVOafMqz4cg3LmKv0",
+      "feed": "waiting_children",
+      "description": "ABC Austin weekly Forever Families segments (Heart Gallery of Central Texas)."
     },
     {
       "name": "The Imprint Weekly Podcast",

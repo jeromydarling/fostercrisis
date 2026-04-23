@@ -5,9 +5,16 @@
 // compact public/data/feeds.json consumed by <FeedSection />.
 //
 // Supported source kinds:
-//   youtube-user    /feeds/videos.xml?user=<handle>
-//   youtube-channel /feeds/videos.xml?channel_id=UC...
-//   rss             any Atom/RSS2 feed URL
+//   youtube-user     /feeds/videos.xml?user=<handle>       (legacy /user/ URLs)
+//   youtube-channel  /feeds/videos.xml?channel_id=UC...    (modern)
+//   youtube-playlist /feeds/videos.xml?playlist_id=PL...   (a curated list
+//                                                           — most reliable
+//                                                           for TV-affiliate
+//                                                           "Wednesday's
+//                                                           Child" and org
+//                                                           waiting-children
+//                                                           playlists)
+//   rss              any Atom/RSS2 feed URL
 //
 // Each failed source logs a warning and is skipped — the workflow must
 // keep going so one dead channel can't blank the whole feeds section.
@@ -106,11 +113,18 @@ async function pickBestYouTubeThumb(videoId) {
   return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 }
 
+function youtubeFeedUrl(src) {
+  if (src.kind === 'youtube-channel') {
+    return `https://www.youtube.com/feeds/videos.xml?channel_id=${src.id}`;
+  }
+  if (src.kind === 'youtube-playlist') {
+    return `https://www.youtube.com/feeds/videos.xml?playlist_id=${src.id}`;
+  }
+  return `https://www.youtube.com/feeds/videos.xml?user=${src.id}`;
+}
+
 async function fetchYouTube(src) {
-  const url =
-    src.kind === 'youtube-channel'
-      ? `https://www.youtube.com/feeds/videos.xml?channel_id=${src.id}`
-      : `https://www.youtube.com/feeds/videos.xml?user=${src.id}`;
+  const url = youtubeFeedUrl(src);
   const xml = await fetchText(url, { timeoutMs: 20_000 });
   const items = [];
   const entries = xml.match(rxEntry) ?? [];
@@ -238,7 +252,11 @@ async function fetchRss(src) {
 async function fetchSource(src) {
   try {
     let items;
-    if (src.kind === 'youtube-user' || src.kind === 'youtube-channel') {
+    if (
+      src.kind === 'youtube-user' ||
+      src.kind === 'youtube-channel' ||
+      src.kind === 'youtube-playlist'
+    ) {
       items = await fetchYouTube(src);
     } else if (src.kind === 'rss') {
       items = await fetchRss(src);
