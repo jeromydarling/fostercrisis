@@ -425,7 +425,8 @@ export function GraveSection() {
           </p>
           <p className="grave-toll-misery-kicker">
             A miserable existence, and then an early grave &mdash; and
-            in every case, a home would have prevented both.
+            in every case, a good Christian home would have prevented
+            both.
           </p>
         </div>
       </div>
