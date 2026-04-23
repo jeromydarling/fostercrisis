@@ -94,8 +94,7 @@ export function PledgeCalendar() {
         </div>
 
         <p className="pledge-fine">
-          Fifty-two Sundays. The Catholic Sunday Gospel each week, in the
-          public-domain World English Bible. Free. No email, no account.
+          Fifty-two weeks of gentle reminders.
         </p>
 
         <details className="pledge-manual">
