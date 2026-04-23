@@ -36,6 +36,7 @@ export function FeedSection({ selectedFips }: Props) {
   const [feeds, setFeeds] = useState<FeedsFile | null>(null);
   const [bucket, setBucket] = useState<FeedBucket>('waiting_children');
   const [loading, setLoading] = useState(true);
+  const [bzeekPlaying, setBzeekPlaying] = useState(false);
 
   useEffect(() => {
     loadFeeds().then((f) => {
@@ -58,6 +59,71 @@ export function FeedSection({ selectedFips }: Props) {
           toward them. The directory refreshes when we refresh it; the news
           feed refreshes daily.
         </p>
+
+        {/* Featured story — Mohammad Bzeek. Sits above the tabs so every
+            visitor sees it, regardless of which feed they open. */}
+        <article className="feed-featured" aria-label="Featured story">
+          <p className="feed-featured-eyebrow">Featured · The Model</p>
+          <h3 className="feed-featured-title">
+            The most Christ-shaped life on this page was not lived by
+            a Christian.
+          </h3>
+          <div className="feed-featured-media">
+            {bzeekPlaying ? (
+              <iframe
+                src="https://www.youtube.com/embed/fqnoGDQ2i2k?autoplay=1&rel=0"
+                title="Mohammad Bzeek — A Hero's Mission (Great Big Story)"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            ) : (
+              <button
+                type="button"
+                className="feed-thumb-btn"
+                onClick={() => setBzeekPlaying(true)}
+                aria-label="Play: Mohammad Bzeek — A Hero's Mission"
+              >
+                <img
+                  src="https://i.ytimg.com/vi/fqnoGDQ2i2k/maxresdefault.jpg"
+                  alt=""
+                  loading="lazy"
+                />
+                <span className="feed-play" aria-hidden>▶</span>
+              </button>
+            )}
+          </div>
+          <div className="feed-featured-body">
+            <p className="feed-featured-who">
+              <strong>Mohammad Bzeek.</strong> Libyan-American Muslim.
+              Los Angeles County, since 1995.
+            </p>
+            <p>
+              Bzeek takes in terminally-ill foster children no one else
+              will take &mdash; children with short diagnoses, many
+              without families willing to be present at the end. He has
+              fostered approximately <strong>80 children</strong>. He
+              has buried <strong>10 of them</strong>. When the rest of
+              them die, he is the one who holds them so they do not die
+              alone.
+            </p>
+            <p className="feed-featured-kicker">
+              If the American Church wants to know what James 1:27 looks
+              like in the flesh &mdash; here it is. And it is not
+              American. And it is not Christian.
+            </p>
+            <p className="feed-featured-credit">
+              Video: Great Big Story via YouTube.{' '}
+              <a
+                href="https://youtu.be/fqnoGDQ2i2k"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Watch on YouTube &rarr;
+              </a>
+            </p>
+          </div>
+        </article>
+
         <nav className="feed-tabs" role="tablist">
           {BUCKETS.map((b) => (
             <button
