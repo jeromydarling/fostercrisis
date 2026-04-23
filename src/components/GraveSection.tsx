@@ -408,8 +408,10 @@ export function GraveSection() {
       <div className="grave-math">
         <h3 className="grave-heading">The math of 329,000.</h3>
         <p className="grave-sub">
-          Applying the in-care mortality gap (JAMA Pediatrics 2020) to the
-          current AFCARS census:
+          The in-care excess is the small number. The real toll is the
+          adult-mortality shadow that follows every one of the roughly
+          <strong> 20 million </strong>Americans who have ever been in
+          foster care.
         </p>
         <ul className="grave-math-list" role="list">
           <li>
@@ -417,29 +419,44 @@ export function GraveSection() {
             <span className="grave-math-val">329,000</span>
           </li>
           <li>
-            <span className="grave-math-label">Expected deaths / year at general-population rate</span>
+            <span className="grave-math-label">Children cycling through the system each year</span>
+            <span className="grave-math-val">~506,000</span>
+          </li>
+          <li>
+            <span className="grave-math-label">Expected in-care deaths / year at general-population rate</span>
             <span className="grave-math-val">~82</span>
           </li>
           <li>
-            <span className="grave-math-label">Actual deaths / year at foster-care rate</span>
+            <span className="grave-math-label">Actual in-care deaths / year at foster-care rate</span>
             <span className="grave-math-val">~116</span>
           </li>
           <li className="grave-math-highlight">
-            <span className="grave-math-label">Excess deaths per year, in-care</span>
+            <span className="grave-math-label">Excess in-care deaths / year</span>
             <span className="grave-math-val">~34</span>
           </li>
           <li>
-            <span className="grave-math-label">Over forty years of evangelical cultural dominance</span>
-            <span className="grave-math-val">~1,300 children buried</span>
+            <span className="grave-math-label">In-care excess over 40 years of evangelical dominance</span>
+            <span className="grave-math-val">~1,300 buried in state custody</span>
+          </li>
+          <li>
+            <span className="grave-math-label">Americans alive today who have been in foster care</span>
+            <span className="grave-math-val">~20 million</span>
+          </li>
+          <li className="grave-math-highlight">
+            <span className="grave-math-label">
+              Adult-mortality shadow across all alumni (2.2× gen-pop)
+            </span>
+            <span className="grave-math-val">Hundreds of thousands of excess deaths</span>
           </li>
         </ul>
         <p className="grave-math-note">
-          That is just the in-care window. Applied to the ~20 million
-          Americans alive today who have ever been in foster care, the
-          adult-mortality shadow (2.2× total mortality through midlife)
-          produces a cumulative excess-death count measured in the
-          hundreds of thousands. No one has published a clean U.S. lifetime
-          estimate.
+          The ~1,300 number is only those who died <em>while still in
+          state custody</em> over forty years. The far larger toll is
+          everyone who lived through the system and then died early —
+          by suicide, overdose, and chronic-illness cascade — for the
+          rest of their lives. No one has published a clean U.S.
+          lifetime estimate. Every cohort study we do have points the
+          same way.
         </p>
       </div>
 
@@ -451,11 +468,12 @@ export function GraveSection() {
             329,000 children are in foster care tonight.
           </span>
           <span className="grave-indictment-line">
-            Roughly 1 in 12 will die before age 25. About 34 will die
-            this year who would have lived if they had been anywhere else.
+            About 34 will die this year above the general-population
+            rate. The ones who survive to adulthood die early at twice
+            that rate &mdash; for the rest of their lives.
           </span>
           <span className="grave-indictment-line grave-indictment-question">
-            Why fight so hard for the unborn —<br />
+            Why fight so hard for the unborn &mdash;<br />
             only to abandon the born?
           </span>
         </blockquote>
