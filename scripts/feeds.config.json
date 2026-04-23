@@ -37,6 +37,48 @@
       "description": "TV-affiliate network producing the Forever Families segment."
     },
     {
+      "name": "Bethany Christian Services",
+      "kind": "youtube-user",
+      "id": "bethanyservices",
+      "feed": "waiting_children",
+      "description": "One of the largest Christian adoption and foster-care agencies in the US."
+    },
+    {
+      "name": "Dave Thomas Foundation for Adoption",
+      "kind": "youtube-user",
+      "id": "davethomasfdn",
+      "feed": "waiting_children",
+      "description": "Wendy's founder's foundation; Wendy's Wonderful Kids recruiter program."
+    },
+    {
+      "name": "National CASA/GAL",
+      "kind": "youtube-user",
+      "id": "nationalcasa",
+      "feed": "waiting_children",
+      "description": "Court Appointed Special Advocates — the volunteer voice for kids in care."
+    },
+    {
+      "name": "Together We Rise",
+      "kind": "youtube-user",
+      "id": "togetherwerise",
+      "feed": "waiting_children",
+      "description": "Sweet Cases, Build-a-Bike, and college-bound kits for foster youth."
+    },
+    {
+      "name": "Project 1.27",
+      "kind": "youtube-user",
+      "id": "project127org",
+      "feed": "waiting_children",
+      "description": "Colorado church-based foster-care and adoption network."
+    },
+    {
+      "name": "Show Hope",
+      "kind": "youtube-user",
+      "id": "showhopeorg",
+      "feed": "waiting_children",
+      "description": "Steven Curtis Chapman's orphan-care and adoption-aid nonprofit."
+    },
+    {
       "name": "The Imprint Weekly Podcast",
       "kind": "rss",
       "url": "https://feeds.buzzsprout.com/1376827.rss",
@@ -44,11 +86,53 @@
       "description": "Weekly news review from the independent child-welfare newsroom."
     },
     {
+      "name": "The Imprint",
+      "kind": "rss",
+      "url": "https://imprintnews.org/feed",
+      "feed": "system_news",
+      "description": "The only independent daily newsroom covering American child welfare."
+    },
+    {
       "name": "NCCPR (Nat'l Coalition for Child Protection Reform)",
       "kind": "rss",
       "url": "https://www.nccprblog.org/feeds/posts/default",
       "feed": "system_news",
       "description": "Advocacy blog on foster-care reform."
+    },
+    {
+      "name": "Casey Family Programs",
+      "kind": "rss",
+      "url": "https://www.casey.org/feed/",
+      "feed": "system_news",
+      "description": "The nation's largest operating foundation focused on foster care."
+    },
+    {
+      "name": "Annie E. Casey Foundation",
+      "kind": "rss",
+      "url": "https://www.aecf.org/blog/rss",
+      "feed": "system_news",
+      "description": "Kids Count data host and child-welfare research publisher."
+    },
+    {
+      "name": "Chronicle of Social Change / Youth Services Insider",
+      "kind": "rss",
+      "url": "https://imprintnews.org/category/youth-services-insider/feed",
+      "feed": "system_news",
+      "description": "The Imprint's policy-and-politics desk."
+    },
+    {
+      "name": "ChildTrends",
+      "kind": "rss",
+      "url": "https://www.childtrends.org/feed",
+      "feed": "system_news",
+      "description": "Nonpartisan research on children and families."
+    },
+    {
+      "name": "FosterClub",
+      "kind": "rss",
+      "url": "https://www.fosterclub.com/rss.xml",
+      "feed": "system_news",
+      "description": "National network of youth in foster care."
     }
   ]
 }

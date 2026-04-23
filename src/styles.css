@@ -1861,6 +1861,51 @@ body {
   gap: 1.5rem;
 }
 
+.feed-more {
+  margin: 2.5rem 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.feed-more-btn {
+  appearance: none;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--ff-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.9rem 1.6rem;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.feed-more-btn:hover,
+.feed-more-btn:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+  outline: none;
+}
+
+.feed-more-count {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--fg-dimmer);
+  text-transform: none;
+}
+
+.feed-more-btn:hover .feed-more-count,
+.feed-more-btn:focus-visible .feed-more-count {
+  color: var(--bg);
+  opacity: 0.75;
+}
+
 /* ---- Kids Waiting directory ---------------------------------------- */
 
 .dir {

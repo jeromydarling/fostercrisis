@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { loadFeeds, type FeedItem, type FeedsFile } from '../data/feeds';
 import { Shareable } from './Shareable';
+
+const PAGE_STEP = 24;
 
 /** Which feed this section is rendering. Stories and News are two
  *  separate top-level modes in the main nav — the tab rail that used
@@ -46,6 +48,7 @@ export function FeedSection({ view }: Props) {
   const [feeds, setFeeds] = useState<FeedsFile | null>(null);
   const [loading, setLoading] = useState(true);
   const [bzeekPlaying, setBzeekPlaying] = useState(false);
+  const [pageSize, setPageSize] = useState(PAGE_STEP);
 
   useEffect(() => {
     loadFeeds().then((f) => {
@@ -54,14 +57,25 @@ export function FeedSection({ view }: Props) {
     });
   }, []);
 
+  // Reset pagination whenever the view flips between stories/news so
+  // users start at the top of the new bucket.
+  useEffect(() => {
+    setPageSize(PAGE_STEP);
+  }, [view]);
+
   // The `waiting_children` feed bucket carries the YouTube video
   // sources (Heart Gallery, Grant Me Hope, AdoptUSKids, etc.). The
   // bucket key is legacy; the content is Stories.
-  const items =
-    view === 'stories'
-      ? feeds?.waiting_children ?? []
-      : feeds?.system_news ?? [];
+  const items = useMemo(
+    () =>
+      view === 'stories'
+        ? feeds?.waiting_children ?? []
+        : feeds?.system_news ?? [],
+    [view, feeds]
+  );
 
+  const visible = items.slice(0, pageSize);
+  const hasMore = items.length > visible.length;
   const header = HEADERS[view];
 
   return (
@@ -153,11 +167,30 @@ export function FeedSection({ view }: Props) {
         <p className="feed-status">No items in this feed yet.</p>
       )}
       {items.length > 0 && (
-        <ul className="feed-grid" role="list">
-          {items.slice(0, 24).map((it) => (
-            <FeedCard key={it.id} item={it} highlight={false} />
-          ))}
-        </ul>
+        <>
+          <ul className="feed-grid" role="list">
+            {visible.map((it) => (
+              <FeedCard key={it.id} item={it} highlight={false} />
+            ))}
+          </ul>
+          {hasMore && (
+            <div className="feed-more">
+              <button
+                type="button"
+                className="feed-more-btn"
+                onClick={() =>
+                  setPageSize((n) => Math.min(n + PAGE_STEP, items.length))
+                }
+              >
+                Load more
+                <span className="feed-more-count">
+                  {Math.min(PAGE_STEP, items.length - visible.length)} of{' '}
+                  {items.length - visible.length} remaining
+                </span>
+              </button>
+            </div>
+          )}
+        </>
       )}
     </section>
   );

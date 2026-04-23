@@ -86,6 +86,26 @@ function decodeHtml(s) {
 
 // --- Per-source fetchers ---------------------------------------------
 
+async function pickBestYouTubeThumb(videoId) {
+  // Try higher-resolution thumbnails first; YouTube serves a 120×90
+  // placeholder with Content-Length ≈ 1097 bytes when the resolution
+  // doesn't exist for a given video. Fall through until one sticks.
+  const candidates = ['maxresdefault', 'sddefault', 'hqdefault'];
+  for (const size of candidates) {
+    const url = `https://i.ytimg.com/vi/${videoId}/${size}.jpg`;
+    try {
+      const res = await fetch(url, { method: 'HEAD' });
+      if (!res.ok) continue;
+      const len = Number(res.headers.get('content-length') || '0');
+      // Placeholder is ~1.1 KB; any real thumbnail is multiple KB.
+      if (len > 2000) return url;
+    } catch {
+      /* try next size */
+    }
+  }
+  return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+}
+
 async function fetchYouTube(src) {
   const url =
     src.kind === 'youtube-channel'
@@ -100,13 +120,14 @@ async function fetchYouTube(src) {
     const title = tag(e, 'title') ?? '';
     const published = tag(e, 'published') ?? '';
     const description = tag(e, 'media:description') ?? '';
+    const thumbnail = await pickBestYouTubeThumb(videoId);
     items.push({
       id: `yt:${videoId}`,
       source: src.name,
       title,
       url: `https://www.youtube.com/watch?v=${videoId}`,
       embedUrl: `https://www.youtube.com/embed/${videoId}`,
-      thumbnail: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+      thumbnail,
       type: 'youtube',
       publishedAt: published,
       state: detectState(`${title} ${description}`),
@@ -114,6 +135,42 @@ async function fetchYouTube(src) {
     });
   }
   return items;
+}
+
+/** Pull og:image (or twitter:image) from an article HTML page. The
+ *  RSS feeds for news publishers almost never carry a usable lead
+ *  image, but the canonical article page always does — that's what
+ *  Facebook/Twitter/Slack render. Time-boxed and failure-tolerant. */
+async function fetchOgImage(url) {
+  try {
+    const html = await fetchText(url, { timeoutMs: 12_000 });
+    // Scan the <head> only; articles with long bodies blow up the
+    // regex backtracker otherwise. `<head>…</head>` is consistently
+    // under 16 KB.
+    const head = /<head[^>]*>([\s\S]*?)<\/head>/i.exec(html)?.[1] ?? html.slice(0, 16_000);
+    const patterns = [
+      /<meta[^>]+property=["']og:image(?::secure_url)?["'][^>]+content=["']([^"']+)["']/i,
+      /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image(?::secure_url)?["']/i,
+      /<meta[^>]+name=["']twitter:image(?::src)?["'][^>]+content=["']([^"']+)["']/i,
+      /<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image(?::src)?["']/i,
+    ];
+    for (const re of patterns) {
+      const m = re.exec(head);
+      if (m && m[1]) {
+        const raw = decodeHtml(m[1]);
+        // Resolve protocol-relative and root-relative URLs.
+        if (raw.startsWith('//')) return 'https:' + raw;
+        if (raw.startsWith('/')) {
+          const u = new URL(url);
+          return `${u.protocol}//${u.host}${raw}`;
+        }
+        return raw;
+      }
+    }
+  } catch {
+    /* network/parse failure — caller will fall back to RSS image or null */
+  }
+  return null;
 }
 
 async function fetchRss(src) {
@@ -141,11 +198,24 @@ async function fetchRss(src) {
     // Podcast: enclosure url
     const audioUrl = tagAttr(raw, 'enclosure', 'url');
     // Cover image: itunes:image, media:thumbnail, or nothing
-    const img =
+    let img =
       tagAttr(raw, 'itunes:image', 'href') ??
       tagAttr(raw, 'media:thumbnail', 'url') ??
+      tagAttr(raw, 'media:content', 'url') ??
       null;
+    // Try to extract first <img> from description HTML if nothing above.
+    if (!img) {
+      const m = /<img[^>]+src=["']([^"']+)["']/i.exec(description);
+      if (m) img = decodeHtml(m[1]);
+    }
     if (!title || !url) continue;
+    // Fetch og:image from the article page for article-type items. We
+    // skip this for podcasts (itunes:image is the canonical cover) and
+    // for items that already have a reasonable-looking image.
+    if (!audioUrl && !img) {
+      const og = await fetchOgImage(url);
+      if (og) img = og;
+    }
     // Strip HTML from description for card excerpt.
     const excerpt = description.replace(/<[^>]+>/g, '').trim().slice(0, 220);
     items.push({
