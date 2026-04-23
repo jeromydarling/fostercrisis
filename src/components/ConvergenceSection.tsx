@@ -239,8 +239,7 @@ export function ConvergenceSection() {
       <div className="conv-hero">
         <p className="conv-eyebrow">Part IV · The Convergence</p>
         <h2 className="conv-title">
-          The two collapses are the same event,<br />
-          seen from two sides of the same door.
+          The two collapses are the same event, seen from two sides of the same door.
         </h2>
         <p className="conv-lede">
           Christian fertility down, foster care up. Out-of-wedlock births
