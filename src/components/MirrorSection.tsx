@@ -5,6 +5,7 @@ import { PledgeCalendar } from './PledgeCalendar';
 import { PRAYERS } from '../data/prayers';
 import { EssayEpigraph } from './EssayEpigraph';
 import { EPIGRAPHS } from '../data/epigraphs';
+import { Shareable } from './Shareable';
 
 const CITATIONS: Citation[] = [
   {
@@ -178,7 +179,7 @@ export function MirrorSection() {
           </p>
         </div>
 
-        <div className="stack stack-money">
+        <Shareable label="Part II · The money you said you couldn't spend" className="stack stack-money">
           <h3 className="stack-heading">The money you said you couldn't spend</h3>
           <ul className="stack-list">
             <li><span className="stack-num">$124B / yr</span><span className="stack-lbl">U.S. church income</span></li>
@@ -208,7 +209,7 @@ export function MirrorSection() {
               have the yes.
             </span>
           </p>
-        </div>
+        </Shareable>
       </div>
 
       {/* THE REDIRECT — one auto-cycling swap */}
@@ -248,7 +249,7 @@ export function MirrorSection() {
       </div>
 
       {/* THE $124B STACKED BAR — where church giving actually goes */}
-      <div className="budget">
+      <Shareable label="Part II · $124B vs $30B" className="budget">
         <h3 className="budget-heading">Where the $124 billion actually goes</h3>
         <p className="budget-sub">
           Of every dollar collected by U.S. churches:
@@ -293,10 +294,10 @@ export function MirrorSection() {
           entire foster system, all paid in three decades, all spent on
           itself.
         </p>
-      </div>
+      </Shareable>
 
       {/* THE WORLDVIEW CAP — 4% biblical worldview, 1% Gen Z */}
-      <div className="worldview">
+      <Shareable label="Part II · 4% biblical worldview" className="worldview">
         <h3 className="worldview-heading">You said you believed.</h3>
         <p className="worldview-lede">
           American Christianity's footprint is staggering. What it produces
@@ -350,7 +351,7 @@ export function MirrorSection() {
             </p>
           </div>
         </div>
-      </div>
+      </Shareable>
 
       {/* THE CLOSING INDICTMENT (Option D · The Screen Indictment) */}
       <div className="indictment">

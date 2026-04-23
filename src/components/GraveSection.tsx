@@ -14,6 +14,7 @@ import { PRAYERS } from '../data/prayers';
 import { EssayEpigraph } from './EssayEpigraph';
 import { EPIGRAPHS } from '../data/epigraphs';
 import { Md, MdInline, parseBlocks } from './Md';
+import { Shareable } from './Shareable';
 import rawContent from '../../content/grave.md?raw';
 
 /** Editable prose lives in `content/grave.md`. The parser splits that
@@ -220,7 +221,7 @@ export function GraveSection() {
       </div>
 
       {/* Six numbers */}
-      <div className="grave-headline-stats">
+      <Shareable label="Part XI · Six numbers that end arguments" className="grave-headline-stats">
         <h3 className="grave-heading">
           <MdInline>{C.statsHeading}</MdInline>
         </h3>
@@ -234,7 +235,7 @@ export function GraveSection() {
             </li>
           ))}
         </ul>
-      </div>
+      </Shareable>
 
       {/* In-care mortality */}
       <div className="grave-incare">
@@ -327,7 +328,7 @@ export function GraveSection() {
       </div>
 
       {/* Swedish natural experiment — two bars */}
-      <div className="grave-sweden">
+      <Shareable label="Part XI · The Swedish experiment" className="grave-sweden">
         <h3 className="grave-heading">
           <MdInline>{C.swedenHeading}</MdInline>
         </h3>
@@ -353,7 +354,7 @@ export function GraveSection() {
           </div>
         </div>
         <Md className="grave-sweden-note">{C.swedenNote}</Md>
-      </div>
+      </Shareable>
 
       {/* Why they die */}
       <div className="grave-causes">
@@ -372,7 +373,7 @@ export function GraveSection() {
       </div>
 
       {/* The single number */}
-      <div className="grave-toll">
+      <Shareable label="Part XI · Hundreds of thousands" className="grave-toll">
         <h3 className="grave-heading">
           <MdInline>{C.tollHeading}</MdInline>
         </h3>
@@ -393,10 +394,10 @@ export function GraveSection() {
             <MdInline>{C.tollMiseryKicker}</MdInline>
           </p>
         </div>
-      </div>
+      </Shareable>
 
       {/* Indictment */}
-      <div className="grave-indictment">
+      <Shareable label="Part XI · The indictment" className="grave-indictment">
         <p className="grave-indictment-eyebrow">The indictment</p>
         <blockquote className="grave-indictment-quote">
           <span className="grave-indictment-line">
@@ -409,7 +410,7 @@ export function GraveSection() {
             <MdInline>{C.indictmentQuestion}</MdInline>
           </span>
         </blockquote>
-      </div>
+      </Shareable>
 
       <Prayer prayer={PRAYERS.grave} />
       <PledgeCalendar />

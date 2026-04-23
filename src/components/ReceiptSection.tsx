@@ -15,6 +15,7 @@ import { PledgeCalendar } from './PledgeCalendar';
 import { PRAYERS } from '../data/prayers';
 import { EssayEpigraph } from './EssayEpigraph';
 import { EPIGRAPHS } from '../data/epigraphs';
+import { Shareable } from './Shareable';
 
 interface Stat {
   figure: string;
@@ -209,7 +210,7 @@ export function ReceiptSection() {
       </div>
 
       {/* Three headline numbers */}
-      <div className="receipt-headline-stats">
+      <Shareable label="Part X · The correlation" className="receipt-headline-stats">
         <h3 className="receipt-heading">The correlation</h3>
         <ul className="receipt-stats-grid" role="list">
           {HEADLINE_STATS.map((s) => (
@@ -220,10 +221,10 @@ export function ReceiptSection() {
             </li>
           ))}
         </ul>
-      </div>
+      </Shareable>
 
       {/* Scatter plot — the full 50-state chart */}
-      <div className="receipt-scatter">
+      <Shareable label="Part X · Foster-care rate × state partisan lean" className="receipt-scatter">
         <figure>
           <img
             src={SCATTER_URL}
@@ -240,10 +241,10 @@ export function ReceiptSection() {
             spread is wide.
           </figcaption>
         </figure>
-      </div>
+      </Shareable>
 
       {/* Top 10 / Bottom 10 tables side-by-side */}
-      <div className="receipt-tables">
+      <Shareable label="Part X · Top ten · Bottom ten" className="receipt-tables">
         <h3 className="receipt-heading">Top ten · bottom ten</h3>
         <p className="receipt-sub">
           Eight of the ten highest-rate states are Republican-leaning.
@@ -283,7 +284,7 @@ export function ReceiptSection() {
           <span className="receipt-table-pvi receipt-table-pvi-blue">−N</span>{' '}
           Democratic lean
         </p>
-      </div>
+      </Shareable>
 
       {/* Three confounders — honest accounting */}
       <div className="receipt-confounders">
@@ -306,7 +307,7 @@ export function ReceiptSection() {
       </div>
 
       {/* The two readings — charitable / uncharitable */}
-      <div className="receipt-readings">
+      <Shareable label="Part X · Two readings — charitable / uncharitable" className="receipt-readings">
         <h3 className="receipt-heading">You can read the pattern two ways.</h3>
         <div className="receipt-readings-grid">
           <div className="receipt-reading receipt-reading-charitable">
@@ -336,10 +337,10 @@ export function ReceiptSection() {
           Both readings can be true. The second one is the one the data
           supports most honestly.
         </p>
-      </div>
+      </Shareable>
 
       {/* Indictment closer */}
-      <div className="receipt-indictment">
+      <Shareable label="Part X · The indictment" className="receipt-indictment">
         <p className="receipt-indictment-eyebrow">The indictment</p>
         <blockquote className="receipt-indictment-quote">
           <span className="receipt-indictment-line">
@@ -353,7 +354,7 @@ export function ReceiptSection() {
             miles of a biblically faithful pulpit.
           </span>
         </blockquote>
-      </div>
+      </Shareable>
 
       <Prayer prayer={PRAYERS.receipt} />
       <PledgeCalendar />

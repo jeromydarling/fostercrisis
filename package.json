@@ -20,6 +20,7 @@
     "data:pledge": "node scripts/build-pledge-ics.mjs"
   },
   "dependencies": {
+    "html-to-image": "^1.11.13",
     "mapbox-gl": "^3.8.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

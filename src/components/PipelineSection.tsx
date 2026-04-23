@@ -13,6 +13,7 @@ import { PledgeCalendar } from './PledgeCalendar';
 import { PRAYERS } from '../data/prayers';
 import { EssayEpigraph } from './EssayEpigraph';
 import { EPIGRAPHS } from '../data/epigraphs';
+import { Shareable } from './Shareable';
 
 interface Stat {
   figure: string;
@@ -169,7 +170,7 @@ export function PipelineSection() {
       </div>
 
       {/* Six headline stats in a responsive grid */}
-      <div className="pipe-headline-stats">
+      <Shareable label="Part VII · The six numbers" className="pipe-headline-stats">
         <h3 className="pipe-heading">The six numbers</h3>
         <ul className="pipe-stats-grid" role="list">
           {HEADLINE_STATS.map((s) => (
@@ -181,7 +182,7 @@ export function PipelineSection() {
             </li>
           ))}
         </ul>
-      </div>
+      </Shareable>
 
       {/* The exit-type ladder — prison entry by how you leave care */}
       <div className="pipe-exits">
@@ -218,7 +219,7 @@ export function PipelineSection() {
       {/* The causal twist — the NBER / CEPR 2022 finding that closes
           the argument: for the marginal child, foster care REDUCES
           crime risk versus being left home. */}
-      <div className="pipe-causal">
+      <Shareable label="Part VII · The twist that closes it" className="pipe-causal">
         <h3 className="pipe-heading">The twist that closes it.</h3>
         <p className="pipe-causal-body">
           A 2022 quasi-experimental study used near-random assignment
@@ -254,10 +255,10 @@ export function PipelineSection() {
           Source: Bald, Chyn, Humlum &amp; Stephenson (2022), NBER /
           CEPR.
         </p>
-      </div>
+      </Shareable>
 
       {/* The indictment — sits as the section's closer. */}
-      <div className="pipe-indictment">
+      <Shareable label="Part VII · The indictment" className="pipe-indictment">
         <p className="pipe-indictment-eyebrow">The indictment</p>
         <blockquote className="pipe-indictment-quote">
           <span className="pipe-indictment-line">
@@ -272,7 +273,7 @@ export function PipelineSection() {
             They have never met.
           </span>
         </blockquote>
-      </div>
+      </Shareable>
 
       <Prayer prayer={PRAYERS.pipeline} />
       <PledgeCalendar />

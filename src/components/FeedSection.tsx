@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { loadFeeds, type FeedBucket, type FeedItem, type FeedsFile } from '../data/feeds';
 import { STATE_INDEX } from '../data/states';
 import { StateOrgsDirectory } from './StateOrgsDirectory';
+import { Shareable } from './Shareable';
 
 const BUCKETS: { key: FeedBucket; label: string; intro: string }[] = [
   {
@@ -62,6 +63,7 @@ export function FeedSection({ selectedFips }: Props) {
 
         {/* Featured story — Mohammad Bzeek. Sits above the tabs so every
             visitor sees it, regardless of which feed they open. */}
+        <Shareable label="Bzeek · The Model" className="feed-featured-shareable">
         <article className="feed-featured" aria-label="Featured story">
           <p className="feed-featured-eyebrow">Featured · The Model</p>
           <h3 className="feed-featured-title">
@@ -123,6 +125,7 @@ export function FeedSection({ selectedFips }: Props) {
             </p>
           </div>
         </article>
+        </Shareable>
 
         <nav className="feed-tabs" role="tablist">
           {BUCKETS.map((b) => (
