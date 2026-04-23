@@ -189,7 +189,7 @@ export function MirrorSection() {
               <li><span className="stack-num">$124B / yr</span><span className="stack-lbl">U.S. church income</span></li>
               <li><span className="stack-num">$4.6B / yr</span><span className="stack-lbl">new church construction (2025)</span></li>
               <li><span className="stack-num">$1.7B / yr</span><span className="stack-lbl">Christian music industry</span></li>
-              <li><span className="stack-num">$11M / weekend</span><span className="stack-lbl">Passion Conference tickets</span></li>
+              <li><span className="stack-num">$11M / wknd</span><span className="stack-lbl">Passion Conference tickets</span></li>
               <li><span className="stack-num">$7,692</span><span className="stack-lbl">one Disney cruise, family of four</span></li>
               <li><span className="stack-num">$5,000 / yr</span><span className="stack-lbl">average family vacation</span></li>
             </ul>
