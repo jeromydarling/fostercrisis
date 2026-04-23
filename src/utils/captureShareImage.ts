@@ -2,174 +2,189 @@ import { toPng } from 'html-to-image';
 
 /** Configuration for a single capture. */
 export interface CaptureOptions {
-  /** The DOM node to capture. */
+  /** The DOM node to capture — usually the outer Shareable div. */
   node: HTMLElement;
-  /** A short human-readable label shown in the branded footer above
-   *  the URL — e.g. "Part XI · The Grave". Optional. */
+  /** Short attribution label rendered above the URL in the footer. */
   attribution?: string;
-  /** Output width in pixels. Defaults to 1080 (Instagram square native). */
-  width?: number;
-  /** Device-pixel scale. Defaults to 2 (retina-crisp shares). */
+  /** Device-pixel multiplier. Defaults to 2 for retina-crisp output. */
   pixelRatio?: number;
 }
 
-/** Produce a PNG blob + object URL for a given DOM node, with a
- *  branded footer appended below the captured content. The footer
- *  carries the fostercrisis.com URL, a tagline, and a small gold
- *  ornament so every share bears the site's identity.
+/** Capture a PNG of the given DOM node with a branded
+ *  fostercrisis.com footer appended beneath the block.
  *
- *  Pipeline: clone the target node into a hidden off-DOM wrapper →
- *  inject a branded footer div beneath the clone → hand the wrapper
- *  to html-to-image → get a PNG data URL → convert to blob. */
+ *  Approach: html-to-image captures the live DOM node (filtering out
+ *  the Shareable's own chrome) → we load the result as an Image → we
+ *  paint it onto a larger canvas and draw the branded footer directly
+ *  using the Canvas 2D text API. This avoids every fragile aspect of
+ *  cloning elements into off-screen wrappers (broken layout context,
+ *  missing computed styles, off-screen rendering optimizations).
+ */
 export async function captureShare(
   opts: CaptureOptions
 ): Promise<{ blob: Blob; dataUrl: string }> {
-  const { node, attribution, width = 1080, pixelRatio = 2 } = opts;
+  const { node, attribution, pixelRatio = 2 } = opts;
 
-  // Wait for any webfonts used in the page to finish loading; otherwise
-  // html-to-image may serialize fallback fonts into the PNG.
+  // Make sure web fonts have loaded before html-to-image serializes
+  // computed styles; otherwise the PNG falls back to system fonts.
   if (typeof document !== 'undefined' && document.fonts?.ready) {
     try {
       await document.fonts.ready;
     } catch {
-      /* ignore — proceed with whatever fonts are loaded */
+      /* non-fatal */
     }
   }
 
-  // Build a floating off-screen wrapper that contains a *clone* of the
-  // target plus the branded footer. The clone approach means we don't
-  // mutate the live DOM while the capture runs — scroll position, focus,
-  // and hover states on the real page remain untouched.
-  const wrapper = document.createElement('div');
-  wrapper.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: -99999px;
-    width: ${width}px;
-    padding: 0;
-    margin: 0;
-    background: #0b0d12;
-    color: #e6e7ea;
-    box-sizing: border-box;
-    font-family: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
-  `;
+  // Capture the live node. The filter keeps our own UI out of the
+  // image — the share trigger button and the modal itself.
+  const contentDataUrl = await toPng(node, {
+    cacheBust: true,
+    pixelRatio,
+    backgroundColor: '#0b0d12',
+    filter: (el) => {
+      if (el instanceof HTMLIFrameElement) return false;
+      const cls = (el as HTMLElement).classList;
+      if (!cls) return true;
+      if (cls.contains('shareable-trigger')) return false;
+      if (cls.contains('shareable-modal')) return false;
+      return true;
+    },
+  });
 
-  const clone = node.cloneNode(true) as HTMLElement;
-  // Strip the Shareable's own chrome (trigger button, modal) so the
-  // capture shows ONLY the content, not the share icon itself.
-  clone.querySelectorAll('.shareable-trigger, .shareable-modal').forEach((el) =>
-    el.parentNode?.removeChild(el)
-  );
-  // Normalise margins / floating positioning so the clone sits cleanly
-  // at the top of the capture wrapper.
-  clone.style.margin = '0';
-  clone.style.position = 'static';
-  clone.style.transform = 'none';
+  const contentImage = await loadImage(contentDataUrl);
+  const contentW = contentImage.naturalWidth || contentImage.width;
+  const contentH = contentImage.naturalHeight || contentImage.height;
 
-  wrapper.appendChild(clone);
-  wrapper.appendChild(makeFooter(attribution));
-  document.body.appendChild(wrapper);
+  // Footer height is proportional to the pixel ratio so the branded
+  // band looks correct at retina resolution.
+  const footerH = Math.round(170 * pixelRatio);
+  const canvas = document.createElement('canvas');
+  canvas.width = contentW;
+  canvas.height = contentH + footerH;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) throw new Error('Canvas 2D context unavailable');
 
-  try {
-    const dataUrl = await toPng(wrapper, {
-      cacheBust: true,
-      pixelRatio,
-      width,
-      backgroundColor: '#0b0d12',
-      style: {
-        margin: '0',
-        padding: '0',
-      },
-      // Skip elements that can't be serialized (iframes, live
-      // mapbox-gl canvases). The caller is expected to wrap stable
-      // DOM only, but belt-and-braces.
-      filter: (el) => {
-        if (el instanceof HTMLIFrameElement) return false;
-        if ((el as HTMLElement).classList?.contains('shareable-trigger')) return false;
-        if ((el as HTMLElement).classList?.contains('shareable-modal')) return false;
-        return true;
-      },
-    });
-    const blob = await dataUrlToBlob(dataUrl);
-    return { blob, dataUrl };
-  } finally {
-    document.body.removeChild(wrapper);
-  }
+  // Paint the dark background across the whole canvas first so the
+  // transition between content and footer is seamless.
+  ctx.fillStyle = '#0b0d12';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Draw the captured content at native size.
+  ctx.drawImage(contentImage, 0, 0, contentW, contentH);
+
+  // Draw a gradient divider between content and footer.
+  const divY = contentH;
+  const grad = ctx.createLinearGradient(0, 0, canvas.width, 0);
+  grad.addColorStop(0, 'rgba(247, 226, 107, 0)');
+  grad.addColorStop(0.5, 'rgba(247, 226, 107, 0.35)');
+  grad.addColorStop(1, 'rgba(247, 226, 107, 0)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, divY, canvas.width, Math.max(1, pixelRatio));
+
+  // Draw the branded footer text.
+  drawFooter(ctx, {
+    x: 0,
+    y: contentH + Math.round(20 * pixelRatio),
+    width: canvas.width,
+    pixelRatio,
+    attribution,
+  });
+
+  const blob = await canvasToBlob(canvas);
+  const dataUrl = canvas.toDataURL('image/png');
+  return { blob, dataUrl };
 }
 
-function makeFooter(attribution?: string): HTMLElement {
-  const footer = document.createElement('div');
-  footer.style.cssText = `
-    width: 100%;
-    padding: 2.25rem 2.5rem 2.5rem;
-    margin-top: 2rem;
-    border-top: 1px solid rgba(247, 226, 107, 0.25);
-    background: linear-gradient(180deg, #0b0d12 0%, #0e1118 100%);
-    color: #e6e7ea;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    text-align: center;
-  `;
+interface FooterOpts {
+  x: number;
+  y: number;
+  width: number;
+  pixelRatio: number;
+  attribution?: string;
+}
 
-  const ornament = document.createElement('div');
-  ornament.textContent = '✦';
-  ornament.style.cssText = `
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.6rem;
-    color: #f7e26b;
-    opacity: 0.85;
-    line-height: 1;
-    margin-bottom: 0.2rem;
-  `;
+function drawFooter(ctx: CanvasRenderingContext2D, o: FooterOpts): void {
+  const { x, y, width, pixelRatio: pr, attribution } = o;
+  const cx = x + width / 2;
+  let cy = y + Math.round(8 * pr);
 
-  const url = document.createElement('div');
-  url.textContent = 'fostercrisis.com';
-  url.style.cssText = `
-    font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
-    font-size: 0.88rem;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: #f7e26b;
-    font-weight: 600;
-  `;
+  // Gold ornament (✦) — generous size, soft glow via text-shadow via
+  // shadowBlur on canvas.
+  ctx.save();
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillStyle = '#f7e26b';
+  ctx.shadowColor = 'rgba(247, 226, 107, 0.45)';
+  ctx.shadowBlur = 16 * pr;
+  ctx.font = `${Math.round(28 * pr)}px "Cormorant Garamond", Georgia, serif`;
+  ctx.fillText('✦', cx, cy);
+  ctx.restore();
+  cy += Math.round(38 * pr);
 
-  const tagline = document.createElement('div');
-  tagline.textContent = '329,000 children in foster care tonight.';
-  tagline.style.cssText = `
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-style: italic;
-    font-size: 1.05rem;
-    color: #9aa0aa;
-    margin-top: 0.25rem;
-  `;
+  // URL — spaced mono, accent yellow, bold.
+  ctx.save();
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillStyle = '#f7e26b';
+  ctx.font = `700 ${Math.round(18 * pr)}px "JetBrains Mono", ui-monospace, monospace`;
+  ctx.fillText(applyLetterSpacing('FOSTERCRISIS.COM', 4 * pr), cx, cy);
+  ctx.restore();
+  cy += Math.round(32 * pr);
 
-  footer.appendChild(ornament);
-  footer.appendChild(url);
-  footer.appendChild(tagline);
+  // Tagline — italic serif, muted.
+  ctx.save();
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillStyle = '#9aa0aa';
+  ctx.font = `italic ${Math.round(18 * pr)}px "Cormorant Garamond", Georgia, serif`;
+  ctx.fillText('329,000 children in foster care tonight.', cx, cy);
+  ctx.restore();
+  cy += Math.round(30 * pr);
 
+  // Optional attribution — tiny mono, dimmest.
   if (attribution) {
-    const attr = document.createElement('div');
-    attr.textContent = attribution;
-    attr.style.cssText = `
-      font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #6b7280;
-      margin-top: 0.5rem;
-    `;
-    footer.appendChild(attr);
+    ctx.save();
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillStyle = '#6b7280';
+    ctx.font = `${Math.round(11 * pr)}px "JetBrains Mono", ui-monospace, monospace`;
+    ctx.fillText(
+      applyLetterSpacing(attribution.toUpperCase(), 3 * pr),
+      cx,
+      cy
+    );
+    ctx.restore();
   }
-
-  return footer;
 }
 
-async function dataUrlToBlob(dataUrl: string): Promise<Blob> {
-  const res = await fetch(dataUrl);
-  return await res.blob();
+/** Canvas has no letter-spacing API, so we manually space the
+ *  characters. Returns a string with zero-width spaces? No — simpler:
+ *  we insert a thin space character proportional to the desired gap. */
+function applyLetterSpacing(text: string, _px: number): string {
+  // Thin space (U+2009) gives a small uniform gap that renders
+  // consistently across fonts. If we need larger spacing, use hair
+  // space (U+200A) which is narrower. For our two uses (URL and
+  // attribution), a single thin space between characters matches the
+  // ~0.22em letter-spacing we use in CSS.
+  return text.split('').join(' ');
+}
+
+function loadImage(src: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('Image failed to load'));
+    img.src = src;
+  });
+}
+
+function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((b) => {
+      if (b) resolve(b);
+      else reject(new Error('Canvas.toBlob returned null'));
+    }, 'image/png');
+  });
 }
 
 /** Trigger a browser download of a PNG blob. */
