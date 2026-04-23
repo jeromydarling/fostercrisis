@@ -23,7 +23,7 @@ export interface CaptureOptions {
 export async function captureShare(
   opts: CaptureOptions
 ): Promise<{ blob: Blob; dataUrl: string }> {
-  const { node, attribution, pixelRatio = 2 } = opts;
+  const { node, attribution, pixelRatio: requestedPr = 2 } = opts;
 
   // Make sure web fonts have loaded before html-to-image serializes
   // computed styles; otherwise the PNG falls back to system fonts.
@@ -34,6 +34,17 @@ export async function captureShare(
       /* non-fatal */
     }
   }
+
+  // Mobile browsers cap canvas dimensions around 4096 × 4096 (some
+  // older devices lower). A tall capture at 2× pixelRatio can easily
+  // exceed that and silently truncate the bottom of the image. Drop
+  // the pixel ratio toward 1 when we'd otherwise overflow.
+  const MAX_CANVAS_DIM = 4000;
+  const FOOTER_RAW_H = 170;
+  const rawW = node.offsetWidth;
+  const rawH = node.offsetHeight + FOOTER_RAW_H;
+  const maxRaw = Math.max(rawW, rawH);
+  const pixelRatio = Math.min(requestedPr, Math.max(1, MAX_CANVAS_DIM / maxRaw));
 
   // Capture the live node. The filter keeps our own UI out of the
   // image — the share trigger button and the modal itself.

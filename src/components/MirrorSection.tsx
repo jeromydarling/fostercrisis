@@ -179,37 +179,47 @@ export function MirrorSection() {
           </p>
         </div>
 
-        <Shareable label="Part II · The money you said you couldn't spend" className="stack stack-money">
+        <div className="stack stack-money">
           <h3 className="stack-heading">The money you said you couldn't spend</h3>
-          <ul className="stack-list">
-            <li><span className="stack-num">$124B / yr</span><span className="stack-lbl">U.S. church income</span></li>
-            <li><span className="stack-num">$4.6B / yr</span><span className="stack-lbl">new church construction (2025)</span></li>
-            <li><span className="stack-num">$1.7B / yr</span><span className="stack-lbl">Christian music industry</span></li>
-            <li><span className="stack-num">$11M / weekend</span><span className="stack-lbl">Passion Conference tickets</span></li>
-            <li><span className="stack-num">$7,692</span><span className="stack-lbl">one Disney cruise, family of four</span></li>
-            <li><span className="stack-num">$5,000 / yr</span><span className="stack-lbl">average family vacation</span></li>
-          </ul>
-          <p className="stack-need">
-            <strong>What fostering costs the family: nothing. The state
-            pays <em>you</em>.</strong>
-            <br /><br />
-            Every state pays a monthly stipend — typically
-            <strong> $450–$1,200 per child per month</strong>, more for
-            teens and kids with medical or trauma needs. Medicaid covers
-            the child's health and dental. Most adoptions from foster
-            care cost the family <strong>$0</strong> — no placement fees,
-            no legal fees — and come with an ongoing adoption-assistance
-            subsidy to age 18 (often 21). The federal adoption tax credit
-            adds roughly <strong>$16,000</strong>. About 30 states waive
-            state-college tuition for kids who came out of care.
-            <br /><br />
-            <span className="stack-burn">
-              This isn't a financial ask. It's a spiritual one. The state
-              has already handled the money. What's left is whether you
-              have the yes.
-            </span>
-          </p>
-        </Shareable>
+          <Shareable
+            label="Part II · $124B the money you said you couldn't spend"
+            className="stack-list-shareable"
+          >
+            <ul className="stack-list">
+              <li><span className="stack-num">$124B / yr</span><span className="stack-lbl">U.S. church income</span></li>
+              <li><span className="stack-num">$4.6B / yr</span><span className="stack-lbl">new church construction (2025)</span></li>
+              <li><span className="stack-num">$1.7B / yr</span><span className="stack-lbl">Christian music industry</span></li>
+              <li><span className="stack-num">$11M / weekend</span><span className="stack-lbl">Passion Conference tickets</span></li>
+              <li><span className="stack-num">$7,692</span><span className="stack-lbl">one Disney cruise, family of four</span></li>
+              <li><span className="stack-num">$5,000 / yr</span><span className="stack-lbl">average family vacation</span></li>
+            </ul>
+          </Shareable>
+          <Shareable
+            label="Part II · What fostering actually costs the family"
+            className="stack-need-shareable"
+          >
+            <p className="stack-need">
+              <strong>What fostering costs the family: nothing. The state
+              pays <em>you</em>.</strong>
+              <br /><br />
+              Every state pays a monthly stipend — typically
+              <strong> $450–$1,200 per child per month</strong>, more for
+              teens and kids with medical or trauma needs. Medicaid covers
+              the child's health and dental. Most adoptions from foster
+              care cost the family <strong>$0</strong> — no placement fees,
+              no legal fees — and come with an ongoing adoption-assistance
+              subsidy to age 18 (often 21). The federal adoption tax credit
+              adds roughly <strong>$16,000</strong>. About 30 states waive
+              state-college tuition for kids who came out of care.
+              <br /><br />
+              <span className="stack-burn">
+                This isn't a financial ask. It's a spiritual one. The state
+                has already handled the money. What's left is whether you
+                have the yes.
+              </span>
+            </p>
+          </Shareable>
+        </div>
       </div>
 
       {/* THE REDIRECT — one auto-cycling swap */}
