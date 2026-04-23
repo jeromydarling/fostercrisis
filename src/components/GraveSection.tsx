@@ -221,7 +221,7 @@ export function GraveSection() {
 
       {/* Six numbers */}
       <div className="grave-headline-stats">
-        <h3 className="grave-heading">What we have asked the Church to sign.</h3>
+        <h3 className="grave-heading">The receipt the American Church has not paid.</h3>
         <ul className="grave-stats-grid" role="list">
           {HEADLINE_STATS.map((s) => (
             <li key={s.label} className="grave-stat">
