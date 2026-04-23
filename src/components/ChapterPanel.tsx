@@ -83,21 +83,6 @@ export function ChapterPanel({ index, onChange, selectedFips, onClearSelection }
         )}
       </div>
 
-      <nav className="chapter-nav" aria-label="Chapters">
-        {CHAPTERS.map((c, i) => (
-          <button
-            key={c.id}
-            className={'chapter-dot' + (i === index ? ' is-active' : '')}
-            onClick={() => onChange(i)}
-            aria-label={`${c.eyebrow}: ${c.title}`}
-            aria-current={i === index ? 'step' : undefined}
-          >
-            <span className="chapter-dot-num">{c.number}</span>
-            <span className="chapter-dot-title">{c.title}</span>
-          </button>
-        ))}
-      </nav>
-
       <div className="chapter-controls">
         <button
           className="ctrl"
