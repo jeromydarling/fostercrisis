@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import type { Prayer as PrayerData } from '../data/prayers';
 
 interface Props {
@@ -25,9 +26,23 @@ export function Prayer({ prayer }: Props) {
         <h3 className="prayer-title">{prayer.title}</h3>
 
         <div className="prayer-body">
-          {paragraphs.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+          {paragraphs.map((p, i) => {
+            // Single newlines within a paragraph are preserved as
+            // line breaks — matters for verse-style prayers (Psalm
+            // 130, Prayer for Our Country) where the stanza shape is
+            // part of the text.
+            const lines = p.split('\n');
+            return (
+              <p key={i}>
+                {lines.map((line, j) => (
+                  <Fragment key={j}>
+                    {line}
+                    {j < lines.length - 1 && <br />}
+                  </Fragment>
+                ))}
+              </p>
+            );
+          })}
         </div>
       </div>
     </aside>

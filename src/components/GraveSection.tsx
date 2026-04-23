@@ -413,6 +413,7 @@ export function GraveSection() {
       </Shareable>
 
       <Prayer prayer={PRAYERS.grave} />
+      <Prayer prayer={PRAYERS.graveDepths} />
       <PledgeCalendar />
       <SourceDetails citations={CITATIONS} />
     </section>
