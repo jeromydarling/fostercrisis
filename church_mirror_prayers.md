@@ -1,6 +1,6 @@
 # Prayer Appendix — The American Church in the Mirror
 
-*A meditative close for each of the twelve sections. Every prayer below is drawn from the Catholic tradition but directed to the Father, the Son, and the Holy Spirit — no intercessions to saints, so the prayers remain usable in Protestant, Reformed, and Evangelical contexts as well. Where a source prayer contained a Marian or saint-intercession coda, it has been trimmed; trims are noted inline.*
+*A meditative close for each of the twelve sections. Every prayer below is drawn from the Catholic tradition and quoted verbatim from its published source, with one exception noted inline (the Pope Benedict XVI Prayer for the Unborn in §6, whose final Marian paragraph is trimmed so the prayer is usable in Protestant contexts). All prayers are addressed to the Father, the Son, and the Holy Spirit — no intercessions to saints, Mary, or angels — so the prayers remain usable in Protestant, Reformed, and Evangelical contexts as well.*
 
 Every prayer is attributed to its source with a full URL so the app, a bulletin, or a printed devotional can honor the original publisher.
 
@@ -56,9 +56,17 @@ Every prayer is attributed to its source with a full URL so the app, a bulletin,
 
 ### Prayer to Be Mindful of Our Media Use
 
-> Loving God, you have given us all good things — including our technology. Help me to use it wisely and well. Give me the eyes to see when my screens are forming me into someone I do not want to be. Give me the ears to hear when the noise has drowned out your voice. Give me the hands to set my phone down, to open your Word, to turn toward the people in front of me. May the media I consume draw me nearer to you, to my neighbor, and to the truth — and when it does not, may I have the courage to turn it off. In Jesus' name. Amen.
+> Lord God, we come before you with grateful hearts, acknowledging the many blessings you've given us, including the gift of technology and communication. Yet, we recognize how easily we can become distracted by the constant flow of digital information and entertainment, losing focus on what truly matters.
+>
+> Help us to be more mindful of the way we engage with our media. Grant us the wisdom to discern when to pause and disconnect, so to become more aware of your presence in our lives.
+>
+> Guide us to use media in ways that uplift, educate, and inspire rather than distract or overwhelm. Teach us to balance our time wisely, not letting the noise of the digital world drown out your still, small voice. Open our hearts to your guidance, that our media use may be a reflection of your light.
+>
+> Grant that we find moments to break from the hold of technology on our lives and reconnect with the world beyond the screen — so that we may honor you in all we do and reflect your love to the world.
+>
+> We ask all this through Christ our Lord. Amen.
 
-*Source: [Daughters of St. Paul / Pauline.org — Prayer to Be Mindful of Our Media Use](https://pauline.org/media-prayers/prayer-to-be-mindful-of-our-media-use/). Light paraphrase preserving original structure and intent.*
+*Source: [Daughters of St. Paul / Pauline.org — Prayer to Be Mindful of Our Media Use](https://pauline.org/media-prayers/prayer-to-be-mindful-of-our-media-use/). Quoted verbatim; addressed to the Lord God through Christ, no saint intercession.*
 
 ---
 
@@ -66,11 +74,13 @@ Every prayer is attributed to its source with a full URL so the app, a bulletin,
 
 **Theme:** Barna's 4% biblical worldview, cultural conformity, repentance for compromised belief.
 
-### Act of Contrition Inspired by the Gospels
+### An Act of Contrition Inspired by the Gospels
 
-> Lord, I have sinned against you. I have not loved you with my whole heart, I have not loved my neighbor as myself. I have said "Lord, Lord," and not done what you said. I have called myself yours while living as if I were my own. Forgive me, Father. Let your Word judge me before the world does. Give me a heart that does not only confess the faith but obeys it, a mind renewed (Romans 12:2), a life that matches the creed I recite. Through Christ our Lord. Amen.
+> Lord Jesus, you opened the eyes of the blind, healed the sick, forgave the sinful woman, and after Peter's denial confirmed him in your love.
+>
+> Listen to my prayer: forgive all my sins, renew your love in my heart, help me to live in perfect unity with my fellow Christians that I may proclaim your saving power to all the world. Amen.
 
-*Source: adapted from [Vatican News — Acts of Contrition inspired by Scripture](https://www.vaticannews.va/en/prayers/act-of-contrition.html), directed to the Father through Christ.*
+*Source: [Vatican News — An Act of Contrition inspired by the Gospels](https://www.vaticannews.va/en/prayers/act-of-contrition.html). Quoted verbatim; addressed entirely to the Lord Jesus.*
 
 ---
 
@@ -102,11 +112,15 @@ Every prayer is attributed to its source with a full URL so the app, a bulletin,
 
 **Theme:** The church substituting peripheral causes and buildings for the biblical mandate of James 1:27.
 
-### Prayer of the Prodigal Son (Act of Contrition)
+### An Act of Contrition Inspired by the Gospels (Prodigal Son, Repentant Thief, Holy Spirit)
 
-> Father, I have sinned against heaven and against you. I am no longer worthy to be called your son. I took the inheritance you gave me — the gospel, the Spirit, the mandate to care for the widow and the orphan — and I spent it on myself. I built what I wanted to build. I fed what I wanted to feed. I left the children on your doorstep and called it someone else's job. I come home now, not asking for what I deserve, but for mercy. Put the ring of sonship back on my hand, not so I can boast of it, but so I can carry water, set the table, open the door for the next child you send. Through Jesus Christ, our Lord. Amen.
+> Father of mercy, like the prodigal son I return to you and say: "I have sinned against you and am no longer worthy to be called your child."
+>
+> Christ Jesus, Savior of the world, I pray with the repentant thief to whom you promised Paradise: "Lord, remember me in your kingdom."
+>
+> Holy Spirit, fountain of love, I call on you with trust: "Purify my heart, and help me to walk as a child of light." Amen.
 
-*Source: adapted from [Vatican News — Act of Contrition inspired by the Parable of the Prodigal Son (Luke 15)](https://www.vaticannews.va/en/prayers/act-of-contrition.html). Addressed to the Father through Christ.*
+*Source: [Vatican News — An Act of Contrition inspired by the Gospels (Luke 15 Prodigal Son, Luke 23 Repentant Thief)](https://www.vaticannews.va/en/prayers/act-of-contrition.html). Quoted verbatim; addressed to the Father, the Son, and the Holy Spirit in turn — no saint intercession.*
 
 ---
 
@@ -114,11 +128,13 @@ Every prayer is attributed to its source with a full URL so the app, a bulletin,
 
 **Theme:** The collapse of Christian cultural markers (marriage, birth, fostering) — a prayer for corporate repentance and renewal.
 
-### A Prayer for Repentance and Renewal
+### Prayer for Repentance and Renewal of the Soul
 
-> Most merciful God, we confess that we have sinned against you in thought, word, and deed, by what we have done and by what we have left undone. We have not loved you with our whole heart; we have not loved our neighbors as ourselves. We are truly sorry, and we humbly repent. For the sake of your Son Jesus Christ, have mercy on us and forgive us, that we may delight in your will and walk in your ways, to the glory of your Name. Renew your Church, O Lord, beginning with me. Amen.
+> *"Be transformed by the renewal of your mind." — Romans 12:2*
+>
+> Lord God, my soul longs for renewal. I am tired of sin and spiritual dryness. I ask You to renew my mind, my heart, and my spirit. Wash away everything that does not belong to You. Fill me again with Your peace and joy. Restore my love for prayer and my desire for holiness. Make me new in Christ and help me live according to Your will each day. I surrender my life to Your transforming grace. Amen.
 
-*Source: [Daily Prayer Room — Catholic Prayer for Repentance](https://dailyprayerroom.org/catholic-prayer-for-repentance/), slightly adapted; the confession language parallels the shared Christian tradition and contains no saint intercession.*
+*Source: [Daily Prayer Room — 25 Catholic Prayers for Repentance, #6 Prayer for Repentance and Renewal of the Soul](https://dailyprayerroom.org/catholic-prayer-for-repentance/). Quoted verbatim; addressed to the Lord God through Christ, no saint intercession.*
 
 ---
 
@@ -152,9 +168,9 @@ Every prayer is attributed to its source with a full URL so the app, a bulletin,
 
 ### Prayer for Healing of Body and Soul
 
-> Lord Jesus Christ, by your five wounds, which you bore for us on the cross, have mercy on these your sick servants. Heal them of all bodily illness, and cleanse them of all sin and spiritual infirmity. Restore them to full health, that they may serve you with a grateful heart; and where healing in this life does not come, grant them your peace, your presence, and the sure hope of the resurrection, when every tear will be wiped away and the old order of things — sickness, suffering, and death — will pass away (Revelation 21:4). Through Christ our Lord. Amen.
+> Lord Jesus Christ, by your five wounds, which you bore for us on the cross, have mercy on this sick servant, heal him/her of all bodily illness, and cleanse him/her of all sin and spiritual infirmity. Restore him/her to full health, that he/her may serve you with a grateful heart. Amen.
 
-*Source: [Covenant Catholic — Catholic Prayers for Healing, #1](https://covenantcatholic.org/prayers-devotions/catholic-prayers-for-healing/), lightly expanded with a Revelation 21:4 coda. Addressed entirely to Christ.*
+*Source: [Covenant Catholic — Prayer for Healing of Body and Soul](https://covenantcatholic.org/prayers-devotions/catholic-prayers-for-healing/). Quoted verbatim; addressed entirely to Christ, no saint intercession.*
 
 ---
 

@@ -131,11 +131,37 @@ The Mirror doc's indictment is not that conservative Christians are worse than l
 
 ## 13.9 Prayer
 
-### A Prayer for Our Cities, Counties, and States
+### Prayer for Our Country
 
-> Lord of every land and every family, you set the borders of the nations and you number the hairs of every child. We confess that we have drawn lines on maps and imagined they reflect your heart. We have called our side righteous and the other side lost, while children on both sides of every line have slept tonight without a parent. Forgive us for arguing about the color of the state when the children in it are without a home. Give us eyes to see what the data sees, and then eyes to see past it — to the particular child, on the particular street, in the particular county, whose life our abstractions overlook. Make your Church the body that shows up in both red counties and blue ones, in opioid hollows and commuter suburbs, in Appalachian trailers and New Jersey apartments. Through Christ our Lord, who crossed every boundary to reach us. Amen.
+> Almighty God,
+> bless our nation
+> and make it true
+> to the ideas of freedom and justice
+> and brotherhood for all who make it great.
+>
+> Guard us from war,
+> from fire and wind,
+> from compromise, fear, confusion.
+>
+> Be close to our president and our statesmen;
+> give them vision and courage,
+> as they ponder decisions affecting peace
+> and the future of the world.
+>
+> Make me more deeply aware of my heritage;
+> realizing not only my rights
+> but also my duties
+> and responsibilities as a citizen.
+>
+> Make this great land
+> and all its people
+> know clearly Your will,
+> that they may fulfill
+> the destiny ordained for us
+> in the salvation of the nations,
+> and the restoring of all things in Christ. Amen.
 
-*Original composition for this project, in the pattern of the Catholic "Prayer for the Nation" tradition (e.g., the [USCCB Prayers for Our Nation](https://www.usccb.org/prayer-and-worship/prayers-and-devotions/prayers/prayer-for-our-nation)). Addressed to the Lord through Christ; no saint intercession.*
+*Source: [Catholic Online — Prayer for Our Country](https://www.catholic.org/prayers/prayer.php?p=1119). Quoted verbatim; addressed to Almighty God through Christ, no saint intercession.*
 
 ---
 

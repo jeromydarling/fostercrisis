@@ -189,21 +189,49 @@ The grave is the last chapter of the indictment. Not because this project is pes
 
 ## 14.10 Prayer
 
-### A Prayer for Those Who Did Not Make It
+### Prayer for the Dead
 
-> Lord of life and Lord of the grave,
+> In your hands, O Lord,
+> we humbly entrust our brothers and sisters.
+> In this life you embraced them with your tender love;
+> deliver them now from every evil
+> and bid them eternal rest.
 >
-> we confess to you the children whose names we never learned — who were born into harm, taken into state care, and did not live to adulthood. We confess the ones who died before their first birthday and the ones who took their own lives before their twentieth. We confess the ones who overdosed at twenty-two, who were buried by caseworkers because their families could not be found, who slept their last night in a placement to which you had called one of your churches and no one went.
->
-> You number every hair and every sparrow, and you did not lose count of them.
->
-> Receive them, Lord, into the rest they never had on earth. Let the arms that held them in the last moment be yours, even if no human arms were there. Where justice for them is still possible, raise it up; where it is no longer possible, let your own judgment be their defense.
->
-> And for us who are still alive and still have time — **do not let us sit through one more sermon** about the family without remembering the children who had none. Break our hearts over the bodies your Church did not bury, so that we will fight to keep the next ones alive. Send us — not tomorrow, not when the building campaign ends, not when the schedule clears — but now, to the ones who are still with us.
->
-> Through Jesus Christ, who was himself born into danger, fled into exile as a child, and is called in Hebrews 4:15 a high priest able to sympathize with every weakness. Amen.
+> The old order has passed away:
+> welcome them into paradise,
+> where there will be no sorrow, no weeping or pain,
+> but fullness of peace and joy
+> with your Son and the Holy Spirit
+> forever and ever. Amen.
 
-*Original composition for this project, in the Catholic tradition of lament prayers for the dead (e.g., the [*De Profundis* / Psalm 130](https://www.vaticannews.va/en/prayers.html) and the [Office of the Dead](https://www.usccb.org/prayers/prayer-mourning-loss)). Addressed entirely to the Lord through Christ; no saint intercession.*
+*Source: [United States Conference of Catholic Bishops — Prayers for Death and Dying, "Prayer for the Dead"](https://www.usccb.org/prayers/prayers-death-and-dying). Quoted verbatim; addressed to the Lord through Christ and the Holy Spirit, no saint intercession.*
+
+### Psalm 130 — *De Profundis* (out of the depths)
+
+> Out of the depths I call to you, LORD;
+> Lord, hear my cry!
+> May your ears be attentive
+> to my cry for mercy.
+>
+> If you, LORD, keep account of sins,
+> Lord, who can stand?
+> But with you is forgiveness
+> and so you are revered.
+>
+> I wait for the LORD,
+> my soul waits
+> and I hope for his word.
+> My soul looks for the Lord
+> more than sentinels for daybreak.
+> More than sentinels for daybreak,
+> let Israel hope in the LORD,
+> For with the LORD is mercy,
+> with him is plenteous redemption.
+>
+> And he will redeem Israel
+> from all its sins.
+
+*Source: [USCCB — Psalms, Psalm 130 (NABRE)](https://bible.usccb.org/bible/psalms/130). Quoted verbatim; this is the penitential psalm used across the Church — Catholic, Orthodox, and Protestant — as a cry from the depths for the living and for the dead.*
 
 ---
 

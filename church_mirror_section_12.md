@@ -210,7 +210,17 @@ There is not a single line in the New Testament that supports this arrangement. 
 
 ---
 
-## 12.11 Companion files
+## 12.11 Prayer
+
+### Prayer for Healing of Body and Soul
+
+> Lord Jesus Christ, by your five wounds, which you bore for us on the cross, have mercy on this sick servant, heal him/her of all bodily illness, and cleanse him/her of all sin and spiritual infirmity. Restore him/her to full health, that he/her may serve you with a grateful heart. Amen.
+
+*Source: [Covenant Catholic — Prayer for Healing of Body and Soul](https://covenantcatholic.org/prayers-devotions/catholic-prayers-for-healing/). Quoted verbatim; addressed entirely to Christ, no saint intercession.*
+
+---
+
+## 12.12 Companion files
 
 - `american_church_mirror_statistics.md` — the 12-section indictment
 - `church_mirror_sections_8_and_9.md` — Substitution / Lost War
