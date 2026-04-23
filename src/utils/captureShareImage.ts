@@ -141,20 +141,69 @@ function drawFooter(ctx: CanvasRenderingContext2D, o: FooterOpts): void {
   ctx.restore();
   cy += Math.round(30 * pr);
 
-  // Optional attribution — tiny mono, dimmest.
+  // Optional attribution — tiny mono, dimmest. No letter-spacing here
+  // (the URL above carries the badge look; letter-spacing doubles the
+  // string width and clips on narrow captures). Auto-shrinks the font
+  // until the line fits, then ellipsizes if it still overflows.
   if (attribution) {
-    ctx.save();
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'top';
-    ctx.fillStyle = '#6b7280';
-    ctx.font = `${Math.round(11 * pr)}px "JetBrains Mono", ui-monospace, monospace`;
-    ctx.fillText(
-      applyLetterSpacing(attribution.toUpperCase(), 3 * pr),
-      cx,
-      cy
-    );
-    ctx.restore();
+    const sidePadding = Math.round(24 * pr);
+    const safeWidth = Math.max(100, width - sidePadding * 2);
+    fitAndDrawText(ctx, {
+      text: attribution.toUpperCase(),
+      x: cx,
+      y: cy,
+      maxWidth: safeWidth,
+      fill: '#6b7280',
+      fontFamily: '"JetBrains Mono", ui-monospace, monospace',
+      startSizePx: 11,
+      minSizePx: 8,
+      pr,
+    });
   }
+}
+
+interface FitTextOpts {
+  text: string;
+  x: number;
+  y: number;
+  maxWidth: number;
+  fill: string;
+  fontFamily: string;
+  fontStyle?: string;
+  fontWeight?: string;
+  startSizePx: number;
+  minSizePx: number;
+  pr: number;
+}
+
+/** Draw a single-line piece of center-aligned text, shrinking the font
+ *  size until it fits within `maxWidth`, and ellipsizing if it still
+ *  doesn't fit at the minimum size. */
+function fitAndDrawText(ctx: CanvasRenderingContext2D, o: FitTextOpts): void {
+  const { text, x, y, maxWidth, fill, fontFamily, fontStyle, fontWeight, pr } = o;
+  let size = o.startSizePx;
+  let rendered = text;
+  const applyFont = () => {
+    const parts = [fontStyle, fontWeight, `${Math.round(size * pr)}px`, fontFamily];
+    ctx.font = parts.filter(Boolean).join(' ');
+  };
+  applyFont();
+  while (ctx.measureText(rendered).width > maxWidth && size > o.minSizePx) {
+    size -= 0.5;
+    applyFont();
+  }
+  if (ctx.measureText(rendered).width > maxWidth) {
+    while (rendered.length > 1 && ctx.measureText(rendered + '…').width > maxWidth) {
+      rendered = rendered.slice(0, -1);
+    }
+    rendered = rendered + '…';
+  }
+  ctx.save();
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillStyle = fill;
+  ctx.fillText(rendered, x, y);
+  ctx.restore();
 }
 
 /** Canvas has no letter-spacing API, so we manually space the
