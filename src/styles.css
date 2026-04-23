@@ -6866,6 +6866,10 @@ body {
   color: var(--fg);
 }
 
+/* Emphasis inside the section title gets the faded-red underline
+   treatment. Lets markdown (*word*) carry the style without needing a
+   custom span className. */
+.grave-title em,
 .grave-underline {
   color: rgba(210, 130, 140, 0.95);
   font-style: italic;
@@ -6873,6 +6877,7 @@ body {
   display: inline-block;
 }
 
+.grave-title em::after,
 .grave-underline::after {
   content: '';
   position: absolute;

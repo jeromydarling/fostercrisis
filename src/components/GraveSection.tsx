@@ -13,6 +13,14 @@ import { PledgeCalendar } from './PledgeCalendar';
 import { PRAYERS } from '../data/prayers';
 import { EssayEpigraph } from './EssayEpigraph';
 import { EPIGRAPHS } from '../data/epigraphs';
+import { Md, MdInline, parseBlocks } from './Md';
+import rawContent from '../../content/grave.md?raw';
+
+/** Editable prose lives in `content/grave.md`. The parser splits that
+ *  file into named blocks keyed by `## blockId`. Everything structural
+ *  (stat arrays, cards, citations, the Sweden visual) stays in this
+ *  file; everything prose-y comes from the markdown. */
+const C = parseBlocks(rawContent);
 
 interface Stat {
   figure: string;
@@ -206,23 +214,16 @@ export function GraveSection() {
       <div className="grave-hero">
         <p className="grave-eyebrow">Part XI · The Grave</p>
         <h2 className="grave-title">
-          The final section of the <span className="grave-underline">diagnostic</span>.
+          <MdInline>{C.heroTitle}</MdInline>
         </h2>
-        <p className="grave-lede">
-          Children who pass through the American foster-care system do not
-          just carry the trauma, the illness, the pipeline, and the abuse.
-          <br /><br />
-          <em>They die more. They die earlier. And the gap does not close
-          when they graduate from care.</em>
-          <br /><br />
-          Every section before this one asked how we got here. This one is
-          the answer.
-        </p>
+        <Md className="grave-lede">{C.heroLede}</Md>
       </div>
 
       {/* Six numbers */}
       <div className="grave-headline-stats">
-        <h3 className="grave-heading">The receipt the American Church has not paid.</h3>
+        <h3 className="grave-heading">
+          <MdInline>{C.statsHeading}</MdInline>
+        </h3>
         <ul className="grave-stats-grid" role="list">
           {HEADLINE_STATS.map((s) => (
             <li key={s.label} className="grave-stat">
@@ -237,34 +238,25 @@ export function GraveSection() {
 
       {/* In-care mortality */}
       <div className="grave-incare">
-        <h3 className="grave-heading">While they are still in care.</h3>
-        <p className="grave-body">
-          Over 8.3 million person-years of U.S. foster children tracked
-          from 2003 to 2016, Sakai et al. found a mortality rate of{' '}
-          <strong>35.4 per 100,000 person-years</strong> — versus{' '}
-          <strong>25.0 per 100,000</strong> in the general child
-          population. Incident rate ratio 1.42. The disparity held across
-          every race category and nearly every age group. For children
-          aged 1–4, the foster-care rate was <em>nearly double</em> the
-          general-population rate.
-        </p>
+        <h3 className="grave-heading">
+          <MdInline>{C.inCareHeading}</MdInline>
+        </h3>
+        <Md className="grave-body">{C.inCareBody}</Md>
         <div className="grave-incare-callout">
-          <p>
-            Between 2003 and 2016, general-population child mortality fell
-            by 2.5% every year. Foster-care mortality <em>stayed flat</em>.
-          </p>
+          <Md>{C.inCareCalloutBody}</Md>
           <p className="grave-incare-kicker">
-            The slope of progress bent for everyone except them.
+            <MdInline>{C.inCareKicker}</MdInline>
           </p>
         </div>
       </div>
 
       {/* Aging-out cliff */}
       <div className="grave-cliff">
-        <h3 className="grave-heading">The aging-out cliff.</h3>
+        <h3 className="grave-heading">
+          <MdInline>{C.cliffHeading}</MdInline>
+        </h3>
         <p className="grave-sub">
-          Turning 18 in foster care is not a graduation. It is an eviction
-          with a candle on it.
+          <MdInline>{C.cliffSub}</MdInline>
         </p>
         <ul className="grave-cliff-list" role="list">
           <li>
@@ -297,22 +289,16 @@ export function GraveSection() {
           </li>
         </ul>
         <p className="grave-cliff-note">
-          The U.S. Surgeon General lists former foster youth among the
-          populations at highest risk of suicide in America — alongside
-          combat veterans, LGBTQ+ youth, and American Indian / Alaska
-          Native communities.
+          <MdInline>{C.cliffNote}</MdInline>
         </p>
       </div>
 
       {/* The shadow */}
       <div className="grave-shadow">
-        <h3 className="grave-heading">The shadow that doesn&rsquo;t lift.</h3>
-        <p className="grave-body">
-          The 2022 <em>Lancet Public Health</em> meta-analysis pooled 14
-          prospective cohorts across the U.S., U.K., Sweden, Finland,
-          Canada, and Australia —{' '}
-          <strong>3,223,580 individuals</strong> tracked into adulthood.
-        </p>
+        <h3 className="grave-heading">
+          <MdInline>{C.shadowHeading}</MdInline>
+        </h3>
+        <Md className="grave-body">{C.shadowBody}</Md>
         <ul className="grave-shadow-list" role="list">
           <li>
             <span className="grave-shadow-fig">2.21×</span>
@@ -332,26 +318,21 @@ export function GraveSection() {
           </li>
         </ul>
         <blockquote className="grave-shadow-quote">
-          &ldquo;Child protection systems, social policy, and health services
-          following care graduation are insufficient to mitigate the
-          adverse experiences that might have preceded placement into care
-          and those that might accompany it.&rdquo;
-          <cite>— Batty et al., <em>Lancet Public Health</em> (2022)</cite>
+          <MdInline>{C.shadowQuoteBody}</MdInline>
+          <cite>— <MdInline>{C.shadowQuoteCite}</MdInline></cite>
         </blockquote>
         <p className="grave-shadow-kicker">
-          We pull these children out of harm — and the harm still kills
-          them twenty, thirty, forty years later.
+          <MdInline>{C.shadowKicker}</MdInline>
         </p>
       </div>
 
       {/* Swedish natural experiment — two bars */}
       <div className="grave-sweden">
-        <h3 className="grave-heading">The experiment the U.S. system does not cite.</h3>
+        <h3 className="grave-heading">
+          <MdInline>{C.swedenHeading}</MdInline>
+        </h3>
         <p className="grave-sub">
-          Sweden keeps population-wide registers. A 2025 study of{' '}
-          <strong>21,000 child-welfare cases</strong> compared children
-          removed to foster care against children with{' '}
-          <em>comparable maltreatment history</em> who were left at home.
+          <MdInline>{C.swedenSub}</MdInline>
         </p>
         <div className="grave-sweden-bars" aria-label="Mortality by age 20 comparison">
           <div className="grave-sweden-bar grave-sweden-bar-home">
@@ -371,22 +352,14 @@ export function GraveSection() {
             <span className="grave-sweden-sub">~4.8× the mortality</span>
           </div>
         </div>
-        <p className="grave-sweden-note">
-          The author&rsquo;s own framing: the gap is driven by suicides that
-          occur <em>while the removed children are still placed in
-          out-of-home care</em>. There is a sharp, persistent increase in
-          suicide risk beginning within nine months of the court&rsquo;s
-          decision.
-          <br /><br />
-          This does not mean foster care is always the wrong answer. It
-          means the American default assumption — <em>we rescued them;
-          the rest is gravy</em> — is not supported by the mortality data.
-        </p>
+        <Md className="grave-sweden-note">{C.swedenNote}</Md>
       </div>
 
       {/* Why they die */}
       <div className="grave-causes">
-        <h3 className="grave-heading">Why they die.</h3>
+        <h3 className="grave-heading">
+          <MdInline>{C.causesHeading}</MdInline>
+        </h3>
         <ul className="grave-causes-grid" role="list">
           {CAUSES.map((c) => (
             <li key={c.label} className="grave-cause">
@@ -395,39 +368,29 @@ export function GraveSection() {
             </li>
           ))}
         </ul>
-        <p className="grave-causes-kicker">
-          The three leading causes of early death among American foster
-          alumni are the three leading causes of early death among combat
-          veterans: <strong>suicide, overdose, and cardiovascular
-          collapse.</strong>
-          <br />
-          Different trauma. Same body reading the same bill.
-        </p>
+        <Md className="grave-causes-kicker">{C.causesKicker}</Md>
       </div>
 
       {/* The single number */}
       <div className="grave-toll">
-        <h3 className="grave-heading">One number.</h3>
-        <p className="grave-toll-figure">Hundreds of thousands.</p>
+        <h3 className="grave-heading">
+          <MdInline>{C.tollHeading}</MdInline>
+        </h3>
+        <p className="grave-toll-figure">
+          <MdInline>{C.tollFigure}</MdInline>
+        </p>
         <p className="grave-toll-frame">
-          American children and foster alumni have died over the last
-          four decades who would still be alive if they had had a home.
+          <MdInline>{C.tollFrame}</MdInline>
         </p>
         <div className="grave-toll-misery">
           <p>
-            And they did not just die.
+            <MdInline>{C.tollMiseryIntro}</MdInline>
           </p>
           <p>
-            They were abused in care at four times the general-population
-            rate. They cycled through placements, were medicated into
-            obesity, and carried PTSD at twice the rate of combat
-            veterans. Half of them considered suicide before they could
-            vote.
+            <MdInline>{C.tollMiseryBody}</MdInline>
           </p>
           <p className="grave-toll-misery-kicker">
-            A miserable existence, and then an early grave &mdash; and
-            in every case, a good Christian home would have prevented
-            both.
+            <MdInline>{C.tollMiseryKicker}</MdInline>
           </p>
         </div>
       </div>
@@ -437,15 +400,13 @@ export function GraveSection() {
         <p className="grave-indictment-eyebrow">The indictment</p>
         <blockquote className="grave-indictment-quote">
           <span className="grave-indictment-line">
-            329,000 children are in foster care tonight.
+            <MdInline>{C.indictmentLine1}</MdInline>
           </span>
           <span className="grave-indictment-line">
-            Hundreds of thousands of the ones who came before them died
-            because no one opened a door.
+            <MdInline>{C.indictmentLine2}</MdInline>
           </span>
           <span className="grave-indictment-line grave-indictment-question">
-            Why fight so hard for the unborn &mdash;<br />
-            only to abandon the born?
+            <MdInline>{C.indictmentQuestion}</MdInline>
           </span>
         </blockquote>
       </div>
