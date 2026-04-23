@@ -7736,53 +7736,6 @@ body {
   font-style: italic;
 }
 
-.prayer-rule {
-  width: 80px;
-  height: 1px;
-  margin: 1.25rem auto 1rem;
-  background: linear-gradient(90deg,
-    transparent,
-    rgba(190, 163, 92, 0.6),
-    transparent);
-  position: relative;
-}
-
-.prayer-source {
-  margin: 0;
-  font-family: var(--ff-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
-  color: #7a663a;
-  line-height: 1.45;
-  position: relative;
-}
-
-.prayer-source a {
-  color: #5f4e22;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(95, 78, 34, 0.4);
-  transition: color 140ms ease, border-color 140ms ease;
-}
-
-.prayer-source a:hover,
-.prayer-source a:focus-visible {
-  color: #2a2210;
-  border-bottom-color: #2a2210;
-}
-
-.prayer-source-note {
-  margin: 0.55rem auto 0;
-  max-width: 520px;
-  font-family: var(--ff-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.05em;
-  color: #8c7636;
-  line-height: 1.5;
-  font-style: italic;
-  opacity: 0.75;
-  position: relative;
-}
-
 /* Ornament glyphs at the four corners — very subtle */
 .prayer-card::after {
   content: '';

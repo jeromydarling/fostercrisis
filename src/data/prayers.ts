@@ -1,14 +1,4 @@
 // Prayers for meditation at the close of each essay section.
-//
-// Drawn from the Catholic tradition and trimmed where necessary to
-// remain usable across Protestant, Reformed, and Evangelical contexts.
-// Every prayer is addressed to the Father, the Son, or the Holy Spirit
-// directly — no saint intercessions. Where a source prayer contained a
-// Marian or saint coda, that portion is noted in `sourceNote` and
-// omitted from `body`.
-//
-// Canonical citations kept so a printed bulletin or the app itself can
-// honor the original publisher.
 
 export interface Prayer {
   /** Matches the essay section id (mirror, cradle, convergence, ...) */
@@ -19,12 +9,6 @@ export interface Prayer {
   title: string;
   /** Prayer body. Double-newline separates paragraphs. */
   body: string;
-  /** Short publisher/author credit. */
-  attribution: string;
-  /** Original source URL. */
-  sourceHref: string;
-  /** Optional note — e.g. coda trims, adaptations. */
-  sourceNote?: string;
 }
 
 export const PRAYERS: Record<string, Prayer> = {
@@ -39,8 +23,6 @@ I have not loved you with my whole heart, I have not loved my neighbor as myself
 Forgive me, Father. Let your Word judge me before the world does. Give me a heart that does not only confess the faith but obeys it, a mind renewed, a life that matches the creed I recite.
 
 Through Christ our Lord. Amen.`,
-    attribution: 'Adapted from the Vatican News Acts of Contrition — directed to the Father through Christ',
-    sourceHref: 'https://www.vaticannews.va/en/prayers/act-of-contrition.html',
   },
 
   cradle: {
@@ -54,9 +36,6 @@ Reawaken in us respect for every unborn life. Make us capable of seeing in the f
 Bless all families, sanctify the union of spouses, render fruitful their love. Console the married couples who suffer because they are unable to have children, and in your goodness, provide for them.
 
 Teach us all to care for orphaned and abandoned children, so they may experience the warmth of your Charity, the consolation of your divine Heart. Amen.`,
-    attribution: 'After Pope Benedict XVI — Prayer for the Unborn',
-    sourceHref: 'https://www.archspm.org/pope-benedict-xvis-prayer-for-the-unborn/',
-    sourceNote: 'The closing Marian paragraph is omitted; everything above is addressed directly to Christ.',
   },
 
   convergence: {
@@ -72,8 +51,6 @@ A clean heart create for me, O God; renew within me a steadfast spirit.
 Cast me not out from your presence, and take not your Holy Spirit from me.
 
 Restore to me the joy of your salvation, and sustain in me a willing spirit. Then I will teach transgressors your ways, and sinners shall return to you. Amen.`,
-    attribution: 'From Psalm 51 — shared Scripture across traditions',
-    sourceHref: 'https://www.vaticannews.va/en/prayers/act-of-contrition.html',
   },
 
   timeline: {
@@ -87,8 +64,6 @@ We have not loved you with our whole heart; we have not loved our neighbors as o
 We are truly sorry, and we humbly repent. For the sake of your Son Jesus Christ, have mercy on us and forgive us, that we may delight in your will and walk in your ways, to the glory of your Name.
 
 Renew your Church, O Lord, beginning with me. Amen.`,
-    attribution: 'From the shared Christian prayer of repentance',
-    sourceHref: 'https://dailyprayerroom.org/catholic-prayer-for-repentance/',
   },
 
   substitution: {
@@ -104,8 +79,6 @@ I come home now, not asking for what I deserve, but for mercy.
 Put the ring of sonship back on my hand, not so I can boast of it, but so I can carry water, set the table, open the door for the next child you send.
 
 Through Jesus Christ, our Lord. Amen.`,
-    attribution: 'Adapted from the Vatican News Act of Contrition inspired by Luke 15',
-    sourceHref: 'https://www.vaticannews.va/en/prayers/act-of-contrition.html',
   },
 
   pipeline: {
@@ -119,8 +92,6 @@ We pray for those in prison. Break the bonds of fear and isolation that exist. S
 Heal those who have been wounded by the actions of others, especially the victims of crime.
 
 Help us to forgive one another, to act justly, love mercy and walk humbly together with Christ in his strength and in his Spirit, now and every day. Amen.`,
-    attribution: 'Catholic Bishops\' Conference of England and Wales — Prisons Week Prayers',
-    sourceHref: 'https://www.cbcew.org.uk/prisons-week-prayers/',
   },
 
   wound: {
@@ -136,8 +107,6 @@ Soothe their restless hearts with hope, steady their shaken spirits with faith. 
 Holy Spirit, comforter of hearts, heal your people's wounds and transform brokenness into wholeness. Grant us the courage and wisdom, humility and grace, to act with justice.
 
 We ask this through Christ, our Lord. Amen.`,
-    attribution: 'United States Conference of Catholic Bishops — Prayer for Healing Victims of Abuse',
-    sourceHref: 'https://www.usccb.org/prayers/prayer-healing-victims-abuse',
   },
 
   score: {
@@ -151,8 +120,6 @@ Heal them of all bodily illness, and cleanse them of all sin and spiritual infir
 Restore them to full health, that they may serve you with a grateful heart — and where healing in this life does not come, grant them your peace, your presence, and the sure hope of the resurrection, when every tear will be wiped away and the old order of things — sickness, suffering, and death — will pass away.
 
 Through Christ our Lord. Amen.`,
-    attribution: 'Catholic Prayers for Healing, lightly expanded with Revelation 21:4',
-    sourceHref: 'https://covenantcatholic.org/prayers-devotions/catholic-prayers-for-healing/',
   },
 
   receipt: {
@@ -170,8 +137,6 @@ Give us eyes to see what the data sees, and then eyes to see past it — to the 
 Make your Church the body that shows up in both red counties and blue ones, in opioid hollows and commuter suburbs, in Appalachian trailers and New Jersey apartments.
 
 Through Christ our Lord, who crossed every boundary to reach us. Amen.`,
-    attribution: 'Original composition in the Catholic "Prayer for the Nation" pattern',
-    sourceHref: 'https://www.usccb.org/prayer-and-worship/prayers-and-devotions/prayers/prayer-for-our-nation',
   },
 
   grave: {
@@ -189,7 +154,5 @@ Receive them, Lord, into the rest they never had on earth. Let the arms that hel
 And for us who are still alive and still have time — do not let us sit through one more sermon about the family without remembering the children who had none. Break our hearts over the bodies your Church did not bury, so that we will fight to keep the next ones alive. Send us — not tomorrow, not when the building campaign ends, not when the schedule clears — but now, to the ones who are still with us.
 
 Through Jesus Christ, who was himself born into danger, fled into exile as a child, and is called in Hebrews 4:15 a high priest able to sympathize with every weakness. Amen.`,
-    attribution: 'Original composition in the tradition of Catholic lament prayers for the dead',
-    sourceHref: 'https://www.usccb.org/prayers/prayer-mourning-loss',
   },
 };

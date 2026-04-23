@@ -29,22 +29,6 @@ export function Prayer({ prayer }: Props) {
             <p key={i}>{p}</p>
           ))}
         </div>
-
-        <div className="prayer-rule" aria-hidden />
-
-        <p className="prayer-source">
-          {prayer.attribution} &middot;{' '}
-          <a
-            href={prayer.sourceHref}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            source
-          </a>
-        </p>
-        {prayer.sourceNote ? (
-          <p className="prayer-source-note">{prayer.sourceNote}</p>
-        ) : null}
       </div>
     </aside>
   );
