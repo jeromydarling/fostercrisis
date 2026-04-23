@@ -1,0 +1,11 @@
+{
+  "_meta": {
+    "fetched": "2026-04-23T02:08:06.310Z",
+    "translation": "World English Bible (public domain)",
+    "source": "bible-api.com + public/data/sunday-lectionary.json",
+    "ok": 0,
+    "cachedHits": 0,
+    "failed": 53
+  },
+  "gospels": {}
+}

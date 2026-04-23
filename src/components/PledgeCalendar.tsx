@@ -35,15 +35,15 @@ export function PledgeCalendar() {
           <em>I will prayerfully consider opening my home to a child.</em>
         </p>
         <p className="pledge-body">
-          Add a weekly calendar reminder &mdash; a standing Sunday-morning
-          invitation to pray for the children in care tonight, and to
-          weigh what the number asks of you.
+          Add one year of Sunday Gospel readings to your calendar &mdash;
+          the passages the Church hears at Mass each week. The words of
+          Jesus. The life of Jesus. Presented without commentary.
         </p>
 
         <a
           className="pledge-btn"
           href={webcalHref}
-          aria-label="Add the Foster Crisis weekly prayer calendar to your calendar app"
+          aria-label="Add the Sunday Gospel calendar to your calendar app"
         >
           <span className="pledge-btn-icon" aria-hidden>
             &#128197;
@@ -52,9 +52,10 @@ export function PledgeCalendar() {
         </a>
 
         <p className="pledge-fine">
-          One year of Sunday meditations. Works with Apple, Google, and
-          Outlook. Free. No email, no account. Unsubscribe by removing
-          the calendar.
+          Fifty-two Sundays. The Catholic Sunday Gospel each week, in the
+          public-domain World English Bible. Works with Apple, Google,
+          and Outlook. Free. No email, no account. Unsubscribe by
+          removing the calendar.
         </p>
 
         <details className="pledge-manual">

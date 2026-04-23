@@ -120,9 +120,17 @@ jobs:
         run: npm run data:feeds
         continue-on-error: true
 
+      # Fetch each Sunday's Gospel from bible-api.com (public-domain WEB
+      # translation) per public/data/sunday-lectionary.json. Cached in
+      # public/data/gospels.json so subsequent runs mostly skip the API.
+      - name: Refresh Sunday Gospels
+        run: npm run data:gospels
+        continue-on-error: true
+
       # Regenerate the 52-week pledge calendar feed (public/pledge.ics).
       # Free, no backend — users subscribe via webcal:// and their
-      # calendar app polls it on its own schedule.
+      # calendar app polls it on its own schedule. Each event is the
+      # Sunday Gospel reading for that week.
       - name: Build pledge calendar (.ics)
         run: npm run data:pledge
 

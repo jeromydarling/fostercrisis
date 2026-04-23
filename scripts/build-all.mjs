@@ -18,8 +18,9 @@ const fetchers = [
   'fetch-ejscreen.mjs',
   'fetch-churches.mjs',
   'fetch-feeds.mjs',
+  'fetch-sunday-gospels.mjs',
 ];
-const composers = ['build-misery-index.mjs'];
+const composers = ['build-misery-index.mjs', 'build-pledge-ics.mjs'];
 
 function run(rel) {
   return new Promise((resolve, reject) => {

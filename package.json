@@ -16,6 +16,7 @@
     "data:churches": "node scripts/fetch-churches.mjs",
     "data:misery": "node scripts/build-misery-index.mjs",
     "data:feeds": "node scripts/fetch-feeds.mjs",
+    "data:gospels": "node scripts/fetch-sunday-gospels.mjs",
     "data:pledge": "node scripts/build-pledge-ics.mjs"
   },
   "dependencies": {
