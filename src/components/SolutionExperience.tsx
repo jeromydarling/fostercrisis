@@ -60,7 +60,7 @@ export function SolutionExperience({ selectedFips }: Props) {
         </p>
 
         <p className="solution-body solution-cta">
-          Scroll down. Look them in the face. Then open your spare
+          Scroll down. Find your state. Then open your spare
           bedroom.
         </p>
 
